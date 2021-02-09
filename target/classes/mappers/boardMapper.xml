@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.cjs200809.dao.BoardDao">
+	
+	<insert id="writeBoard">
+		insert into kurly_board values (default,#{vo.mid},#{vo.name},#{vo.title},default,default,#{vo.content});
+	</insert>
+
+	<select id="bListTotRecCnt" resultType="int">
+		select count(*) from kurly_board;
+	</select>
+
+	<select id="bList" resultType="com.spring.cjs200809.vo.BoardVo">
+		select * from kurly_board order by board_idx desc limit #{startNo},#{pageSize};
+	</select>
+	
+	<select id="viewBoard" resultType="com.spring.cjs200809.vo.BoardVo">
+		select * from kurly_board where board_idx=#{board_idx};
+	</select>
+	
+	<update id="addViewCnt">
+		update kurly_board set viewCnt=viewCnt+1 where board_idx=#{board_idx};
+	</update>
+	
+
+	
+
+</mapper>

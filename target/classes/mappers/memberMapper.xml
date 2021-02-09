@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.cjs200809.dao.MemberDao">
+	
+	<select id="getIdCheck" resultType="com.spring.cjs200809.vo.MemberVo">
+		select * from kurly_member where mid = #{mid};
+	</select>
+
+	<select id="getemailCheck" resultType="com.spring.cjs200809.vo.MemberVo">
+		select * from kurly_member where email = #{email};
+	</select>
+	
+	<insert id="memberJoin">
+		insert into kurly_member values (default,#{vo.mid},#{vo.pwd},#{vo.name},#{vo.email},#{vo.phone},#{vo.address},#{vo.gender},#{vo.birthday},default,default,default,default,default);
+	</insert>
+
+</mapper>
