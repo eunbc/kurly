@@ -4,10 +4,11 @@ import com.spring.cjs200809.vo.MemberVo;
 
 public interface MemberService {
 
-	public MemberVo getIdCheck(String mid);
+	public MemberVo IdCheck(String mMID);
 
-	public MemberVo getemailCheck(String email);
+	public MemberVo EmailCheck(String mEMAIL);
 
 	public void memberJoin(MemberVo vo);
+
 
 }

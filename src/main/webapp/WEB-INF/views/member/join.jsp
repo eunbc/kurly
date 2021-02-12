@@ -31,76 +31,81 @@
 		<h2 style="text-align: center;font-weight: 900;">회원가입</h2>
 		<p style="text-align: right;"><span class="necessary">*</span>필수입력사항</p>
 		<hr color="black">
-		<form name="joinform" method="post">
+		<form name="joinForm" method="post">
 			<table>
-					<tr>
-						<td>아이디<span class="necessary">*</span></td>
-						<td>
-							<input type="text" name="mid" id="mid" class="form-control" placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합"/>
-		                    <div class="validation" id="id_check"></div>
-						</td>
-						<td><input type="button" class="button-outline-join" style="width:140px" value="중복확인" id="idCheck"/></td>
-					</tr>
-					<tr>
-						<td>비밀번호<span class="necessary">*</span></td>
-						<td>
-							<input type="password" name="pwd" id="pwd" class="form-control" placeholder="비밀번호를 입력해주세요"/>
-		                    <div class="validation" id="pwd_check"></div>
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>비밀번호확인<span class="necessary">*</span></td>
-						<td>
-							<input type="password" name="pwdCheck" id="pwdCheck" class="form-control" placeholder="비밀번호를 한번 더 입력해주세요"/>
-		                    <div class="validation" id="pwd_Recheck"></div>
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>이름<span class="necessary">*</span></td>
-						<td><input type="text" name="name" id="name" class="form-control" placeholder="이름을 입력해주세요"/></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>이메일<span class="necessary">*</span></td>
-						<td><input type="text" name="email" id="email" class="form-control" placeholder="예: marketkurly@kurly.com"/></td>
-						<td><input type="button" value="중복확인" class="button-outline-join" style="width:140px" id="emailCheck"/></td>
-					</tr>
-					<tr>
-						<td>휴대폰<span class="necessary">*</span></td>
-						<td><input type="text" name="phone" id="phone" class="form-control" placeholder="숫자만 입력해주세요"/></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>주소<span class="necessary">*</span></td>
-						<td>
-							<input type="button" name="address" onclick="sample4_execDaumPostcode()" id="address" style="width:304;text-align: center;" class="button-outline" value="주소 검색"/>
-							<p style="font-size: 12px">배송지에 따라 상품 정보가 달라질 수 있습니다.</p>
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>성별</td>
-						<td>
-							<input type="radio" value="남자" name="gender" />&nbsp;남자 &nbsp;
-							<input type="radio" value="여자" name="gender" />&nbsp;여자 &nbsp;
-							<input type="radio" value="-" name="gender" checked />&nbsp;선택안함 
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>생년월일</td>
-						<td><input type="text" name="birthday" id="birthday" class="form-control" placeholder="예: 19900207"/></td>
-						<td></td>
-					</tr>				
-					<tr>
-						<td>추가입력 사항</td>
-						<td>
-							<input type="checkbox" name="" value="추천인 아이디"/>&nbsp;추천인 아이디 
-						</td>
-						<td></td>
-					</tr>
+				<tr>
+					<td>아이디<span class="necessary">*</span></td>
+					<td>
+						<input type="text" name="mMID" id="mMID" class="form-control" placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합"/>
+	                    <div class="validation" id="id_check"></div>
+					</td>
+					<td><input type="button" class="button-outline-join" style="width:140px" value="중복확인" id="idCheck"/></td>
+				</tr>
+				<tr>
+					<td>비밀번호<span class="necessary">*</span></td>
+					<td>
+						<input type="password" name="mPWD" id="mPWD" class="form-control" placeholder="비밀번호를 입력해주세요"/>
+	                    <div class="validation" id="pwd_check"></div>
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>비밀번호확인<span class="necessary">*</span></td>
+					<td>
+						<input type="password" name="pwdCheck" id="pwdCheck" class="form-control" placeholder="비밀번호를 한번 더 입력해주세요"/>
+	                    <div class="validation" id="pwd_Recheck"></div>
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>이름<span class="necessary">*</span></td>
+					<td><input type="text" name="mNAME" id="mNAME" class="form-control" placeholder="이름을 입력해주세요"/></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>이메일<span class="necessary">*</span></td>
+					<td><input type="text" name="mEMAIL" id="mEMAIL" class="form-control" placeholder="예: marketkurly@kurly.com"/></td>
+					<td><input type="button" value="중복확인" class="button-outline-join" style="width:140px" id="emailCheck"/></td>
+				</tr>
+				<tr>
+					<td>휴대폰<span class="necessary">*</span></td>
+					<td><input type="text" name="mPHONE" id="mPHONE" class="form-control" placeholder="숫자만 입력해주세요"/></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>주소<span class="necessary">*</span></td>
+					<td>
+						<input type="button" onclick="sample6_execDaumPostcode()" id="address" style="width:304;text-align: center;" class="button-outline" value="주소 검색"/>
+						<input type="text" id="sample6_postcode" placeholder="우편번호" class="form-control">
+						<input type="text" id="sample6_address" placeholder="주소" class="form-control"><br>
+						<input type="text" id="sample6_detailAddress" placeholder="상세주소" class="form-control">
+						<input type="text" id="sample6_extraAddress" placeholder="참고항목" class="form-control">
+						<input type="hidden" name="mADDRESS" id="mADDRESS"/>
+						<p style="font-size: 12px">배송지에 따라 상품 정보가 달라질 수 있습니다.</p>
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>성별</td>
+					<td>
+						<input type="radio" value="남자" name="mGENDER" />&nbsp;남자 &nbsp;
+						<input type="radio" value="여자" name="mGENDER" />&nbsp;여자 &nbsp;
+						<input type="radio" value="-" name="mGENDER" checked />&nbsp;선택안함 
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>생년월일</td>
+					<td><input type="text" name="mBDAY" id="mBDAY" class="form-control" placeholder="예: 19900207"/></td>
+					<td></td>
+				</tr>				
+				<tr>
+					<td>추가입력 사항</td>
+					<td>
+						<input type="checkbox" name="" value="추천인 아이디"/>&nbsp;추천인 아이디 
+					</td>
+					<td></td>
+				</tr>
 			</table>
 			<hr color="black"/>
 			<table>
@@ -121,7 +126,7 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td><input type="checkbox" name="terms" id="term3" value="Y"/>&nbsp;할인쿠폰 등 혜택/정보 수신 동의<span class="gray">(선택)</span></td>
+					<td><input type="checkbox" name="mRECEIVEAD" id="term3" value="Y"/>&nbsp;할인쿠폰 등 혜택/정보 수신 동의<span class="gray">(선택)</span></td>
 					<td></td>
 				</tr>
 				<tr>
@@ -133,7 +138,7 @@
 			<hr/>
 			<p><br/></p>
 			<div style="text-align: center;">
-				<input type="submit" value="가입하기" class="button" />
+				<input type="button" id="fCheck" value="가입하기" class="button" />
 			</div>
 		</form>
 	</div>

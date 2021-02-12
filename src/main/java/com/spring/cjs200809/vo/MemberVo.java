@@ -4,20 +4,18 @@ import lombok.Data;
 
 @Data
 public class MemberVo {
-	private int idx;
-	private String mid;
-	private String pwd;
-	private String name;
-	private String email;
-	private String phone;
-	private String address;
-	private String gender;
-	private String birthday;
-	private String joinday;
-	private int point;
-	private String level;
-	private String receiveAd;
-	private String dropout;
-	
-	
+	private int mIDX;
+	private String mMID;
+	private String mPWD;
+	private String mNAME;
+	private String mEMAIL;
+	private String mPHONE;
+	private String mADDRESS;
+	private String mGENDER;
+	private String mBDAY;
+	private String mJOINDAY;
+	private int mEMONEY;
+	private String mLEVEL;
+	private String mRECEIVEAD;
+	private String mDROPOUT;
 }

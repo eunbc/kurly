@@ -15,7 +15,7 @@ CREATE TABLE `member` (
 	`mJOINDAY` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
 	`mEMONEY` INT NOT NULL DEFAULT '0',									/* 적립금 */
 	`mLEVEL` VARCHAR(3) NULL DEFAULT '일반' COLLATE 'utf8mb4_0900_ai_ci', /* 일반, 화이트, 라벤더, 퍼플, 관리자 */	
-	`mRECIEVEAD` CHAR(1) NULL DEFAULT 'N' COLLATE 'utf8mb4_0900_ai_ci', /* 광고성 이메일 수신 동의*/
+	`mRECEIVEAD` CHAR(1) NULL DEFAULT 'N' COLLATE 'utf8mb4_0900_ai_ci', /* 광고성 이메일 수신 동의*/
 	`mDROPOUT` CHAR(1) NULL DEFAULT 'N' COLLATE 'utf8mb4_0900_ai_ci', 	/* 회원탈퇴 */
 	PRIMARY KEY (`mIDX`, `mMID`) USING BTREE,
 	UNIQUE INDEX `mid` (`mMID`, `mEMAIL`) USING BTREE
@@ -23,3 +23,7 @@ CREATE TABLE `member` (
 COLLATE='utf8mb4_0900_ai_ci'
 ENGINE=InnoDB
 ;
+
+DROP TABLE member; 
+
+SELECT * FROM member;

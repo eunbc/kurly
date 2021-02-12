@@ -6,9 +6,9 @@ import com.spring.cjs200809.vo.MemberVo;
 
 public interface MemberDao {
 
-	public MemberVo getIdCheck(@Param("mid") String mid);
+	public MemberVo IdCheck(@Param("mMID") String mMID);
 
-	public MemberVo getemailCheck(@Param("email") String email);
+	public MemberVo EmailCheck(@Param("mEMAIL") String mEMAIL);
 
 	public void memberJoin(@Param("vo") MemberVo vo);
 

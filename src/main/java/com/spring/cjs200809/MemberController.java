@@ -2,7 +2,7 @@ package com.spring.cjs200809;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +20,9 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 	
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 	@RequestMapping(value="/join", method=RequestMethod.GET)
 	public String joinGet() {
 		return "member/join";
@@ -27,26 +30,31 @@ public class MemberController {
 
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String joinPost(MemberVo vo) {
-		
 	  	// 아이디 중복체크
-	  	if(memberService.getIdCheck(vo.getMid()) != null) {
-	  		msgFlag = "mInputNo";
+	  	if(memberService.IdCheck(vo.getMMID()) != null) {
+	  		msgFlag = "idCheckNO";
 	  		return "redirect:/msg/" + msgFlag;
 	  	}
-	  	//닉네임 중복체크
-	  	if(memberService.getemailCheck(vo.getEmail()) != null) {
-	  		msgFlag = "mInputNo";
+	  	//이메일 중복체크
+	  	if(memberService.EmailCheck(vo.getMEMAIL()) != null) {
+	  		msgFlag = "emailCheckNO";
 	  		return "redirect:/msg/" + msgFlag;
 	  	}
-	  	
+	  	vo.setMPWD(bCryptPasswordEncoder.encode(vo.getMPWD()));
 		memberService.memberJoin(vo);
-		msgFlag = "memberJoinOk";
+		msgFlag = "memberJoinOK";
 		return "redirect:/msg/"+msgFlag;
 	}
 
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String loginGet() {
 		return "member/login";
+	}
+
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public String loginPost() {
+		msgFlag = "memberJoiOK";
+		return "redirect:/msg/"+msgFlag;
 	}
 
 	@RequestMapping(value="/find_id", method=RequestMethod.GET)
@@ -59,23 +67,21 @@ public class MemberController {
 		return "member/find_pwd";
 	}
 
-	//아이디 중복확인(ajax)
 	@ResponseBody
 	@RequestMapping(value="/idCheck", method=RequestMethod.GET)
-	public String idCheckGet(String mid) {
+	public String idCheckGet(String mMID) {
 	  	String res = "0";
-	  	MemberVo vo = memberService.getIdCheck(mid);
+	  	MemberVo vo = memberService.IdCheck(mMID);
 	  	if(vo != null) res = "1";
 	  	
 	  	return res;
 	}
 
-	//이메일 중복확인
 	@ResponseBody
 	@RequestMapping(value="/emailCheck", method=RequestMethod.GET)
-	public String emailCheckGet(String email) {
+	public String emailCheckGet(String mEMAIL) {
 	  	String res = "0";
-	  	MemberVo vo = memberService.getemailCheck(email);
+	  	MemberVo vo = memberService.EmailCheck(mEMAIL);
 	  	if(vo != null) res = "1";
 	  	
 	  	return res;

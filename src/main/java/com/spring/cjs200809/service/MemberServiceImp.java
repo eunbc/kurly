@@ -12,17 +12,18 @@ public class MemberServiceImp implements MemberService{
 	MemberDao memberDao;
 
 	@Override
-	public MemberVo getIdCheck(String mid) {
-		return memberDao.getIdCheck(mid);
+	public MemberVo IdCheck(String mMID) {
+		return memberDao.IdCheck(mMID);
 	}
 
 	@Override
-	public MemberVo getemailCheck(String email) {
-		return memberDao.getemailCheck(email);
+	public MemberVo EmailCheck(String mEMAIL) {
+		return memberDao.EmailCheck(mEMAIL);
 	}
 
 	@Override
 	public void memberJoin(MemberVo vo) {
 		memberDao.memberJoin(vo);
 	}
+
 }

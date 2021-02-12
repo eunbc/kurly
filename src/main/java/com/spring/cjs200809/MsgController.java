@@ -15,13 +15,17 @@ public class MsgController {
 		String nickname = session.getAttribute("snickname") == null? "" : (String) session.getAttribute("snickname");
 		String strLevel = session.getAttribute("sStrLevel") == null? "" : (String) session.getAttribute("sStrLevel");
 		
-		if(msgFlag.equals("writeBoardOk")) {
-			model.addAttribute("msg","공지사항 작성이 완료되었습니다.");
-			model.addAttribute("url","board/list");
+		if(msgFlag.equals("idCheckNO")) {
+			model.addAttribute("msg","사용중인 아이디입니다.");
+			model.addAttribute("url","member/join");
 		}
-		else if(msgFlag.equals("fileUploadNo")) {
-			model.addAttribute("msg","파일 업로드 실패.");
-			model.addAttribute("url","study/fileUpload");
+		else if(msgFlag.equals("emailCheckNO")) {
+			model.addAttribute("msg","사용중인 이메일입니다.");
+			model.addAttribute("url","member/join");
+		}
+		else if(msgFlag.equals("memberJoinOK")) {
+			model.addAttribute("msg","회원가입이 완료되었습니다. \\n로그인 후 이용해주세요.");
+			model.addAttribute("url","member/login");
 		}
 		
 		//예) msgFlag = "imgDeleteOk$fileCnt="+fileCnt;
