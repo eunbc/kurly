@@ -11,15 +11,15 @@
 	</select>
 
 	<select id="bList" resultType="com.spring.cjs200809.vo.BoardVo">
-		select * from kurly_board order by board_idx desc limit #{startNo},#{pageSize};
+		select * from kurly_board order by idx desc limit #{startNo},#{pageSize};
 	</select>
 	
 	<select id="viewBoard" resultType="com.spring.cjs200809.vo.BoardVo">
-		select * from kurly_board where board_idx=#{board_idx};
+		select * from kurly_board where idx=#{idx};
 	</select>
 	
 	<update id="addViewCnt">
-		update kurly_board set viewCnt=viewCnt+1 where board_idx=#{board_idx};
+		update kurly_board set viewCnt=viewCnt+1 where idx=#{idx};
 	</update>
 	
 

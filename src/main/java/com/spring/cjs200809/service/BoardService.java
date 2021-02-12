@@ -12,8 +12,8 @@ public interface BoardService {
 
 	public List<BoardVo> bList(int startNo, int pageSize);
 
-	public BoardVo viewBoard(int board_idx);
+	public BoardVo viewBoard(int idx);
 
-	public void addViewCnt(int board_idx);
+	public void addViewCnt(int idx);
 
 }

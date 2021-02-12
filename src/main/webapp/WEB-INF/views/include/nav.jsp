@@ -54,14 +54,16 @@
 			left: 0;
 			right: 0;
 			z-index:3;
-			border-bottom: 2px solid #F8F8F8;   
+			border-bottom: 3px solid #F8F8F8;   
+			background-color: white; 
 		}
 		
 		#topMenu_icon a {
 			text-decoration:none;
 			color: black;
 		    display: inline-block;                          
-		    width: 50px;    
+		    width: 50px;   
+		    padding: 8px; 
 		}
 
         #container {            
@@ -69,7 +71,6 @@
             width: 1100px; 
           /*  border: 1px solid black; */
             margin: 0 auto;
-			background-color: white; 
         }
 		#container ul,li {list-style:none; margin:0; padding:0;}
 		
@@ -77,8 +78,8 @@
 		ul.myMenu > li {
 			text-align: center;
             float: left;                
-            line-height: 50px;         /*   글씨가 가운데로 오도록 설정하기 위해 한줄의 높이를 30px로 설정 */
-            vertical-align: middle;     /* 세로 정렬을 가운데로 설정(위의 line-height와 같이 설정 필요함) */
+            line-height: 50px;         
+            vertical-align: middle;   
             position : relative;    
 		}
 		ul.myMenu > li a {
@@ -95,15 +96,12 @@
             text-decoration: underline;
         }
         
-        
-        
-        
 		ul.myMenu > li ul.submenu {display:none; position:absolute; border: 2px solid #F7F7F7;}
 		ul.myMenu > li ul.submenu > li {
 			text-align: left;
             float: left;                
-            line-height: 50px;         /*   글씨가 가운데로 오도록 설정하기 위해 한줄의 높이를 30px로 설정 */
-            vertical-align: middle;     /* 세로 정렬을 가운데로 설정(위의 line-height와 같이 설정 필요함) */
+            line-height: 50px;        
+            vertical-align: middle;     
 		}
 		ul.myMenu > li ul.submenu > li a{
 			padding: 0 0 0 10px;
@@ -120,7 +118,7 @@
 			background-color: #F7F7F7;
 			color: #5F0080;
 		}
-		ul.myMenu > li:hover ul.submenu{  /*마우스를 올렸을 때 상위 카테보리 보여줌 */
+		ul.myMenu > li:hover ul.submenu{ 
 			display: block;
 		}		
 		ul.myMenu > li ul.top_submenu {
@@ -171,6 +169,7 @@
 					<li><a href="${contextPath}/mypage/coupon">쿠폰</a></li>
 					<li><a href="${contextPath}/member/myinfo_update">개인 정보 수정</a></li>
 					<li><a href="${contextPath}/member/logout">로그아웃</a></li>
+					<li><a href="${contextPath}/admin/main">관리자</a></li>
 				</ul>
 			</li>
 			<li><a href="${contextPath}/member/login" class="menuLink">로그인</a></li>
@@ -211,7 +210,7 @@
 			<li class="menu3"><a href="${contextPath}/" class="menuLink">베스트</a></li>
 			<li class="menu4"><a href="${contextPath}/" class="menuLink">알뜰쇼핑</a></li>
 			<li class="menu5"><a href="${contextPath}/" class="menuLink">금주혜택</a></li>
-			<li style="line-height: 30px; width:220px"><input type="text" class="form-control" placeholder="검색" /></li>
+			<li style="width:220px;margin:8px;"><input type="text" class="form-control" placeholder="검색" /></li>
 		</ul> 
 		<div id="topMenu_icon">
 			&nbsp;<a href="${contextPath}/" ><i class="xi-search xi-2x"></i></a>

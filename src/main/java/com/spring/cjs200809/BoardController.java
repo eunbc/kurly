@@ -72,11 +72,11 @@ public class BoardController {
 	
 	@RequestMapping(value="/view", method=RequestMethod.GET)
 	public String viewBoardGet(Model model, HttpServletRequest request) {
-		int board_idx = Integer.parseInt(request.getParameter("board_idx"));
+		int idx = Integer.parseInt(request.getParameter("idx"));
 		int pag = request.getParameter("pag")==null? 1 : Integer.parseInt(request.getParameter("pag"));
 		
-		boardService.addViewCnt(board_idx);
-		BoardVo vo = boardService.viewBoard(board_idx);
+		boardService.addViewCnt(idx);
+		BoardVo vo = boardService.viewBoard(idx);
 		
 		model.addAttribute("vo",vo);
 		model.addAttribute("pag",pag);

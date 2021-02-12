@@ -9,9 +9,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>마켓컬리 :: 내일의 장보기, 마켓컬리</title>
-	<style>
-		.align-right {align:right;}
-	</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/nav.jsp" %>
@@ -28,7 +25,7 @@
 		</ul>
 	</div>
 	<div class="section">
-		<h4>공지사항 <span class="explanation-gray">컬리의 새로운 소식들과 유용한 정보들을 한곳에서 확인하세요. </span>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="button-outline-join" onclick="location.href='${contextPath}/board/write'" value="공지작성"/></h4>
+		<h4>공지사항 <span class="explanation-gray">컬리의 새로운 소식들과 유용한 정보들을 한곳에서 확인하세요. </span></h4>
 		<table class="list-table">
 			<tr> 
 				<th style="width:50px">번호</th>
@@ -40,7 +37,7 @@
 			<c:forEach var="vo" items="${vos}">
 				<tr>
 					<td>${curScrNo}</td>
-					<td><a href="${contextPath}/board/view?board_idx=${vo.board_idx}&pag=${p.pag}" class="title-decoration-none">${vo.title}</a></td>
+					<td><a href="${contextPath}/board/view?idx=${vo.idx}&pag=${p.pag}" class="title-decoration-none">${vo.title}</a></td>
 					<td>${vo.name}</td>
 					<td>${fn:substring(vo.wdate,0,10)}</td>
 					<td>${vo.viewCnt}</td>
@@ -48,6 +45,10 @@
 				<c:set var="curScrNo" value="${curScrNo-1}"/>
 			</c:forEach>
 		</table>
+		
+		<div style="text-align: right;">
+			<input type="button" class="button-small" onclick="location.href='${contextPath}/board/write'" value="글쓰기"/>
+		</div>
 		
 		<!-- 페이징 처리 시작 -->
 	    <div class="row">

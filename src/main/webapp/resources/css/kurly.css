@@ -5,7 +5,7 @@
 .content-default{
 	width: 1100px;
 	margin: 0 auto;
-	padding: 50px 0 0 0;
+	padding: 50px 0 200px 0;
 }	
 
 .button {
@@ -23,6 +23,23 @@
     border-radius: 3px;
     font-weight: 700;
 }
+.button-small {
+    width:130px;
+    background-color: #795B8F;
+    border: 1px solid #5F0080;
+    color:#fff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 10px;
+    cursor: pointer;
+    font-weight: 700;
+}
+.button-small:hover {
+    background-color: #5F0080;
+}
 .button-outline {
     width:250px;
     background-color: white;
@@ -38,7 +55,6 @@
     border-radius: 3px;
     font-weight: 700;
 }
-
 
 
 /*---------------------------nav-------------------------------*/
@@ -111,24 +127,24 @@ ul.subNavMenu > li {
 }
 ul.subNavMenu > li a {
 	text-align: left;
-          width: 200px;                            
-          display: inline-block;                          
-          border : 1px solid #F2F2F2;
-          background-color:white;                           
-          text-decoration:none;                    
-          color: #383838;                        
-          font-size: 14px;                           
-          font-weight: 600;  
-          padding: 10px 10px 10px 20px;
+    width: 200px;                            
+    display: inline-block;                          
+    border : 1px solid #F2F2F2;
+    background-color:white;                           
+    text-decoration:none;                    
+    color: #383838;                        
+    font-size: 14px;                           
+    font-weight: 600;  
+    padding: 10px 10px 10px 20px;
 }
 ul.subNavMenu > li a:hover {
-          color: #5F0080;  
- 			background-color: #F7F7F7;
-      }
+    color: #5F0080;  
+	background-color: #F7F7F7;
+}
 ul.subNavMenu > li a.subNavMenuClicked {
-          font-weight: 700;  
-          color: #5F0080;  
- 			background-color: #F7F7F7;
+    font-weight: 700;  
+    color: #5F0080;  
+ 	background-color: #F7F7F7;
 }
 
 /*--------------------------list------------------------------*/
@@ -185,9 +201,17 @@ table.write-table {
 }
 
 /*--------view------------*/
+.view-title{
+	text-align: center;
+	margin-bottom: 50px;
+}
+.view-title h3{
+	font-weight: bold;
+}
 .view-table{
 	width: 1100px;
 	border-top: 2px solid black;
+	border-bottom: 1px solid #F6F6F6;
 	font-size: 13px;
 }
 .view-table tr{
@@ -200,9 +224,29 @@ table.write-table {
 	text-align: left;
 }
 .view-table tr td.title-colored{
-	font-weight: 500;
-	background-color: #F7F5F8;			
+	font-weight: 700;
+	background-color: #F7F5F8;	
+	width: 150px;		
 }
+.view-table-move{
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+	width: 1100px;
+	font-size: 13px;
+}
+.view-table-move tr td{
+	padding: 10px;
+	border: 1px solid #F6F6F6;
+}
+.view-table-move tr td:first-child{
+	width: 100px;
+	text-align: center;
+}
+.view-table-move tr td a{
+	color: black;	
+	text-decoration: none;
+}
+
 
 
 

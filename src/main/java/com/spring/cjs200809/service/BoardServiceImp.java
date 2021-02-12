@@ -83,13 +83,13 @@ public class BoardServiceImp implements BoardService{
 	}
 
 	@Override
-	public BoardVo viewBoard(int board_idx) {
-		return boardDao.viewBoard(board_idx);
+	public BoardVo viewBoard(int idx) {
+		return boardDao.viewBoard(idx);
 	}
 
 	@Override
-	public void addViewCnt(int board_idx) {
-		boardDao.addViewCnt(board_idx);
+	public void addViewCnt(int idx) {
+		boardDao.addViewCnt(idx);
 	}
 
 
