@@ -33,6 +33,16 @@
 				<th style="width:70px">작성일</th>
 				<th style="width:50px">조회</th>
 			</tr>
+			<c:forEach var="tVo" items="${vosTOP}">
+				<tr>
+					<td><b>공지</b></td>
+					<td><a href="${contextPath}/board/view?bIDX=${tVo.bIDX}&pag=${p.pag}" class="title-decoration-none">${tVo.bTITLE}</a></td>
+					<td>${tVo.bNAME}</td>
+					<td>${fn:substring(tVo.bWDATE,0,10)}</td>
+					<td>${tVo.bVIEWCNT}</td>
+				</tr>
+			</c:forEach>
+			
 			<c:forEach var="vo" items="${vos}">
 				<tr>
 					<td>${curScrNo}</td>

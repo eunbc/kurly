@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.cjs200809.dao.InquiryDao">
+	
+	<insert id="writeInquiry">
+		insert into inquiry values(default,#{vo.mMID},#{vo.iTITLE},#{vo.iCATEGORY},default,#{vo.oNVOICE},#{vo.iCONTENT},#{vo.iFNAME},#{vo.iRFNAME},default);
+	</insert>
+	
+	<select id="listInquiry" resultType="com.spring.cjs200809.vo.InquiryVo">
+		select * from inquiry where mMID=#{mMID} order by iIDX desc;	
+	</select>
+	
+	<select id="viewInquiry" resultType="com.spring.cjs200809.vo.InquiryVo">
+		select * from inquiry where iIDX=#{iIDX};
+	</select>
+</mapper>

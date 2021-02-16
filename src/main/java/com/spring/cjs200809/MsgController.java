@@ -43,6 +43,10 @@ public class MsgController {
 			model.addAttribute("msg","공지사항을 등록하였습니다.");
 			model.addAttribute("url","board/list");
 		}		
+		else if(msgFlag.equals("writeInquiryOK")) {
+			model.addAttribute("msg","1:1문의를 등록하였습니다.");
+			model.addAttribute("url","inquiry/list");
+		}		
 		
 		//예) msgFlag = "imgDeleteOk$fileCnt="+fileCnt;
 		//앞의 예에서 특정 매개변수에 추가로 매개값이 넘어왔을 때는 아래와 같이 처리한다.

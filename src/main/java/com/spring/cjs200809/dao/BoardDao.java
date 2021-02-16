@@ -22,6 +22,8 @@ public interface BoardDao {
 
 	public void deleteBoard(@Param("bIDX") int bIDX);
 
+	public List<BoardVo> bListTop();
+
 	//public BoardVo prevAndnext(@Param("bIDX") int bIDX);
 
 }

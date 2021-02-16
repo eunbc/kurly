@@ -24,6 +24,8 @@ public interface BoardService {
 
 	public void deleteBoard(int bIDX);
 
+	public List<BoardVo> bListTop();
+
 	//public BoardVo prevAndnext(int bIDX);
 	
 

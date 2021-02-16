@@ -3,7 +3,7 @@
 <mapper namespace="com.spring.cjs200809.dao.BoardDao">
 	
 	<insert id="writeBoard">
-		insert into board values (default,#{vo.mMID},#{vo.bNAME},#{vo.bTITLE},default,default,#{vo.bCONTENT});
+		insert into board values (default,#{vo.mMID},#{vo.bNAME},#{vo.bTITLE},default,default,#{vo.bCONTENT},#{vo.bTOP});
 	</insert>
 
 	<select id="bListTotRecCnt" resultType="int">
@@ -30,6 +30,9 @@
 		delete from board where bIDX=#{bIDX};
 	</delete>
 	
+	<select id="bListTop" resultType="com.spring.cjs200809.vo.BoardVo">
+		select * from board where bTOP='Y';
+	</select>
 <!-- 	<select id="prevAndnext" resultType="com.spring.cjs200809.vo.BoardVo">
 		select bTITLE 
 			from board 

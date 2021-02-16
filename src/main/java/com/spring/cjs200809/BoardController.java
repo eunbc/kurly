@@ -38,10 +38,12 @@ public class BoardController {
 		
 		com.spring.cjs200809.pagination.PageVo pageVo = pageProcess.pagination(pag,pageSize,"board");
 		List<BoardVo> vos = boardService.bList(pageVo.getStartNo(),pageVo.getPageSize());
+		List<BoardVo> vosTOP = boardService.bListTop();
 		int curScrNo = pageVo.getCurScrNo();
 		
 		model.addAttribute("p",pageVo);
 		model.addAttribute("vos",vos);
+		model.addAttribute("vosTOP",vosTOP);
 		model.addAttribute("curScrNo",curScrNo);
 		
 		return "board/list";

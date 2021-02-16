@@ -167,6 +167,11 @@ public class BoardServiceImp implements BoardService{
 		boardDao.deleteBoard(bIDX);
 	}
 
+	@Override
+	public List<BoardVo> bListTop() {
+		return boardDao.bListTop();
+	}
+
 	/*
 	 * @Override public BoardVo prevAndnext(int bIDX) { return
 	 * boardDao.prevAndnext(bIDX); }

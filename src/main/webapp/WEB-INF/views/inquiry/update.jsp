@@ -24,6 +24,7 @@
 				writeForm.bNAME.focus();
 			}
 			else {
+	    		writeForm.originalCONTENT.value = document.getElementById("originalCONTENT").innerHTML;
 				writeForm.submit();
 			}
 		}
@@ -41,39 +42,39 @@
 		</ul>
 	</div>
 	<div class="section">
-		<h4>공지작성</h4>
-		<form name="writeForm" method="post" action="${contextPath}/board/write">
+		<h4>공지수정</h4>
+		<form name="writeForm" method="post" action="${contextPath}/board/update">
 			<table class="write-table">
 				<tr> 
 					<td>제목</td>
-					<td><input type="text" name="bTITLE" class="form-control" maxlength="100"/></td>
+					<td><input type="text" name="bTITLE" value="${vo.bTITLE}" class="form-control" maxlength="100"/></td>
 				</tr>
 				<tr> 
 					<td>작성자</td>
-					<td><input type="text" name="bNAME" class="form-control" value="MarketKurly" maxlength="20"/></td>
-				</tr>
-				<tr> 
-					<td>공지등록여부</td>
-					<td>
-						<input type="radio" name="bTOP" value="Y"/>공지
-						<input type="radio" name="bTOP" value="N" checked/>일반
-					</td>
+					<td><input type="text" name="bNAME" value="${vo.bNAME}" class="form-control" value="MarketKurly" maxlength="20"/></td>
 				</tr>
 				<tr> 
 					<td>내용</td>
-					<td><textarea name="bCONTENT" class="form-control" id="CKEDITOR"></textarea></td>
+					<td><textarea name="bCONTENT" class="form-control" id="CKEDITOR">${vo.bCONTENT}</textarea></td>
+					<!-- 변경된 content -->
 					<script type="text/javascript">
 						CKEDITOR.replace("bCONTENT", {
-							uploadUrl:"${contextPath}/imageUpload",	//드래그 앤 드롭					
-							filebrowserUploadUrl: "${contextPath}/imageUpload", //파일은 이 경로로 업로드
+							uploadUrl:"${contextPath}/imageUpload",				
+							filebrowserUploadUrl: "${contextPath}/imageUpload",
 							height : 400
 						});
 					</script>
 				</tr>
 			</table>
 			<p><br/></p>
+			<input type="hidden" name="bIDX" value="${vo.bIDX}"/>
 			<input type="hidden" name="mMID" value="${smid}"/>
-			<input type="button" onclick="writeCheck()" class="button" style="margin-left: 290px" value="등록"/>
+			<input type="hidden" name="pag" value="${pag}"/>
+			<input type="hidden" name="originalCONTENT"/>
+			<div id="originalCONTENT" style="display:none;">${vo.bCONTENT}</div>
+			<!-- 기존의 content -->
+			
+			<input type="button" onclick="writeCheck()" class="button" style="margin-left: 290px" value="수정"/>
 		</form>
 	</div>
 </div>

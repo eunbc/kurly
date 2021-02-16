@@ -8,6 +8,7 @@ public class BoardVo {
 	private String bWDATE;
 	private int bVIEWCNT;
 	private String bCONTENT;
+	private String bTOP;
 	private String originalCONTENT;
 	
 	private int prevIDX; //이전글 번호
@@ -56,6 +57,12 @@ public class BoardVo {
 	public void setbCONTENT(String bCONTENT) {
 		this.bCONTENT = bCONTENT;
 	}
+	public String getbTOP() {
+		return bTOP;
+	}
+	public void setbTOP(String bTOP) {
+		this.bTOP = bTOP;
+	}
 	public String getOriginalCONTENT() {
 		return originalCONTENT;
 	}
@@ -89,9 +96,9 @@ public class BoardVo {
 	@Override
 	public String toString() {
 		return "BoardVo [bIDX=" + bIDX + ", mMID=" + mMID + ", bNAME=" + bNAME + ", bTITLE=" + bTITLE + ", bWDATE="
-				+ bWDATE + ", bVIEWCNT=" + bVIEWCNT + ", bCONTENT=" + bCONTENT + ", originalCONTENT=" + originalCONTENT
-				+ ", prevIDX=" + prevIDX + ", nextIDX=" + nextIDX + ", prevTITLE=" + prevTITLE + ", nextTITLE="
-				+ nextTITLE + "]";
+				+ bWDATE + ", bVIEWCNT=" + bVIEWCNT + ", bCONTENT=" + bCONTENT + ", bTOP=" + bTOP + ", originalCONTENT="
+				+ originalCONTENT + ", prevIDX=" + prevIDX + ", nextIDX=" + nextIDX + ", prevTITLE=" + prevTITLE
+				+ ", nextTITLE=" + nextTITLE + "]";
 	}
 	
 }

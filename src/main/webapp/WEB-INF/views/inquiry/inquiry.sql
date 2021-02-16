@@ -1,20 +1,24 @@
-CREATE TABLE `board` (
-	`bIDX` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE `inquiry` (
+	`iIDX` INT NOT NULL AUTO_INCREMENT,
 	`mMID` VARCHAR(20) NOT NULL,
-	`bNAME` VARCHAR(20) NOT NULL ,
-	`bTITLE` VARCHAR(100) NOT NULL,
-	`bWDATE` DATETIME NOT NULL DEFAULT now(),
-	`bVIEWCNT` INT NOT NULL DEFAULT '0',
-	`bCONTENT` TEXT NOT NULL,
-	PRIMARY KEY (`bIDX`),
+	`iTITLE` VARCHAR(100) NOT NULL,
+	`iCATEGORY` VARCHAR(20) NOT NULL,
+	`iWDATE` DATETIME NOT NULL DEFAULT now(),
+	`oIDX` int,
+	`iCONTENT` TEXT NOT NULL,
+	`iFNAME` varchar(100),
+	`iRFNAME` varchar(200),
+	`iREPLY` varchar(10) DEFAULT '답변대기중',
+	PRIMARY KEY (`iIDX`),
     FOREIGN KEY (mMID)
     REFERENCES member(mMID) ON UPDATE CASCADE
 );
 
-desc board;
-drop table board;
 
-select * from board;
+desc board;
+drop table inquiry;
+
+select * from inquiry;
 
 select * 
 	from board 

@@ -152,7 +152,7 @@
 				<ul class="submenu top_submenu">
 					<li><a href="${contextPath}/board/list">공지사항</a></li>
 					<li><a href="${contextPath}/faq/list">자주하는 질문</a></li>
-					<li><a href="${contextPath}/">1:1 문의</a></li>
+					<li><a href="${contextPath}/inquiry/list">1:1 문의</a></li>
 				</ul>
 			</li>
 			<c:if test="${!empty smid}">
