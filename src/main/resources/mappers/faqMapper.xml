@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.cjs200809.dao.FaqDao">
+
+	<select id="listFaq" resultType="com.spring.cjs200809.vo.FaqVo">
+		select * from faq order by fIDX desc limit #{startNo},#{pageSize};
+	</select>
+
+	<select id="fListTotRecCnt" resultType="int">
+		select count(*) from faq;
+	</select>
+
+	<select id="listFaqCategory" resultType="com.spring.cjs200809.vo.FaqVo">
+		select * from faq where fCATEGORY=#{fCATEGORY} order by fIDX desc limit #{startNo},#{pageSize};
+	</select>
+
+	<select id="fListTotRecCntCategory" resultType="int">
+		select count(*) from faq where fCATEGORY=#{fCATEGORY};
+	</select>
+	
+	<insert id="writeFaq">
+		insert into faq values (default,#{vo.fCATEGORY},#{vo.fTITLE},#{vo.fCONTENT});
+	</insert>
+	
+
+</mapper>
