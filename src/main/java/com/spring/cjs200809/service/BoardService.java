@@ -8,12 +8,23 @@ public interface BoardService {
 
 	public void writeBoard(BoardVo vo);
 
-	public void imgCheck(String content, String uploadPath, int position_number);
+	public void imgCheck(String bCONTENT, String uploadPath, int position_number);
 
 	public List<BoardVo> bList(int startNo, int pageSize);
 
-	public BoardVo viewBoard(int idx);
+	public BoardVo viewBoard(int bIDX);
 
-	public void addViewCnt(int idx);
+	public void addViewCnt(int bIDX);
+
+	public void imgBackup(String bCONTENT, String uploadPath);
+
+	public void imgDelete(String originalCONTENT, String uploadPath);
+
+	public void updateBoard(BoardVo vo);
+
+	public void deleteBoard(int bIDX);
+
+	//public BoardVo prevAndnext(int bIDX);
+	
 
 }

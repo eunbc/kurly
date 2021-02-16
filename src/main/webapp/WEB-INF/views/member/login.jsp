@@ -14,33 +14,67 @@
 		#content{margin: 0 auto; width: 320px;}
 		tr, td {padding: 7px;}
 		table {margin: 0 auto;}
+		tr td div {
+			font-size: 13px;
+			margin-bottom: 10px;
+		}
+		tr td div a {
+			color : black;
+			text-decoration: none;
+			text-align: right;
+		}
 	</style>
+	<script>
+		function loginCheck() {
+			var mid = loginForm.mMID.value;
+			var pwd = loginForm.mPWD.value;
+			
+			if(mid==''){
+				alert("아이디를 입력해주세요.");
+				loginForm.mMID.focus();
+				return false;
+			}
+			else if(pwd==''){
+				alert("비밀번호를 입력해주세요.");
+				loginForm.mPWD.focus();
+				return false;
+			}
+			else {
+				loginForm.submit();
+			}
+		}
+	</script>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/nav.jsp" %>
+<c:if test="${not empty cmid}"> <!-- 쿠키가 비어있지 않다면 체크박스 checked 속성 줌 -->
+  <c:set value="checked" var="checked"/>
+</c:if>
 <div class="content-default">
 	<div id="content">
 		<p><br/></p>
 		<h4 style="text-align: center;font-weight: 900;">로그인</h4>
 		<p><br/></p>
-		<form>
+		<form name="loginForm" method="post">
 			<table>
 				<tr>
-					<td><input type="text" class="form-control" name="mid" id="mid" placeholder="아이디를 입력해주세요"/></td>
+					<td><input type="text" class="form-control" value="${cmid}" name="mMID" id="mMID" placeholder="아이디를 입력해주세요"/></td>
 				</tr>
 				<tr>
-					<td><input type="text" class="form-control" name="pwd" id="pwd" placeholder="비밀번호를 입력해주세요"/></td>
+					<td><input type="password" class="form-control" name="mPWD" id="mPWD" placeholder="비밀번호를 입력해주세요"/></td>
 				</tr>
 				<tr>
 					<td>
-						<span id="rememberId"><input type="checkbox" id="rememberId" name="rememberId" ${checked}/>아이디 기억하기</span>
-						<div id="login_find"><a href="${contextPath}/member/find_id">아이디 찾기 </a> | <a href="${contextPath}/member/find_pwd">비밀번호 찾기</a></div>
+						<div>
+							<input type="checkbox" id="rememberId" name="rememberId" value="YES" ${checked} style="text-align: left;"/>&nbsp;아이디 기억하기 
+							<a href="${contextPath}/member/find_id" style="margin-left: 50px; ">아이디 찾기 </a> | <a href="${contextPath}/member/find_pwd">비밀번호 찾기</a>
+						</div>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<input type="button" class="button" style="width:320px" value="로그인"/>
-						<input type="button" class="button-outline" style="width:320px" value="회원가입"/>
+						<input type="button" class="button" style="width:320px" onclick="loginCheck()" value="로그인"/>
+						<input type="button" class="button-outline" style="width:320px" onclick="location.href='${contextPath}/member/join'" value="회원가입"/>
 					</td>
 				</tr>
 			</table>

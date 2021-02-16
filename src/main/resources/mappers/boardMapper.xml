@@ -3,24 +3,41 @@
 <mapper namespace="com.spring.cjs200809.dao.BoardDao">
 	
 	<insert id="writeBoard">
-		insert into kurly_board values (default,#{vo.mid},#{vo.name},#{vo.title},default,default,#{vo.content});
+		insert into board values (default,#{vo.mMID},#{vo.bNAME},#{vo.bTITLE},default,default,#{vo.bCONTENT});
 	</insert>
 
 	<select id="bListTotRecCnt" resultType="int">
-		select count(*) from kurly_board;
+		select count(*) from board;
 	</select>
 
 	<select id="bList" resultType="com.spring.cjs200809.vo.BoardVo">
-		select * from kurly_board order by idx desc limit #{startNo},#{pageSize};
+		select * from board order by bIDX desc limit #{startNo},#{pageSize};
 	</select>
 	
 	<select id="viewBoard" resultType="com.spring.cjs200809.vo.BoardVo">
-		select * from kurly_board where idx=#{idx};
+		select * from board where bIDX=#{bIDX};
 	</select>
 	
 	<update id="addViewCnt">
-		update kurly_board set viewCnt=viewCnt+1 where idx=#{idx};
+		update board set bVIEWCNT=bVIEWCNT+1 where bIDX=#{bIDX};
 	</update>
+	
+	<update id="updateBoard">
+		update board set bNAME=#{vo.bNAME}, bTITLE=#{vo.bTITLE}, bCONTENT=#{vo.bCONTENT} where bIDX=#{vo.bIDX};
+	</update>
+	
+	<delete id="deleteBoard">
+		delete from board where bIDX=#{bIDX};
+	</delete>
+	
+<!-- 	<select id="prevAndnext" resultType="com.spring.cjs200809.vo.BoardVo">
+		select bTITLE 
+			from board 
+			where bIDX in (
+				(select bIDX from board where bIDX &lt; #{bIDX} order by bIDX desc limit 1),
+				(select bIDX from board where bIDX &gt; #{bIDX} order by bIDX limit 1)
+			);		
+	</select> -->
 	
 
 	

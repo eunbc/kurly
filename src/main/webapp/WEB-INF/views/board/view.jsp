@@ -9,6 +9,19 @@
 <head>
 	<meta charset="UTF-8">
 	<title>마켓컬리 :: 내일의 장보기, 마켓컬리</title>
+	<script>
+		function updateCheck(idx) {
+			var ans = confirm("수정하시겠습니까?");
+			if(!ans) return false;
+			else location.href="${contextPath}/board/update?bIDX="+idx+"&pag="+${pag};			
+		}
+		
+		function deleteCheck(idx) {
+			var ans = confirm("삭제하시겠습니까?");
+			if(!ans) return false;
+			else location.href="${contextPath}/board/delete?bIDX="+idx+"&pag="+${pag};			
+		}
+	</script>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/nav.jsp"%>
@@ -20,35 +33,39 @@
 	<table class="view-table">
 		<tr>
 			<td class="title-colored">제목</td>
-			<td colspan="3">${vo.title}</td>
+			<td colspan="3">${vo.bTITLE}</td>
 		</tr>
 		<tr>
 			<td class="title-colored">작성자</td>
-			<td colspan="3">${vo.name}</td>
+			<td colspan="3">${vo.bNAME}</td>
 		</tr>
 		<tr>
 			<td class="title-colored">작성일</td>
-			<td style="width:200px">${fn:substring(vo.wdate,0,10)}</td>
+			<td style="width:200px">${fn:substring(vo.bWDATE,0,10)}</td>
 			<td class="title-colored">조회수</td>
-			<td>${vo.viewCnt}</td>
+			<td>${vo.bVIEWCNT}</td>
 		</tr>
 		<tr>
-			<td colspan="4">${vo.content}</td>
+			<td colspan="4">${vo.bCONTENT}</td>
 		</tr>
 	</table>
 	
 	<div style="text-align: right">
-		<input type="button" value="목록" onclick="location.href='${contextPath}/board/list'" class="button-small"/>
+		<c:if test="${sname=='관리자'}">
+			<input type="button" value="수정" onclick="updateCheck(${vo.bIDX})" class="button-outline-small"/>
+			<input type="button" value="삭제" onclick="deleteCheck(${vo.bIDX})" class="button-outline-small"/>
+		</c:if>
+		<input type="button" value="목록" onclick="location.href='${contextPath}/board/list?pag=${pag}'" class="button-small"/>
 	</div>
 	
 	<table class="view-table-move">
 		<tr>
 			<td>∧이전글</td>
-			<td><a href="${contextPath}/board/view?idx=">[가격인상공지]</a></td>
+			<td><a href="${contextPath}/board/view?bIDX=&pag=${pag}"></a></td>
 		</tr>
 		<tr>
 			<td>∨다음글</td>
-			<td><a href="${contextPath}/board/view?idx=">[가격인상공지]</a></td>
+			<td><a href="${contextPath}/board/view?bIDX=&pag=${pag}"></a></td>
 		</tr>
 	</table>
 </div>

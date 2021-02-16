@@ -14,8 +14,14 @@ public interface BoardDao {
 
 	public List<BoardVo> bList(@Param("startNo") int startNo,@Param("pageSize") int pageSize);
 
-	public BoardVo viewBoard(@Param("idx") int idx);
+	public BoardVo viewBoard(@Param("bIDX") int bIDX);
 
-	public void addViewCnt(@Param("idx") int idx);
+	public void addViewCnt(@Param("bIDX") int bIDX);
+
+	public void updateBoard(@Param("vo") BoardVo vo);
+
+	public void deleteBoard(@Param("bIDX") int bIDX);
+
+	//public BoardVo prevAndnext(@Param("bIDX") int bIDX);
 
 }

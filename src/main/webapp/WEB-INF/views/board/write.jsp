@@ -12,17 +12,16 @@
 	<script src="${contextPath}/resources/ckeditor/ckeditor.js"></script>
 	<script>
 		function writeCheck() {
-			var title = writeForm.title.value;
-			var name = writeForm.name.value;
-			var content = writeForm.content.value;
+			var bTITLE = writeForm.bTITLE.value;
+			var bNAME = writeForm.bNAME.value;
 			
-			if(title=="") {
+			if(bTITLE=="") {
 				alert("제목을 입력하세요.");
-				writeForm.title.focus();
+				writeForm.bTITLE.focus();
 			}
-			else if(name=="") {
+			else if(bNAME=="") {
 				alert("작성자를 입력하세요.");
-				writeForm.name.focus();
+				writeForm.bNAME.focus();
 			}
 			else {
 				writeForm.submit();
@@ -36,12 +35,9 @@
 	<div class="subNav">
 		<h2 style="font-weight: 600">&nbsp;고객센터</h2>
 		<ul class="subNavMenu">
-			<li><a href="${contextPath}/board/list" class="subNavMenuClicked">공지사항<span class="align-right">&gt;</span></a></li>
-			<li><a href="${contextPath}/">자주하는 질문<span class="align-right">&gt;</span></a></li>
-			<li><a href="${contextPath}/">1:1문의<span class="align-right">&gt;</span></a></li>
-			<li><a href="${contextPath}/">대량주문 문의<span class="align-right">&gt;</span></a></li>
-			<li><a href="${contextPath}/">상품 제안<span class="align-right">&gt;</span></a></li>
-			<li><a href="${contextPath}/">에코포장 피드백<span class="align-right">&gt;</span></a></li>
+			<li><a href="${contextPath}/board/list" class="subNavMenuClicked">공지사항</a></li>
+			<li><a href="${contextPath}/faq/list">자주하는 질문</a></li>
+			<li><a href="${contextPath}/inquiry/list">1:1문의</a></li>
 		</ul>
 	</div>
 	<div class="section">
@@ -50,17 +46,17 @@
 			<table class="write-table">
 				<tr> 
 					<td>제목</td>
-					<td><input type="text" name="title" class="form-control" maxlength="100"/></td>
+					<td><input type="text" name="bTITLE" class="form-control" maxlength="100"/></td>
 				</tr>
 				<tr> 
 					<td>작성자</td>
-					<td><input type="text" name="name" class="form-control" value="MarketKurly" maxlength="20"/></td>
+					<td><input type="text" name="bNAME" class="form-control" value="MarketKurly" maxlength="20"/></td>
 				</tr>
 				<tr> 
 					<td>내용</td>
-					<td><textarea name="content" class="form-control" id="CKEDITOR"></textarea></td>
+					<td><textarea name="bCONTENT" class="form-control" id="CKEDITOR"></textarea></td>
 					<script type="text/javascript">
-						CKEDITOR.replace("content", {
+						CKEDITOR.replace("bCONTENT", {
 							uploadUrl:"${contextPath}/imageUpload",	//드래그 앤 드롭					
 							filebrowserUploadUrl: "${contextPath}/imageUpload", //파일은 이 경로로 업로드
 							height : 400
@@ -69,7 +65,7 @@
 				</tr>
 			</table>
 			<p><br/></p>
-			<input type="hidden" name="mid" value="admin"/>
+			<input type="hidden" name="mMID" value="${smid}"/>
 			<input type="button" onclick="writeCheck()" class="button" style="margin-left: 290px" value="등록"/>
 		</form>
 	</div>

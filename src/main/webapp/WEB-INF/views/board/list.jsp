@@ -16,16 +16,15 @@
 	<div class="subNav">
 		<h2 style="font-weight: 600">&nbsp;고객센터</h2>
 		<ul class="subNavMenu">
-			<li><a href="${contextPath}/board/list" class="subNavMenuClicked">공지사항<span class="align-right">&gt;</span></a></li>
-			<li><a href="${contextPath}/">자주하는 질문<span class="align-right">&gt;</span></a></li>
-			<li><a href="${contextPath}/">1:1문의<span class="align-right">&gt;</span></a></li>
-			<li><a href="${contextPath}/">대량주문 문의<span class="align-right">&gt;</span></a></li>
-			<li><a href="${contextPath}/">상품 제안<span class="align-right">&gt;</span></a></li>
-			<li><a href="${contextPath}/">에코포장 피드백<span class="align-right">&gt;</span></a></li>
+			<li><a href="${contextPath}/board/list" class="subNavMenuClicked">공지사항</a></li>
+			<li><a href="${contextPath}/faq/list">자주하는 질문</a></li>
+			<li><a href="${contextPath}/inquiry/list">1:1문의</a></li>
 		</ul>
 	</div>
 	<div class="section">
-		<h4>공지사항 <span class="explanation-gray">컬리의 새로운 소식들과 유용한 정보들을 한곳에서 확인하세요. </span></h4>
+		<div>
+			<span class="section-title">공지사항 </span><span class="explanation-gray">컬리의 새로운 소식들과 유용한 정보들을 한곳에서 확인하세요. </span>
+		</div>
 		<table class="list-table">
 			<tr> 
 				<th style="width:50px">번호</th>
@@ -37,18 +36,20 @@
 			<c:forEach var="vo" items="${vos}">
 				<tr>
 					<td>${curScrNo}</td>
-					<td><a href="${contextPath}/board/view?idx=${vo.idx}&pag=${p.pag}" class="title-decoration-none">${vo.title}</a></td>
-					<td>${vo.name}</td>
-					<td>${fn:substring(vo.wdate,0,10)}</td>
-					<td>${vo.viewCnt}</td>
+					<td><a href="${contextPath}/board/view?bIDX=${vo.bIDX}&pag=${p.pag}" class="title-decoration-none">${vo.bTITLE}</a></td>
+					<td>${vo.bNAME}</td>
+					<td>${fn:substring(vo.bWDATE,0,10)}</td>
+					<td>${vo.bVIEWCNT}</td>
 				</tr>
 				<c:set var="curScrNo" value="${curScrNo-1}"/>
 			</c:forEach>
 		</table>
 		
-		<div style="text-align: right;">
-			<input type="button" class="button-small" onclick="location.href='${contextPath}/board/write'" value="글쓰기"/>
-		</div>
+		<c:if test="${sname=='관리자'}">
+			<div style="text-align: right;">
+				<input type="button" class="button-small" onclick="location.href='${contextPath}/board/write'" value="글쓰기"/>
+			</div>
+		</c:if>
 		
 		<!-- 페이징 처리 시작 -->
 	    <div class="row">

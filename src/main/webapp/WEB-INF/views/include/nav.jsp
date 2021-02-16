@@ -151,29 +151,32 @@
 				<a href="${contextPath}/member/join" class="menuLink">고객센터 ▼</a>
 				<ul class="submenu top_submenu">
 					<li><a href="${contextPath}/board/list">공지사항</a></li>
-					<li><a href="${contextPath}/">자주하는 질문</a></li>
+					<li><a href="${contextPath}/faq/list">자주하는 질문</a></li>
 					<li><a href="${contextPath}/">1:1 문의</a></li>
-					<li><a href="${contextPath}/">대량주문 문의</a></li>
-					<li><a href="${contextPath}/">상품 제안</a></li>
-					<li><a href="${contextPath}/">에코포장 피드백</a></li>
 				</ul>
 			</li>
-			<li>
-				<a href="${contextPath}/member/join" class="menuLink">조은비님 ▼</a>
-				<ul class="submenu top_submenu">
-					<li><a href="${contextPath}/mypage/orderlist">주문내역</a></li>
-					<li><a href="${contextPath}/mypage/destinationlist">배송지 관리</a></li>
-					<li><a href="${contextPath}/mypage/wishlist">늘 사는 것</a></li>
-					<li><a href="${contextPath}/mypage/reviewlist">상품 후기</a></li>
-					<li><a href="${contextPath}/mypage/emoney">적립금</a></li>
-					<li><a href="${contextPath}/mypage/coupon">쿠폰</a></li>
-					<li><a href="${contextPath}/member/myinfo_update">개인 정보 수정</a></li>
-					<li><a href="${contextPath}/member/logout">로그아웃</a></li>
-					<li><a href="${contextPath}/admin/main">관리자</a></li>
-				</ul>
-			</li>
-			<li><a href="${contextPath}/member/login" class="menuLink">로그인</a></li>
-			<li><a href="${contextPath}/member/join" class="menuLink" style="color: #5F0080">회원가입</a></li>
+			<c:if test="${!empty smid}">
+				<li>
+					<a href="${contextPath}/member/join" class="menuLink">${sname}님 ▼</a>
+					<ul class="submenu top_submenu">
+						<li><a href="${contextPath}/mypage/orderlist">주문내역</a></li>
+						<li><a href="${contextPath}/mypage/destinationlist">배송지 관리</a></li>
+						<li><a href="${contextPath}/mypage/wishlist">늘 사는 것</a></li>
+						<li><a href="${contextPath}/mypage/reviewlist">상품 후기</a></li>
+						<li><a href="${contextPath}/mypage/emoney">적립금</a></li>
+						<li><a href="${contextPath}/mypage/coupon">쿠폰</a></li>
+						<li><a href="${contextPath}/member/myinfo_update">개인 정보 수정</a></li>
+						<li><a href="${contextPath}/member/logout">로그아웃</a></li>
+						<c:if test="${smid=='marketkurly'}">
+							<li><a href="${contextPath}/admin/main">관리자</a></li>
+						</c:if>
+					</ul>
+				</li>
+			</c:if>
+			<c:if test="${empty smid}">
+				<li><a href="${contextPath}/member/login" class="menuLink">로그인</a></li>
+				<li><a href="${contextPath}/member/join" class="menuLink" style="color: #5F0080">회원가입</a></li>
+			</c:if>
 		</ul>
 	</div>
 	
