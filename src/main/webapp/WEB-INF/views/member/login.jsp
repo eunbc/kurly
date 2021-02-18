@@ -11,17 +11,51 @@
 	<title>마켓컬리 :: 내일의 장보기, 마켓컬리</title>
 	<link rel= "stylesheet" type="text/css" href="${contextPath}/resources/css/kurly.css?after">
 	<style type="text/css">
-		#content{margin: 0 auto; width: 320px;}
-		tr, td {padding: 7px;}
-		table {margin: 0 auto;}
-		tr td div {
+		.content-default{
+			width: 1100px;
+			margin: 0 auto;
+			padding: 50px 0 200px 0;
+		}	
+		.login-content{margin: 0 auto; width: 320px;}
+		.login-table tr, td {padding: 7px;}
+		.login-table tr td div {
 			font-size: 13px;
 			margin-bottom: 10px;
 		}
-		tr td div a {
+		.login-table tr td div a {
 			color : black;
 			text-decoration: none;
 			text-align: right;
+		}
+		.button {
+		    width:250px;
+		    background-color: #5F0080;
+		    border: none;
+		    color:#fff;
+		    padding: 15px 0;
+		    text-align: center;
+		    text-decoration: none;
+		    display: inline-block;
+		    font-size: 15px;
+		    margin: 4px;
+		    cursor: pointer;
+		    border-radius: 3px;
+		    font-weight: 700;
+		}		
+		.button-outline {
+		    width:250px;
+		    background-color: white;
+		    border: 1.5px solid #5F0080;
+		    color:#5F0080;
+		    padding: 15px 0;
+		    text-align: center;
+		    text-decoration: none;
+		    display: inline-block;
+		    font-size: 15px;
+		    margin: 4px;
+		    cursor: pointer;
+		    border-radius: 3px;
+		    font-weight: 700;
 		}
 	</style>
 	<script>
@@ -51,12 +85,12 @@
   <c:set value="checked" var="checked"/>
 </c:if>
 <div class="content-default">
-	<div id="content">
+	<div class="login-content">
 		<p><br/></p>
 		<h4 style="text-align: center;font-weight: 900;">로그인</h4>
 		<p><br/></p>
 		<form name="loginForm" method="post">
-			<table>
+			<table class="login-table">
 				<tr>
 					<td><input type="text" class="form-control" value="${cmid}" name="mMID" id="mMID" placeholder="아이디를 입력해주세요"/></td>
 				</tr>

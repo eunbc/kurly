@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
 /*----------------------default---------------------------*/
-
 .content-default{
 	width: 1100px;
 	margin: 0 auto;
@@ -226,7 +225,7 @@ table.write-table {
 	width: 1100px;
 	border-top: 2px solid black;
 	border-bottom: 1px solid #F6F6F6;
-	font-size: 13px;
+	/* font-size: 13px; */
 }
 .view-table tr{
 	line-height: 40px;
@@ -246,7 +245,7 @@ table.write-table {
 	border-top: 2px solid black;
 	border-bottom: 2px solid black;
 	width: 1100px;
-	font-size: 13px;
+	/* font-size: 13px; */
 }
 .view-table-move tr td{
 	padding: 10px;
@@ -260,6 +259,55 @@ table.write-table {
 	color: black;	
 	text-decoration: none;
 }
+
+
+/*----------------mypage---------------*/
+.mypage-box{
+	height: 260px;
+	background-color: #F7F7F7;
+}
+.mypage-content{
+	width: 1100px;
+	margin: 0 auto;
+	padding: 50px 0 50px 0;
+}
+.mypage-content-box{
+	height: 160px;
+	background-color: white;
+	float: left;
+	margin-right: 10px;
+	width: 340px;
+	padding: 20px;
+}
+.mypage-number{
+	text-align: center;
+}
+.mypage-number a{
+	font-weight: 700;
+	color: #5F0080;
+	font-size: larger;
+}
+.mypage-number a:hover {
+	text-decoration: none;
+	color: #5F0080;
+}
+.mypage-number a:after{
+	content:'>';
+	margin-left: 5px;
+	color: #BDBDBD;
+	font-size: larger;
+}
+.mypage-button{
+	text-decoration: none;
+	background-color: #F7F7F7;
+	padding: 3px;
+	border-radius: 3px;
+	color: black;
+}
+.mypage-button:hover{
+	color: black;
+}
+
 
 
 

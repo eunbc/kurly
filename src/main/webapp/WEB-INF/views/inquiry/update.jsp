@@ -57,13 +57,6 @@
 					<td>내용</td>
 					<td><textarea name="bCONTENT" class="form-control" id="CKEDITOR">${vo.bCONTENT}</textarea></td>
 					<!-- 변경된 content -->
-					<script type="text/javascript">
-						CKEDITOR.replace("bCONTENT", {
-							uploadUrl:"${contextPath}/imageUpload",				
-							filebrowserUploadUrl: "${contextPath}/imageUpload",
-							height : 400
-						});
-					</script>
 				</tr>
 			</table>
 			<p><br/></p>

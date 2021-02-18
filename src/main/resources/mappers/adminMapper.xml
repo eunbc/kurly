@@ -2,7 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.cjs200809.dao.AdminDao">
 	
-
+  <select id="inquiryTotRecCnt" resultType="int">
+    <if test="partValue == '전체'">
+	    select count(*) from inquiry;
+    </if>
+    <if test="partValue != '전체'">
+	    select count(*) from inquiry where iREPLY = #{partValue};
+    </if>
+  </select>
+  
+  <select id="listInquiry" resultType="com.spring.cjs200809.vo.InquiryVo">
+    <if test="iREPLY == '전체'">
+    	select * from inquiry order by iIDX desc limit #{startNo},#{pageSize};
+    </if>
+    <if test="iREPLY != '전체'">
+    	select * from inquiry where iREPLY = #{iREPLY} order by iIDX desc limit #{startNo},#{pageSize};
+    </if>
+  </select>
 	
 
 </mapper>

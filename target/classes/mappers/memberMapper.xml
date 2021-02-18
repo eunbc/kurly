@@ -13,6 +13,18 @@
 	<insert id="memberJoin">
 		insert into member values (default,#{vo.mMID},#{vo.mPWD},#{vo.mNAME},#{vo.mEMAIL},#{vo.mPHONE},#{vo.mADDRESS},#{vo.mGENDER},#{vo.mBDAY},default,default,default,#{vo.mRECEIVEAD},default);
 	</insert>
+	
+	<select id="findId" resultType="com.spring.cjs200809.vo.MemberVo">
+		select * from member where mNAME=#{mNAME} and mEMAIL=#{mEMAIL};
+	</select>
+
+	<select id="findPwd" resultType="com.spring.cjs200809.vo.MemberVo">
+		select * from member where mNAME=#{mNAME} and mMID=#{mMID} and mEMAIL=#{mEMAIL};
+	</select>
+	
+	<update id="TempPwdChange">
+		update member set mPWD=#{encode} where mMID=#{mMID};
+	</update>
 
 
 </mapper>

@@ -1,6 +1,8 @@
 package com.spring.cjs200809;
 
 
+import java.util.UUID;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,8 +15,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.cjs200809.service.MemberService;
+import com.spring.cjs200809.vo.MailVo;
 import com.spring.cjs200809.vo.MemberVo;
 
 
@@ -104,10 +108,48 @@ public class MemberController {
 	public String find_idGet() {
 		return "member/find_id";
 	}
+
+	@RequestMapping(value="/find_id", method=RequestMethod.POST)
+    public String find_idPost(String mNAME,String mEMAIL,Model model) {
+	  	MemberVo vo = memberService.findId(mNAME,mEMAIL);
+	 	 
+	  	if(vo!=null) {
+	  		String id_found = vo.getMMID().substring(0,vo.getMMID().length()-3)+"***";
+	  		model.addAttribute("id_found",id_found);
+	  		model.addAttribute("mNAME",mNAME);
+	  		return "member/id_found";
+	  	} 
+	  	else {
+	  		msgFlag = "find_idNO";
+	  		return "redirect:/msg/"+msgFlag;
+	  	}
+    }
+	
 	
 	@RequestMapping(value="/find_pwd", method=RequestMethod.GET)
 	public String find_pwdGet() {
 		return "member/find_pwd";
+	}
+	
+	@RequestMapping(value="/find_pwd", method=RequestMethod.POST)
+	public String mPwdSearchPost(String mNAME, String mMID, String mEMAIL) {
+		String pwd = "";
+		
+		MemberVo vo = memberService.findPwd(mNAME,mMID,mEMAIL);
+		
+		if(vo != null) {
+			//임시비밀번호를 발급한다
+			UUID uid = UUID.randomUUID();
+			pwd = uid.toString().substring(0,6);
+			memberService.TempPwdChange(mMID, bCryptPasswordEncoder.encode(pwd)); //암호화 시킨 비밀번호를 저장
+			String toMail = mEMAIL;
+			String content = pwd;
+			return "redirect:/mail/pwdConfirmMailForm/"+toMail+"/"+content+"/"; 
+		}
+		else {
+			msgFlag = "find_pwdNO";
+			return "redirect:/msg/"+msgFlag;
+		}
 	}
 
 	@ResponseBody
@@ -129,5 +171,16 @@ public class MemberController {
 	  	
 	  	return res;
 	}
+	
+	@RequestMapping(value="/update", method=RequestMethod.GET)
+	public String updateGet(HttpSession session, Model model) {
+		String mMID = (String)session.getAttribute("smid");
+		//MemberVo vo = memberService.getMemberInfo(mMID);
+		//model.addAttribute("vo",vo);
+		return "mypage/pwdCheck";
+	}
+
+	
+	
 	
 }

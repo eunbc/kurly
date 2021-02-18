@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.spring.cjs200809.dao.AdminDao;
 import com.spring.cjs200809.dao.InquiryDao;
 import com.spring.cjs200809.dao.MypageDao;
+import com.spring.cjs200809.vo.InquiryReplyVo;
 import com.spring.cjs200809.vo.InquiryVo;
 
 @Service
@@ -87,6 +88,21 @@ public class InquiryServiceImp implements InquiryService{
 	@Override
 	public InquiryVo viewInquiry(int iIDX) {
 		return inquiryDao.viewInquiry(iIDX);
+	}
+
+	@Override
+	public void writeInquiryReply(InquiryReplyVo vo) {
+		inquiryDao.writeInquiryReply(vo);
+	}
+
+	@Override
+	public String viewInquiryReply(int iIDX) {
+		return inquiryDao.viewInquiryReply(iIDX);
+	}
+
+	@Override
+	public void updateReplyStmt(int iIDX) {
+		inquiryDao.updateReplyStmt(iIDX);
 	}
 
 }

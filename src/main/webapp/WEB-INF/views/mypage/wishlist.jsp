@@ -19,13 +19,13 @@
 	<div class="subNav">
 		<h2 style="font-weight: 600">&nbsp;마이컬리</h2>
 		<ul class="subNavMenu">
-			<li><a href="${contextPath}/board/list" class="subNavMenuClicked">주문 내역<span class="align-right">&gt;</span></a></li>
-			<li><a href="${contextPath}/">배송지 관리<span class="align-right">&gt;</span></a></li>
-			<li><a href="${contextPath}/">늘 사는 것<span class="align-right">&gt;</span></a></li>
-			<li><a href="${contextPath}/">상품 후기<span class="align-right">&gt;</span></a></li>
-			<li><a href="${contextPath}/">적립금<span class="align-right">&gt;</span></a></li>
-			<li><a href="${contextPath}/">쿠폰<span class="align-right">&gt;</span></a></li>
-			<li><a href="${contextPath}/">개인 정보 수정<span class="align-right">&gt;</span></a></li>
+			<li><a href="${contextPath}/mypage/order" >주문 내역</a></li>
+			<li><a href="${contextPath}/mypage/destination">배송지 관리</a></li>
+			<li><a href="${contextPath}/mypage/wishlist" class="subNavMenuClicked">늘 사는 것</a></li>
+			<li><a href="${contextPath}/mypage/review">상품 후기</a></li>
+			<li><a href="${contextPath}/mypage/emoney">적립금</a></li>
+			<li><a href="${contextPath}/mypage/coupon">쿠폰</a></li>
+			<li><a href="${contextPath}/member/update">개인 정보 수정</a></li>
 		</ul>
 	</div>
 	<div class="section">

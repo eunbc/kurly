@@ -10,5 +10,12 @@ public interface MemberService {
 
 	public void memberJoin(MemberVo vo);
 
+	public MemberVo findId(String mNAME, String mEMAIL);
+
+	public MemberVo findPwd(String mNAME, String mMID, String mEMAIL);
+
+	public void TempPwdChange(String mMID, String encode);
+
+
 
 }

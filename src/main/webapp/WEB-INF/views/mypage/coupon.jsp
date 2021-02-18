@@ -9,9 +9,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>마켓컬리 :: 내일의 장보기, 마켓컬리</title>
-	<style>
-		.align-right {align:right;}
-	</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/nav.jsp" %>
@@ -19,11 +16,12 @@
 	<div class="subNav">
 		<h2 style="font-weight: 600">&nbsp;마이컬리</h2>
 		<ul class="subNavMenu">
-			<li><a href="${contextPath}/mypage/order" class="subNavMenuClicked">주문 내역</a></li>
+			<li><a href="${contextPath}/mypage/order">주문 내역</a></li>
 			<li><a href="${contextPath}/mypage/destination">배송지 관리</a></li>
 			<li><a href="${contextPath}/mypage/wishlist">늘 사는 것</a></li>
 			<li><a href="${contextPath}/mypage/review">상품 후기</a></li>
 			<li><a href="${contextPath}/mypage/emoney">적립금</a></li>
+			<li><a href="${contextPath}/mypage/coupon"  class="subNavMenuClicked">쿠폰</a></li>
 			<li><a href="${contextPath}/member/update">개인 정보 수정</a></li>
 		</ul>
 	</div>

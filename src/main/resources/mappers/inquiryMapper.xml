@@ -13,4 +13,16 @@
 	<select id="viewInquiry" resultType="com.spring.cjs200809.vo.InquiryVo">
 		select * from inquiry where iIDX=#{iIDX};
 	</select>
+	
+	<insert id="writeInquiryReply">
+		insert into inquiryReply values(default,#{vo.iIDX},default,#{vo.irCONTENT});
+	</insert>
+	
+	<select id="viewInquiryReply" resultType="String">
+		select irCONTENT from inquiryReply where iIDX=#{iIDX} order by irIDX desc limit 1;
+	</select>
+	
+	<update id="updateReplyStmt">
+		update inquiry set iREPLY='답변완료' where iIDX=#{iIDX};
+	</update>
 </mapper>

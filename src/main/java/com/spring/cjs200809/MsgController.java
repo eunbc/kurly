@@ -46,7 +46,19 @@ public class MsgController {
 		else if(msgFlag.equals("writeInquiryOK")) {
 			model.addAttribute("msg","1:1문의를 등록하였습니다.");
 			model.addAttribute("url","inquiry/list");
-		}		
+		}	
+		else if(msgFlag.equals("find_idNO")) {
+			model.addAttribute("msg","해당 이메일로 가입된 내역이 없습니다.");
+			model.addAttribute("url","member/find_id");
+		}	
+		else if(msgFlag.equals("find_pwdNO")) {
+			model.addAttribute("msg","일치하는 정보가 존재하지 않습니다.");
+			model.addAttribute("url","member/find_pwd");
+		}	
+		else if(msgFlag.equals("find_pwdOK_sendEmail")) {
+			model.addAttribute("msg","해당 이메일로 안내 메일이 발송되었습니다.");
+			model.addAttribute("url","member/login");
+		}	
 		
 		//예) msgFlag = "imgDeleteOk$fileCnt="+fileCnt;
 		//앞의 예에서 특정 매개변수에 추가로 매개값이 넘어왔을 때는 아래와 같이 처리한다.

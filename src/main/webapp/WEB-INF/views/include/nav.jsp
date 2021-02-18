@@ -19,7 +19,6 @@
 		#topBar {            
 		    height: 25px; 
 		    width: 1100px; 
-		    /*border: 1px solid black;*/
 		    margin: 0 auto;
 		}
 		#topBar ul {
@@ -30,10 +29,9 @@
 		    color: black;            
 		    background-color: white;  
 		    float: right;                
-		    line-height: 20px;         /*   글씨가 가운데로 오도록 설정하기 위해 한줄의 높이를 30px로 설정 */
-		    vertical-align: middle;     /* 세로 정렬을 가운데로 설정(위의 line-height와 같이 설정 필요함) */
+		    line-height: 20px;        
+		    vertical-align: middle;    
 		    text-align: center;  
-		    /*border : 1px solid black;   */                        
 		    border-right : 1px solid lightgray;    
 		    padding : 0px 5px 0px 10px;
 		}
@@ -69,7 +67,6 @@
         #container {            
             height: 55px; 
             width: 1100px; 
-          /*  border: 1px solid black; */
             margin: 0 auto;
         }
 		#container ul,li {list-style:none; margin:0; padding:0;}
@@ -107,7 +104,6 @@
 			padding: 0 0 0 10px;
             width: 200px;                            
             display: inline-block;                          
-            /*border : 1px solid black; */                          
             text-decoration:none;                    
             color: black;                        
             font-size: 15px;                           
@@ -159,13 +155,13 @@
 				<li>
 					<a href="${contextPath}/member/join" class="menuLink">${sname}님 ▼</a>
 					<ul class="submenu top_submenu">
-						<li><a href="${contextPath}/mypage/orderlist">주문내역</a></li>
-						<li><a href="${contextPath}/mypage/destinationlist">배송지 관리</a></li>
+						<li><a href="${contextPath}/mypage/order">주문내역</a></li>
+						<li><a href="${contextPath}/mypage/destination">배송지 관리</a></li>
 						<li><a href="${contextPath}/mypage/wishlist">늘 사는 것</a></li>
-						<li><a href="${contextPath}/mypage/reviewlist">상품 후기</a></li>
+						<li><a href="${contextPath}/mypage/review">상품 후기</a></li>
 						<li><a href="${contextPath}/mypage/emoney">적립금</a></li>
 						<li><a href="${contextPath}/mypage/coupon">쿠폰</a></li>
-						<li><a href="${contextPath}/member/myinfo_update">개인 정보 수정</a></li>
+						<li><a href="${contextPath}/member/update">개인 정보 수정</a></li>
 						<li><a href="${contextPath}/member/logout">로그아웃</a></li>
 						<c:if test="${smid=='marketkurly'}">
 							<li><a href="${contextPath}/admin/main">관리자</a></li>

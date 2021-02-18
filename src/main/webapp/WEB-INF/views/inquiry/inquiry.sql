@@ -14,6 +14,16 @@ CREATE TABLE `inquiry` (
     REFERENCES member(mMID) ON UPDATE CASCADE
 );
 
+CREATE TABLE `inquiryReply` (
+	irIDX 		INT NOT NULL AUTO_INCREMENT,
+	iIDX 		INT NOT NULL ,
+	irWDATE 		DATETIME NOT NULL DEFAULT now(),
+	irCONTENT	TEXT NOT NULL,
+	PRIMARY KEY (`irIDX`),
+    FOREIGN KEY (iIDX)
+    REFERENCES inquiry(iIDX)
+);
+drop table inquiryReply;
 
 desc board;
 drop table inquiry;

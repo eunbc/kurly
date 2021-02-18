@@ -13,25 +13,6 @@
 	<style>
 		.content {margin:0 auto; width: 320px}
 	</style>
-	<script type="text/javascript">
-		function fCheck() {
-			var mNAME = idForm.mNAME.value;
-			var mEMAIL = idForm.mEMAIL.value;
-			if(mNAME=="") {
-				alert("이름을 입력하세요.");
-				idForm.mNAME.focus();
-				return false;
-			}
-			else if(mEMAIL=="") {
-				alert("이메일을 입력하세요.");
-				idForm.mEMAIL.focus();
-				return false;
-			}
-			else {
-				idForm.submit();
-			}
-		}
-	</script>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/nav.jsp" %>
@@ -39,13 +20,14 @@
 	<div class="content">
 		<p><br/></p>
 		<h4 style="text-align: center;font-weight: 900;">아이디 찾기</h4>
-		<form name="idForm" method="post">
-			<div>이름 <input type="text" name="mNAME" class="form-control" placeholder="고객님의 이름을 입력해주세요"/></div>
 			<p><br/></p>
-			<div>이메일 <input type="text" name="mEMAIL" class="form-control" placeholder="가입 시 등록하신 이메일 주소를 입력해주세요"/></div>
-			<p><br/></p>
-			<input type="button" value="아이디 찾기" class="button" onclick="fCheck()" style="width:320px; height: 50px;"/>
-		</form>
+			<p style="text-align: center;">
+				${mNAME}님으로 검색된 아이디입니다. <br/>
+				${id_found}
+			</p>
+			<hr/>
+			<input type="button" value="로그인" class="button" onclick="location.href='${contextPath}/member/login'" style="width:320px; height: 50px;"/>
+			<input type="button" value="다시 찾기" class="button-outline" onclick="location.href='${contextPath}/member/find_id'" style="width:320px; height: 50px;"/>
 	</div>
 </div>
 </body>

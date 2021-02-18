@@ -10,45 +10,55 @@
 	<meta charset="UTF-8">
 	<title>마켓컬리 :: 내일의 장보기, 마켓컬리</title>
 	<style>
-		.align-right {align:right;}
+		.list-table tr td:first-child{
+			width: 200px;
+		}
+		.list-table tr td:last-child{
+			width: 200px;
+		}
 	</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/nav.jsp" %>
+<%@ include file="/WEB-INF/views/include/mypage-box.jsp" %>
 <div class="content-default">
 	<div class="subNav">
 		<h2 style="font-weight: 600">&nbsp;마이컬리</h2>
 		<ul class="subNavMenu">
-			<li><a href="${contextPath}/mypage/order" >주문 내역</a></li>
+			<li><a href="${contextPath}/mypage/order">주문 내역</a></li>
 			<li><a href="${contextPath}/mypage/destination">배송지 관리</a></li>
 			<li><a href="${contextPath}/mypage/wishlist">늘 사는 것</a></li>
-			<li><a href="${contextPath}/mypage/review" class="subNavMenuClicked">상품 후기</a></li>
+			<li><a href="${contextPath}/mypage/review">상품 후기</a></li>
 			<li><a href="${contextPath}/mypage/emoney">적립금</a></li>
 			<li><a href="${contextPath}/mypage/coupon">쿠폰</a></li>
-			<li><a href="${contextPath}/member/update">개인 정보 수정</a></li>
+			<li><a href="${contextPath}/member/update" class="subNavMenuClicked">개인 정보 수정</a></li>
 		</ul>
 	</div>
 	<div class="section">
-		<h4>주문 내역 <span class="explanation-gray">지난 3년간의 주문 내역 조회가 가능합니다 </span>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="button-outline-join" onclick="location.href='${contextPath}/board/write'" value="공지작성"/></h4>
+		<div>
+			<span class="section-title">개인 정보 수정</span><span class="explanation-gray">회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해주세요.</span>
+		</div>
 		<table class="list-table">
 			<tr> 
-				<th style="width:50px">번호</th>
-				<th style="width:550px">제목</th>
-				<th style="width:70px">작성자</th>
-				<th style="width:70px">작성일</th>
-				<th style="width:50px">조회</th>
+				<td>
+					아이디
+				</td>
+				<td>
+					<input type="text" value="${smid}" class="form-control"/>
+				</td>
+				<td></td>
 			</tr>
-			<c:forEach var="vo" items="${vos}">
-				<tr>
-					<td>${curScrNo}</td>
-					<td><a href="${contextPath}/board/view?board_idx=${vo.board_idx}&pag=${p.pag}" class="title-decoration-none">${vo.title}</a></td>
-					<td>${vo.name}</td>
-					<td>${fn:substring(vo.wdate,0,10)}</td>
-					<td>${vo.viewCnt}</td>
-				</tr>
-				<c:set var="curScrNo" value="${curScrNo-1}"/>
-			</c:forEach>
+			<tr> 
+				<td>
+					비밀번호
+				</td>
+				<td>
+					<input type="password" class="form-control"/>
+				</td>
+				<td></td>
+			</tr>
 		</table>
+		<input type="button" onclick="writeCheck()" class="button" style="margin-left: 290px" value="등록"/>
 	</div>
 </div>
 </body>

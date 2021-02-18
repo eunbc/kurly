@@ -89,30 +89,30 @@
 				<ul class="pagination justify-content-center" style="margin:20px 0">
 				<c:set var="startPageNum" value="${p.pag- (p.pag-1)%(p.blockSize)}"/>
 				<c:if test="${p.pag != 1}">
-		  			<li class="page-item"><a class="page-link" href="${contextPath}/board/list?pag=1&pageSize=${p.pageSize}">◀</a></li>
-		  			<li class="page-item"><a class="page-link" href="${contextPath}/board/list?pag=${p.pag-1}&pageSize=${p.pageSize}">◁</a></li>
+		  			<li class="page-item"><a class="page-link" href="${contextPath}/faq/list?pag=1&fCATEGORY=${fCATEGORY}">◀</a></li>
+		  			<li class="page-item"><a class="page-link" href="${contextPath}/faq/list?pag=${p.pag-1}&fCATEGORY=${fCATEGORY}">◁</a></li>
 				</c:if>
 				<c:if test="${p.pag == 1}">
-		  			<li class="page-item disabled"><a class="page-link" href="${contextPath}/board/list?pag=1&pageSize=${p.pageSize}">◀</a></li>
-		  			<li class="page-item disabled"><a class="page-link" href="${contextPath}/board/list?pag=${p.pag-1}&pageSize=${p.pageSize}">◁</a></li>
+		  			<li class="page-item disabled"><a class="page-link" href="${contextPath}/faq/list?pag=1&fCATEGORY=${fCATEGORY}">◀</a></li>
+		  			<li class="page-item disabled"><a class="page-link" href="${contextPath}/faq/list?pag=${p.pag-1}&fCATEGORY=${fCATEGORY}">◁</a></li>
 				</c:if>
 				<c:forEach var="i" begin="0" end="2">
 					<c:if test="${(startPageNum + i)<=p.totPage}">
 						<c:if test="${(startPageNum + i)==p.pag}">
-				  			<li class="page-item active"><b><a class="page-link" href="${contextPath}/board/list?pag=${startPageNum + i}&pageSize=${p.pageSize}">${startPageNum + i }</a></b></li>
+				  			<li class="page-item active"><b><a class="page-link" href="${contextPath}/faq/list?pag=${startPageNum + i}&fCATEGORY=${fCATEGORY}">${startPageNum + i }</a></b></li>
 						</c:if>
 						<c:if test="${(startPageNum + i)!=p.pag}">
-							<li class="page-item"><a class="page-link" href="${contextPath}/board/list?pag=${startPageNum + i}&pageSize=${p.pageSize}">${startPageNum + i }</a></li>
+							<li class="page-item"><a class="page-link" href="${contextPath}/faq/list?pag=${startPageNum + i}&fCATEGORY=${fCATEGORY}">${startPageNum + i }</a></li>
 						</c:if>
 					</c:if>
 				</c:forEach>
 				<c:if test="${p.pag != p.totPage}">
-					<li class="page-item"><a class="page-link" href="${contextPath}/board/list?pag=${p.pag+1}&pageSize=${p.pageSize}">▷</a></li>
-					<li class="page-item"><a class="page-link" href="${contextPath}/board/list?pag=${p.totPage}&pageSize=${p.pageSize}">▶</a></li>
+					<li class="page-item"><a class="page-link" href="${contextPath}/faq/list?pag=${p.pag+1}&fCATEGORY=${fCATEGORY}">▷</a></li>
+					<li class="page-item"><a class="page-link" href="${contextPath}/faq/list?pag=${p.totPage}&fCATEGORY=${fCATEGORY}">▶</a></li>
 				</c:if>
 				<c:if test="${p.pag == p.totPage}">
-					<li class="page-item disabled"><a class="page-link" href="${contextPath}/board/list?pag=${p.pag+1}&pageSize=${p.pageSize}">▷</a></li>
-					<li class="page-item disabled"><a class="page-link" href="${contextPath}/board/list?pag=${p.totPage}&pageSize=${p.pageSize}">▶</a></li>
+					<li class="page-item disabled"><a class="page-link" href="${contextPath}/faq/list?pag=${p.pag+1}&fCATEGORY=${fCATEGORY}">▷</a></li>
+					<li class="page-item disabled"><a class="page-link" href="${contextPath}/faq/list?pag=${p.totPage}&fCATEGORY=${fCATEGORY}">▶</a></li>
 				</c:if>
 				</ul>            
             </div>

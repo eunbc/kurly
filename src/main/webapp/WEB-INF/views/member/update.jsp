@@ -28,7 +28,7 @@
 <div class="content-default">
 	<div id="content">
 		<p><br/></p>
-		<h2 style="text-align: center;font-weight: 900;">회원가입</h2>
+		<h2 style="text-align: center;font-weight: 900;">정보수정</h2>
 		<p style="text-align: right;"><span class="necessary">*</span>필수입력사항</p>
 		<hr color="black">
 		<form name="joinForm" method="post">
@@ -36,7 +36,7 @@
 				<tr>
 					<td>아이디<span class="necessary">*</span></td>
 					<td>
-						<input type="text" name="mMID" id="mMID" class="form-control" placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합"/>
+						<input type="text" name="mMID" id="mMID" value="${smid}" readonly="readonly" class="form-control"/>
 	                    <div class="validation" id="id_check"></div>
 					</td>
 					<td><input type="button" class="button-outline-join" style="width:140px" value="중복확인" id="idCheck"/></td>
@@ -59,17 +59,17 @@
 				</tr>
 				<tr>
 					<td>이름<span class="necessary">*</span></td>
-					<td><input type="text" name="mNAME" id="mNAME" class="form-control" placeholder="이름을 입력해주세요"/></td>
+					<td><input type="text" name="mNAME" id="mNAME" class="form-control" value="${vo.mNAME}"/></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td>이메일<span class="necessary">*</span></td>
-					<td><input type="text" name="mEMAIL" id="mEMAIL" class="form-control" placeholder="예: marketkurly@kurly.com"/></td>
+					<td><input type="text" name="mEMAIL" id="mEMAIL" class="form-control" value="${vo.mEMAIL}"/></td>
 					<td><input type="button" value="중복확인" class="button-outline-join" style="width:140px" id="emailCheck"/></td>
 				</tr>
 				<tr>
 					<td>휴대폰<span class="necessary">*</span></td>
-					<td><input type="text" name="mPHONE" id="mPHONE" class="form-control" placeholder="숫자만 입력해주세요"/></td>
+					<td><input type="text" name="mPHONE" id="mPHONE" class="form-control" value="${vo.mPHONE}"/></td>
 					<td></td>
 				</tr>
 				<tr>
@@ -88,57 +88,30 @@
 				<tr>
 					<td>성별</td>
 					<td>
-						<input type="radio" value="남자" name="mGENDER" />&nbsp;남자 &nbsp;
-						<input type="radio" value="여자" name="mGENDER" />&nbsp;여자 &nbsp;
-						<input type="radio" value="-" name="mGENDER" checked />&nbsp;선택안함 
+						<input type="radio" value="남자" name="mGENDER" <c:if test=${vo.mGENDER=='남자'}>checked</c:if>/>&nbsp;남자 &nbsp;
+						<input type="radio" value="여자" name="mGENDER" <c:if test=${vo.mGENDER=='여자'}>checked</c:if>/>&nbsp;여자 &nbsp;
+						<input type="radio" value="-" name="mGENDER" <c:if test=${vo.mGENDER=='-'}>checked</c:if>/>&nbsp;선택안함 
 					</td>
 					<td></td>
 				</tr>
 				<tr>
 					<td>생년월일</td>
-					<td><input type="text" name="mBDAY" id="mBDAY" class="form-control" placeholder="예: 19900207"/></td>
+					<td><input type="text" name="mBDAY" id="mBDAY" class="form-control" value="${vo.mBDAY}"/></td>
 					<td></td>
 				</tr>				
 				<tr>
 					<td>추가입력 사항</td>
 					<td>
-						<input type="checkbox" name="" value="추천인 아이디"/>&nbsp;추천인 아이디 
+						<input type="checkbox" name="mRECEIVEAD" id="term3" value="Y"/>&nbsp;할인쿠폰 등 혜택/정보 수신 동의<span class="gray">(선택)</span>
 					</td>
 					<td></td>
 				</tr>
 			</table>
 			<hr color="black"/>
-			<table>
-				<tr>
-					<td>이용약관동의<span class="necessary">*</span></td>
-					<td><input type="checkbox" id="termsCheckALl" />&nbsp;<b>전체 동의합니다</b></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><input type="checkbox" name="terms" id="term1" />&nbsp;이용약관 동의<span class="gray">(필수)</span></td>
-					<td><a href="" class="terms">약관보기></a></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><input type="checkbox" name="terms" id="term2" />&nbsp;개인정보처리방침 동의<span class="gray">(필수)</span></td>
-					<td><a href="" class="terms">약관보기></a></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><input type="checkbox" name="mRECEIVEAD" id="term3" value="Y"/>&nbsp;할인쿠폰 등 혜택/정보 수신 동의<span class="gray">(선택)</span></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><input type="checkbox" name="terms" id="term4" />&nbsp;본인은 만 14세 이상입니다.<span class="gray">(필수)</span></td>
-					<td></td>
-				</tr>
-			</table>
 			<hr/>
 			<p><br/></p>
 			<div style="text-align: center;">
-				<input type="button" id="fCheck" value="가입하기" class="button" />
+				<input type="button" id="fCheck" value="수정하기" class="button" />
 			</div>
 		</form>
 	</div>

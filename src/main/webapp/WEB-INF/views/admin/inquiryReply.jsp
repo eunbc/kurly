@@ -9,22 +9,45 @@
 <head>
 	<meta charset="UTF-8">
 	<title>마켓컬리 :: 내일의 장보기, 마켓컬리</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
-		function updateCheck(idx) {
-			var ans = confirm("수정하시겠습니까?");
-			if(!ans) return false;
-			else location.href="${contextPath}/inquiry/update?bIDX="+idx;			
-		}
-		
-		function deleteCheck(idx) {
-			var ans = confirm("삭제하시겠습니까?");
-			if(!ans) return false;
-			else location.href="${contextPath}/inquiry/delete?bIDX="+idx;			
+		$(document).ready(function() {
+			$('#insertBtn').hide(); 
+			
+			$('#updateBtn').click(function(){
+				$('#insertBtn').show(); 
+				$('#updateBtn').hide(); 
+				$('#irCONTENT').removeAttr('readonly');				
+			});
+		});
+		function inquiryReply() {
+			var iIDX = "${vo.iIDX}";
+			var irCONTENT = replyForm.irCONTENT.value;
+			if(irCONTENT == "") {
+				alert("답변을 입력하세요!");
+				replyForm.irCONTENT.focus();
+				return false;
+			}
+			
+			var query = {
+					iIDX : iIDX,
+					irCONTENT : irCONTENT
+			}
+			$.ajax({
+				url : "${contextPath}/admin/writeInquiryReply",
+				type : "get",
+				data : query,
+				success : function(data) {
+					if(data ==1) {
+						location.reload();
+					}
+				}
+			});
 		}
 	</script>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/include/nav.jsp"%>
+<%@ include file="/WEB-INF/views/include/nav_admin.jsp"%>
 <div class="content-default">
 	<div class="view-title">
 		<h3>1:1문의</h3>
@@ -33,6 +56,10 @@
 		<tr>
 			<td class="title-colored">제목</td>
 			<td colspan="3">[${vo.iCATEGORY}] ${vo.iTITLE}</td>
+		</tr>
+		<tr>
+			<td class="title-colored">작성ID</td>
+			<td colspan="3">${vo.mMID}</td>
 		</tr>
 		<tr>
 			<td class="title-colored">상태</td>
@@ -69,7 +96,7 @@
 	            <c:if test="${rfname=='JPG' || rfname=='GIF' || rfname=='PNG'}">
 	               <c:set var="img" value="${fn:split(orfname,'/')}"/>
 	               <c:forEach var="imgItem" items="${img}" varStatus="st">
-	                   <img src="${contextPath}/resources/inquiry/${imgItem}" width="600px"/><br/><br/>
+	                   <img src="${contextPath}/resources/inquiry/${imgItem}" width="300px"/><br/><br/>
 	               </c:forEach>
 	            </c:if>
 	            <br/>
@@ -80,20 +107,35 @@
 	</table>
 	
 	<div style="text-align: right">
-		<c:if test="${vo.iREPLY=='답변대기중'}">
+		<c:if test="${smid==vo.mMID}">
 			<input type="button" value="수정" onclick="updateCheck(${vo.iIDX})" class="button-outline-small"/>
 			<input type="button" value="삭제" onclick="deleteCheck(${vo.iIDX})" class="button-outline-small"/>
 		</c:if>
-		<input type="button" value="목록" onclick="location.href='${contextPath}/inquiry/list'" class="button-small"/>
+		<input type="button" value="목록" onclick="location.href='${contextPath}/admin/inquiry?pag=${pag}'" class="button-small"/>
 	</div>
 	
 	<hr/>
 	<c:if test="${!empty irCONTENT}">
 		<form name="replyForm">
-			<label for="irCONTENT">관리자 답변</label>
-			<textarea name="irCONTENT" rows="5"  id="irCONTENT" readonly="readonly" class="form-control">${irCONTENT}</textarea>
+			<label for="irCONTENT">답변보기</label>
+			<textarea name="irCONTENT" rows="5"  id="irCONTENT" readonly="readonly" class="form-control" >${irCONTENT}</textarea>
+			<div style="text-align: right">
+				<input type="button" value="수정" id="updateBtn" class="button-outline-small"/>
+				<input type="button" value="등록" id="insertBtn" onclick="inquiryReply()" class="button-small"/>
+			</div>
 		</form>
 	</c:if>
+
+	<c:if test="${empty irCONTENT}">
+		<form name="replyForm">
+			<label for="irCONTENT">답변 작성하기</label>
+			<textarea name="irCONTENT" rows="5" class="form-control" placeholder="답변 작성하기"></textarea>
+			<div style="text-align: right">
+				<input type="button" value="등록" onclick="inquiryReply()" class="button-small"/>
+			</div>
+		</form>
+	</c:if>
+	
 
 </div>
 </body>

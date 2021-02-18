@@ -26,4 +26,19 @@ public class MemberServiceImp implements MemberService{
 		memberDao.memberJoin(vo);
 	}
 
+	@Override
+	public MemberVo findId(String mNAME, String mEMAIL) {
+		return memberDao.findId(mNAME,mEMAIL);
+	}
+
+	@Override
+	public MemberVo findPwd(String mNAME, String mMID, String mEMAIL) {
+		return memberDao.findPwd(mNAME,mMID,mEMAIL);
+	}
+
+	@Override
+	public void TempPwdChange(String mMID, String encode) {
+		memberDao.TempPwdChange(mMID,encode);
+	}
+
 }

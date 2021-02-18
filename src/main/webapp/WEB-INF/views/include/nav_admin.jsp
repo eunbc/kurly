@@ -135,12 +135,10 @@
 					<li><a href="${contextPath}/shop/productList?category=">중분류관리</a></li>
 				</ul>
 			</li>
-			<li class="menu4"><a href="${contextPath}/" class="menuLink">후기관리</a>
+			<li class="menu4"><a href="${contextPath}/" class="menuLink">문의관리</a>
 				<ul class="menu2_s submenu">
-					<li><a href="${contextPath}/shop/productList?category=">상품등록</a></li>
-					<li><a href="${contextPath}/shop/productList?category=">상품목록</a></li>
-					<li><a href="${contextPath}/shop/productList?category=">대분류관리</a></li>
-					<li><a href="${contextPath}/shop/productList?category=">중분류관리</a></li>
+					<li><a href="${contextPath}/admin/inquiry">1:1문의</a></li>
+					<li><a href="${contextPath}/">상품문의</a></li>
 				</ul>
 			</li>
 			<li class="menu5"><a href="${contextPath}/" class="menuLink">금주혜택</a></li>

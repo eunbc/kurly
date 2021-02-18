@@ -54,6 +54,8 @@ public class InquiryController {
 	@RequestMapping(value="/view", method=RequestMethod.GET)
 	public String viewInquiryGet(int iIDX,Model model) {
 		InquiryVo vo = inquiryService.viewInquiry(iIDX);
+		String irCONTENT = inquiryService.viewInquiryReply(iIDX);
+		model.addAttribute("irCONTENT",irCONTENT);
 		model.addAttribute("vo",vo);
 		return "inquiry/view";
 	}

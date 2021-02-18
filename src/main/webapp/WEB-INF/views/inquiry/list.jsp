@@ -43,7 +43,14 @@
 					<tr>
 						<td style="text-align: left;padding-left: 20px;"><a href="${contextPath}/inquiry/view?iIDX=${vo.iIDX}" class="title-decoration-none" >[${vo.iCATEGORY}] ${vo.iTITLE}</a></td>
 						<td>${fn:substring(vo.iWDATE,0,10)}</td>
-						<td>${vo.iREPLY}</td>
+						<td>
+							<c:if test="${vo.iREPLY=='답변대기중'}">
+								<span class="badge badge-pill badge-secondary">${vo.iREPLY}</span>						
+							</c:if>
+							<c:if test="${vo.iREPLY=='답변완료'}">
+								<span class="badge badge-pill badge-danger">${vo.iREPLY}</span>						
+							</c:if>
+						</td>
 					</tr>
 				</c:forEach>
 			</c:if>

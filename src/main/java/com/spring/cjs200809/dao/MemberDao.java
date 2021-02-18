@@ -12,4 +12,10 @@ public interface MemberDao {
 
 	public void memberJoin(@Param("vo") MemberVo vo);
 
+	public MemberVo findId(@Param("mNAME") String mNAME,@Param("mEMAIL") String mEMAIL);
+
+	public MemberVo findPwd(@Param("mNAME") String mNAME,@Param("mMID") String mMID,@Param("mEMAIL") String mEMAIL);
+
+	public void TempPwdChange(@Param("mMID") String mMID,@Param("encode") String encode);
+
 }
