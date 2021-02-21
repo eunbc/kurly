@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -71,11 +72,11 @@ public class FaqController {
 		return "redirect:/location/"+msgFlag;
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="/delete", method=RequestMethod.GET) 
-	public String bDeleteGet(HttpServletRequest request,int fIDX,int pag) {
+	public int fDeleteGet(HttpServletRequest request,int fIDX,int pag,String fCATEGORY) {
 		faqService.deleteFaq(fIDX);
-		msgFlag = "deleteFaqOK$pag="+pag;
-		return "redirect:/msg/"+msgFlag;
+		return 1;
 	}
 	
 }

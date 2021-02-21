@@ -11,6 +11,7 @@ public class InquiryVo {
 	private String iFNAME;
 	private String iRFNAME;
 	private String iREPLY;
+	
 	public int getiIDX() {
 		return iIDX;
 	}

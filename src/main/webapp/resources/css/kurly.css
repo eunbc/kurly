@@ -70,6 +70,26 @@
     font-weight: 700;
 }
 
+.input-box {
+	height: 30px;
+	border-radius: 5px;
+	border-color: black;
+	background-color: white;
+}
+
+.pagination .page-link {
+    color: gray;
+    border-radius: 0;
+    border-color: #DDDDDD;
+}
+.pagination .page-link:hover,
+.pagination .page-item.active .page-link {
+    color: #5F0080;
+    background: #F6F8F7;
+    border-color: #DDDDDD;
+}
+
+
 /*---------------------------nav-------------------------------*/
 
 
@@ -308,7 +328,37 @@ table.write-table {
 	color: black;
 }
 
+/*-----------------admin----------------*/
 
+.admin-list-table {
+	width: 1100px;
+	border-top: 2px solid #5F0080;
+	margin: 0 auto;
+}
+.admin-list-table tr{
+	line-height: 60px;
+	vertical-align: middle;	
+}
+.admin-list-table tr:not(:first-child):hover{
+	background-color: #F7F7F7;
+}
+.admin-list-table tr th{
+	text-align: center;
+	font-weight: 700;		
+	border-bottom: 1px solid black;
+}
+.admin-list-table tr td{
+	text-align: center;
+	font-weight: 400;		
+	border-bottom: 1px solid #F5F5F5;
+}	
+.admin-list-table tr td:nth-child(2){
+	text-align: left;
+}
+.admin-list-table tr td a.title-decoration-none{
+	text-decoration: none;
+	color: black;
+}	
 
 
 

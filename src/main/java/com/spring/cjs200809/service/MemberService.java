@@ -16,6 +16,10 @@ public interface MemberService {
 
 	public void TempPwdChange(String mMID, String encode);
 
+	public void memberUpdate(MemberVo vo);
+
+	public void memberDelete(String mMID);
+
 
 
 }

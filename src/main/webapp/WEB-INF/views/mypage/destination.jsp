@@ -9,6 +9,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title>마켓컬리 :: 내일의 장보기, 마켓컬리</title>
+	<style>
+		.list-table tr th {
+			border: 1px solid black;
+		}
+	</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/nav.jsp" %>
@@ -27,16 +32,19 @@
 		</ul>
 	</div>
 	<div class="section">
-		<h4>주문 내역 <span class="explanation-gray">지난 3년간의 주문 내역 조회가 가능합니다 </span>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="button-outline-join" onclick="location.href='${contextPath}/board/write'" value="공지작성"/></h4>
+		<div>
+			<span class="section-title">배송지 관리 </span><span class="explanation-gray">배송지에 따라 상품 정보가 달라질 수 있습니다. </span>
+		</div>
 		<table class="list-table">
 			<tr> 
-				<th style="width:50px">번호</th>
-				<th style="width:550px">제목</th>
-				<th style="width:70px">작성자</th>
-				<th style="width:70px">작성일</th>
-				<th style="width:50px">조회</th>
+				<th style="width:50px">선택</th>
+				<th>주소</th>
+				<th style="width:70px">받으실 분</th>
+				<th style="width:100px">연락처</th>
+				<th style="width:70px">배송유형</th>
+				<th style="width:50px">수정</th>
 			</tr>
-			<c:forEach var="vo" items="${vos}">
+<%-- 			<c:forEach var="vo" items="${vos}">
 				<tr>
 					<td>${curScrNo}</td>
 					<td><a href="${contextPath}/board/view?board_idx=${vo.board_idx}&pag=${p.pag}" class="title-decoration-none">${vo.title}</a></td>
@@ -46,43 +54,7 @@
 				</tr>
 				<c:set var="curScrNo" value="${curScrNo-1}"/>
 			</c:forEach>
-		</table>
-		
-		<!-- 페이징 처리 시작 -->
-	    <div class="row">
-	        <div class="col-12">
-				<ul class="pagination justify-content-center" style="margin:20px 0">
-				<c:set var="startPageNum" value="${p.pag- (p.pag-1)%(p.blockSize)}"/>
-				<c:if test="${p.pag != 1}">
-		  			<li class="page-item"><a class="page-link" href="${contextPath}/board/list?pag=1&pageSize=${p.pageSize}">◀</a></li>
-		  			<li class="page-item"><a class="page-link" href="${contextPath}/board/list?pag=${p.pag-1}&pageSize=${p.pageSize}">◁</a></li>
-				</c:if>
-				<c:if test="${p.pag == 1}">
-		  			<li class="page-item disabled"><a class="page-link" href="${contextPath}/board/list?pag=1&pageSize=${p.pageSize}">◀</a></li>
-		  			<li class="page-item disabled"><a class="page-link" href="${contextPath}/board/list?pag=${p.pag-1}&pageSize=${p.pageSize}">◁</a></li>
-				</c:if>
-				<c:forEach var="i" begin="0" end="2">
-					<c:if test="${(startPageNum + i)<=p.totPage}">
-						<c:if test="${(startPageNum + i)==p.pag}">
-				  			<li class="page-item active"><b><a class="page-link" href="${contextPath}/board/list?pag=${startPageNum + i}&pageSize=${p.pageSize}">${startPageNum + i }</a></b></li>
-						</c:if>
-						<c:if test="${(startPageNum + i)!=p.pag}">
-							<li class="page-item"><a class="page-link" href="${contextPath}/board/list?pag=${startPageNum + i}&pageSize=${p.pageSize}">${startPageNum + i }</a></li>
-						</c:if>
-					</c:if>
-				</c:forEach>
-				<c:if test="${p.pag != p.totPage}">
-					<li class="page-item"><a class="page-link" href="${contextPath}/board/list?pag=${p.pag+1}&pageSize=${p.pageSize}">▷</a></li>
-					<li class="page-item"><a class="page-link" href="${contextPath}/board/list?pag=${p.totPage}&pageSize=${p.pageSize}">▶</a></li>
-				</c:if>
-				<c:if test="${p.pag == p.totPage}">
-					<li class="page-item disabled"><a class="page-link" href="${contextPath}/board/list?pag=${p.pag+1}&pageSize=${p.pageSize}">▷</a></li>
-					<li class="page-item disabled"><a class="page-link" href="${contextPath}/board/list?pag=${p.totPage}&pageSize=${p.pageSize}">▶</a></li>
-				</c:if>
-				</ul>            
-            </div>
-        </div>
-      <!-- 페이징 처리 끝 -->		
+ --%>		</table>
 	</div>
 </div>
 </body>

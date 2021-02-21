@@ -22,6 +22,13 @@
 		tr, td {padding: 7px;}
 		.gray {color: gray;}
 	</style>
+	<script type="text/javascript">
+		function memberDelete() {
+			var ans = confirm("탈퇴하시겠습니까?");
+			if(!ans) return false;
+			else location.href="${contextPath}/member/delete";
+		}
+	</script>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/nav.jsp" %>
@@ -39,12 +46,11 @@
 						<input type="text" name="mMID" id="mMID" value="${smid}" readonly="readonly" class="form-control"/>
 	                    <div class="validation" id="id_check"></div>
 					</td>
-					<td><input type="button" class="button-outline-join" style="width:140px" value="중복확인" id="idCheck"/></td>
 				</tr>
 				<tr>
 					<td>비밀번호<span class="necessary">*</span></td>
 					<td>
-						<input type="password" name="mPWD" id="mPWD" class="form-control" placeholder="비밀번호를 입력해주세요"/>
+						<input type="password" name="mPWD" id="mPWD" class="form-control" />
 	                    <div class="validation" id="pwd_check"></div>
 					</td>
 					<td></td>
@@ -52,7 +58,7 @@
 				<tr>
 					<td>비밀번호확인<span class="necessary">*</span></td>
 					<td>
-						<input type="password" name="pwdCheck" id="pwdCheck" class="form-control" placeholder="비밀번호를 한번 더 입력해주세요"/>
+						<input type="password" name="pwdCheck" id="pwdCheck" class="form-control" />
 	                    <div class="validation" id="pwd_Recheck"></div>
 					</td>
 					<td></td>
@@ -73,30 +79,17 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td>주소<span class="necessary">*</span></td>
-					<td>
-						<input type="button" onclick="sample6_execDaumPostcode()" id="address" style="width:304;text-align: center;" class="button-outline" value="주소 검색"/>
-						<input type="text" id="sample6_postcode" placeholder="우편번호" class="form-control">
-						<input type="text" id="sample6_address" placeholder="주소" class="form-control"><br>
-						<input type="text" id="sample6_detailAddress" placeholder="상세주소" class="form-control">
-						<input type="text" id="sample6_extraAddress" placeholder="참고항목" class="form-control">
-						<input type="hidden" name="mADDRESS" id="mADDRESS"/>
-						<p style="font-size: 12px">배송지에 따라 상품 정보가 달라질 수 있습니다.</p>
-					</td>
-					<td></td>
-				</tr>
-				<tr>
 					<td>성별</td>
 					<td>
-						<input type="radio" value="남자" name="mGENDER" <c:if test=${vo.mGENDER=='남자'}>checked</c:if>/>&nbsp;남자 &nbsp;
+<%-- 						<input type="radio" value="남자" name="mGENDER" <c:if test=${vo.mGENDER=='남자'}>checked</c:if>/>&nbsp;남자 &nbsp;
 						<input type="radio" value="여자" name="mGENDER" <c:if test=${vo.mGENDER=='여자'}>checked</c:if>/>&nbsp;여자 &nbsp;
 						<input type="radio" value="-" name="mGENDER" <c:if test=${vo.mGENDER=='-'}>checked</c:if>/>&nbsp;선택안함 
-					</td>
+ --%>					</td>
 					<td></td>
 				</tr>
 				<tr>
 					<td>생년월일</td>
-					<td><input type="text" name="mBDAY" id="mBDAY" class="form-control" value="${vo.mBDAY}"/></td>
+					<td><input type="text" name="mBDAY" id="mBDAY" class="form-control" value="${fn:substring(vo.mBDAY,0,10)}"/></td>
 					<td></td>
 				</tr>				
 				<tr>
@@ -112,6 +105,7 @@
 			<p><br/></p>
 			<div style="text-align: center;">
 				<input type="button" id="fCheck" value="수정하기" class="button" />
+				<input type="button" id="fCheck" onclick="memberDelete()" value="회원탈퇴" class="button-outline" />
 			</div>
 		</form>
 	</div>

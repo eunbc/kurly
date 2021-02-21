@@ -26,5 +26,12 @@
 		update member set mPWD=#{encode} where mMID=#{mMID};
 	</update>
 
+	<update id="memberUpdate">
+		update member set mPWD=${vo.mPWD}, mNAME=${vo.mNAME}, mEMAIL=${vo.mEMAIL}, mPHONE=${vo.mPHONE}, mADDRESS=${vo.mADDRESS}, mGENDER=${vo.mGENDER}, mBDAY=${vo.mBDAY}, mRECEIVEAD=${vo.mRECEIVEAD} where mMID=${vo.mMID};
+	</update>
+	
+	<update id="memberDelete">
+		update member set mDROPOUT='Y' where mMID=#{mMID};
+	</update>
 
 </mapper>

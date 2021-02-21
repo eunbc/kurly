@@ -25,6 +25,24 @@
 		}
 		function viewContent(fIDX) {
 		}
+		function faqDelete(fIDX,fCATEGORY) {
+			var query = {
+					fIDX : fIDX,
+					pag : ${p.pag},
+					fCATEGORY : fCATEGORY
+			}
+			
+			$.ajax({
+				url : "${contextPath}/faq/delete",
+				type : "get",
+				data : query,
+				success : function(data) {
+					if(data ==1) {
+						location.reload();
+					}
+				}
+			});
+		}
 	</script>
 </head>
 <body>
@@ -70,7 +88,12 @@
 				<tr id='content"+${vo.fIDX}+"' class="content">
 					<td></td>
 					<td colspan="2">
-						<p><i class="xi-font"></i>&nbsp;${fn:replace(vo.fCONTENT,newLine, "<br/>")}</p>
+						<p>
+							<i class="xi-font"></i>&nbsp;${fn:replace(vo.fCONTENT,newLine, "<br/>")}
+							<c:if test="${sname=='관리자'}">
+								<br/><a href="javascript:faqDelete('${vo.fIDX}','${vo.fCATEGORY}');">삭제</a>
+							</c:if>
+						</p>
 					</td>
 				</tr>
 				<c:set var="curScrNo" value="${curScrNo-1}"/>

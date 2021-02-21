@@ -11,12 +11,32 @@
 	<title>마켓컬리 :: 내일의 장보기, 마켓컬리</title>
 	<style>
 		.list-table tr td:first-child{
-			width: 200px;
+			width: 300px;
 		}
 		.list-table tr td:last-child{
-			width: 200px;
+			width: 300px;
 		}
 	</style>
+	<script>
+		function loginCheck() {
+			var mid = loginForm.mMID.value;
+			var pwd = loginForm.mPWD.value;
+			
+			if(mid==''){
+				alert("아이디를 입력해주세요.");
+				loginForm.mMID.focus();
+				return false;
+			}
+			else if(pwd==''){
+				alert("비밀번호를 입력해주세요.");
+				loginForm.mPWD.focus();
+				return false;
+			}
+			else {
+				loginForm.submit();
+			}
+		}
+	</script>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/nav.jsp" %>
@@ -36,29 +56,31 @@
 	</div>
 	<div class="section">
 		<div>
-			<span class="section-title">개인 정보 수정</span><span class="explanation-gray">회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해주세요.</span>
+			<span class="section-title">개인 정보 수정 </span><span class="explanation-gray">회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해주세요.</span>
 		</div>
-		<table class="list-table">
-			<tr> 
-				<td>
-					아이디
-				</td>
-				<td>
-					<input type="text" value="${smid}" class="form-control"/>
-				</td>
-				<td></td>
-			</tr>
-			<tr> 
-				<td>
-					비밀번호
-				</td>
-				<td>
-					<input type="password" class="form-control"/>
-				</td>
-				<td></td>
-			</tr>
-		</table>
-		<input type="button" onclick="writeCheck()" class="button" style="margin-left: 290px" value="등록"/>
+		<form name="loginForm" method="post">
+			<table class="list-table">
+				<tr> 
+					<td>
+						아이디
+					</td>
+					<td>
+						<input type="text" value="${smid}" name="mMID" class="form-control"/>
+					</td>
+					<td></td>
+				</tr>
+				<tr> 
+					<td>
+						비밀번호
+					</td>
+					<td>
+						<input type="password" name="mPWD" class="form-control"/>
+					</td>
+					<td></td>
+				</tr>
+			</table>
+			<input type="button" onclick="loginCheck()" class="button" style="margin-left: 290px" value="확인"/>
+		</form>
 	</div>
 </div>
 </body>

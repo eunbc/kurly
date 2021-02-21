@@ -41,4 +41,14 @@ public class MemberServiceImp implements MemberService{
 		memberDao.TempPwdChange(mMID,encode);
 	}
 
+	@Override
+	public void memberUpdate(MemberVo vo) {
+		memberDao.memberUpdate(vo);
+	}
+
+	@Override
+	public void memberDelete(String mMID) {
+		memberDao.memberDelete(mMID);
+	}
+
 }

@@ -19,29 +19,13 @@
 		select count(*) from faq where fCATEGORY=#{fCATEGORY};
 	</select>
 	
-<!-- 다중 sql 
-  <select id="totRecCnt" resultType="int">
-    <if test="partValue == '전체'">
-	    select count(*) from pds2;
-    </if>
-    <if test="partValue != '전체'">
-	    select count(*) from pds2 where part = #{partValue};
-    </if>
-  </select>
-  
-  <select id="getPList" resultType="com.spring.cjs2008.vo.PdsVo">
-    <if test="part == '전체'">
-    	select * from pds2 order by idx desc limit #{startNo},#{pageSize};
-    </if>
-    <if test="part != '전체'">
-    	select * from pds2 where part = #{part} order by idx desc limit #{startNo},#{pageSize};
-    </if>
-  </select>
-  --> 
-	
 	<insert id="writeFaq">
 		insert into faq values (default,#{vo.fCATEGORY},#{vo.fTITLE},#{vo.fCONTENT});
 	</insert>
+	
+	<delete id="deleteFaq">
+		delete from faq where fIDX=#{fIDX};
+	</delete>
 	
 
 </mapper>

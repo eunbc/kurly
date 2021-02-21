@@ -32,7 +32,6 @@ $(document).ready(function() {
             $('#id_check').text('6자 이상의 영문 혹은 영문과 숫자를 조합');
             $('#id_check').css('font-size', '12px');
     		$('#id_check').css('color', 'black');
-            
         }
     });
     
@@ -84,7 +83,6 @@ $(document).ready(function() {
     			else {
     			 	alert("사용 가능한 아이디입니다");
     			 	idKey = 1;
-    			 	//$("#mMID").attr("readonly", true);
     			 	$("#mPWD").focus();
     			}
     		}
@@ -113,14 +111,12 @@ $(document).ready(function() {
     			else {
     			 	alert("사용이 가능합니다");
     			 	emailKey = 1;
-    			 	$("#mEMAIL").attr("readonly", true);
     			}
     		}
     	});
     });
     
     //제출할 때
-    
     $('#fCheck').click(function() {
 	    
 	    var address = "["+$("#sample6_postcode").val()+"]"+$("#sample6_address").val()+" "+$("#sample6_detailAddress").val()+" "+$("#sample6_extraAddress").val();

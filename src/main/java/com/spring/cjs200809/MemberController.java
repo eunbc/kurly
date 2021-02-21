@@ -41,16 +41,16 @@ public class MemberController {
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String joinPost(MemberVo vo) {
 	  	//아이디 중복체크
-	  	if(memberService.IdCheck(vo.getMMID()) != null) {
+	  	if(memberService.IdCheck(vo.getmMID()) != null) {
 	  		msgFlag = "idCheckNO";
 	  		return "redirect:/msg/" + msgFlag;
 	  	}
 	  	//이메일 중복체크
-	  	if(memberService.EmailCheck(vo.getMEMAIL()) != null) {
+	  	if(memberService.EmailCheck(vo.getmEMAIL()) != null) {
 	  		msgFlag = "emailCheckNO";
 	  		return "redirect:/msg/" + msgFlag;
 	  	}
-	  	vo.setMPWD(bCryptPasswordEncoder.encode(vo.getMPWD()));
+	  	vo.setmPWD(bCryptPasswordEncoder.encode(vo.getmPWD()));
 		memberService.memberJoin(vo);
 		msgFlag = "memberJoinOK";
 		return "redirect:/msg/"+msgFlag;
@@ -75,10 +75,10 @@ public class MemberController {
     		HttpServletResponse response, String rememberId) {
 	  	MemberVo vo = memberService.IdCheck(mMID);
 	  	//로그인시 세션생성
-	  	if(vo != null && bCryptPasswordEncoder.matches(mPWD, vo.getMPWD())) {
+	  	if(vo != null && bCryptPasswordEncoder.matches(mPWD, vo.getmPWD())) {
 	  		session.setAttribute("smid" , mMID);
-	  		session.setAttribute("sname", vo.getMNAME());
-	  		session.setAttribute("slevel", vo.getMLEVEL());
+	  		session.setAttribute("sname", vo.getmNAME());
+	  		session.setAttribute("slevel", vo.getmLEVEL());
 	  		
 	  		//아이디 기억하기 체크시 쿠키생성
 	  		if(rememberId.equals("YES")) {
@@ -114,7 +114,7 @@ public class MemberController {
 	  	MemberVo vo = memberService.findId(mNAME,mEMAIL);
 	 	 
 	  	if(vo!=null) {
-	  		String id_found = vo.getMMID().substring(0,vo.getMMID().length()-3)+"***";
+	  		String id_found = vo.getmMID().substring(0,vo.getmMID().length()-3)+"***";
 	  		model.addAttribute("id_found",id_found);
 	  		model.addAttribute("mNAME",mNAME);
 	  		return "member/id_found";
@@ -173,12 +173,51 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.GET)
-	public String updateGet(HttpSession session, Model model) {
-		String mMID = (String)session.getAttribute("smid");
-		//MemberVo vo = memberService.getMemberInfo(mMID);
-		//model.addAttribute("vo",vo);
+	public String updateGet() {
 		return "mypage/pwdCheck";
 	}
+
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	public String updatePost(String mMID, String mPWD) {
+	  	MemberVo vo = memberService.IdCheck(mMID);
+	  	if(vo != null && bCryptPasswordEncoder.matches(mPWD, vo.getmPWD())) {
+	  		msgFlag = "pwdCheckOk";
+	  		return "redirect:/location/" + msgFlag;
+	  	} else {
+	  		msgFlag = "pwdCheckNo";
+	  		return "redirect:/msg/" + msgFlag;
+	  	}
+	}
+	
+	@RequestMapping(value="/updateForm", method=RequestMethod.GET)
+	public String updateFormGet(HttpSession session, Model model) {
+		String mMID = (String)session.getAttribute("smid");
+  		MemberVo vo = memberService.IdCheck(mMID);
+  		model.addAttribute("vo",vo);
+		return "member/update";
+	}
+
+	@RequestMapping(value="/updateForm", method=RequestMethod.POST)
+	public String updateFormPost(MemberVo vo) {
+	  	//이메일 중복체크
+	  	if(memberService.EmailCheck(vo.getmEMAIL()) != null) {
+	  		msgFlag = "emailCheckNO";
+	  		return "redirect:/msg/" + msgFlag;
+	  	}
+	  	vo.setmPWD(bCryptPasswordEncoder.encode(vo.getmPWD()));
+		memberService.memberUpdate(vo);
+		msgFlag = "memberUpdateOK";
+		return "redirect:/msg/"+msgFlag;
+	}
+	
+	@RequestMapping(value="/delete", method=RequestMethod.GET)
+	public String deleteGet(HttpSession session, Model model) {
+		String mMID = (String)session.getAttribute("smid");
+		memberService.memberDelete(mMID);
+		msgFlag = "memberDeleteOK";
+		return "redirect:/msg/"+msgFlag;
+	}
+	
 
 	
 	

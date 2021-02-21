@@ -28,7 +28,6 @@
 				replyForm.irCONTENT.focus();
 				return false;
 			}
-			
 			var query = {
 					iIDX : iIDX,
 					irCONTENT : irCONTENT

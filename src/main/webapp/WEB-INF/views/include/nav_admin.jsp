@@ -81,26 +81,6 @@
 		ul.myMenu > li:hover ul.submenu{  
 			display: block;
 		}		
-		ul.myMenu > li ul.top_submenu {
-			z-index: 5;
-		}
-		
-		ul.myMenu > li ul.top_submenu > li a{
-			padding: 3px 0 0 3px;
-            width: 100px;                            
-            display: inline-block;                          
-            /*border : 1px solid black; */                          
-            text-decoration:none;                    
-            color: black;                        
-            font-size: 12px;                           
-            background-color: white;    
-            text-align: left;          
-            font-weight: normal;       
-		}
-		ul.myMenu > li ul.top_submenu > li a:hover{
-			background-color: white;
-			color: black;
-		}    
 		.icon{
 			padding: 7px;
 		}
@@ -123,8 +103,8 @@
 				<ul class="menu2_s submenu">
 					<li><a href="${contextPath}/shop/productList?category=">상품등록</a></li>
 					<li><a href="${contextPath}/shop/productList?category=">상품목록</a></li>
-					<li><a href="${contextPath}/shop/productList?category=">대분류관리</a></li>
-					<li><a href="${contextPath}/shop/productList?category=">중분류관리</a></li>
+					<li><a href="${contextPath}/admin/category">대분류관리</a></li>
+					<li><a href="${contextPath}/admin/subcategory">중분류관리</a></li>
 				</ul>
 			</li>
 			<li class="menu3"><a href="${contextPath}/" class="menuLink">주문관리</a>

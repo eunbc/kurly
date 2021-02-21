@@ -26,6 +26,15 @@ public class MsgController {
 			model.addAttribute("msg","회원가입이 완료되었습니다. \\n로그인 후 이용해주세요.");
 			model.addAttribute("url","member/login");
 		}
+		else if(msgFlag.equals("memberUpdateOK")) {
+			model.addAttribute("msg","회원정보가 수정되었습니다.");
+			model.addAttribute("url","member/updateForm");
+		}
+		else if(msgFlag.equals("memberDeleteOK")) {
+			session.invalidate();
+			model.addAttribute("msg","탈퇴되었습니다.\\n 30일동안 같은 아이디로 회원가입이 불가합니다.");
+			model.addAttribute("url","h");
+		}
 		else if(msgFlag.equals("loginOK")) {
 			model.addAttribute("msg","로그인 성공");
 			model.addAttribute("url","h");
@@ -33,6 +42,10 @@ public class MsgController {
 		else if(msgFlag.equals("loginNO")) {
 			model.addAttribute("msg","로그인 실패.\\n아이디와 비밀번호를 확인해주세요.");
 			model.addAttribute("url","member/login");
+		}
+		else if(msgFlag.equals("pwdCheckNo")) {
+			model.addAttribute("msg","아이디와 비밀번호를 확인해주세요.");
+			model.addAttribute("url","member/update");
 		}
 		else if(msgFlag.equals("logoutOK")) {
 			session.invalidate();
@@ -58,6 +71,10 @@ public class MsgController {
 		else if(msgFlag.equals("find_pwdOK_sendEmail")) {
 			model.addAttribute("msg","해당 이메일로 안내 메일이 발송되었습니다.");
 			model.addAttribute("url","member/login");
+		}	
+		else if(msgFlag.equals("categoryOverlap")) {
+			model.addAttribute("msg","이미 존재하는 대분류 코드입니다.");
+			model.addAttribute("url","admin/category");
 		}	
 		
 		//예) msgFlag = "imgDeleteOk$fileCnt="+fileCnt;

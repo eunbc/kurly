@@ -20,17 +20,15 @@ public class LocationController {
 		else if(msgFlag.equals("loginOK")) {
 			model.addAttribute("url","h");
 		}
+		else if(msgFlag.equals("pwdCheckOk")) {
+			model.addAttribute("url","member/updateForm");
+		}
 		
 		//예) msgFlag = "imgDeleteOk$fileCnt="+fileCnt;
 		//앞의 예에서 특정 매개변수에 추가로 매개값이 넘어왔을 때는 아래와 같이 처리한다.
-		else if(msgFlag.substring(0,13).equals("updateBoardOK")) {
-			model.addAttribute("msg","공지글이 수정되었습니다.");
-			model.addAttribute("url","board/view?"+msgFlag.substring(14));
-		}
-		else if(msgFlag.substring(0,13).equals("deleteBoardOK")) {
-			model.addAttribute("msg","공지글이 삭제되었습니다.");
-			model.addAttribute("url","board/list?"+msgFlag.substring(14));
-		}
+		else if(msgFlag.substring(0,11).equals("deleteFaqOK")) {
+			model.addAttribute("url","faq/list?"+msgFlag.substring(12));
+		}		
 		
 		return "include/location";
 	}

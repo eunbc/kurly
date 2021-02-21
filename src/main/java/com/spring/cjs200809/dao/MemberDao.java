@@ -18,4 +18,8 @@ public interface MemberDao {
 
 	public void TempPwdChange(@Param("mMID") String mMID,@Param("encode") String encode);
 
+	public void memberUpdate(@Param("vo") MemberVo vo);
+
+	public void memberDelete(@Param("mMID") String mMID);
+
 }

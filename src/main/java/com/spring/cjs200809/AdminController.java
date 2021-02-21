@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.spring.cjs200809.pagination.PageProcess;
 import com.spring.cjs200809.service.AdminService;
 import com.spring.cjs200809.service.InquiryService;
+import com.spring.cjs200809.vo.CategoryVo;
 import com.spring.cjs200809.vo.InquiryReplyVo;
 import com.spring.cjs200809.vo.InquiryVo;
+import com.spring.cjs200809.vo.SubcategoryVo;
 
 
 @Controller
@@ -77,6 +79,65 @@ public class AdminController {
 		return "1";
 	}
 
+	@RequestMapping(value="/category", method=RequestMethod.GET)
+	public String CategoryAdminGet(Model model) {
+		List<CategoryVo> vos = adminService.getCategoryList();
+		model.addAttribute("vos",vos);
+		return "admin/category";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/addCategory", method=RequestMethod.POST)
+	public String AddCategoryPost(String cCODE,String cNAME) {
+	  	String res = "";
+		CategoryVo vo = adminService.CategoryCheck(cCODE);
+	  	if(vo != null) {
+	  		res = "0";
+	  	} else {
+	  		adminService.addCategory(cCODE,cNAME);
+	  		res = "1";
+	  	}
+  		return res;
+	}
 
+	@RequestMapping(value="/subcategory", method=RequestMethod.GET)
+	public String subcategoryAdminGet(Model model, String cCODE) {
+		List<CategoryVo> cVos = adminService.getCategoryList();
+		List<SubcategoryVo> scVos = adminService.getSubcategoryList(cCODE);
+		String cNAME = adminService.getcNAME(cCODE);
+		model.addAttribute("cVos",cVos);
+		model.addAttribute("scVos",scVos);
+		model.addAttribute("cCODE",cCODE);
+		model.addAttribute("cNAME",cNAME);
+		return "admin/subcategory";
+	}
 
+	@ResponseBody
+	@RequestMapping(value="/addSubcategory", method=RequestMethod.POST)
+	public String AddSubcategoryPost(String cCODE,String scCODE,String scNAME) {
+	  	String res = "";
+		SubcategoryVo vo = adminService.subcategoryCheck(cCODE,scCODE);
+	  	if(vo != null) {
+	  		res = "0";
+	  	} else {
+	  		adminService.addSubcategory(cCODE,scCODE,scNAME);
+	  		res = "1";
+	  	}
+  		return res;
+	}
+
+	@ResponseBody
+	@RequestMapping(value="/deleteCategory", method=RequestMethod.GET)
+	public String deleteCategoryGet(String cCODE) {
+		adminService.deleteCategory(cCODE);
+		return "1";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/deleteSubcategory", method=RequestMethod.GET)
+	public String deleteSubcategoryGet(String cCODE,String scCODE) {
+		adminService.deleteSubcategory(cCODE,scCODE);
+		return "1";
+	}
+	
 }
