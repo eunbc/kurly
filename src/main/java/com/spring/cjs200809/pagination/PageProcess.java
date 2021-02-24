@@ -91,6 +91,12 @@ public class PageProcess {
 		else if(partFlag.equals("inquiry")) {
 			totRecCnt = adminDao.inquiryTotRecCnt(partValue); 
 		} 
+		else if(partFlag.equals("goods") && partValue != "") {
+			totRecCnt = adminDao.goodsTotRecCnt(partValue.substring(0,3),partValue.substring(3)); 
+		} 
+		else if(partFlag.equals("goods") && partValue == "") {
+			totRecCnt = adminDao.goodsTotRecCnt("",""); 
+		} 
 		
 		
 		int totPage = (totRecCnt % pageSize)==0? totRecCnt/pageSize : (int) (totRecCnt/pageSize) +1;

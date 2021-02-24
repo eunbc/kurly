@@ -70,8 +70,8 @@
 				</tr>
 				<tr>
 					<td>이메일<span class="necessary">*</span></td>
-					<td><input type="text" name="mEMAIL" id="mEMAIL" class="form-control" value="${vo.mEMAIL}"/></td>
-					<td><input type="button" value="중복확인" class="button-outline-join" style="width:140px" id="emailCheck"/></td>
+					<td><input type="text" name="mEMAIL" id="mEMAIL" class="form-control" value="${vo.mEMAIL}" readonly="readonly"/></td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>휴대폰<span class="necessary">*</span></td>
@@ -79,12 +79,25 @@
 					<td></td>
 				</tr>
 				<tr>
+					<td>주소<span class="necessary">*</span></td>
+					<td>
+						<input type="button" onclick="sample6_execDaumPostcode()" id="address" style="width:304;text-align: center;" class="button-outline" value="주소 검색"/>
+						<input type="text" id="sample6_postcode" name="address1" value="${fn:split(vo.mADDRESS,'@')[0]}" class="form-control">
+						<input type="text" id="sample6_address" name="address2" value="${fn:split(vo.mADDRESS,'@')[1]}" class="form-control"><br>
+						<input type="text" id="sample6_detailAddress" name="address3" value="${fn:split(vo.mADDRESS,'@')[2]}" class="form-control">
+						<input type="text" id="sample6_extraAddress" name="address4" value="${fn:split(vo.mADDRESS,'@')[3]}" class="form-control">
+						<input type="hidden" name="mADDRESS" id="mADDRESS"/>
+						<p style="font-size: 12px">배송지에 따라 상품 정보가 달라질 수 있습니다.</p>
+					</td>
+					<td></td>
+				</tr>
+				<tr>
 					<td>성별</td>
 					<td>
-<%-- 						<input type="radio" value="남자" name="mGENDER" <c:if test=${vo.mGENDER=='남자'}>checked</c:if>/>&nbsp;남자 &nbsp;
-						<input type="radio" value="여자" name="mGENDER" <c:if test=${vo.mGENDER=='여자'}>checked</c:if>/>&nbsp;여자 &nbsp;
-						<input type="radio" value="-" name="mGENDER" <c:if test=${vo.mGENDER=='-'}>checked</c:if>/>&nbsp;선택안함 
- --%>					</td>
+ 						<input type="radio" value="남자" name="mGENDER" ${vo.mGENDER=='남자'? 'checked':''}/>&nbsp;남자 &nbsp;
+						<input type="radio" value="여자" name="mGENDER" ${vo.mGENDER=='여자'? 'checked':''}/>&nbsp;여자 &nbsp;
+						<input type="radio" value="-" name="mGENDER" ${vo.mGENDER=='-'? 'checked':''}/>&nbsp;선택안함 
+					</td>
 					<td></td>
 				</tr>
 				<tr>
@@ -95,7 +108,7 @@
 				<tr>
 					<td>추가입력 사항</td>
 					<td>
-						<input type="checkbox" name="mRECEIVEAD" id="term3" value="Y"/>&nbsp;할인쿠폰 등 혜택/정보 수신 동의<span class="gray">(선택)</span>
+						<input type="checkbox" name="mRECEIVEAD" id="term3" ${vo.mRECEIVEAD eq 'Y'? 'checked':''}/>&nbsp;할인쿠폰 등 혜택/정보 수신 동의<span class="gray">(선택)</span>
 					</td>
 					<td></td>
 				</tr>

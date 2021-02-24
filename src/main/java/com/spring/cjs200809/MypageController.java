@@ -26,11 +26,5 @@ public class MypageController {
 	public String MypageOrderGet() {
 		return "mypage/order";
 	}
-
-	@RequestMapping(value="/destination", method=RequestMethod.GET)
-	public String MypageDestinationGet() {
-		return "mypage/destination";
-	}
-
 	
 }

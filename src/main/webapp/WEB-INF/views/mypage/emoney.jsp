@@ -20,7 +20,6 @@
 		<h2 style="font-weight: 600">&nbsp;마이컬리</h2>
 		<ul class="subNavMenu">
 			<li><a href="${contextPath}/mypage/order" >주문 내역</a></li>
-			<li><a href="${contextPath}/mypage/destination">배송지 관리</a></li>
 			<li><a href="${contextPath}/mypage/wishlist">늘 사는 것</a></li>
 			<li><a href="${contextPath}/mypage/review">상품 후기</a></li>
 			<li><a href="${contextPath}/mypage/emoney" class="subNavMenuClicked">적립금</a></li>

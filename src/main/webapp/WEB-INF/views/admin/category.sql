@@ -18,3 +18,19 @@ drop table subcategory;
 
 update category set cNAME='채소' where cCODE='907';
 
+create table goods(
+	gIDX 	int not null auto_increment primary key,
+	gNAME 	varchar(50) not null,
+	gSHORT  varchar(50)
+	cCODE 	char(3) not null,
+	scCODE  char(3) not null,
+	gPRICE 	int not null,
+	gDISCOUNT int default 0,
+	gSTOCK int,
+	gIMAGE varchar(100) not null,
+	gDETAIL text not null,
+	gWDATE datetime default now(),
+	gSALES int default 0,
+	foreign key(cCODE) references category(cCODE)
+);
+

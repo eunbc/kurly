@@ -156,7 +156,6 @@
 					<a href="${contextPath}/member/join" class="menuLink">${sname}님 ▼</a>
 					<ul class="submenu top_submenu">
 						<li><a href="${contextPath}/mypage/order">주문내역</a></li>
-						<li><a href="${contextPath}/mypage/destination">배송지 관리</a></li>
 						<li><a href="${contextPath}/mypage/wishlist">늘 사는 것</a></li>
 						<li><a href="${contextPath}/mypage/review">상품 후기</a></li>
 						<li><a href="${contextPath}/mypage/emoney">적립금</a></li>

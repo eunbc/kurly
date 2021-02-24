@@ -119,8 +119,16 @@ $(document).ready(function() {
     //제출할 때
     $('#fCheck').click(function() {
 	    
-	    var address = "["+$("#sample6_postcode").val()+"]"+$("#sample6_address").val()+" "+$("#sample6_detailAddress").val()+" "+$("#sample6_extraAddress").val();
+	    var address = $("#sample6_postcode").val()+"@"+$("#sample6_address").val()+"@"+$("#sample6_detailAddress").val()+"@"+$("#sample6_extraAddress").val();
     	$('#mADDRESS').val(address);
+    	
+        var check = $('input:checkbox[name="mRECEIVEAD"]').is(':checked');
+    	if(check){
+            $("#mRECEIVEAD").val('Y');
+    	} else {
+            $("#mRECEIVEAD").val('N');
+    	}
+    	
 	    
     	if($('#mMID').val()=='') {
     		alert("아이디를 입력하세요.");
@@ -163,12 +171,19 @@ $(document).ready(function() {
     //체크박스 전체 선택
     $("#termsCheckALl").click(function(){
         if($("#termsCheckALl").prop("checked")){
-            $("input[name=terms]").prop("checked",true);
+            $(".terms").prop("checked",true);
         }else{
-            $("input[name=terms]").prop("checked",false);
+            $(".terms").prop("checked",false);
         }
     })
 
+    //전체 선택된 상태에서 하나 해제할 때, 전체 선택 해제
+    $(".terms").click(function(){
+        var check = $('input:checkbox[id="termsCheckALl"]').is(':checked');
+    	if(check){
+            $("#termsCheckALl").prop("checked",false);
+    	}
+    });
 
 });
 

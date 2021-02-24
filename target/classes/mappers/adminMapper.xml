@@ -56,8 +56,39 @@
 		delete from subcategory where cCODE=#{cCODE} and scCODE=#{scCODE};
 	</delete>
 	
+	<insert id="addGoods">
+		insert into goods values (default,#{vo.gNAME},#{vo.gSHORT},#{vo.cCODE},#{vo.scCODE},#{vo.gPRICE},#{vo.gDISCOUNT},#{vo.gSTOCK},#{vo.gIMAGE},#{vo.gDETAIL},default,default);
+	</insert>
 	
-
+ 	<select id="goodsTotRecCnt" resultType="int">
+	    <if test="cCODE == '' and scCODE ==''">
+		    select count(*) from goods;
+	    </if>
+	    <if test="cCODE != ''">
+			select count(*) from goods where cCODE = #{cCODE} and scCODE = #{scCODE};
+	    </if> 
+	</select>
+	
+	<select id="getGoodsByCategory" resultType="com.spring.cjs200809.vo.GoodsVo">
+	    <if test="cCODE == '' and scCODE == ''">
+	  	    select * from goods order by gIDX desc limit #{startNo},#{pageSize};
+	    </if>
+	    <if test="scCODE != ''">
+	  	    select * from goods where cCODE=#{cCODE} and scCODE=#{scCODE} order by gIDX desc limit #{startNo},#{pageSize};
+	    </if>
+	</select>
+	
+	<select id="getGoodsDetail" resultType="com.spring.cjs200809.vo.GoodsVo">
+		select * from goods where gIDX=#{gIDX};
+	</select>
+	
+	<delete id="goodsDelete">
+		delete from goods where gIDX=#{gIDX};
+	</delete>
+	
+	<update id="updateGoods">
+		update goods set gNAME=#{vo.gNAME},gSHORT=#{vo.gSHORT},cCODE=#{vo.cCODE},scCODE=#{vo.scCODE},gPRICE=#{vo.gPRICE},gDISCOUNT=#{vo.gDISCOUNT},gSTOCK=#{vo.gSTOCK},gIMAGE=#{vo.gIMAGE},gDETAIL=#{vo.gDETAIL} where gIDX=#{vo.gIDX};
+	</update>
 	
 
 </mapper>

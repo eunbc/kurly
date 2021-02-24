@@ -124,14 +124,12 @@
 			<tr> 
 				<th style="width:100px">중분류 코드</th>
 				<th>중분류 이름</th>
-				<th style="width:70x">수정</th>
-				<th style="width:70x">삭제</th>
+				<th style="width:140x">삭제</th>
 			</tr>
  	 		<c:forEach var="scVo" items="${scVos}">
 				<tr>
 					<td>${scVo.scCODE}</td>
 					<td style="text-align: center;">${scVo.scNAME}</td>
-					<td><a href="" class="icon"><i class="xi-pen"></i></a></td>
 					<td><a href="javascript:deleteSubcategory('${scVo.cCODE}','${scVo.scCODE}');" class="icon"><i class="xi-close"></i></a></td>
 				</tr>
 			</c:forEach>

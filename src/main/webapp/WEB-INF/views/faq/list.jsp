@@ -12,19 +12,11 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 	<script>
-		$(function(){
-			$(".answer").click(function(){
-				$(".content").hide();
-				$(this).next(".answer").show();
-			});
-			
-		});
 		function categoryCheck() {
 			var fCATEGORY = categoryForm.fCATEGORY.value;
 			location.href="${contextPath}/faq/list?fCATEGORY="+fCATEGORY;
 		}
-		function viewContent(fIDX) {
-		}
+		
 		function faqDelete(fIDX,fCATEGORY) {
 			var query = {
 					fIDX : fIDX,
@@ -43,7 +35,42 @@
 				}
 			});
 		}
+		$(document).ready(function() {
+		    'use strict';
+		    $('.item').on("click", function () {
+		        $(this).next().slideToggle(100);
+		        $('p').not($(this).next()).slideUp('fast');
+		    });
+		});    
 	</script>
+	<style>
+		.accordion{
+			margin-top:20px;
+		    width: 830px;
+		    cursor: pointer;
+		    background-color: white;
+		}    
+		.accordion p{
+	        padding: 30px;
+	        display: none;
+	        color: gray;
+	    }
+	    .item{
+	        height: 30px;
+	    }   
+	    .item h6{
+	        display: inline-block;
+	        vertical-align: middle;
+	        height: 100%;
+	        padding-left: 5px;
+		}
+        .item h6:before{
+            content: "";
+            display: inline-block;
+            vertical-align: middle;
+            height: 100%;
+        } 
+	</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/nav.jsp" %>
@@ -73,32 +100,25 @@
 		</div>
 		<table class="list-table">
 			<tr> 
-				<th style="width:50px">번호</th>
-				<th style="width:100px">카테고리</th>
+				<th style="width:100px">번호</th>
 				<th style="width:600px">제목</th>
 			</tr>
-			<c:forEach var="vo" items="${vos}">
-				<tr>
-					<td>${curScrNo}</td>
-					<td style="text-align:center">${vo.fCATEGORY}</td>
-					<td style="text-align:left">
-						<a href="javascript:viewContent(${vo.fIDX})" class="title-decoration-none"><input type="checkbox" id='answer"+${vo.fIDX}+'/>${vo.fTITLE}</a>
-					</td>
-				</tr>
-				<tr id='content"+${vo.fIDX}+"' class="content">
-					<td></td>
-					<td colspan="2">
-						<p>
-							<i class="xi-font"></i>&nbsp;${fn:replace(vo.fCONTENT,newLine, "<br/>")}
-							<c:if test="${sname=='관리자'}">
-								<br/><a href="javascript:faqDelete('${vo.fIDX}','${vo.fCATEGORY}');">삭제</a>
-							</c:if>
-						</p>
-					</td>
-				</tr>
-				<c:set var="curScrNo" value="${curScrNo-1}"/>
-			</c:forEach>
 		</table>
+	    <section class="accordion">
+		    <c:forEach var="vo" items="${vos}">
+		        <div class="item">
+			        <h6><span style="margin: 0 30px 0 50px;font-weight: 400;">${curScrNo}</span><span style="margin-left: 50px;">${vo.fTITLE}</span></h6>
+			    </div>
+			    <p>
+			   	    <i class="xi-font"></i>${fn:replace(vo.fCONTENT,newLine, "<br/>")}
+			        <c:if test="${sname=='관리자'}">
+				        <a href="javascript:faqDelete('${vo.fIDX}','${vo.fCATEGORY}');">삭제</a>
+				    </c:if>	   
+			    </p>
+			    <hr/>			
+			    <c:set var="curScrNo" value="${curScrNo-1}"/>
+	        </c:forEach>			
+	    </section>
 		
 		<c:if test="${sname=='관리자'}">
 			<div style="text-align: right;">

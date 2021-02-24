@@ -109,5 +109,5 @@ public class MemberVo {
 				+ ", mJOINDAY=" + mJOINDAY + ", mEMONEY=" + mEMONEY + ", mLEVEL=" + mLEVEL + ", mRECEIVEAD="
 				+ mRECEIVEAD + ", mDROPOUT=" + mDROPOUT + "]";
 	}
-	
+
 }

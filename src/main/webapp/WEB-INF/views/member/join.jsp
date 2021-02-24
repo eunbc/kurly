@@ -14,7 +14,6 @@
 	<script src="${contextPath}/resources/js/join.js"></script>
     <script src="${contextPath}/resources/js/address.js"></script>
 	<style>
-		.necessary {color: red;}
 		#content{margin: 0 auto; width: 620px;}
 		tr td:first-child {font-weight:800; width:150px;}
 		tr td:nth-child(2) {width: 320px}
@@ -76,10 +75,10 @@
 					<td>주소<span class="necessary">*</span></td>
 					<td>
 						<input type="button" onclick="sample6_execDaumPostcode()" id="address" style="width:304;text-align: center;" class="button-outline" value="주소 검색"/>
-						<input type="text" id="sample6_postcode" placeholder="우편번호" class="form-control">
-						<input type="text" id="sample6_address" placeholder="주소" class="form-control"><br>
-						<input type="text" id="sample6_detailAddress" placeholder="상세주소" class="form-control">
-						<input type="text" id="sample6_extraAddress" placeholder="참고항목" class="form-control">
+						<input type="text" id="sample6_postcode" name="address1" placeholder="우편번호" class="form-control">
+						<input type="text" id="sample6_address" name="address2" placeholder="주소" class="form-control"><br>
+						<input type="text" id="sample6_detailAddress" name="address3" placeholder="상세주소" class="form-control">
+						<input type="text" id="sample6_extraAddress" name="address4" placeholder="참고항목" class="form-control">
 						<input type="hidden" name="mADDRESS" id="mADDRESS"/>
 						<p style="font-size: 12px">배송지에 따라 상품 정보가 달라질 수 있습니다.</p>
 					</td>
@@ -116,22 +115,22 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td><input type="checkbox" name="terms" id="term1" />&nbsp;이용약관 동의<span class="gray">(필수)</span></td>
+					<td><input type="checkbox" class="terms" />&nbsp;이용약관 동의<span class="gray">(필수)</span></td>
 					<td><a href="" class="terms">약관보기></a></td>
 				</tr>
 				<tr>
 					<td></td>
-					<td><input type="checkbox" name="terms" id="term2" />&nbsp;개인정보처리방침 동의<span class="gray">(필수)</span></td>
+					<td><input type="checkbox" class="terms" />&nbsp;개인정보처리방침 동의<span class="gray">(필수)</span></td>
 					<td><a href="" class="terms">약관보기></a></td>
 				</tr>
 				<tr>
 					<td></td>
-					<td><input type="checkbox" name="mRECEIVEAD" id="term3" value="Y"/>&nbsp;할인쿠폰 등 혜택/정보 수신 동의<span class="gray">(선택)</span></td>
+					<td><input type="checkbox" class="terms" name="mRECEIVEAD" id="mRECEIVEAD"/>&nbsp;할인쿠폰 등 혜택/정보 수신 동의<span class="gray">(선택)</span></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td></td>
-					<td><input type="checkbox" name="terms" id="term4" />&nbsp;본인은 만 14세 이상입니다.<span class="gray">(필수)</span></td>
+					<td><input type="checkbox" class="terms" />&nbsp;본인은 만 14세 이상입니다.<span class="gray">(필수)</span></td>
 					<td></td>
 				</tr>
 			</table>

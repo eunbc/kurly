@@ -51,6 +51,13 @@ public class InquiryController {
 		return "inquiry/write";
 	}
 
+	@RequestMapping(value="/write", method=RequestMethod.POST)
+	public String writeInquiryPost(MultipartHttpServletRequest file,InquiryVo vo) {
+		inquiryService.writeInquiry(file,vo);
+		msgFlag="writeInquiryOK";
+		return "redirect:/msg/"+msgFlag;
+	}
+
 	@RequestMapping(value="/view", method=RequestMethod.GET)
 	public String viewInquiryGet(int iIDX,Model model) {
 		InquiryVo vo = inquiryService.viewInquiry(iIDX);
@@ -60,11 +67,5 @@ public class InquiryController {
 		return "inquiry/view";
 	}
 
-	@RequestMapping(value="/write", method=RequestMethod.POST)
-	public String writeInquiryPost(MultipartHttpServletRequest file,InquiryVo vo) {
-		inquiryService.writeInquiry(file,vo);
-		msgFlag="writeInquiryOK";
-		return "redirect:/msg/"+msgFlag;
-	}
 	
 }

@@ -101,8 +101,8 @@
 			</li>
 			<li class="menu2"><a href="${contextPath}/" class="menuLink">상품관리</a>
 				<ul class="menu2_s submenu">
-					<li><a href="${contextPath}/shop/productList?category=">상품등록</a></li>
-					<li><a href="${contextPath}/shop/productList?category=">상품목록</a></li>
+					<li><a href="${contextPath}/admin/goods">상품등록</a></li>
+					<li><a href="${contextPath}/admin/goodsList">상품목록</a></li>
 					<li><a href="${contextPath}/admin/category">대분류관리</a></li>
 					<li><a href="${contextPath}/admin/subcategory">중분류관리</a></li>
 				</ul>

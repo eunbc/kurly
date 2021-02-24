@@ -76,6 +76,10 @@ public class MsgController {
 			model.addAttribute("msg","이미 존재하는 대분류 코드입니다.");
 			model.addAttribute("url","admin/category");
 		}	
+		else if(msgFlag.equals("addGoodsOK")) {
+			model.addAttribute("msg","상품이 등록되었습니다.");
+			model.addAttribute("url","admin/goods");
+		}	
 		
 		//예) msgFlag = "imgDeleteOk$fileCnt="+fileCnt;
 		//앞의 예에서 특정 매개변수에 추가로 매개값이 넘어왔을 때는 아래와 같이 처리한다.
@@ -86,6 +90,10 @@ public class MsgController {
 		else if(msgFlag.substring(0,13).equals("deleteBoardOK")) {
 			model.addAttribute("msg","공지글이 삭제되었습니다.");
 			model.addAttribute("url","board/list?"+msgFlag.substring(14));
+		}
+		else if(msgFlag.substring(0,13).equals("goodsUpdateOK")) {
+			model.addAttribute("msg","상품 정보가 수정되었습니다.");
+			model.addAttribute("url","admin/goodsDetail?"+msgFlag.substring(14));
 		}
 		
 		return "include/msg";

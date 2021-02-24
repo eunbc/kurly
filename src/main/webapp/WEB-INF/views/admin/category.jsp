@@ -101,8 +101,7 @@
 			<tr> 
 				<th style="width:100px">대분류 코드</th>
 				<th>대분류 이름</th>
-				<th style="width:70x">수정</th>
-				<th style="width:70x">삭제</th>
+				<th style="width:140x">삭제</th>
 			</tr>
 	 		<c:forEach var="vo" items="${vos}">
 				<tr>
@@ -110,7 +109,6 @@
 					<td style="text-align: center;">
 						<div id="updateArea">${vo.cNAME}</div>
 					</td>
-					<td><a id="updateBtn" class="icon"><i class="xi-pen"></i></a></td>
 					<td><a href="javascript:deleteCategory('${vo.cCODE}');" class="icon"><i class="xi-close"></i></a></td>
 				</tr>
 			</c:forEach>

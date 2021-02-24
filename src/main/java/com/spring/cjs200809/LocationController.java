@@ -26,8 +26,8 @@ public class LocationController {
 		
 		//예) msgFlag = "imgDeleteOk$fileCnt="+fileCnt;
 		//앞의 예에서 특정 매개변수에 추가로 매개값이 넘어왔을 때는 아래와 같이 처리한다.
-		else if(msgFlag.substring(0,11).equals("deleteFaqOK")) {
-			model.addAttribute("url","faq/list?"+msgFlag.substring(12));
+		else if(msgFlag.substring(0,13).equals("goodsDeleteOK")) {
+			model.addAttribute("url","admin/goodsList?"+msgFlag.substring(14));
 		}		
 		
 		return "include/location";
