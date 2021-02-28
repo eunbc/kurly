@@ -82,6 +82,11 @@
 					<td>판매량</td>
 					<td>${vo.gSALES}</td>
 				</tr>
+				<tr>
+					<td colspan="2">
+						<a href='${contextPath}/admin/goodsOption?gIDX=${vo.gIDX}'>옵션관리></a>
+					</td>
+				</tr>
 			</table>
 		</div>
 	</div>

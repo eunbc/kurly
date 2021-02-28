@@ -204,7 +204,7 @@
 					<li><a href="${contextPath}/shop/productList?category=">주방용품</a></li>
 				</ul>
 			</li>
-			<li class="menu2"><a href="${contextPath}/" class="menuLink">신상품</a></li>
+			<li class="menu2"><a href="${contextPath}/goods/goodsNew" class="menuLink">신상품</a></li>
 			<li class="menu3"><a href="${contextPath}/" class="menuLink">베스트</a></li>
 			<li class="menu4"><a href="${contextPath}/" class="menuLink">알뜰쇼핑</a></li>
 			<li class="menu5"><a href="${contextPath}/" class="menuLink">금주혜택</a></li>

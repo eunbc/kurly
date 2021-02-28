@@ -5,12 +5,14 @@ package com.spring.cjs200809;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -19,11 +21,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.spring.cjs200809.pagination.PageProcess;
 import com.spring.cjs200809.service.AdminService;
 import com.spring.cjs200809.service.InquiryService;
-import com.spring.cjs200809.vo.BoardVo;
 import com.spring.cjs200809.vo.CategoryVo;
+import com.spring.cjs200809.vo.GoodsOptionVo;
 import com.spring.cjs200809.vo.GoodsVo;
 import com.spring.cjs200809.vo.InquiryReplyVo;
 import com.spring.cjs200809.vo.InquiryVo;
+import com.spring.cjs200809.vo.MemberVo;
 import com.spring.cjs200809.vo.SubcategoryVo;
 
 
@@ -272,6 +275,7 @@ public class AdminController {
 
 	}
 
+	//상품 개별 삭제
 	@RequestMapping(value="/goodsDelete", method=RequestMethod.GET)
 	public String goodsDeleteGet(HttpServletRequest request) {
 		int gIDX = Integer.parseInt(request.getParameter("gIDX"));
@@ -282,5 +286,50 @@ public class AdminController {
   		msgFlag = "goodsDeleteOK$pag="+pag;
   		return "redirect:/location/" + msgFlag;
 	}
+	
+	//선택 항목 일괄 삭제
+	@ResponseBody
+	@RequestMapping(value="/goodsDelete", method=RequestMethod.POST)
+	public int goodsDeletePost(HttpSession session,
+		     @RequestParam(value = "chbox[]") List<String> chArr) {
+		//세션이 끊길 때를 방지
+		String mid = (String)session.getAttribute("smid");
+		 
+		int result = 0;
+		int gIDX = 0;
+		 
+		if(mid != null) {
+			for(String i : chArr) {   
+				gIDX = Integer.parseInt(i);
+				adminService.goodsDelete(gIDX);
+			}   
+			result = 1;
+		}  
+		return result;  
+	}
+	
+	@RequestMapping(value="/goodsOption", method=RequestMethod.GET)
+	public String goodsOptionGet(Model model,int gIDX) {
+		List<GoodsOptionVo> vos = adminService.getGoodsOption(gIDX);
+		model.addAttribute("vos",vos);
+		model.addAttribute("gIDX",gIDX);
+		return "admin/goodsOption";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/addGoodsOption", method=RequestMethod.POST)
+	public String addGoodsOptionPost(GoodsOptionVo vo) {
+		adminService.addGoodsOption(vo);
+  		return "";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/deleteGoodsOption", method=RequestMethod.POST)
+	public String deleteGoodsOptionPost(int goIDX) {
+		adminService.deleteGoodsOption(goIDX);
+  		return "";
+	}
+	
+	
 
 }

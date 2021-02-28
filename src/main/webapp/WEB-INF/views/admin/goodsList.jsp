@@ -13,7 +13,7 @@
 	<style>
 		.goodsList-select{
 			text-align: center;
-			padding-bottom: 20px;
+			padding-bottom: 5px;
 		}		
 	</style>
 	<script>
@@ -52,7 +52,28 @@
 		            $("#checkAll").prop("checked",false);
 		    	}
 		    });
-		    
+			
+		    //선택 삭제 버튼 누르면 선택된 항목만 삭제된다
+		    $(".selectDelete_btn").click(function(){
+		      	var checkArr = new Array();
+		      
+		      	$("input[class='goodsChkbox']:checked").each(function(){
+		       		checkArr.push($(this).attr("data-gIDX"));
+		      	});
+		      	
+		    	var ans = confirm(""+checkArr.length+"개 항목을 삭제하시겠습니까?");
+		     	if(!ans) return false;
+		     	else if(ans) {
+			      	$.ajax({
+			       		url : "${contextPath}/admin/goodsDelete",
+			       		type : "post",
+			       		data : { chbox : checkArr },
+			       		success : function(){
+							location.reload();
+			       		}
+			      	});
+		     	} 
+		    });
 		}); 
 		
 		function selectCategory() {
@@ -96,8 +117,10 @@
 				</select>	
 				
 				<input type="button" class="button-small" onclick="selectCategory()"value="분류별 조회"/>
+				<input type="button" class="button-outline-small selectDelete_btn" value="선택삭제"/>
 			</form>
 		</div>
+		
 	
 		<table class="admin-list-table">
 			<tr> 
@@ -109,7 +132,7 @@
 			</tr>
  			<c:forEach var="gVo" items="${gVos}">
 				<tr>
-					<td><input type="checkbox" class="goodsChkbox"/></td>
+					<td><input type="checkbox" class="goodsChkbox" data-gIDX="${gVo.gIDX}" /></td>
 					<td><a href="${contextPath}/admin/goodsDetail?gIDX=${gVo.gIDX}&pag=${p.pag}" class="title-decoration-none">${gVo.gNAME}</a></td>
 					<td>${gVo.gDISCOUNT}</td>
 					<td>${gVo.gSTOCK}</td>
@@ -152,7 +175,7 @@
 				</ul>            
             </div>
         </div>
-      <!-- 페이징 처리 끝 -->		
+        <!-- 페이징 처리 끝 -->		
 	</div>
 </div>
 </body>

@@ -170,7 +170,7 @@
 				$("#gDISCOUNTtxtbox").val('');
 				return;
 			}
-			$("#PRICEafterDISCOUNT").val(Math.floor(($("#gPRICE").val().replace(/,/g,"") - $("#gPRICE").val().replace(/,/g,"") * x * 0.01)/100)*100);  
+			$("#PRICEafterDISCOUNT").val(Math.floor(($("#gPRICE").val().replace(/,/g,"") - $("#gPRICE").val().replace(/,/g,"") * x * 0.01)/10)*10);  
 		}
 		
 		function writeCheck() {
@@ -204,6 +204,5 @@
 				goodsForm.submit();
 			}
 		}
-		
 	</script>
 </html>

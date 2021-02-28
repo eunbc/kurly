@@ -34,3 +34,13 @@ create table goods(
 	foreign key(cCODE) references category(cCODE)
 );
 
+create table goods_option (
+	goIDX  int not null auto_increment primary key,
+	gIDX   int not null,
+	goNAME varchar(50) not null,
+	goPRICE int,
+	foreign key(gIDX) references goods(gIDX)
+);
+
+
+

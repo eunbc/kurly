@@ -22,6 +22,22 @@
     border-radius: 3px;
     font-weight: 700;
 }
+
+.button-outline {
+    width:250px;
+    background-color: white;
+    border: 1.5px solid #5F0080;
+    color:#5F0080;
+    padding: 15px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-weight: 700;
+}
 .button-small {
     width:130px;
     background-color: #795B8F;
@@ -54,22 +70,39 @@
     font-weight: 700;
 }
 
-.button-outline {
-    width:250px;
-    background-color: white;
-    border: 1.5px solid #5F0080;
-    color:#5F0080;
-    padding: 15px 0;
+.button-xs {
+    width:100px;
+	height:30px;
+    background-color: #795B8F;
+    border: 1px solid #5F0080;
+    color:#fff;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 15px;
-    margin: 4px;
+    font-size: 10px;
+    margin: 5px;
     cursor: pointer;
-    border-radius: 3px;
     font-weight: 700;
+    vertical-align: middle;
+    padding: 0;
 }
-
+.button-xs:hover {
+    background-color: #5F0080;
+}
+.button-outline-xs {
+    width:100px;
+	height:30px;
+    background-color: WHITE;
+    border: 1px solid #5F0080;
+    color:#5F0080;
+    text-align: center;
+    text-decoration: none;
+    font-size: 10px;
+    margin: 5px;
+    cursor: pointer;
+    font-weight: 700;
+    padding: 0;
+}
 .input-box {
 	height: 30px;
 	border-radius: 5px;

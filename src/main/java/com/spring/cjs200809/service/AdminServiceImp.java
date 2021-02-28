@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.cjs200809.dao.AdminDao;
 import com.spring.cjs200809.vo.CategoryVo;
+import com.spring.cjs200809.vo.GoodsOptionVo;
 import com.spring.cjs200809.vo.GoodsVo;
 import com.spring.cjs200809.vo.InquiryVo;
 import com.spring.cjs200809.vo.SubcategoryVo;
@@ -276,6 +277,21 @@ public class AdminServiceImp implements AdminService{
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public void addGoodsOption(GoodsOptionVo vo) {
+		adminDao.addGoodsOption(vo);
+	}
+
+	@Override
+	public List<GoodsOptionVo> getGoodsOption(int gIDX) {
+		return adminDao.getGoodsOption(gIDX);
+	}
+
+	@Override
+	public void deleteGoodsOption(int goIDX) {
+		adminDao.deleteGoodsOption(goIDX);
 	}
 	
 

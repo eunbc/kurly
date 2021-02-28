@@ -108,7 +108,7 @@
 				<tr>
 					<td>추가입력 사항</td>
 					<td>
-						<input type="checkbox" name="mRECEIVEAD" id="term3" ${vo.mRECEIVEAD eq 'Y'? 'checked':''}/>&nbsp;할인쿠폰 등 혜택/정보 수신 동의<span class="gray">(선택)</span>
+						<input type="checkbox" name="mRECEIVEAD" id="term3" ${vo.mRECEIVEAD=='Y'? 'checked':''}/>&nbsp;할인쿠폰 등 혜택/정보 수신 동의<span class="gray">(선택)</span>
 					</td>
 					<td></td>
 				</tr>

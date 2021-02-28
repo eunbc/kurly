@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.spring.cjs200809.vo.CategoryVo;
+import com.spring.cjs200809.vo.GoodsOptionVo;
 import com.spring.cjs200809.vo.GoodsVo;
 import com.spring.cjs200809.vo.InquiryVo;
 import com.spring.cjs200809.vo.SubcategoryVo;
@@ -46,5 +47,11 @@ public interface AdminDao {
 	public void goodsImageDelete(@Param("gIDX") int gIDX);
 
 	public void updateGoods(@Param("vo") GoodsVo vo);
+
+	public void addGoodsOption(@Param("vo") GoodsOptionVo vo);
+
+	public List<GoodsOptionVo> getGoodsOption(@Param("gIDX") int gIDX);
+
+	public void deleteGoodsOption(@Param("goIDX")int goIDX);
 
 }

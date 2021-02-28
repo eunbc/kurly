@@ -10,6 +10,7 @@
 	<meta charset="UTF-8">
 	<title>마켓컬리 :: 내일의 장보기, 마켓컬리</title>
 	<link rel= "stylesheet" type="text/css" href="${contextPath}/resources/css/kurly.css?after">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
 	<style type="text/css">
 		.content-default{
 			width: 1100px;
@@ -63,6 +64,14 @@
 			var mid = loginForm.mMID.value;
 			var pwd = loginForm.mPWD.value;
 			
+	        var check = $('input:checkbox[id="rememberIdchkbox"]').is(':checked');
+	    	if(!check) {
+	            $('#rememberId').val('NO');
+	    	}
+	    	else if(check){
+	            $('#rememberId').val("YES");
+	    	}
+
 			if(mid==''){
 				alert("아이디를 입력해주세요.");
 				loginForm.mMID.focus();
@@ -82,14 +91,14 @@
 <body>
 <%@ include file="/WEB-INF/views/include/nav.jsp" %>
 <c:if test="${not empty cmid}"> <!-- 쿠키가 비어있지 않다면 체크박스 checked 속성 줌 -->
-  <c:set value="checked" var="checked"/>
+    <c:set value="checked" var="checked"/>
 </c:if>
 <div class="content-default">
 	<div class="login-content">
 		<p><br/></p>
 		<h4 style="text-align: center;font-weight: 900;">로그인</h4>
 		<p><br/></p>
-		<form name="loginForm" method="post">
+		<form name="loginForm" method="post" action="${contextPath}/member/login">
 			<table class="login-table">
 				<tr>
 					<td><input type="text" class="form-control" value="${cmid}" name="mMID" id="mMID" placeholder="아이디를 입력해주세요"/></td>
@@ -100,7 +109,8 @@
 				<tr>
 					<td>
 						<div>
-							<input type="checkbox" id="rememberId" name="rememberId" value="YES" ${checked} style="text-align: left;"/>&nbsp;아이디 기억하기 
+							<input type="checkbox" id="rememberIdchkbox" ${checked} style="text-align: left;"/>&nbsp;아이디 기억하기 
+							<input type="hidden" name="rememberId" id="rememberId"/>
 							<a href="${contextPath}/member/find_id" style="margin-left: 50px; ">아이디 찾기 </a> | <a href="${contextPath}/member/find_pwd">비밀번호 찾기</a>
 						</div>
 					</td>

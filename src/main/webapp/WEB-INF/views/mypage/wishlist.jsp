@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <% pageContext.setAttribute("newLine", "\n"); %>
 <%@ include file="/WEB-INF/views/include/bs.jsp" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
@@ -9,12 +10,125 @@
 <head>
 	<meta charset="UTF-8">
 	<title>마켓컬리 :: 내일의 장보기, 마켓컬리</title>
+	<script>
+		$(function() {
+		    //체크박스 전체 선택
+		    $("#wishcheckAll").click(function(){
+		        if($("#wishcheckAll").prop("checked")){
+		            $(".wishChkbox").prop("checked",true);
+		        }else{
+		            $(".wishChkbox").prop("checked",false);
+		        }
+		    });
+		    
+		    //전체 선택된 상태에서 하나 해제할 때, 전체 선택 해제
+		    $(".wishChkbox").click(function(){
+	            var check = $('input:checkbox[id="wishcheckAll"]').is(':checked');
+		    	if(check){
+		            $("#wishcheckAll").prop("checked",false);
+		    	}
+		    });
+			
+		    //선택 삭제 버튼 누르면 선택된 항목만 삭제된다
+		    $(".wishselectDelete_btn").click(function(){
+		    	
+		      	var checkArr = new Array();
+		      
+		      	$("input[class='wishChkbox']:checked").each(function(){
+		       		checkArr.push($(this).attr("data-wIDX"));
+		      	});
+		      	
+		      	$.ajax({
+		       		url : "${contextPath}/mypage/wishDelete",
+		       		type : "post",
+		       		data : { chbox : checkArr },
+		       		success : function(){
+						location.reload();
+		       		}
+		      	});
+		    });
+		    		    
+		    $(".delete ${vo.wIDX}").click(function(){
+		    	
+		      	var checkArr = new Array();
+		      
+	       		checkArr.push($(this).attr("data-wIDX"));
+		      	
+		      	$.ajax({
+		       		url : "${contextPath}/mypage/wishDelete",
+		       		type : "post",
+		       		data : { chbox : checkArr },
+		       		success : function(){
+						location.reload();
+		       		}
+		      	});
+		    });
+		    
+		    $(".addToCart ${vo.gIDX}").click(function(){
+		    	
+		      	var checkArr = new Array();
+			      
+	       		checkArr.push($(this).attr("data-gIDX"));
+		      	
+		      	$.ajax({
+		       		url : "${contextPath}/goods/addCart2",
+		       		type : "post",
+		       		data : { 
+		       			chbox : checkArr,
+				        cQTY : 1,
+				        goIDX: 0
+		       			},
+			    	success : function(data){
+			    		if(data=='1') {
+				     		alert("장바구니 담기 성공");
+			    		}else {
+			    			alert("로그인 후 이용가능합니다.");
+			    		}
+			    	}
+		      	});
+		    });
+		    
+		}); 
+		
+	</script>
 	<style>
-		.align-right {align:right;}
+		.wishlist-content{
+			height: 150px;
+		}
+		.wishlist-content-info .chkbox{
+			padding: 100px 20px;
+		}
+		.wishlist-content-info .detail{
+			width: 300px;
+			padding-left: 50px;
+		}
+		.wishlist-content-info{
+			float: left;
+		}
+		#btn-addToCart{
+			background-color: #795B8F;
+			border-radius: 0;
+			font-size: 13px;
+		}
+		#btn-Delete{
+			color: #5F0080;
+			border-radius: 0;
+			font-size: 13px;
+			width: 108px;
+			margin-top: 4px;
+		}
+		#btn-Delete:hover{
+			background-color: white;
+		}
+		.list-table img{
+			width: 100px;
+			margin: 25px;
+		}
 	</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/nav.jsp" %>
+<%@ include file="/WEB-INF/views/include/mypage-box.jsp" %>
 <div class="content-default">
 	<div class="subNav">
 		<h2 style="font-weight: 600">&nbsp;마이컬리</h2>
@@ -28,62 +142,34 @@
 		</ul>
 	</div>
 	<div class="section">
-		<h4>주문 내역 <span class="explanation-gray">지난 3년간의 주문 내역 조회가 가능합니다 </span>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="button-outline-join" onclick="location.href='${contextPath}/board/write'" value="공지작성"/></h4>
+		<h4>늘 사는 것 <span class="explanation-gray">늘 사는 것으로 등록하신 상품 목록입니다 </span></h4>
 		<table class="list-table">
 			<tr> 
-				<th style="width:50px">번호</th>
-				<th style="width:550px">제목</th>
-				<th style="width:70px">작성자</th>
-				<th style="width:70px">작성일</th>
-				<th style="width:50px">조회</th>
+				<th style="width:50px"><input type="checkbox" id="wishcheckAll"/></th>
+				<th style="width:100px"></th>
+				<th style="width:550px">상품 정보</th>
+				<th style="width:70px">선택</th>
 			</tr>
 			<c:forEach var="vo" items="${vos}">
-				<tr>
-					<td>${curScrNo}</td>
-					<td><a href="${contextPath}/board/view?board_idx=${vo.board_idx}&pag=${p.pag}" class="title-decoration-none">${vo.title}</a></td>
-					<td>${vo.name}</td>
-					<td>${fn:substring(vo.wdate,0,10)}</td>
-					<td>${vo.viewCnt}</td>
-				</tr>
-				<c:set var="curScrNo" value="${curScrNo-1}"/>
+			<tr>
+				<td><input type="checkbox" class="wishChkbox" data-wIDX="${vo.wIDX}" /></td>
+				<td>
+			        <img src="${contextPath}/resources/goods/${vo.gIMAGE}" width="100px"/>
+				</td>
+				<td style="text-align: left;">
+					<div style="font-size: medium;">${vo.gNAME}</div>
+					<div><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.gPRICE}"/>원</div>
+				</td>
+				<td>
+					<div><input type="button" class="btn btn-secondary addToCart ${vo.gIDX}" data-gIDX="${vo.gIDX}" id="btn-addToCart" value="장바구니 담기"></div> 
+					<div><input type="button" class="btn btn-outline-secondary delete ${vo.wIDX}" data-wIDX="${vo.wIDX}" id="btn-Delete" value="삭제"></div>
+				</td>
+			</tr>
 			</c:forEach>
 		</table>
-		
-		<!-- 페이징 처리 시작 -->
-	    <div class="row">
-	        <div class="col-12">
-				<ul class="pagination justify-content-center" style="margin:20px 0">
-				<c:set var="startPageNum" value="${p.pag- (p.pag-1)%(p.blockSize)}"/>
-				<c:if test="${p.pag != 1}">
-		  			<li class="page-item"><a class="page-link" href="${contextPath}/board/list?pag=1&pageSize=${p.pageSize}">◀</a></li>
-		  			<li class="page-item"><a class="page-link" href="${contextPath}/board/list?pag=${p.pag-1}&pageSize=${p.pageSize}">◁</a></li>
-				</c:if>
-				<c:if test="${p.pag == 1}">
-		  			<li class="page-item disabled"><a class="page-link" href="${contextPath}/board/list?pag=1&pageSize=${p.pageSize}">◀</a></li>
-		  			<li class="page-item disabled"><a class="page-link" href="${contextPath}/board/list?pag=${p.pag-1}&pageSize=${p.pageSize}">◁</a></li>
-				</c:if>
-				<c:forEach var="i" begin="0" end="2">
-					<c:if test="${(startPageNum + i)<=p.totPage}">
-						<c:if test="${(startPageNum + i)==p.pag}">
-				  			<li class="page-item active"><b><a class="page-link" href="${contextPath}/board/list?pag=${startPageNum + i}&pageSize=${p.pageSize}">${startPageNum + i }</a></b></li>
-						</c:if>
-						<c:if test="${(startPageNum + i)!=p.pag}">
-							<li class="page-item"><a class="page-link" href="${contextPath}/board/list?pag=${startPageNum + i}&pageSize=${p.pageSize}">${startPageNum + i }</a></li>
-						</c:if>
-					</c:if>
-				</c:forEach>
-				<c:if test="${p.pag != p.totPage}">
-					<li class="page-item"><a class="page-link" href="${contextPath}/board/list?pag=${p.pag+1}&pageSize=${p.pageSize}">▷</a></li>
-					<li class="page-item"><a class="page-link" href="${contextPath}/board/list?pag=${p.totPage}&pageSize=${p.pageSize}">▶</a></li>
-				</c:if>
-				<c:if test="${p.pag == p.totPage}">
-					<li class="page-item disabled"><a class="page-link" href="${contextPath}/board/list?pag=${p.pag+1}&pageSize=${p.pageSize}">▷</a></li>
-					<li class="page-item disabled"><a class="page-link" href="${contextPath}/board/list?pag=${p.totPage}&pageSize=${p.pageSize}">▶</a></li>
-				</c:if>
-				</ul>            
-            </div>
-        </div>
-      <!-- 페이징 처리 끝 -->		
+		<div style="text-align: right;">
+			<input type="button" class="button-outline-small wishselectDelete_btn" value="늘 사는 것 비우기"/>
+		</div>
 	</div>
 </div>
 </body>

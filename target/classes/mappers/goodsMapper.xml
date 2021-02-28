@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.cjs200809.dao.GoodsDao">
+	
+	<select id="goodsListNew" resultType="com.spring.cjs200809.vo.GoodsVo">
+		select * from goods order by gIDX desc limit #{startNo},#{pageSize};
+	</select>
+
+	<select id="goodsTotRecCnt" resultType="int">
+		select count(*) from goods;
+	</select>
+	
+	<insert id="addCart">
+		insert into cart values(default,#{mMID},#{gIDX},#{cQTY},#{goIDX},default);
+	</insert>
+	
+	<insert id="addWishlist">
+		insert into wishlist values(default,#{mMID},#{gIDX});
+	</insert>
+	
+	<select id="checkWishlist" resultType="String">
+		select wIDX from wishlist where mMID=#{mMID} and gIDX=#{gIDX} limit 1;
+	</select>
+
+</mapper>

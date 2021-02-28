@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.spring.cjs200809.dao.AdminDao;
 import com.spring.cjs200809.dao.BoardDao;
 import com.spring.cjs200809.dao.FaqDao;
-import com.spring.cjs200809.dao.InquiryDao;
+import com.spring.cjs200809.dao.GoodsDao;
 
 @Service
 public class PageProcess {
@@ -18,6 +18,10 @@ public class PageProcess {
 	
 	@Autowired
 	AdminDao adminDao;
+	
+	@Autowired
+	GoodsDao goodsDao;
+	
 	
 	public PageVo pagination(int pag, int pageSize, String partFlag) {
 		int totRecCnt = 0;
@@ -96,6 +100,9 @@ public class PageProcess {
 		} 
 		else if(partFlag.equals("goods") && partValue == "") {
 			totRecCnt = adminDao.goodsTotRecCnt("",""); 
+		} 
+		else if(partFlag.equals("goodsList") && partValue == "new") {
+			totRecCnt = goodsDao.goodsTotRecCnt();  
 		} 
 		
 		

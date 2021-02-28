@@ -90,5 +90,17 @@
 		update goods set gNAME=#{vo.gNAME},gSHORT=#{vo.gSHORT},cCODE=#{vo.cCODE},scCODE=#{vo.scCODE},gPRICE=#{vo.gPRICE},gDISCOUNT=#{vo.gDISCOUNT},gSTOCK=#{vo.gSTOCK},gIMAGE=#{vo.gIMAGE},gDETAIL=#{vo.gDETAIL} where gIDX=#{vo.gIDX};
 	</update>
 	
-
+	<insert id="addGoodsOption">
+		insert into goods_option values (default,#{vo.gIDX},#{vo.goNAME},#{vo.goPRICE});
+	</insert>
+	
+	<select id="getGoodsOption" resultType="com.spring.cjs200809.vo.GoodsOptionVo">
+		select * from goods_option where gIDX=#{gIDX};
+	</select>
+	
+	<delete id="deleteGoodsOption">
+		delete from goods_option where goIDX=#{goIDX};
+	</delete>
+	
+	
 </mapper>

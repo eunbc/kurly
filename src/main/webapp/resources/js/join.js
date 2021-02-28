@@ -23,7 +23,16 @@
 
 $(document).ready(function() {
 
-
+    var address = $("#sample6_postcode").val()+"@"+$("#sample6_address").val()+"@"+$("#sample6_detailAddress").val()+"@"+$("#sample6_extraAddress").val();
+	$('#mADDRESS').val(address);
+	
+    var check = $('input:checkbox[name="mRECEIVEAD"]').is(':checked');
+	if(check){
+        $("#mRECEIVEAD").val('Y');
+	} else if(!check) {
+        $("#mRECEIVEAD").val('N');
+	}
+    	
     $('#mMID').blur(function() {
         if (idJ.test($('#mMID').val())) {
             console.log('true');
@@ -119,17 +128,6 @@ $(document).ready(function() {
     //제출할 때
     $('#fCheck').click(function() {
 	    
-	    var address = $("#sample6_postcode").val()+"@"+$("#sample6_address").val()+"@"+$("#sample6_detailAddress").val()+"@"+$("#sample6_extraAddress").val();
-    	$('#mADDRESS').val(address);
-    	
-        var check = $('input:checkbox[name="mRECEIVEAD"]').is(':checked');
-    	if(check){
-            $("#mRECEIVEAD").val('Y');
-    	} else {
-            $("#mRECEIVEAD").val('N');
-    	}
-    	
-	    
     	if($('#mMID').val()=='') {
     		alert("아이디를 입력하세요.");
     		$('#mMID').focus();
@@ -161,6 +159,12 @@ $(document).ready(function() {
     	}
     	else if($('#sample6_address').val()=='') {
     		alert("주소를 입력하세요.");
+    		return false;
+    	}else if(idKey==0) {
+    		alert("아이디를 중복체크 해주세요.");
+    		return false;
+    	}else if(emailKey==0) {
+    		alert("이메일 중복체크 해주세요.");
     		return false;
     	}
         else {

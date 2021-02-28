@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.cjs200809.vo.CategoryVo;
+import com.spring.cjs200809.vo.GoodsOptionVo;
 import com.spring.cjs200809.vo.GoodsVo;
 import com.spring.cjs200809.vo.InquiryVo;
 import com.spring.cjs200809.vo.SubcategoryVo;
@@ -48,5 +49,11 @@ public interface AdminService {
 	public void imgDelete(String originalCONTENT, String uploadPath);
 
 	public void updateGoods(MultipartFile file, GoodsVo vo);
+
+	public void addGoodsOption(GoodsOptionVo vo);
+
+	public List<GoodsOptionVo> getGoodsOption(int gIDX);
+
+	public void deleteGoodsOption(int goIDX);
 
 }

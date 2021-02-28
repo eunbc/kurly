@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -71,24 +72,30 @@ public class MemberController {
 	}
 
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String loginPost(String mMID, String mPWD, HttpSession session,
-    		HttpServletResponse response, String rememberId) {
-	  	MemberVo vo = memberService.IdCheck(mMID);
+	public String loginPost(String mMID, String mPWD, String rememberId, HttpSession session,
+    		HttpServletResponse response,HttpServletRequest request) {
+
+		MemberVo vo = memberService.IdCheck(mMID);
 	  	//로그인시 세션생성
 	  	if(vo != null && bCryptPasswordEncoder.matches(mPWD, vo.getmPWD())) {
 	  		session.setAttribute("smid" , mMID);
 	  		session.setAttribute("sname", vo.getmNAME());
 	  		session.setAttribute("slevel", vo.getmLEVEL());
 	  		
-	  		//아이디 기억하기 체크시 쿠키생성
+	  		//아이디 기억하기 체크시 쿠키생성, 체크 안할시 모든 쿠키 삭제
 	  		if(rememberId.equals("YES")) {
 	  			Cookie cookie = new Cookie("cmid",mMID);
 	  			cookie.setMaxAge(60*60*24);
 	  			response.addCookie(cookie);
-	  		}
-			/*
-			 * else if(rememberId.equals("NO")) { System.out.println("나는 아이디 기억 안하겠다"); }
-			 */
+	  		} else { 
+	  			Cookie[] cookies = request.getCookies();
+	  			if(cookies!=null) {
+	  				for(int i=0;i<cookies.length;i++) {
+	  					cookies[i].setMaxAge(0);
+	  					response.addCookie(cookies[i]);
+	  				}
+	  			}
+  			}
 	  		msgFlag = "loginOK";
 	  		return "redirect:/location/" + msgFlag;
 	  	}

@@ -38,6 +38,5 @@ select *
 	);		
 
 	
-	
 alter table board add FOREIGN KEY(mMID) REFERENCES member(mMID);
 ALTER TABLE `board` ADD CONSTRAINT `mMID` FOREIGN KEY (`mMID`) REFERENCES `member` (`mMID`) ON UPDATE CASCADE ON DELETE NO ACTION;
