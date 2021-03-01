@@ -106,7 +106,7 @@
 .input-box {
 	height: 30px;
 	border-radius: 5px;
-	border-color: black;
+	border-color: rgb(192, 192, 192);
 	background-color: white;
 }
 

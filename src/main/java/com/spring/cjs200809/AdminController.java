@@ -26,7 +26,7 @@ import com.spring.cjs200809.vo.GoodsOptionVo;
 import com.spring.cjs200809.vo.GoodsVo;
 import com.spring.cjs200809.vo.InquiryReplyVo;
 import com.spring.cjs200809.vo.InquiryVo;
-import com.spring.cjs200809.vo.MemberVo;
+import com.spring.cjs200809.vo.QnaVo;
 import com.spring.cjs200809.vo.SubcategoryVo;
 
 
@@ -330,6 +330,22 @@ public class AdminController {
   		return "";
 	}
 	
+	@RequestMapping(value="/qna", method=RequestMethod.GET)
+	public String QnaListAdminGet(Model model,HttpServletRequest request) {
+		String qREPLY = request.getParameter("qREPLY")==null? "전체":request.getParameter("qREPLY");
+		int pag = request.getParameter("pag")==null? 1 : Integer.parseInt(request.getParameter("pag"));
+		int pageSize = request.getParameter("pageSize")==null? 10 : Integer.parseInt(request.getParameter("pageSize"));
+		
+		com.spring.cjs200809.pagination.PageVo pageVo = pageProcess.pagination(pag,pageSize,"qna",qREPLY);
+		List<QnaVo> vos = adminService.listQna(qREPLY,pageVo.getStartNo(),pageVo.getPageSize());
+		int curScrNo = pageVo.getCurScrNo();
+		
+		model.addAttribute("qREPLY",qREPLY);
+		model.addAttribute("curScrNo",curScrNo);
+		model.addAttribute("p",pageVo);
+		model.addAttribute("vos",vos);
+		return "admin/inquiry";
+	}
 	
 
 }

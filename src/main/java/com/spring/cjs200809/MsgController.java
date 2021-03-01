@@ -99,6 +99,10 @@ public class MsgController {
 			model.addAttribute("msg","상품 정보가 수정되었습니다.");
 			model.addAttribute("url","admin/goodsDetail?"+msgFlag.substring(14));
 		}
+		else if(msgFlag.substring(0,10).equals("writeQnaOK")) {
+			model.addAttribute("msg","상품 문의가 등록되었습니다.");
+			model.addAttribute("url","goods/goodsDetail?"+msgFlag.substring(11));
+		}
 		
 		return "include/msg";
 	}

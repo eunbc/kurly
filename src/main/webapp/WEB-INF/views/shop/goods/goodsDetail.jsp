@@ -287,6 +287,7 @@
         <p>${fn:replace(vo.gDETAIL,newLine,"<br/>")}<br/></p>
 	</div>
     <hr/>
+    <div style="text-align: right"><input type="button" class="button-small" value="상품문의" onclick="location.href='${contextPath}/qna/write?gIDX=${vo.gIDX}';"/></div>
 
 </div>
 </body>

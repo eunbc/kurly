@@ -7,6 +7,7 @@ import com.spring.cjs200809.dao.AdminDao;
 import com.spring.cjs200809.dao.BoardDao;
 import com.spring.cjs200809.dao.FaqDao;
 import com.spring.cjs200809.dao.GoodsDao;
+import com.spring.cjs200809.dao.QnaDao;
 
 @Service
 public class PageProcess {
@@ -21,6 +22,9 @@ public class PageProcess {
 	
 	@Autowired
 	GoodsDao goodsDao;
+	
+	@Autowired
+	QnaDao qnaDao;
 	
 	
 	public PageVo pagination(int pag, int pageSize, String partFlag) {
@@ -94,6 +98,9 @@ public class PageProcess {
 		} 
 		else if(partFlag.equals("inquiry")) {
 			totRecCnt = adminDao.inquiryTotRecCnt(partValue); 
+		} 
+		else if(partFlag.equals("qna")) {
+			totRecCnt = qnaDao.qnaTotRecCnt(partValue); 
 		} 
 		else if(partFlag.equals("goods") && partValue != "") {
 			totRecCnt = adminDao.goodsTotRecCnt(partValue.substring(0,3),partValue.substring(3)); 
