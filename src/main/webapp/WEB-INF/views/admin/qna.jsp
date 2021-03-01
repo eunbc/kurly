@@ -10,6 +10,8 @@
 	<meta charset="UTF-8">
 	<title>마켓컬리 :: 내일의 장보기, 마켓컬리</title>
 	<link rel= "stylesheet" type="text/css" href="${contextPath}/resources/css/kurly.css?after">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"></script>
 	<style>
 		.admin-list-table {
 			width: 1100px;
@@ -42,10 +44,21 @@
 		}	
 	</style>
 	<script>
+		var fromnow = moment("20120620", "YYYYMMDD").fromNow();
+		console.log(fromnow);
+		
+		$(document).ready(function() {
+			
+			var qWDATE = $('#qWDATE').val();
+			var fromnow = moment(qWDATE, "YYYYMMDD").fromNow();
+			console.log(fromnow);
+		});
+		
 		function categoryCheck() {
-			var iREPLY = categoryForm.iREPLY.value;
-			location.href="${contextPath}/admin/inquiry?iREPLY="+iREPLY;
+			var qREPLY = categoryForm.qREPLY.value;
+			location.href="${contextPath}/admin/qna?qREPLY="+qREPLY;
 		}
+
 	</script>
 </head>
 <body>
@@ -57,10 +70,10 @@
 	<div class="admin-content">
 		<p><br/></p>
 		<form name="categoryForm" style="width:200px;" onchange="categoryCheck()">
-			<select class="form-control" name="iREPLY" style="margin-left: 50px;">
-			    <option value="전체" <c:if test="${iREPLY=='전체'}">selected</c:if>>전체</option>
-			    <option value="답변대기중" <c:if test="${iREPLY=='답변대기중'}">selected</c:if>>답변대기중</option>
-			    <option value="답변완료" <c:if test="${iREPLY=='답변완료'}">selected</c:if>>답변완료</option>
+			<select class="form-control" name="qREPLY" style="margin-left: 50px;">
+			    <option value="전체" <c:if test="${qREPLY=='전체'}">selected</c:if>>전체</option>
+			    <option value="답변대기중" <c:if test="${qREPLY=='답변대기중'}">selected</c:if>>답변대기중</option>
+			    <option value="답변완료" <c:if test="${qREPLY=='답변완료'}">selected</c:if>>답변완료</option>
 			</select>
 		</form>
 	
@@ -75,15 +88,20 @@
 			<c:forEach var="vo" items="${vos}">
 				<tr>
 					<td>${curScrNo}</td>
-					<td><a href="${contextPath}/admin/inquiryReply?iIDX=${vo.iIDX}&pag=${p.pag}" class="title-decoration-none">[${vo.iCATEGORY}] ${vo.iTITLE}</a></td>
-					<td>${vo.mMID}</td>
-					<td>${fn:substring(vo.iWDATE,0,10)}</td>
+					<td><a href="${contextPath}/admin/qnaReply?qIDX=${vo.qIDX}&pag=${p.pag}" class="title-decoration-none">${vo.qTITLE}</a></td>
+					<td>${vo.qNAME}</td>
 					<td>
-						<c:if test="${vo.iREPLY=='답변대기중'}">
-							<span class="badge badge-pill badge-secondary">${vo.iREPLY}</span>						
+						${fn:substring(vo.qWDATE,0,10)}
+						<input type="hidden" value="${vo.qIDX}" id="qIDX"/>
+						<input type="hidden" value="${vo.qWDATE}" id="qWDATE"/>
+						<p class='qWDATE${vo.qIDX}'></p>
+					</td>
+					<td>
+						<c:if test="${vo.qREPLY=='답변대기중'}">
+							<span class="badge badge-pill badge-secondary">${vo.qREPLY}</span>						
 						</c:if>
-						<c:if test="${vo.iREPLY=='답변완료'}">
-							<span class="badge badge-pill badge-danger">${vo.iREPLY}</span>						
+						<c:if test="${vo.qREPLY=='답변완료'}">
+							<span class="badge badge-pill badge-danger">${vo.qREPLY}</span>						
 						</c:if>
 					</td>
 				</tr>
@@ -97,30 +115,30 @@
 				<ul class="pagination justify-content-center" style="margin:20px 0">
 				<c:set var="startPageNum" value="${p.pag- (p.pag-1)%(p.blockSize)}"/>
 				<c:if test="${p.pag != 1}">
-		  			<li class="page-item"><a class="page-link" href="${contextPath}/admin/inquiry?pag=1&pageSize=${p.pageSize}">◀</a></li>
-		  			<li class="page-item"><a class="page-link" href="${contextPath}/admin/inquiry?pag=${p.pag-1}&pageSize=${p.pageSize}">◁</a></li>
+		  			<li class="page-item"><a class="page-link" href="${contextPath}/admin/qna?pag=1&pageSize=${p.pageSize}">◀</a></li>
+		  			<li class="page-item"><a class="page-link" href="${contextPath}/admin/qna?pag=${p.pag-1}&pageSize=${p.pageSize}">◁</a></li>
 				</c:if>
 				<c:if test="${p.pag == 1}">
-		  			<li class="page-item disabled"><a class="page-link" href="${contextPath}/admin/inquiry?pag=1&pageSize=${p.pageSize}">◀</a></li>
-		  			<li class="page-item disabled"><a class="page-link" href="${contextPath}/admin/inquiry?pag=${p.pag-1}&pageSize=${p.pageSize}">◁</a></li>
+		  			<li class="page-item disabled"><a class="page-link" href="${contextPath}/admin/qna?pag=1&pageSize=${p.pageSize}">◀</a></li>
+		  			<li class="page-item disabled"><a class="page-link" href="${contextPath}/admin/qna?pag=${p.pag-1}&pageSize=${p.pageSize}">◁</a></li>
 				</c:if>
 				<c:forEach var="i" begin="0" end="2">
 					<c:if test="${(startPageNum + i)<=p.totPage}">
 						<c:if test="${(startPageNum + i)==p.pag}">
-				  			<li class="page-item active"><b><a class="page-link" href="${contextPath}/admin/inquiry?pag=${startPageNum + i}&pageSize=${p.pageSize}">${startPageNum + i }</a></b></li>
+				  			<li class="page-item active"><b><a class="page-link" href="${contextPath}/admin/qna?pag=${startPageNum + i}&pageSize=${p.pageSize}">${startPageNum + i }</a></b></li>
 						</c:if>
 						<c:if test="${(startPageNum + i)!=p.pag}">
-							<li class="page-item"><a class="page-link" href="${contextPath}/admin/inquiry?pag=${startPageNum + i}&pageSize=${p.pageSize}">${startPageNum + i }</a></li>
+							<li class="page-item"><a class="page-link" href="${contextPath}/admin/qna?pag=${startPageNum + i}&pageSize=${p.pageSize}">${startPageNum + i }</a></li>
 						</c:if>
 					</c:if>
 				</c:forEach>
 				<c:if test="${p.pag != p.totPage}">
-					<li class="page-item"><a class="page-link" href="${contextPath}/admin/inquiry?pag=${p.pag+1}&pageSize=${p.pageSize}">▷</a></li>
-					<li class="page-item"><a class="page-link" href="${contextPath}/admin/inquiry?pag=${p.totPage}&pageSize=${p.pageSize}">▶</a></li>
+					<li class="page-item"><a class="page-link" href="${contextPath}/admin/qna?pag=${p.pag+1}&pageSize=${p.pageSize}">▷</a></li>
+					<li class="page-item"><a class="page-link" href="${contextPath}/admin/qna?pag=${p.totPage}&pageSize=${p.pageSize}">▶</a></li>
 				</c:if>
 				<c:if test="${p.pag == p.totPage}">
-					<li class="page-item disabled"><a class="page-link" href="${contextPath}/admin/inquiry?pag=${p.pag+1}&pageSize=${p.pageSize}">▷</a></li>
-					<li class="page-item disabled"><a class="page-link" href="${contextPath}/admin/inquiry?pag=${p.totPage}&pageSize=${p.pageSize}">▶</a></li>
+					<li class="page-item disabled"><a class="page-link" href="${contextPath}/admin/qna?pag=${p.pag+1}&pageSize=${p.pageSize}">▷</a></li>
+					<li class="page-item disabled"><a class="page-link" href="${contextPath}/admin/qna?pag=${p.totPage}&pageSize=${p.pageSize}">▶</a></li>
 				</c:if>
 				</ul>            
             </div>

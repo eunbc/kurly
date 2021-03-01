@@ -10,6 +10,8 @@
 	<meta charset="UTF-8">
 	<title>마켓컬리 :: 내일의 장보기, 마켓컬리</title>
 	<link rel= "stylesheet" type="text/css" href="${contextPath}/resources/css/kurly.css?after">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"></script>
 	<style>
 		.admin-list-table {
 			width: 1100px;
@@ -42,6 +44,13 @@
 		}	
 	</style>
 	<script>
+		$(document).ready(function() {
+			var idx = $('.iIDX').val();
+			var iWDATE = $('#iWDATE'+idx).val();
+			var fromnow = moment(iWDATE, "YYYYMMDD").fromNow();
+			console.log(fromnow);
+		});
+	
 		function categoryCheck() {
 			var iREPLY = categoryForm.iREPLY.value;
 			location.href="${contextPath}/admin/inquiry?iREPLY="+iREPLY;
@@ -77,7 +86,12 @@
 					<td>${curScrNo}</td>
 					<td><a href="${contextPath}/admin/inquiryReply?iIDX=${vo.iIDX}&pag=${p.pag}" class="title-decoration-none">[${vo.iCATEGORY}] ${vo.iTITLE}</a></td>
 					<td>${vo.mMID}</td>
-					<td>${fn:substring(vo.iWDATE,0,10)}</td>
+					<td>
+						${fn:substring(vo.iWDATE,0,10)}
+						<input type="hidden" value="${vo.iIDX}" id="iIDX${vo.iIDX}" class="iIDX"/>
+						<input type="hidden" value="${vo.iWDATE}" id="iWDATE${vo.iIDX}"/>
+						<p class='iWDATE${vo.iIDX}'></p>
+					</td>
 					<td>
 						<c:if test="${vo.iREPLY=='답변대기중'}">
 							<span class="badge badge-pill badge-secondary">${vo.iREPLY}</span>						

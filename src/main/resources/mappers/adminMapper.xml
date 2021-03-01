@@ -19,6 +19,24 @@
 	  	    select * from inquiry where iREPLY = #{iREPLY} order by iIDX desc limit #{startNo},#{pageSize};
 	    </if>
 	</select>
+
+	<select id="qnaTotRecCnt" resultType="int">
+	    <if test="partValue == '전체'">
+		    select count(*) from qna where qLEVEL=0 and qPUBLIC='Y';
+	    </if>
+	    <if test="partValue != '전체'">
+			select count(*) from qna where qREPLY = #{partValue} and qLEVEL=0 and qPUBLIC='Y';
+	    </if>
+	</select>
+	
+	<select id="listQna" resultType="com.spring.cjs200809.vo.QnaVo">
+	    <if test="qREPLY == '전체'">
+	  	    select * from qna where qLEVEL=0 and qPUBLIC='Y' order by qIDX desc limit #{startNo},#{pageSize};
+	    </if>
+	    <if test="qREPLY != '전체'">
+	  	    select * from qna where qREPLY = #{qREPLY} and qLEVEL=0 and qPUBLIC='Y' order by qIDX desc limit #{startNo},#{pageSize};
+	    </if>
+	</select>
 	
 	<insert id="addCategory">
 		insert into category values (#{cCODE},#{cNAME});

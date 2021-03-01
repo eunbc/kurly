@@ -100,7 +100,7 @@ public class PageProcess {
 			totRecCnt = adminDao.inquiryTotRecCnt(partValue); 
 		} 
 		else if(partFlag.equals("qna")) {
-			totRecCnt = qnaDao.qnaTotRecCnt(partValue); 
+			totRecCnt = adminDao.qnaTotRecCnt(partValue); 
 		} 
 		else if(partFlag.equals("goods") && partValue != "") {
 			totRecCnt = adminDao.goodsTotRecCnt(partValue.substring(0,3),partValue.substring(3)); 

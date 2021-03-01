@@ -118,7 +118,7 @@
 			<li class="menu4"><a href="${contextPath}/" class="menuLink">문의관리</a>
 				<ul class="menu2_s submenu">
 					<li><a href="${contextPath}/admin/inquiry">1:1문의</a></li>
-					<li><a href="${contextPath}/">상품문의</a></li>
+					<li><a href="${contextPath}/admin/qna">상품문의</a></li>
 				</ul>
 			</li>
 			<li class="menu5"><a href="${contextPath}/" class="menuLink">금주혜택</a></li>

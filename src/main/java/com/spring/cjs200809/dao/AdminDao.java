@@ -8,6 +8,7 @@ import com.spring.cjs200809.vo.CategoryVo;
 import com.spring.cjs200809.vo.GoodsOptionVo;
 import com.spring.cjs200809.vo.GoodsVo;
 import com.spring.cjs200809.vo.InquiryVo;
+import com.spring.cjs200809.vo.QnaVo;
 import com.spring.cjs200809.vo.SubcategoryVo;
 
 public interface AdminDao {
@@ -53,5 +54,9 @@ public interface AdminDao {
 	public List<GoodsOptionVo> getGoodsOption(@Param("gIDX") int gIDX);
 
 	public void deleteGoodsOption(@Param("goIDX")int goIDX);
+
+	public List<QnaVo> listQna(@Param("qREPLY")String qREPLY,@Param("startNo") int startNo,@Param("pageSize") int pageSize);
+
+	public int qnaTotRecCnt(@Param("partValue")String partValue);
 
 }

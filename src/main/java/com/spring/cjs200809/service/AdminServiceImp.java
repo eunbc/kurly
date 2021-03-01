@@ -21,6 +21,7 @@ import com.spring.cjs200809.vo.CategoryVo;
 import com.spring.cjs200809.vo.GoodsOptionVo;
 import com.spring.cjs200809.vo.GoodsVo;
 import com.spring.cjs200809.vo.InquiryVo;
+import com.spring.cjs200809.vo.QnaVo;
 import com.spring.cjs200809.vo.SubcategoryVo;
 
 @Service
@@ -292,6 +293,11 @@ public class AdminServiceImp implements AdminService{
 	@Override
 	public void deleteGoodsOption(int goIDX) {
 		adminDao.deleteGoodsOption(goIDX);
+	}
+
+	@Override
+	public List<QnaVo> listQna(String qREPLY, int startNo, int pageSize) {
+		return adminDao.listQna(qREPLY,startNo,pageSize);
 	}
 	
 

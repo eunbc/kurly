@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.spring.cjs200809.pagination.PageProcess;
 import com.spring.cjs200809.service.AdminService;
 import com.spring.cjs200809.service.InquiryService;
+import com.spring.cjs200809.service.QnaService;
 import com.spring.cjs200809.vo.CategoryVo;
 import com.spring.cjs200809.vo.GoodsOptionVo;
 import com.spring.cjs200809.vo.GoodsVo;
@@ -43,6 +44,9 @@ public class AdminController {
 	
 	@Autowired
 	InquiryService inquiryService;
+	
+	@Autowired
+	QnaService qnaService;
 
 	@RequestMapping(value="/main", method=RequestMethod.GET)
 	public String mainAdminGet() {
@@ -344,8 +348,40 @@ public class AdminController {
 		model.addAttribute("curScrNo",curScrNo);
 		model.addAttribute("p",pageVo);
 		model.addAttribute("vos",vos);
-		return "admin/inquiry";
+		return "admin/qna";
 	}
+	
+	@RequestMapping(value="/qnaReply", method=RequestMethod.GET)
+	public String qnaReplyGet(int qIDX,Model model,HttpServletRequest request) {
+		QnaVo vo = qnaService.viewQna(qIDX);
+		int pag = request.getParameter("pag")==null? 1 : Integer.parseInt(request.getParameter("pag"));
+		model.addAttribute("pag",pag);
+		model.addAttribute("vo",vo);
+		return "admin/qnaReply";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/writeQnaReply", method=RequestMethod.POST)
+	public String writeQnaReplyPost(QnaVo vo) {
+		//부모댓글보다 큰 모든 댓글의 levelOrder를 부모 댓글의 levelOrder 값에 +1하여 지정
+		qnaService.levelOrderPlusUpdate(vo);
+		//자신의 레벨오더는 부모의 레벨오더보다 +1
+		vo.setqLEVELORDER(vo.getqLEVELORDER()+1);
+		//답변글 저장
+		qnaService.writeQnaReply(vo);
+		//답변 상태 변경
+		qnaService.updateReplyStmt(vo.getqIDX());
+		return "1";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/qnaPrivateByAdmin", method=RequestMethod.POST)
+	public String qnaPrivateByAdminPost(int qIDX) {
+		qnaService.qnaPrivateByAdmin(qIDX);
+  		return "";
+	}
+	
+	
 	
 
 }
