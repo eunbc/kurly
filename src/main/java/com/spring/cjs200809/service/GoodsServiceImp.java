@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.cjs200809.dao.GoodsDao;
 import com.spring.cjs200809.vo.BoardVo;
+import com.spring.cjs200809.vo.CartVo;
 
 @Service
 public class GoodsServiceImp implements GoodsService{
@@ -31,6 +32,11 @@ public class GoodsServiceImp implements GoodsService{
 	@Override
 	public String checkWishlist(String mMID, int gIDX) {
 		return goodsDao.checkWishlist(mMID,gIDX);
+	}
+
+	@Override
+	public List<CartVo> getMyCart(String mMID) {
+		return goodsDao.getMyCart(mMID);
 	}
 
 	

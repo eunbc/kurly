@@ -56,9 +56,11 @@
 			</c:if>
 		</table>
 		
-		<div style="text-align: right;">
-			<input type="button" class="button-small" onclick="location.href='${contextPath}/inquiry/write'" value="글쓰기"/>
-		</div>
+		<c:if test="${!empty smid}">
+			<div style="text-align: right;">
+				<input type="button" class="button-small" onclick="location.href='${contextPath}/inquiry/write'" value="글쓰기"/>
+			</div>
+		</c:if>
 		
 	</div>
 </div>

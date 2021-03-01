@@ -3,6 +3,7 @@ package com.spring.cjs200809.service;
 import java.util.List;
 
 import com.spring.cjs200809.vo.BoardVo;
+import com.spring.cjs200809.vo.CartVo;
 
 public interface GoodsService {
 
@@ -13,5 +14,7 @@ public interface GoodsService {
 	public void addWishlist(String mMID, int gIDX);
 
 	public String checkWishlist(String mMID, int gIDX);
+
+	public List<CartVo> getMyCart(String mMID);
 
 }

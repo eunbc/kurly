@@ -198,10 +198,6 @@
 					<li><a href="${contextPath}/shop/productList?category=">생수·음료·우유·커피</a></li>
 					<li><a href="${contextPath}/shop/productList?category=">간식·과자·떡</a></li>
 					<li><a href="${contextPath}/shop/productList?category=">베이커리·치즈·델리</a></li>
-					<li><a href="${contextPath}/shop/productList?category=">건강식품</a></li>
-					<li><a href="${contextPath}/shop/productList?category=">생활용품·리빙</a></li>
-					<li><a href="${contextPath}/shop/productList?category=">뷰티·바디케어</a></li>
-					<li><a href="${contextPath}/shop/productList?category=">주방용품</a></li>
 				</ul>
 			</li>
 			<li class="menu2"><a href="${contextPath}/goods/goodsNew" class="menuLink">신상품</a></li>
@@ -213,7 +209,7 @@
 		<div id="topMenu_icon">
 			&nbsp;<a href="${contextPath}/" ><i class="xi-search xi-2x"></i></a>
 			<a href="${contextPath}/" ><i class="xi-maker xi-2x"></i></a>
-			<a href="${contextPath}/" ><i class="xi-cart-o xi-2x"></i></a>
+			<a href="${contextPath}/goods/cart" ><i class="xi-cart-o xi-2x"></i></a>
 		</div>
 	</div>
 	<!-- Nav Bar End -->

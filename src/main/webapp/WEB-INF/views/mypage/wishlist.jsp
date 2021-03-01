@@ -38,6 +38,10 @@
 		       		checkArr.push($(this).attr("data-wIDX"));
 		      	});
 		      	
+		      	if(checkArr==""){
+					alert("삭제할 항목을 선택해주세요.");
+					return false;
+		      	}
 		      	$.ajax({
 		       		url : "${contextPath}/mypage/wishDelete",
 		       		type : "post",

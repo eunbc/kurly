@@ -20,6 +20,8 @@ import com.spring.cjs200809.pagination.PageVo;
 import com.spring.cjs200809.service.AdminService;
 import com.spring.cjs200809.service.GoodsService;
 import com.spring.cjs200809.vo.BoardVo;
+import com.spring.cjs200809.vo.CartVo;
+import com.spring.cjs200809.vo.GoodsOptionVo;
 import com.spring.cjs200809.vo.GoodsVo;
 
 
@@ -48,7 +50,6 @@ public class GoodsController {
 		int pageSize = request.getParameter("pageSize")==null? 9 : Integer.parseInt(request.getParameter("pageSize"));
 		
 		com.spring.cjs200809.pagination.PageVo pageVo = pageProcess.pagination(pag,pageSize,"goodsList","new");
-		//여기서 페이지 사이즈를 9로 넘겼는데 왜 전체 항목이 나올까요?
 		List<BoardVo> vos = goodsService.goodsListNew(pageVo.getStartNo(),pageVo.getPageSize());
 		model.addAttribute("pag",pag);
 		model.addAttribute("p",pageVo);
@@ -59,8 +60,11 @@ public class GoodsController {
 	@RequestMapping(value="/goodsDetail", method=RequestMethod.GET)
 	public String goodsDetailGet(int gIDX,Model model, HttpServletRequest request, PageVo pageVo) {
 		int pag = request.getParameter("pag")==null? 1 : Integer.parseInt(request.getParameter("pag"));
-		GoodsVo vo = adminService.getGoodsDetail(gIDX);
 		
+		GoodsVo vo = adminService.getGoodsDetail(gIDX);
+		List<GoodsOptionVo> goVos = adminService.getGoodsOption(gIDX);
+		
+		model.addAttribute("goVos",goVos);
 		model.addAttribute("vo",vo);
 		model.addAttribute("pag",pag);
 		return "shop/goods/goodsDetail";
@@ -121,6 +125,15 @@ public class GoodsController {
 			return "0"; //로그인 안된 상태
 		}
 	}
+	
+	@RequestMapping(value="/cart", method=RequestMethod.GET)
+	public String viewMyCartGet(Model model,HttpSession session) {
+		String mMID = (String) session.getAttribute("smid");
+		List<CartVo> vos = goodsService.getMyCart(mMID);
+		model.addAttribute("vos",vos);
+		return "shop/cart/cart";
+	}
+
 	
 
 }

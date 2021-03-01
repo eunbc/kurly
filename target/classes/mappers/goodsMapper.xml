@@ -21,5 +21,13 @@
 	<select id="checkWishlist" resultType="String">
 		select wIDX from wishlist where mMID=#{mMID} and gIDX=#{gIDX} limit 1;
 	</select>
+	
+	<select id="getMyCart" resultType="com.spring.cjs200809.vo.CartVo">
+		select *
+		from cart c
+		    inner join goods g
+		        on c.gIDX = g.gIDX   
+		    where mMID=#{mMID} order by cIDX desc;
+	</select>
 
 </mapper>

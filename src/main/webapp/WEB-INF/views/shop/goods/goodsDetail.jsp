@@ -76,18 +76,8 @@
 		
 	</style>
 	<script>
-		function updateCheck(idx) {
-			var ans = confirm("수정하시겠습니까?");
-			if(!ans) return false;
-			else location.href="${contextPath}/admin/goodsUpdate?gIDX="+idx+"&pag="+${pag};			
-		}
-		
-		function deleteCheck(idx) {
-			var ans = confirm("삭제하시겠습니까?");
-			if(!ans) return false;
-			else location.href="${contextPath}/admin/goodsDelete?gIDX="+idx+"&pag="+${pag};			
-		}
 		$(function() {
+			var goIDX;
 		    $(".plus").click(function(){
 			    var num = $(".numBox").val();
 			    var plusNum = Number(num) + 1;
@@ -112,6 +102,23 @@
 			    $(".realFinalPrice").text(${vo.gPRICE*(100-vo.gDISCOUNT)*0.01}*($(".numBox").val()));
 			});
 			
+	        $("#plus"+goIDX).click(function(){
+	        	alert("플러스 클릭");
+			    var num = $("#numBox"+goIDX).val();
+			    var plusNum = Number(num) + 1;
+		    	$("#numBox"+goIDX).val(plusNum);
+			});
+			  
+			$("#minus"+goIDX).click(function(){
+			    var num = $("#numBox"+goIDX).val();
+			    var minusNum  = Number(num) - 1;
+			    if(minusNum  <= 0) {
+			    	$("#numBox"+goIDX).val(num);
+			    } else{
+			    	$("#numBox"+goIDX).val(minusNum);
+			    }			    
+			});
+			
 		    $(".addCart_btn").click(function(){
 			    var cQTY = $(".numBox").val();
 			    if(cQTY<1) {
@@ -131,7 +138,7 @@
 			    	data : query,
 			    	success : function(data){
 			    		if(data=='1') {
-				     		alert("장바구니 담기 성공");
+				     		alert("장바구니에 담았습니다.");
 			    		}else {
 			    			alert("로그인 후 이용가능합니다.");
 			    		}
@@ -153,13 +160,45 @@
 				     		alert("늘 사는 것에 추가하였습니다.");
 			    		}else if(data=='2'){
 							alert("이미 늘 사는 리스트에 존재하는 상품입니다.");
-			    		} else if(data=='0'){
+			    		}else if(data=='0'){
 			    			alert("로그인 후 이용가능합니다.");
 			    		}
 			    	}
 			    });
 		    });
+		    
+		    $("#selectOption").change(function(){
+		    	var selectOption = $(this).val();
+		    	var goIDX = selectOption.substring(0,selectOption.indexOf("@"));
+		    	var goNAME = selectOption.substring(selectOption.indexOf("@")+1,selectOption.indexOf("#"));
+		        var goPRICE = selectOption.substring(selectOption.indexOf("#")+1);
+
+		    	
+		    	//선택한 옵션이 있고, 이미 선택한 옵션이 없을 때 
+		    	if(goIDX!="" && $("#option"+goIDX).length==0){
+			    	var str = "";
+			    	
+			    	str += "<div id='option"+goIDX+"'>"
+			    	str += "<div class='optionName'><a href='javascript:removeOption("+goIDX+")'><i class='xi-close'></i></a>"+goNAME+" ("+goPRICE+"원)</div>";
+			    	str += "<div class='optionQty'>";
+			    	str += "<button type='button' id='plus"+goIDX+"'><i class='xi-plus'></i></button>";
+			    	str += "<input type='text' id='numBox"+goIDX+"' min='1' max='100' value='0' readonly='readonly'/>";
+			    	str += "<button type='button' id='minus"+goIDX+"'><i class='xi-minus'></i></button>";
+			    	str += "</div>";
+			    	str += "</div>";
+			    	
+			    	$("#addOptionBox").append(str);
+		    	}
+		    	else if (goIDX==""){
+		    		alert("옵션을 선택하세요.");
+		    	} else {
+					alert("이미 선택한 옵션입니다.");		    		
+		    	}
+		    });
 		});
+		function removeOption(goIDX) {
+			$("div").remove("#option"+goIDX);
+		}
 	</script>
 	
 </head>
@@ -190,22 +229,49 @@
 					</td>
 					<td></td>
 				</tr>
-				<tr>
-					<td>구매수량</td>
-					<td>
-						<button type="button" class="plus"><i class="xi-plus"></i></button>
-						<input type="text" class="numBox" min="1" max="${vo.gSTOCK}" value="0" readonly="readonly"/>
-						<button type="button" class="minus"><i class="xi-minus"></i></button>
-					</td>
-				</tr>
-				<tr >
-					<td></td>
-					<td colspan="2" style="text-align: right;padding: 200px 10px 0 0;">
-						<input type="hidden" class="realFinalPrice"/>
-						총 상품금액 : &nbsp;<span class="finalPrice"> 0 </span>&nbsp;원<br/>
-						적립 3%
-					</td>
-				</tr>
+				
+				<!-- 상품옵션이 없을 경우(단일 품목) -->
+				<c:if test="${empty goVos}">
+					<tr>
+						<td>구매수량</td>
+						<td>
+							<button type="button" class="plus"><i class="xi-plus"></i></button>
+							<input type="text" class="numBox" min="1" max="${vo.gSTOCK}" value="0" readonly="readonly"/>
+							<button type="button" class="minus"><i class="xi-minus"></i></button>
+						</td>
+					</tr>
+					<tr >
+						<td></td>
+						<td colspan="2" style="text-align: right;padding: 200px 10px 0 0;">
+							<input type="hidden" class="realFinalPrice"/>
+							총 상품금액 : &nbsp;<span class="finalPrice"> 0 </span>&nbsp;원<br/>
+							적립 3%
+						</td>
+					</tr>
+				</c:if>
+
+				<!-- 상품옵션이 있을 경우 -->
+				<c:if test="${!empty goVos}">
+					<tr>
+						<td>상품 선택</td>
+						<td>
+							<select class="form-control" id="selectOption">
+								<option value="">상품선택</option>
+								<c:forEach var="goVo" items="${goVos}">
+									<option value="${goVo.goIDX}@${goVo.goNAME}#${goVo.goPRICE}">${goVo.goNAME} (${goVo.goPRICE}원)</option>
+								</c:forEach>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<div id="addOptionBox">
+								
+							</div>
+						</td>
+					</tr>
+				</c:if>
 			</table>
 		</div>
 	</div>
@@ -218,7 +284,7 @@
 	<hr/>
     <br/>
 	<div class="goods-detail-bottom">
-	        <p>${fn:replace(vo.gDETAIL,newLine,"<br/>")}<br/></p>
+        <p>${fn:replace(vo.gDETAIL,newLine,"<br/>")}<br/></p>
 	</div>
     <hr/>
 

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.spring.cjs200809.vo.BoardVo;
+import com.spring.cjs200809.vo.CartVo;
 
 public interface GoodsDao {
 
@@ -17,5 +18,7 @@ public interface GoodsDao {
 	public void addWishlist(@Param("mMID")String mMID,@Param("gIDX") int gIDX);
 
 	public String checkWishlist(@Param("mMID")String mMID,@Param("gIDX") int gIDX);
+
+	public List<CartVo> getMyCart(@Param("mMID") String mMID);
 
 }
