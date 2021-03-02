@@ -94,7 +94,7 @@
 			<li class="icon"><a href="${contextPath}/admin/main"><i class="xi-home xi-2x"></i></a></li>
 			<li class="menu1"><a href="${contextPath}/" class="menuLink">회원관리</a>
 				<ul class="menu2_s submenu">
-					<li><a href="${contextPath}/shop/productList?category=">회원목록</a></li>
+					<li><a href="${contextPath}/admin/memberList">회원목록</a></li>
 					<li><a href="${contextPath}/shop/productList?category=">배송지목록</a></li>
 					<li><a href="${contextPath}/shop/productList?category=">중분류관리</a></li>
 				</ul>
@@ -121,7 +121,7 @@
 					<li><a href="${contextPath}/admin/qna">상품문의</a></li>
 				</ul>
 			</li>
-			<li class="menu5"><a href="${contextPath}/" class="menuLink">금주혜택</a></li>
+			<li class="menu5"><a href="${contextPath}/" class="menuLink">통계자료</a></li>
 			<li class="icon"><a href="${contextPath}/h" class="menuLink"><i class="xi-share xi-2x"></i></a></li>
 		</ul> 
 	</div>

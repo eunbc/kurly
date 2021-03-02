@@ -4,6 +4,7 @@ public class QnaVo {
 	private int qIDX;
 	private int gIDX;
 	private String qNAME;
+	private String mMID;
 	private String qTITLE;
 	private String qCONTENT;
 	private String qSECRET;
@@ -12,6 +13,7 @@ public class QnaVo {
 	private String qREPLY;
 	private int qLEVEL;
 	private int qLEVELORDER;
+	
 	public int getqIDX() {
 		return qIDX;
 	}
@@ -29,6 +31,12 @@ public class QnaVo {
 	}
 	public void setqNAME(String qNAME) {
 		this.qNAME = qNAME;
+	}
+	public String getmMID() {
+		return mMID;
+	}
+	public void setmMID(String mMID) {
+		this.mMID = mMID;
 	}
 	public String getqTITLE() {
 		return qTITLE;
@@ -78,11 +86,11 @@ public class QnaVo {
 	public void setqLEVELORDER(int qLEVELORDER) {
 		this.qLEVELORDER = qLEVELORDER;
 	}
+	
 	@Override
 	public String toString() {
-		return "QnaVo [qIDX=" + qIDX + ", gIDX=" + gIDX + ", qNAME=" + qNAME + ", qTITLE=" + qTITLE + ", qCONTENT="
-				+ qCONTENT + ", qSECRET=" + qSECRET + ", qWDATE=" + qWDATE + ", qPUBLIC=" + qPUBLIC + ", qREPLY="
-				+ qREPLY + ", qLEVEL=" + qLEVEL + ", qLEVELORDER=" + qLEVELORDER + "]";
+		return "QnaVo [qIDX=" + qIDX + ", gIDX=" + gIDX + ", qNAME=" + qNAME + ", mMID=" + mMID + ", qTITLE=" + qTITLE
+				+ ", qCONTENT=" + qCONTENT + ", qSECRET=" + qSECRET + ", qWDATE=" + qWDATE + ", qPUBLIC=" + qPUBLIC
+				+ ", qREPLY=" + qREPLY + ", qLEVEL=" + qLEVEL + ", qLEVELORDER=" + qLEVELORDER + "]";
 	}
-	
 }

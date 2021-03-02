@@ -92,7 +92,6 @@
             color: #5F0080;  
             text-decoration: underline;
         }
-        
 		ul.myMenu > li ul.submenu {display:none; position:absolute; border: 2px solid #F7F7F7;}
 		ul.myMenu > li ul.submenu > li {
 			text-align: left;
@@ -144,7 +143,7 @@
 	<div id="topBar">
 		<ul class="myMenu">
 			<li>
-				<a href="${contextPath}/member/join" class="menuLink">고객센터 ▼</a>
+				<a href="${contextPath}/board/list" class="menuLink">고객센터 ▼</a>
 				<ul class="submenu top_submenu">
 					<li><a href="${contextPath}/board/list">공지사항</a></li>
 					<li><a href="${contextPath}/faq/list">자주하는 질문</a></li>
@@ -153,7 +152,9 @@
 			</li>
 			<c:if test="${!empty smid}">
 				<li>
-					<a href="${contextPath}/member/join" class="menuLink">${sname}님 ▼</a>
+					<a class="menuLink">
+						${sname}님 ▼
+					</a>
 					<ul class="submenu top_submenu">
 						<li><a href="${contextPath}/mypage/order">주문내역</a></li>
 						<li><a href="${contextPath}/mypage/wishlist">늘 사는 것</a></li>

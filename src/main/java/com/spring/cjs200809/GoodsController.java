@@ -23,6 +23,7 @@ import com.spring.cjs200809.vo.BoardVo;
 import com.spring.cjs200809.vo.CartVo;
 import com.spring.cjs200809.vo.GoodsOptionVo;
 import com.spring.cjs200809.vo.GoodsVo;
+import com.spring.cjs200809.vo.QnaVo;
 
 
 @Controller
@@ -60,10 +61,17 @@ public class GoodsController {
 	@RequestMapping(value="/goodsDetail", method=RequestMethod.GET)
 	public String goodsDetailGet(int gIDX,Model model, HttpServletRequest request, PageVo pageVo) {
 		int pag = request.getParameter("pag")==null? 1 : Integer.parseInt(request.getParameter("pag"));
+		int pageSize = request.getParameter("pageSize")==null? 5 : Integer.parseInt(request.getParameter("pageSize"));
+		
+		//com.spring.cjs200809.pagination.PageVo pageVo = pageProcess.pagination(pag,pageSize,"board");
+		//List<QnaVo> qVos = adminService.getQnaList(pageVo.getStartNo(),pageVo.getPageSize());
+		int curScrNo = pageVo.getCurScrNo();
+		
+		model.addAttribute("p",pageVo);
+		model.addAttribute("curScrNo",curScrNo);
 		
 		GoodsVo vo = adminService.getGoodsDetail(gIDX);
 		List<GoodsOptionVo> goVos = adminService.getGoodsOption(gIDX);
-		
 		model.addAttribute("goVos",goVos);
 		model.addAttribute("vo",vo);
 		model.addAttribute("pag",pag);

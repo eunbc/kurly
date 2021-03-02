@@ -29,5 +29,9 @@
 		        on c.gIDX = g.gIDX   
 		    where mMID=#{mMID} order by cIDX desc;
 	</select>
+	
+	<select id="mainGoodsListNew" resultType="com.spring.cjs200809.vo.GoodsVo">
+		select * from goods order by gIDX desc limit 4;
+	</select>
 
 </mapper>

@@ -111,6 +111,9 @@ public class PageProcess {
 		else if(partFlag.equals("goodsList") && partValue == "new") {
 			totRecCnt = goodsDao.goodsTotRecCnt();  
 		} 
+		else if(partFlag.equals("qnaList")) {
+			totRecCnt = qnaDao.qnaTotRecCnt(partValue);  
+		} 
 		
 		
 		int totPage = (totRecCnt % pageSize)==0? totRecCnt/pageSize : (int) (totRecCnt/pageSize) +1;

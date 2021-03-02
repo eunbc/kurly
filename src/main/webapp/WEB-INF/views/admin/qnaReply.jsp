@@ -58,6 +58,7 @@
 					gIDX : gIDX,
 					qCONTENT : qCONTENT,
 					qNAME : qNAME,
+					mMID : ${smid},
 					qTITLE : qTITLE,
 					qSECRET : qSECRET,
 					qREPLY : qREPLY,

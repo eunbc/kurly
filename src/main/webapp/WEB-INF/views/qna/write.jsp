@@ -97,6 +97,7 @@
 				</tr>
 			</table>
 			<p><br/></p>
+			<input type="hidden" name="mMID" value="${smid}"/>
 			<input type="hidden" name="gIDX" value="${gIDX}"/>
 			<input type="button" onclick="writeCheck()" class="button" style="margin-left: 390px" value="등록"/>
 		</form>

@@ -79,10 +79,16 @@
 	</insert>
 	
  	<select id="goodsTotRecCnt" resultType="int">
+		<!-- 전체보기 -->
 	    <if test="cCODE == '' and scCODE ==''">
 		    select count(*) from goods;
 	    </if>
-	    <if test="cCODE != ''">
+	    <!-- 대분류별 보기 -->
+	    <if test="cCODE != '' and scCODE ==''">
+			select count(*) from goods where cCODE = #{cCODE};
+	    </if>
+	    <!-- 중분류별 보기 --> 
+	    <if test="cCODE != '' and scCODE !=''">
 			select count(*) from goods where cCODE = #{cCODE} and scCODE = #{scCODE};
 	    </if> 
 	</select>
@@ -91,7 +97,10 @@
 	    <if test="cCODE == '' and scCODE == ''">
 	  	    select * from goods order by gIDX desc limit #{startNo},#{pageSize};
 	    </if>
-	    <if test="scCODE != ''">
+	    <if test="cCODE != '' and scCODE ==''">
+	  	    select * from goods where cCODE=#{cCODE} order by gIDX desc limit #{startNo},#{pageSize};
+		</if>	    
+	    <if test="cCODE != '' and scCODE !=''">
 	  	    select * from goods where cCODE=#{cCODE} and scCODE=#{scCODE} order by gIDX desc limit #{startNo},#{pageSize};
 	    </if>
 	</select>

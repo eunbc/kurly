@@ -8,8 +8,44 @@
 <div class="mypage-box">
 	<div class="mypage-content">
 		<div class="mypage-content-box" style="margin-left: 20px">
-			<p>일반 <b>${sname}</b> 님</p>
-			<p class="mypage-number"><a href="">적립 0.5%</a></p>
+			<p>
+				<c:if test="${slevel=='일반'}">
+					<span class="level general">일반</span>
+				</c:if>
+				<c:if test="${slevel=='화이트'}">
+					<span class="level white">화이트</span>
+				</c:if>
+				<c:if test="${slevel=='라벤더'}">
+					<span class="level lavendar">라벤더</span>
+				</c:if>
+				<c:if test="${slevel=='퍼플'}">
+					<span class="level purple">퍼플</span>
+				</c:if>
+				<c:if test="${slevel=='관리자'}">
+					<span class="level admin">관리자</span>
+				</c:if>
+				<b>${sname}</b> 님
+			</p>
+			
+			<p class="mypage-number">
+				<a href="">적립 
+				<c:if test="${slevel=='일반'}">
+					0.5%
+				</c:if>
+				<c:if test="${slevel=='화이트'}">
+					1%
+				</c:if>
+				<c:if test="${slevel=='라벤더'}">
+					3%
+				</c:if>
+				<c:if test="${slevel=='퍼플'}">
+					5%
+				</c:if>
+				<c:if test="${slevel=='관리자'}">
+					10%
+				</c:if>
+				</a>
+			</p>
 			<p><a class="mypage-button">전체등급 보기</a></p>
 		</div>
 		<div class="mypage-content-box">

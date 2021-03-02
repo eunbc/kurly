@@ -363,10 +363,10 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value="/writeQnaReply", method=RequestMethod.POST)
 	public String writeQnaReplyPost(QnaVo vo) {
-		//부모댓글보다 큰 모든 댓글의 levelOrder를 부모 댓글의 levelOrder 값에 +1하여 지정
-		qnaService.levelOrderPlusUpdate(vo);
-		//자신의 레벨오더는 부모의 레벨오더보다 +1
-		vo.setqLEVELORDER(vo.getqLEVELORDER()+1);
+		//부모댓글보다 작은 모든 댓글의 levelOrder를 부모 댓글의 levelOrder 값에 -1하여 지정
+		qnaService.levelOrderMinusUpdate(vo);
+		//자신의 레벨오더는 부모의 레벨오더보다 -1
+		vo.setqLEVELORDER(vo.getqLEVELORDER()-1);
 		//답변글 저장
 		qnaService.writeQnaReply(vo);
 		//답변 상태 변경

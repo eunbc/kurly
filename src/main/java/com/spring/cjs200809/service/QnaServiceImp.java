@@ -1,5 +1,7 @@
 package com.spring.cjs200809.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,13 +40,18 @@ public class QnaServiceImp implements QnaService{
 	}
 
 	@Override
-	public void levelOrderPlusUpdate(QnaVo vo) {
-		qnaDao.levelOrderPlusUpdate(vo);
+	public void levelOrderMinusUpdate(QnaVo vo) {
+		qnaDao.levelOrderMinusUpdate(vo);
 	}
 
 	@Override
 	public void qnaPrivateByAdmin(int qIDX) {
 		qnaDao.qnaPrivateByAdmin(qIDX);
+	}
+
+	@Override
+	public List<QnaVo> getQnaList(int startNo, int pageSize, int gIDX) {
+		return qnaDao.getQnaList(startNo,pageSize,gIDX);
 	}
 
 

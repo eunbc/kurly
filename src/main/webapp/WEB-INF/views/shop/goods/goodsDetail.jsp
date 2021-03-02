@@ -73,11 +73,41 @@
   			font-size: 30px;
 		    font-weight: bolder;			
 		}
+        #menu-container {            
+            height: 55px; 
+            width: 1000px; 
+            margin: 20px auto;
+        }
+        
+		#menu-container ul,li {list-style:none; margin:0; padding:0;}
 		
+		ul.goodsMenu > li {
+			text-align: center;
+            float: left;                
+            line-height: 50px;         
+            vertical-align: middle;   
+            position : relative;    
+            border-top : 1px solid #C2C0C3;                           
+            border-left : 1px solid #C2C0C3;                           
+            border-right : 1px solid #C2C0C3;                           
+			background-color: #F0EEF1;
+		}
+		ul.goodsMenu > li a {
+            width: 180px;                            
+            display: inline-block;
+            text-decoration:none; 
+            color: #383838;                        
+            font-size: 13px;     
+            font-weight: normal;                      
+		}
+		
+		ul.goodsMenu > li #menuSelected{
+			background-color: white;
+			font-weight: 800;
+		}
 	</style>
 	<script>
 		$(function() {
-			var goIDX;
 		    $(".plus").click(function(){
 			    var num = $(".numBox").val();
 			    var plusNum = Number(num) + 1;
@@ -102,7 +132,7 @@
 			    $(".realFinalPrice").text(${vo.gPRICE*(100-vo.gDISCOUNT)*0.01}*($(".numBox").val()));
 			});
 			
-	        $("#plus"+goIDX).click(function(){
+/*	        $("#plus"+goIDX).click(function(){
 	        	alert("플러스 클릭");
 			    var num = $("#numBox"+goIDX).val();
 			    var plusNum = Number(num) + 1;
@@ -118,7 +148,7 @@
 			    	$("#numBox"+goIDX).val(minusNum);
 			    }			    
 			});
-			
+*/			
 		    $(".addCart_btn").click(function(){
 			    var cQTY = $(".numBox").val();
 			    if(cQTY<1) {
@@ -199,8 +229,14 @@
 		function removeOption(goIDX) {
 			$("div").remove("#option"+goIDX);
 		}
+		
+		//클릭하면 해당 메뉴로 스크롤 이동
+	    function move(seq){
+	        var offset = $(".div" + seq).offset();
+	        $('html, body').animate({scrollTop : offset.top}, 400);
+	    }
+
 	</script>
-	
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/nav.jsp"%>
@@ -246,6 +282,21 @@
 							<input type="hidden" class="realFinalPrice"/>
 							총 상품금액 : &nbsp;<span class="finalPrice"> 0 </span>&nbsp;원<br/>
 							적립 3%
+							<c:if test="${slevel=='일반'}">
+								<span class="level General">일반</span>
+							</c:if>
+							<c:if test="${slevel=='화이트'}">
+								<span class="level White">화이트</span>
+							</c:if>
+							<c:if test="${slevel=='라벤더'}">
+								<span class="level Lavendar">라벤더</span>
+							</c:if>
+							<c:if test="${slevel=='퍼플'}">
+								<span class="level Purple">퍼플</span>
+							</c:if>
+							<c:if test="${slevel=='관리자'}">
+								<span class="level Admin">관리자</span>
+							</c:if>
 						</td>
 					</tr>
 				</c:if>
@@ -281,15 +332,62 @@
 		<input type="button" value="장바구니 담기" class="button addCart_btn"/>
 	</div>
 	
-	<hr/>
+	<div id="menu-container" class="div1">
+		<ul class="goodsMenu">
+			<li><a href="javascript:move('1')" id="menuSelected">상품설명</a></li>
+			<li><a href="javascript:move('2')">고객후기</a></li>
+			<li><a href="javascript:move('3')">상품문의</a></li>
+		</ul>
+	</div>
+	
     <br/>
 	<div class="goods-detail-bottom">
         <p>${fn:replace(vo.gDETAIL,newLine,"<br/>")}<br/></p>
 	</div>
-    <hr/>
-    <div style="text-align: right"><input type="button" class="button-small" value="상품문의" onclick="location.href='${contextPath}/qna/write?gIDX=${vo.gIDX}';"/></div>
 
+	<div id="menu-container" class="div2">
+		<ul class="goodsMenu">
+			<li><a href="javascript:move('1')">상품설명</a></li>
+			<li><a href="javascript:move('2')" id="menuSelected">고객후기</a></li>
+			<li><a href="javascript:move('3')">상품문의</a></li>
+		</ul>
+	</div>
+    <div style="text-align: right"><input type="button" class="button-small" value="리뷰작성" onclick="location.href='${contextPath}/qna/write?gIDX=${vo.gIDX}';"/></div>
+
+	<div id="menu-container" class="div3">
+		<ul class="goodsMenu">
+			<li><a href="javascript:move('1')">상품설명</a></li>
+			<li><a href="javascript:move('2')">고객후기</a></li>
+			<li><a href="javascript:move('3')" id="menuSelected">상품문의</a></li>
+		</ul>
+	</div>
+
+    <div style="text-align: right; padding-right:50px;"><input type="button" class="button-small" value="상품문의" onclick="location.href='${contextPath}/qna/write?gIDX=${vo.gIDX}';"/></div>
+	<div id="goods-qna" data-load="0">
+ 		<iframe id="inqna" src="${contextPath}/qna/list?gIDX=${vo.gIDX}" frameborder="0" height="600" width="1100"></iframe> 
+	</div>
+	
 </div>
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
+<script>
+	var acc = document.getElementsByClassName("accordion");
+	var i;
+	
+	for (i = 0; i < acc.length; i++) {
+	    acc[i].addEventListener("click", function() {
+	    /* Toggle between adding and removing the "active" class,
+	    to highlight the button that controls the panel */
+	    	this.classList.toggle("active");
+	
+		    /* Toggle between hiding and showing the active panel */
+		    var panel = this.nextElementSibling;
+		    if (panel.style.display === "block") {
+		      panel.style.display = "none";
+		    } else {
+		      panel.style.display = "block";
+		    }
+	    });
+	}	    
+</script>
 </html>

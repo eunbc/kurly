@@ -3,11 +3,11 @@
 <mapper namespace="com.spring.cjs200809.dao.QnaDao">
 
 	<insert id="writeQna">
-		insert into qna values (default,#{vo.gIDX},#{vo.qNAME},#{vo.qTITLE},#{vo.qCONTENT},#{vo.qSECRET},default,default,default,default,#{vo.qLEVELORDER});
+		insert into qna values (default,#{vo.gIDX},#{vo.qNAME},#{vo.mMID},#{vo.qTITLE},#{vo.qCONTENT},#{vo.qSECRET},default,default,default,default,#{vo.qLEVELORDER});
 	</insert>
 	
 	<insert id="writeQnaReply">
-		insert into qna values (default,#{vo.gIDX},#{vo.qNAME},#{vo.qTITLE},#{vo.qCONTENT},'N',default,default,'답변글',1,#{vo.qLEVELORDER});
+		insert into qna values (default,#{vo.gIDX},#{vo.qNAME},#{vo.mMID},#{vo.qTITLE},#{vo.qCONTENT},'N',default,default,'답변글',1,#{vo.qLEVELORDER});
 	</insert>
 	
 	<update id="updateReplyStmt">
@@ -22,12 +22,20 @@
 		select max(qLEVELORDER) from qna where gIDX=#{gIDX};
 	</select>
 	
-	<update id="levelOrderPlusUpdate">
-		update qna set qLEVELORDER=qLEVELORDER+1 where gIDX=#{vo.gIDX} and qLEVELORDER>#{vo.qLEVELORDER};
+	<update id="levelOrderMinusUpdate">
+		update qna set qLEVELORDER=qLEVELORDER-1 where gIDX=#{vo.gIDX} and qLEVELORDER &lt; #{vo.qLEVELORDER};
 	</update>
 	
 	<update id="qnaPrivateByAdmin">
 		update qna set qPUBLIC='N' where qIDX=#{qIDX};
 	</update>
+	
+	<select id="getQnaList" resultType="com.spring.cjs200809.vo.QnaVo">
+		select * from qna where gIDX=#{gIDX} order by qLEVELORDER desc limit #{startNo},#{pageSize};
+	</select>
+	
+	<select id="qnaTotRecCnt" resultType="int">
+		select count(*) from qna where gIDX=#{partValue};
+	</select>
 	
 </mapper>

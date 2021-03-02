@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <% pageContext.setAttribute("newLine", "\n"); %>
 <%@ include file="/WEB-INF/views/include/bs.jsp" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
@@ -103,7 +104,7 @@
 					<tr>
 						<td>${vo.goNAME}</td>
 						<td style="text-align: center;">
-							${vo.goPRICE}
+							<fmt:formatNumber value="${vo.goPRICE}" pattern="#,###" />
 						</td>
 						<td><a href="javascript:deleteGoodsOption('${vo.goIDX}');" class="icon"><i class="xi-close"></i></a></td>
 					</tr>

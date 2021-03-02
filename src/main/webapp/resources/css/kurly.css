@@ -123,6 +123,26 @@
 }
 .necessary {color: red;}
 
+.level{
+	border: 1px solid black;
+	border-radius: 10px;
+	padding: 2px;
+}
+.white{
+	color : 5F0080; 
+}
+.lavendar{
+	background-color: #BB9AE1;
+}
+.purple{
+	background-color: #5F0080;
+	color : white; 
+}
+.admin{
+	background-color: black;
+	color : white; 
+}
+
 
 /*---------------------------nav-------------------------------*/
 
@@ -222,6 +242,10 @@ ul.subNavMenu > li a.subNavMenuClicked {
 	line-height: 60px;
 	vertical-align: middle;	
 }
+.list-table tr:not(:first-child):hover{
+	background-color: #f7f7f7;
+}
+
 .list-table tr th{
 	text-align: center;
 	font-weight: 600;		
