@@ -9,7 +9,18 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
+	<style>
+		footer {
+    		width: 1100px;
+    		margin: 0 auto;
+		    padding: 5px 5px 20px 20px;
+		    background-color: #FFFFFF;
+		}	
+	</style>
 </head>
 <body>
+    <footer>
+        <img src="${contextPath}/resources/images/footer.JPG" >
+    </footer>
 </body>
 </html>

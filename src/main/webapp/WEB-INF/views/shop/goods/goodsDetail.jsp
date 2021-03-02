@@ -290,5 +290,6 @@
     <div style="text-align: right"><input type="button" class="button-small" value="상품문의" onclick="location.href='${contextPath}/qna/write?gIDX=${vo.gIDX}';"/></div>
 
 </div>
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
 </html>

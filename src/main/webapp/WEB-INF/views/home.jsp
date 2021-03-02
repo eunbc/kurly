@@ -41,5 +41,6 @@
     <span class="carousel-control-next-icon"></span>
   </a>
 </div>
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
 </html>

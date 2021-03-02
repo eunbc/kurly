@@ -88,9 +88,6 @@
 					<td>${vo.mMID}</td>
 					<td>
 						${fn:substring(vo.iWDATE,0,10)}
-						<input type="hidden" value="${vo.iIDX}" id="iIDX${vo.iIDX}" class="iIDX"/>
-						<input type="hidden" value="${vo.iWDATE}" id="iWDATE${vo.iIDX}"/>
-						<p class='iWDATE${vo.iIDX}'></p>
 					</td>
 					<td>
 						<c:if test="${vo.iREPLY=='답변대기중'}">

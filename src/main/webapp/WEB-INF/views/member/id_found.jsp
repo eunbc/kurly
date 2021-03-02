@@ -30,5 +30,6 @@
 			<input type="button" value="다시 찾기" class="button-outline" onclick="location.href='${contextPath}/member/find_id'" style="width:320px; height: 50px;"/>
 	</div>
 </div>
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
 </html>

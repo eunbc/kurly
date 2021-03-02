@@ -58,7 +58,6 @@
 			var qREPLY = categoryForm.qREPLY.value;
 			location.href="${contextPath}/admin/qna?qREPLY="+qREPLY;
 		}
-
 	</script>
 </head>
 <body>
@@ -92,9 +91,6 @@
 					<td>${vo.qNAME}</td>
 					<td>
 						${fn:substring(vo.qWDATE,0,10)}
-						<input type="hidden" value="${vo.qIDX}" id="qIDX"/>
-						<input type="hidden" value="${vo.qWDATE}" id="qWDATE"/>
-						<p class='qWDATE${vo.qIDX}'></p>
 					</td>
 					<td>
 						<c:if test="${vo.qREPLY=='답변대기중'}">

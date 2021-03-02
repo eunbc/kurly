@@ -87,6 +87,6 @@
 		<input type="button" class="button" value="주문하기">
 	</div>
 </div>
-
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
 </html>
