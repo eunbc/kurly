@@ -35,6 +35,11 @@ public class HomeController {
 		model.addAttribute("newVos",newVos);
 		return "home";
 	}
+
+	@RequestMapping(value = ("/p"), method = RequestMethod.GET)
+	public String practice(Model model) {
+		return "shop/goods/cart";
+	}
 	
 	@ResponseBody
 	@RequestMapping("/imageUpload")

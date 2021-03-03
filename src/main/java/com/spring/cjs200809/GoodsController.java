@@ -7,6 +7,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +27,6 @@ import com.spring.cjs200809.vo.BoardVo;
 import com.spring.cjs200809.vo.CartVo;
 import com.spring.cjs200809.vo.GoodsOptionVo;
 import com.spring.cjs200809.vo.GoodsVo;
-import com.spring.cjs200809.vo.QnaVo;
 
 
 @Controller
@@ -111,6 +114,25 @@ public class GoodsController {
 		} else {
 			return "0";
 		}
+	}
+
+	//장바구니에 추가(상품옵션번호 넣기)
+	@ResponseBody
+	@RequestMapping(value="/addtoCartwithOption", method=RequestMethod.POST)
+	public String addtoCartwithOptionPost(@RequestParam String cart,int gIDX) {
+		try {
+			JSONParser jsonParse = new JSONParser();
+			JSONObject jsonObj = (JSONObject) jsonParse.parse(cart);
+			JSONArray personArray = (JSONArray) jsonObj.get("Persons");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+
+		
+		return "";
 	}
 
 	//늘사는것에 추가

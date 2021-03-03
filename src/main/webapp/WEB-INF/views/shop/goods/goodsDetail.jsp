@@ -12,6 +12,7 @@
 	<title>마켓컬리 :: 내일의 장보기, 마켓컬리</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+	<script src="${contextPath}/resources/js/goodsDetail.js"></script>
 	<style>
 		.goods-detail{
 			margin:0 auto;
@@ -132,24 +133,7 @@
 			    $(".realFinalPrice").text(${vo.gPRICE*(100-vo.gDISCOUNT)*0.01}*($(".numBox").val()));
 			});
 			
-/*	        $("#plus"+goIDX).click(function(){
-	        	alert("플러스 클릭");
-			    var num = $("#numBox"+goIDX).val();
-			    var plusNum = Number(num) + 1;
-		    	$("#numBox"+goIDX).val(plusNum);
-			});
-			  
-			$("#minus"+goIDX).click(function(){
-			    var num = $("#numBox"+goIDX).val();
-			    var minusNum  = Number(num) - 1;
-			    if(minusNum  <= 0) {
-			    	$("#numBox"+goIDX).val(num);
-			    } else{
-			    	$("#numBox"+goIDX).val(minusNum);
-			    }			    
-			});
-*/			
-		    $(".addCart_btn").click(function(){
+/* 		    $(".addCart_btn").click(function(){
 			    var cQTY = $(".numBox").val();
 			    if(cQTY<1) {
 			    	alert("수량은 반드시 1 이상이어야 합니다.");
@@ -160,7 +144,6 @@
 			        cQTY : cQTY,
 			        goIDX: 0
 			    };
-			    /* 상품옵션번호 */
 			   
 			    $.ajax({
 			    	url : "${contextPath}/goods/addCart",
@@ -174,6 +157,26 @@
 			    		}
 			    	}
 			    });
+		    }); */
+		    
+		    $(".addCart_btn").click(function(){
+				console.log(cart);		   //이제 이걸 ajax 로 넘겨주고, 화면 클리어 시켜주면 된다.
+			    jQuery.ajaxSettings.traditional = true;
+
+				var query = {
+					cart : JSON.stringify(cart),
+					gIDX : ${vo.gIDX}
+				}
+				
+				$.ajax({
+			    	url : "${contextPath}/goods/addtoCartwithOption",
+			    	type : "post",
+			    	data : query,
+			    	success : function(data){
+			    		alert("장바구니에 추가하였습니다.");
+			    	}
+			    });
+				
 		    });
 		    
 		    $(".addWishlist_btn").click(function(){
@@ -207,7 +210,7 @@
 		    	//선택한 옵션이 있고, 이미 선택한 옵션이 없을 때 
 		    	if(goIDX!="" && $("#option"+goIDX).length==0){
 			    	var str = "";
-			    	
+
 			    	str += "<div id='option"+goIDX+"'>"
 			    	str += "<div class='optionName'><a href='javascript:removeOption("+goIDX+")'><i class='xi-close'></i></a>"+goNAME+" ("+goPRICE+"원)</div>";
 			    	str += "<div class='optionQty'>";
@@ -235,6 +238,7 @@
 	        var offset = $(".div" + seq).offset();
 	        $('html, body').animate({scrollTop : offset.top}, 400);
 	    }
+		
 
 	</script>
 </head>
@@ -306,20 +310,42 @@
 					<tr>
 						<td>상품 선택</td>
 						<td>
-							<select class="form-control" id="selectOption">
+							<select class="form-control select-option">
 								<option value="">상품선택</option>
 								<c:forEach var="goVo" items="${goVos}">
-									<option value="${goVo.goIDX}@${goVo.goNAME}#${goVo.goPRICE}">${goVo.goNAME} (${goVo.goPRICE}원)</option>
+									<option value="${goVo.goIDX}" data-gIDX="${goVo.gIDX}" data-goNAME="${goVo.goNAME}" data-goPRICE="${goVo.goPRICE}">${goVo.goNAME} (${goVo.goPRICE}원)</option>
 								</c:forEach>
 							</select>
 						</td>
 					</tr>
+					<script>
+						let optionSelect = document.querySelector('.select-option');
+						let selectEvent = function(){
+						    //화면단에서 진행되는 작업
+							let goIDX = optionSelect.options[optionSelect.selectedIndex].value; // cat 
+						    let gIDX = optionSelect.options[optionSelect.selectedIndex].getAttribute('data-gIDX') // data-cat
+						    let goNAME = optionSelect.options[optionSelect.selectedIndex].getAttribute('data-goNAME') // data-cat
+						    let goPRICE = optionSelect.options[optionSelect.selectedIndex].getAttribute('data-goPRICE') // data-cat
+						  
+						    if(goIDX=="") {
+						    	//console.log("옵션 미선택");
+						    	return false;
+						    }
+						    addItemToCart(goIDX, goNAME, goPRICE)
+						    updateCartTotal()
+						}
+	
+						optionSelect.addEventListener("change", selectEvent);	
+					</script>
 					<tr>
 						<td></td>
 						<td>
-							<div id="addOptionBox">
-								
-							</div>
+				            <div class="cart-items">
+				            </div>
+				            <div class="cart-total">
+				                <strong class="cart-total-title">Total</strong>
+				                <span class="cart-total-price">$0</span>
+				            </div>
 						</td>
 					</tr>
 				</c:if>
