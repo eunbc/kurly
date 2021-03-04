@@ -22,4 +22,11 @@ public interface MemberDao {
 
 	public void memberDelete(@Param("mMID") String mMID);
 
+	public int getMyCartNumber(@Param("mMID") String mMID);
+
+	public String getMyAddress(@Param("mMID")String mMID);
+
+	public void addEmoneyMember(@Param("mMID")String mMID,@Param("addedEmoney") int addedEmoney);
+
+
 }

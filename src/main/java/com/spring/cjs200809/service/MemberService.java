@@ -20,6 +20,13 @@ public interface MemberService {
 
 	public void memberDelete(String mMID);
 
+	public int getMyCartNumber(String mMID);
+
+	public String getMyAddress(String mMID);
+
+	public void addEmoneyMember(String mMID, int addedEmoney);
+
+
 
 
 }

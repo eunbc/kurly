@@ -67,31 +67,6 @@
 		       		}
 		      	});
 		    });
-		    
-		    $(".addToCart ${vo.gIDX}").click(function(){
-		    	
-		      	var checkArr = new Array();
-			      
-	       		checkArr.push($(this).attr("data-gIDX"));
-		      	
-		      	$.ajax({
-		       		url : "${contextPath}/goods/addCart2",
-		       		type : "post",
-		       		data : { 
-		       			chbox : checkArr,
-				        cQTY : 1,
-				        goIDX: 0
-		       			},
-			    	success : function(data){
-			    		if(data=='1') {
-				     		alert("장바구니 담기 성공");
-			    		}else {
-			    			alert("로그인 후 이용가능합니다.");
-			    		}
-			    	}
-		      	});
-		    });
-		    
 		}); 
 		
 	</script>
@@ -161,11 +136,10 @@
 			        <img src="${contextPath}/resources/goods/${vo.gIMAGE}" width="100px"/>
 				</td>
 				<td style="text-align: left;">
-					<div style="font-size: medium;">${vo.gNAME}</div>
+					<div><a href="${contextPath}/goods/goodsDetail?gIDX=${vo.gIDX}" style="font-size: medium; text-decoration: none; color: black;">${vo.gNAME}</a></div>
 					<div><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.gPRICE}"/>원</div>
 				</td>
 				<td>
-					<div><input type="button" class="btn btn-secondary addToCart ${vo.gIDX}" data-gIDX="${vo.gIDX}" id="btn-addToCart" value="장바구니 담기"></div> 
 					<div><input type="button" class="btn btn-outline-secondary delete ${vo.wIDX}" data-wIDX="${vo.wIDX}" id="btn-Delete" value="삭제"></div>
 				</td>
 			</tr>

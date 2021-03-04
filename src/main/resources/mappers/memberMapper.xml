@@ -33,5 +33,17 @@
 	<update id="memberDelete">
 		update member set mDROPOUT='Y' where mMID=#{mMID};
 	</update>
+	
+	<select id="getMyCartNumber" resultType="int">
+		select count(*) from cart where mMID=#{mMID};
+	</select>
 
+	<select id="getMyAddress" resultType="String">
+		select mADDRESS from member where mMID=#{mMID};
+	</select>
+	
+	<update id="addEmoneyMember">
+		update member set mEMONEY=mEMONEY+#{addedEmoney} where mMID=#{mMID};
+	</update>
+	
 </mapper>

@@ -2,7 +2,10 @@ package com.spring.cjs200809;
 
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -23,6 +26,7 @@ import com.spring.cjs200809.pagination.PageProcess;
 import com.spring.cjs200809.pagination.PageVo;
 import com.spring.cjs200809.service.AdminService;
 import com.spring.cjs200809.service.GoodsService;
+import com.spring.cjs200809.service.MemberService;
 import com.spring.cjs200809.vo.BoardVo;
 import com.spring.cjs200809.vo.CartVo;
 import com.spring.cjs200809.vo.GoodsOptionVo;
@@ -42,6 +46,9 @@ public class GoodsController {
 	
 	@Autowired
 	AdminService adminService;
+	
+	@Autowired
+	MemberService memberService;
 
 	@RequestMapping(value="/write", method=RequestMethod.GET)
 	public String writeBoardGet() {
@@ -83,56 +90,42 @@ public class GoodsController {
 
 	//장바구니에 추가(상품옵션번호 넣기)
 	@ResponseBody
-	@RequestMapping(value="/addCart", method=RequestMethod.POST)
-	public String addCartPost(HttpSession session, int gIDX, int cQTY, int goIDX) {
-		//세션이 끊길 때를 방지
-		String mMID = (String)session.getAttribute("smid");
-		 
-		if(mMID != null) {
-			goodsService.addCart(mMID,gIDX,cQTY,goIDX);
-			return "1";
-		} else {
-			return "0";
-		}
-	}
-	
-	//장바구니에 추가(상품옵션번호 넣기)
-	@ResponseBody
-	@RequestMapping(value="/addCart2", method=RequestMethod.POST)
-	public String addCart2Post(HttpSession session, 
-			@RequestParam(value = "chbox[]") List<String> chArr, int cQTY, int goIDX) {
-		//세션이 끊길 때를 방지
-		String mMID = (String)session.getAttribute("smid");
-		int gIDX = 0;
-		 
-		if(mMID != null) {
-			for(String i : chArr) {   
-				gIDX = Integer.parseInt(i);
-				goodsService.addCart(mMID,gIDX,cQTY,goIDX);
-			}   
-			return "1";
-		} else {
-			return "0";
-		}
-	}
-
-	//장바구니에 추가(상품옵션번호 넣기)
-	@ResponseBody
 	@RequestMapping(value="/addtoCartwithOption", method=RequestMethod.POST)
-	public String addtoCartwithOptionPost(@RequestParam String cart,int gIDX) {
-		try {
-			JSONParser jsonParse = new JSONParser();
-			JSONObject jsonObj = (JSONObject) jsonParse.parse(cart);
-			JSONArray personArray = (JSONArray) jsonObj.get("Persons");
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-
-
+	public String addtoCartwithOptionPost(@RequestParam String cart,int gIDX,HttpSession session) {
+		String mMID = (String) session.getAttribute("smid");
+		String result = "";
 		
-		return "";
+		if (mMID!=null) {
+			try {
+				JSONParser jsonParse = new JSONParser();
+				JSONArray itemArray = (JSONArray) jsonParse.parse(cart);
+				
+				for(int i=0; i<itemArray.size(); i++) {
+					JSONObject itemObject = (JSONObject) itemArray.get(i);
+					int cQTY = Integer.parseInt(String.valueOf(itemObject.get("cQTY")));
+					int goIDX = Integer.parseInt(String.valueOf(itemObject.get("goIDX")));
+					
+					//이미 존재하는 상품이라면, 수량만 증가하도록
+					if(goodsService.checkMyCart(mMID,gIDX,goIDX)>0) {
+						goodsService.updateMyCart(mMID,gIDX,goIDX,cQTY);
+						result = "2";
+					} else {
+						//장바구니에 추가
+						goodsService.addCart(mMID, gIDX, cQTY, goIDX);
+						
+						//장바구니 세션값 변경
+						int scart = memberService.getMyCartNumber(mMID);
+						session.setAttribute("scart", scart);
+						result = "1";
+					}
+				}
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		} else {
+			result = "0";
+		}
+		return result;
 	}
 
 	//늘사는것에 추가
@@ -160,10 +153,36 @@ public class GoodsController {
 	public String viewMyCartGet(Model model,HttpSession session) {
 		String mMID = (String) session.getAttribute("smid");
 		List<CartVo> vos = goodsService.getMyCart(mMID);
+		String mADDRESS = memberService.getMyAddress(mMID);
+		
 		model.addAttribute("vos",vos);
+		model.addAttribute("mADDRESS",mADDRESS);
 		return "shop/cart/cart";
 	}
-
+	
+	//선택 항목 일괄 삭제
+	@ResponseBody
+	@RequestMapping(value="/cartDelete", method=RequestMethod.POST)
+	public int cartDeletePost(HttpSession session,
+		     @RequestParam(value = "chbox[]") List<String> chArr) {
+		//세션이 끊길 때를 방지
+		String mid = (String)session.getAttribute("smid");
+		 
+		int result = 0;
+		int cIDX = 0;
+		 
+		if(mid != null) {
+			for(String i : chArr) {   
+				cIDX = Integer.parseInt(i);
+				goodsService.cartDelete(cIDX);
+			}   
+			//장바구니 세션값 변경
+			int scart = memberService.getMyCartNumber(mid);
+			session.setAttribute("scart", scart);
+			result = 1;
+		}  
+		return result;  
+	}
 	
 
 }

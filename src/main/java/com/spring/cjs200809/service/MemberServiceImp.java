@@ -51,4 +51,20 @@ public class MemberServiceImp implements MemberService{
 		memberDao.memberDelete(mMID);
 	}
 
+	@Override
+	public int getMyCartNumber(String mMID) {
+		return memberDao.getMyCartNumber(mMID);
+	}
+
+	@Override
+	public String getMyAddress(String mMID) {
+		return memberDao.getMyAddress(mMID);
+	}
+
+	@Override
+	public void addEmoneyMember(String mMID, int addedEmoney) {
+		memberDao.addEmoneyMember(mMID,addedEmoney);
+	}
+
+
 }

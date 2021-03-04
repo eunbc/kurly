@@ -23,16 +23,9 @@
 
 $(document).ready(function() {
 
-    var address = $("#sample6_postcode").val()+"@"+$("#sample6_address").val()+"@"+$("#sample6_detailAddress").val()+"@"+$("#sample6_extraAddress").val();
-	$('#mADDRESS').val(address);
-	
-    var check = $('input:checkbox[name="mRECEIVEAD"]').is(':checked');
-	if(check){
-        $("#mRECEIVEAD").val('Y');
-	} else if(!check) {
-        $("#mRECEIVEAD").val('N');
-	}
-    	
+    $("#recommendId").hide();
+    $(".myAddress").hide();
+	    	
     $('#mMID').blur(function() {
         if (idJ.test($('#mMID').val())) {
             console.log('true');
@@ -167,7 +160,32 @@ $(document).ready(function() {
     		alert("이메일 중복체크 해주세요.");
     		return false;
     	}
+    	else if($('#necessary1').is(":checked") == false){
+    		alert("이용약관동의(필수)에 체크해주세요.");
+    		console.log('모두 체크 안함');
+    		return false;
+		}
+    	else if($('#necessary2').is(":checked") == false){
+    		alert("이용약관동의(필수)에 체크해주세요.");
+    		console.log('모두 체크 안함');
+    		return false;
+		}
+    	else if($('#necessary3').is(":checked") == false){
+    		alert("이용약관동의(필수)에 체크해주세요.");
+    		console.log('모두 체크 안함');
+    		return false;
+		}
         else {
+		    var address = $("#sample6_postcode").val()+"@"+$("#sample6_address").val()+"@"+$("#sample6_detailAddress").val()+"@"+$("#sample6_extraAddress").val();
+			$('#mADDRESS').val(address);
+
+		    var check = $('input:checkbox[id="mRECEIVEADChkbox"]').is(':checked');
+			if(check){
+		        $("#mRECEIVEAD").val('Y');
+			} else if(!check) {
+		        $("#mRECEIVEAD").val('N');
+			}
+			
 			joinForm.submit();
         }
     });

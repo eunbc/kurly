@@ -12,6 +12,15 @@ var Item = function(goIDX, goPRICE, cQTY){
 	this.cQTY = cQTY
 };
 
+
+
+//클릭하면 해당 메뉴로 스크롤 이동
+function move(seq){
+    var offset = $(".div" + seq).offset();
+    $('html, body').animate({scrollTop : offset.top}, 400);
+}
+
+
 function ready() {
 
     var removeCartItemButtons = document.getElementsByClassName('btn-danger')
@@ -26,22 +35,20 @@ function ready() {
         input.addEventListener('change', quantityChanged)
     }
 
-    //document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked)
-
 }
 
 function purchaseClicked() {
-    alert('Thank you for your purchase')
     var cartItems = document.getElementsByClassName('cart-items')[0]
+    if(cartItems=='') return false;
     while (cartItems.hasChildNodes()) {
         cartItems.removeChild(cartItems.firstChild)
     }
     updateCartTotal()
+    cart = []
 }
 
 function removeCartItem(event) {
     var buttonClicked = event.target
-
 	//객체 삭제
 	var goIDX = buttonClicked.getAttribute('data-goIDX')
 	for(var i in cart) {
@@ -59,20 +66,18 @@ function quantityChanged(event) {
     if (isNaN(input.value) || input.value <= 0) {
         input.value = 1
     }
+    
     updateCartTotal()
 
-	var goIDX = input.getAttribute('data-goIDX')
+	var goIDX = input.getAttribute('data-goIDX');
 
 	//수량 변경
 	for(var i in cart) {
 		if(cart[i].goIDX == goIDX){
-			//console.log(input.value);
-			cart[i].cQTY = Number(input.value); //여기에 변경된 수량을 넣고 싶음!!
-			//console.log(cart[i].cQTY);
+			cart[i].cQTY = Number(input.value); 
 			break;
 		}
 	}
-	//console.log(cart);
 }
 
 function addItemToCart(goIDX, goNAME, goPRICE) {
@@ -84,7 +89,7 @@ function addItemToCart(goIDX, goNAME, goPRICE) {
 	for (var i = 0; i < cartItemNames.length; i++) {
         if (cartItemNames[i].innerText == goNAME) {
             alert('이미 추가한 옵션입니다.')
-            return
+            return;
         }
     }
     var cartRowContents = `
@@ -105,7 +110,10 @@ function addItemToCart(goIDX, goNAME, goPRICE) {
 	//객체 생성
 	var item = new Item(goIDX, goPRICE, 1);
 	cart.push(item);
-	//console.log(cart);
+}
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 function updateCartTotal() {
@@ -120,6 +128,6 @@ function updateCartTotal() {
         var quantity = quantityElement.value
         total = total + (price * quantity)
     }
-    total = Math.round(total * 100) / 100
-    document.getElementsByClassName('cart-total-price')[0].innerText = total + '원'
+    total = Math.round(total * 100) / 100;
+    document.getElementsByClassName('cart-total-price')[0].innerText = numberWithCommas(total);
 }

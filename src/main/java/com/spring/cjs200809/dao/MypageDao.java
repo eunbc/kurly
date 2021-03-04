@@ -12,4 +12,6 @@ public interface MypageDao {
 
 	public void wishDelete(@Param("wIDX") int wIDX);
 
+	public void addEmoney(@Param("mMID")String mMID,@Param("ePLUS") int ePLUS,@Param("eCONTENT") String eCONTENT);
+
 }

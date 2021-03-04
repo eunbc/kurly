@@ -23,6 +23,11 @@ public class MyPageServiceImp implements MypageService{
 	public void wishDelete(int wIDX) {
 		mypageDao.wishDelete(wIDX);
 	}
+
+	@Override
+	public void addEmoney(String mMID, int ePLUS, String eCONTENT) {
+		mypageDao.addEmoney(mMID,ePLUS,eCONTENT);
+	}
 	
 
 

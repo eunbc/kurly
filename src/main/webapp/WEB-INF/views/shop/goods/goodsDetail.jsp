@@ -106,141 +106,17 @@
 			background-color: white;
 			font-weight: 800;
 		}
-	</style>
-	<script>
-		$(function() {
-		    $(".plus").click(function(){
-			    var num = $(".numBox").val();
-			    var plusNum = Number(num) + 1;
-			    if(plusNum >= ${vo.gSTOCK}) {
-			    	$(".numBox").val(num);
-			    } else{
-			    	$(".numBox").val(plusNum);
-			    }			    
-			    $(".finalPrice").text(${vo.gPRICE*(100-vo.gDISCOUNT)*0.01}*($(".numBox").val()));
-			    $(".realFinalPrice").text(${vo.gPRICE*(100-vo.gDISCOUNT)*0.01}*($(".numBox").val()));
-			});
-			  
-			$(".minus").click(function(){
-			    var num = $(".numBox").val();
-			    var minusNum  = Number(num) - 1;
-			    if(minusNum  <= 0) {
-			    	$(".numBox").val(num);
-			    } else{
-			    	$(".numBox").val(minusNum);
-			    }			    
-			    $(".finalPrice").text(${vo.gPRICE*(100-vo.gDISCOUNT)*0.01}*($(".numBox").val()));
-			    $(".realFinalPrice").text(${vo.gPRICE*(100-vo.gDISCOUNT)*0.01}*($(".numBox").val()));
-			});
-			
-/* 		    $(".addCart_btn").click(function(){
-			    var cQTY = $(".numBox").val();
-			    if(cQTY<1) {
-			    	alert("수량은 반드시 1 이상이어야 합니다.");
-			    	return false;
-			    }  
-			    var query = {
-			        gIDX : ${vo.gIDX},
-			        cQTY : cQTY,
-			        goIDX: 0
-			    };
-			   
-			    $.ajax({
-			    	url : "${contextPath}/goods/addCart",
-			    	type : "post",
-			    	data : query,
-			    	success : function(data){
-			    		if(data=='1') {
-				     		alert("장바구니에 담았습니다.");
-			    		}else {
-			    			alert("로그인 후 이용가능합니다.");
-			    		}
-			    	}
-			    });
-		    }); */
-		    
-		    $(".addCart_btn").click(function(){
-				console.log(cart);		   //이제 이걸 ajax 로 넘겨주고, 화면 클리어 시켜주면 된다.
-			    jQuery.ajaxSettings.traditional = true;
-
-				var query = {
-					cart : JSON.stringify(cart),
-					gIDX : ${vo.gIDX}
-				}
-				
-				$.ajax({
-			    	url : "${contextPath}/goods/addtoCartwithOption",
-			    	type : "post",
-			    	data : query,
-			    	success : function(data){
-			    		alert("장바구니에 추가하였습니다.");
-			    	}
-			    });
-				
-		    });
-		    
-		    $(".addWishlist_btn").click(function(){
-			    var query = {
-			        gIDX : ${vo.gIDX}
-			    };
-			   
-			    $.ajax({
-			    	url : "${contextPath}/goods/addWishlist",
-			    	type : "post",
-			    	data : query,
-			    	success : function(data){
-			    		if(data=='1') {
-				     		alert("늘 사는 것에 추가하였습니다.");
-			    		}else if(data=='2'){
-							alert("이미 늘 사는 리스트에 존재하는 상품입니다.");
-			    		}else if(data=='0'){
-			    			alert("로그인 후 이용가능합니다.");
-			    		}
-			    	}
-			    });
-		    });
-		    
-		    $("#selectOption").change(function(){
-		    	var selectOption = $(this).val();
-		    	var goIDX = selectOption.substring(0,selectOption.indexOf("@"));
-		    	var goNAME = selectOption.substring(selectOption.indexOf("@")+1,selectOption.indexOf("#"));
-		        var goPRICE = selectOption.substring(selectOption.indexOf("#")+1);
-
-		    	
-		    	//선택한 옵션이 있고, 이미 선택한 옵션이 없을 때 
-		    	if(goIDX!="" && $("#option"+goIDX).length==0){
-			    	var str = "";
-
-			    	str += "<div id='option"+goIDX+"'>"
-			    	str += "<div class='optionName'><a href='javascript:removeOption("+goIDX+")'><i class='xi-close'></i></a>"+goNAME+" ("+goPRICE+"원)</div>";
-			    	str += "<div class='optionQty'>";
-			    	str += "<button type='button' id='plus"+goIDX+"'><i class='xi-plus'></i></button>";
-			    	str += "<input type='text' id='numBox"+goIDX+"' min='1' max='100' value='0' readonly='readonly'/>";
-			    	str += "<button type='button' id='minus"+goIDX+"'><i class='xi-minus'></i></button>";
-			    	str += "</div>";
-			    	str += "</div>";
-			    	
-			    	$("#addOptionBox").append(str);
-		    	}
-		    	else if (goIDX==""){
-		    		alert("옵션을 선택하세요.");
-		    	} else {
-					alert("이미 선택한 옵션입니다.");		    		
-		    	}
-		    });
-		});
-		function removeOption(goIDX) {
-			$("div").remove("#option"+goIDX);
+		.cart-quantity-input{
+			width: 70px;
+			border: 1px solid gray;
+			border-radius: 5px;
 		}
-		
-		//클릭하면 해당 메뉴로 스크롤 이동
-	    function move(seq){
-	        var offset = $(".div" + seq).offset();
-	        $('html, body').animate({scrollTop : offset.top}, 400);
-	    }
-		
+		.cart-price{
+			color: white;
+			font-size: 0px;
+		}
+	</style>
 
-	</script>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/nav.jsp"%>
@@ -283,24 +159,7 @@
 					<tr >
 						<td></td>
 						<td colspan="2" style="text-align: right;padding: 200px 10px 0 0;">
-							<input type="hidden" class="realFinalPrice"/>
 							총 상품금액 : &nbsp;<span class="finalPrice"> 0 </span>&nbsp;원<br/>
-							적립 3%
-							<c:if test="${slevel=='일반'}">
-								<span class="level General">일반</span>
-							</c:if>
-							<c:if test="${slevel=='화이트'}">
-								<span class="level White">화이트</span>
-							</c:if>
-							<c:if test="${slevel=='라벤더'}">
-								<span class="level Lavendar">라벤더</span>
-							</c:if>
-							<c:if test="${slevel=='퍼플'}">
-								<span class="level Purple">퍼플</span>
-							</c:if>
-							<c:if test="${slevel=='관리자'}">
-								<span class="level Admin">관리자</span>
-							</c:if>
 						</td>
 					</tr>
 				</c:if>
@@ -322,10 +181,10 @@
 						let optionSelect = document.querySelector('.select-option');
 						let selectEvent = function(){
 						    //화면단에서 진행되는 작업
-							let goIDX = optionSelect.options[optionSelect.selectedIndex].value; // cat 
-						    let gIDX = optionSelect.options[optionSelect.selectedIndex].getAttribute('data-gIDX') // data-cat
-						    let goNAME = optionSelect.options[optionSelect.selectedIndex].getAttribute('data-goNAME') // data-cat
-						    let goPRICE = optionSelect.options[optionSelect.selectedIndex].getAttribute('data-goPRICE') // data-cat
+							let goIDX = optionSelect.options[optionSelect.selectedIndex].value;  
+						    let gIDX = optionSelect.options[optionSelect.selectedIndex].getAttribute('data-gIDX') 
+						    let goNAME = optionSelect.options[optionSelect.selectedIndex].getAttribute('data-goNAME')
+						    let goPRICE = optionSelect.options[optionSelect.selectedIndex].getAttribute('data-goPRICE') 
 						  
 						    if(goIDX=="") {
 						    	//console.log("옵션 미선택");
@@ -343,8 +202,8 @@
 				            <div class="cart-items">
 				            </div>
 				            <div class="cart-total">
-				                <strong class="cart-total-title">Total</strong>
-				                <span class="cart-total-price">$0</span>
+				                <strong class="cart-total-title">총 상품금액 : &nbsp;</strong>
+				                <span class="cart-total-price finalPrice">0</span>원
 				            </div>
 						</td>
 					</tr>
@@ -355,7 +214,7 @@
 	
 	<div style="text-align: right; margin-right: 50px;">
 		<input type="button" value="늘 사는 것" class="button-outline addWishlist_btn"/>
-		<input type="button" value="장바구니 담기" class="button addCart_btn"/>
+		<input type="button" value="장바구니 담기" class="button btn-addToCart"/>
 	</div>
 	
 	<div id="menu-container" class="div1">
@@ -396,24 +255,102 @@
 </div>
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
-<script>
-	var acc = document.getElementsByClassName("accordion");
-	var i;
-	
-	for (i = 0; i < acc.length; i++) {
-	    acc[i].addEventListener("click", function() {
-	    /* Toggle between adding and removing the "active" class,
-	    to highlight the button that controls the panel */
-	    	this.classList.toggle("active");
-	
-		    /* Toggle between hiding and showing the active panel */
-		    var panel = this.nextElementSibling;
-		    if (panel.style.display === "block") {
-		      panel.style.display = "none";
-		    } else {
-		      panel.style.display = "block";
-		    }
-	    });
-	}	    
-</script>
+	<script>
+		$(function() {
+			//--------------------------------------------단일 옵션일 때 - 시작
+			
+		    $(".plus").click(function(){
+			    var num = $(".numBox").val();
+			    var plusNum = Number(num) + 1;
+			    if(plusNum >= ${vo.gSTOCK}) {
+			    	$(".numBox").val(num);
+			    } else{
+			    	$(".numBox").val(plusNum);
+			    }			    
+			    $(".finalPrice").text(numberWithCommas(${vo.gPRICE*(100-vo.gDISCOUNT)*0.01}*($(".numBox").val())));
+
+			    //만약 이미 객체를 생성하였다면 수량만 증가시키고, 없다면 객체 생성
+		        if (cart!='') {
+		    		cart[0].cQTY = Number($(".numBox").val());
+		        } else {
+		        	//객체 생성
+		        	var item = new Item(0, ${vo.gPRICE}, 1);
+		        	cart.push(item);
+		        }
+			
+		    });
+			  
+			$(".minus").click(function(){
+			    var num = $(".numBox").val();
+			    var minusNum  = Number(num) - 1;
+			    if(minusNum  <= 0) {
+			    	$(".numBox").val(num);
+			    } else{
+			    	$(".numBox").val(minusNum);
+			    }			    
+			    $(".finalPrice").text(numberWithCommas(${vo.gPRICE*(100-vo.gDISCOUNT)*0.01}*($(".numBox").val())));
+			    
+		        if (cart!='') {
+		    		cart[0].cQTY = Number($(".numBox").val());
+		        }
+			});
+			
+			//------------------------------------------------------단일 옵션일 때 - 끝
+			
+		    $(".btn-addToCart").click(function(){
+				console.log(cart);		   //이제 이걸 ajax 로 넘겨주고, 화면 클리어 시켜주면 된다.
+			    jQuery.ajaxSettings.traditional = true;
+				if(cart=='') {
+					alert("옵션이나 수량을 선택해주세요!");
+					return false;
+				}
+				var query = {
+					cart : JSON.stringify(cart),
+					gIDX : ${vo.gIDX}
+				}
+				
+				$.ajax({
+			    	url : "${contextPath}/goods/addtoCartwithOption",
+			    	type : "post",
+			    	data : query,
+			    	success : function(data){
+			    		if(data=="0"){
+			    			alert("로그인 후 이용가능합니다.");
+			    		} else if(data=="1"){
+				    		alert("장바구니에 추가하였습니다.");
+							purchaseClicked();
+							//$("#my-cart-badge").load();
+			    		} else if(data=="2"){
+				    		alert("이미 존재하는 상품으로,장바구니에 수량 추가하였습니다.");
+							purchaseClicked();
+							//$("#my-cart-badge").load();
+			    		} 
+			    	}
+			    });
+				
+				
+		    });
+		    
+		    $(".addWishlist_btn").click(function(){
+			    var query = {
+			        gIDX : ${vo.gIDX}
+			    };
+			   
+			    $.ajax({
+			    	url : "${contextPath}/goods/addWishlist",
+			    	type : "post",
+			    	data : query,
+			    	success : function(data){
+			    		if(data=='1') {
+				     		alert("늘 사는 것에 추가하였습니다.");
+			    		}else if(data=='2'){
+							alert("이미 늘 사는 리스트에 존재하는 상품입니다.");
+			    		}else if(data=='0'){
+			    			alert("로그인 후 이용가능합니다.");
+			    		}
+			    	}
+			    });
+		    });
+		});
+	</script>
 </html>

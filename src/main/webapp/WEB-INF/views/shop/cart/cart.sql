@@ -8,3 +8,4 @@ create table cart(
 	foreign key(mMID) references member(mMID),
 	foreign key(gIDX) references goods(gIDX)
 );
+

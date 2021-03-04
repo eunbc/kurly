@@ -45,6 +45,21 @@ public class GoodsServiceImp implements GoodsService{
 		return goodsDao.mainGoodsListNew();
 	}
 
+	@Override
+	public int checkMyCart(String mMID, int gIDX, int goIDX) {
+		return goodsDao.checkMyCart(mMID,gIDX,goIDX);
+	}
+
+	@Override
+	public void updateMyCart(String mMID, int gIDX, int goIDX, int cQTY) {
+		goodsDao.updateMyCart(mMID,gIDX,goIDX,cQTY);
+	}
+
+	@Override
+	public void cartDelete(int cIDX) {
+		goodsDao.cartDelete(cIDX);
+	}
+
 	
 
 

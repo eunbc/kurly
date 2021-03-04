@@ -24,4 +24,10 @@ public interface GoodsDao {
 
 	public List<GoodsVo> mainGoodsListNew();
 
+	public int checkMyCart(@Param("mMID")String mMID,@Param("gIDX") int gIDX,@Param("goIDX") int goIDX);
+
+	public void updateMyCart(@Param("mMID")String mMID,@Param("gIDX") int gIDX,@Param("goIDX") int goIDX,@Param("cQTY") int cQTY);
+
+	public void cartDelete(@Param("cIDX")int cIDX);
+
 }

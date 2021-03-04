@@ -20,4 +20,10 @@ public interface GoodsService {
 
 	public List<GoodsVo> mainGoodsListNew();
 
+	public int checkMyCart(String mMID, int gIDX, int goIDX);
+
+	public void updateMyCart(String mMID, int gIDX, int goIDX, int cQTY);
+
+	public void cartDelete(int cIDX);
+
 }

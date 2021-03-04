@@ -59,9 +59,10 @@
 		#topMenu_icon a {
 			text-decoration:none;
 			color: black;
-		    display: inline-block;                          
+		    display: relative;                          
 		    width: 50px;   
 		    padding: 8px; 
+		    top: -10px;
 		}
 
         #container {            
@@ -136,6 +137,11 @@
 			background-color: white;
 			color: black;
 		}    
+		.badge-notify {
+			background-color: 5F0080;
+			color: white;
+			font-size: 9px;
+		}
     </style>
 </head>
 <header>
@@ -208,9 +214,9 @@
 			<li style="width:220px;margin:8px;"><input type="text" class="form-control" placeholder="검색" /></li>
 		</ul> 
 		<div id="topMenu_icon">
-			&nbsp;<a href="${contextPath}/" ><i class="xi-search xi-2x"></i></a>
-			<a href="${contextPath}/" ><i class="xi-maker xi-2x"></i></a>
-			<a href="${contextPath}/goods/cart" ><i class="xi-cart-o xi-2x"></i></a>
+			&nbsp;<a href="${contextPath}/" style="top:-10px;" ><i class="xi-search xi-2x"></i></a>
+			<a href="${contextPath}/" style="top:-10px;" ><i class="xi-maker xi-2x"></i></a>
+			<a href="${contextPath}/goods/cart" ><i class="xi-cart-o xi-2x"></i><span class="badge badge-notify my-cart-badge" id="my-cart-badge">${scart}</span></a>
 		</div>
 	</div>
 	<!-- Nav Bar End -->

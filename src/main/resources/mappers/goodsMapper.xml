@@ -25,13 +25,24 @@
 	<select id="getMyCart" resultType="com.spring.cjs200809.vo.CartVo">
 		select *
 		from cart c
-		    inner join goods g
-		        on c.gIDX = g.gIDX   
+		    inner join goods g on c.gIDX = g.gIDX   
 		    where mMID=#{mMID} order by cIDX desc;
 	</select>
 	
 	<select id="mainGoodsListNew" resultType="com.spring.cjs200809.vo.GoodsVo">
 		select * from goods order by gIDX desc limit 4;
 	</select>
+	
+	<select id="checkMyCart" resultType="int">
+		select count(*) from cart where mMID=#{mMID} and gIDX=#{gIDX} and goIDX=#{goIDX};
+	</select>
+	
+	<update id="updateMyCart">
+		update cart set cQTY=cQTY+#{cQTY} where mMID=#{mMID} and gIDX=#{gIDX} and goIDX=#{goIDX};
+	</update>
+	
+	<delete id="cartDelete">
+		delete from cart where cIDX=#{cIDX};
+	</delete>
 
 </mapper>

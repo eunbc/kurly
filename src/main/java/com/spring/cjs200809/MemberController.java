@@ -14,12 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.cjs200809.service.MemberService;
-import com.spring.cjs200809.vo.MailVo;
+import com.spring.cjs200809.service.MypageService;
 import com.spring.cjs200809.vo.MemberVo;
 
 
@@ -32,6 +30,9 @@ public class MemberController {
 	MemberService memberService;
 	
 	@Autowired
+	MypageService mypageService;
+	
+	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@RequestMapping(value="/join", method=RequestMethod.GET)
@@ -40,8 +41,20 @@ public class MemberController {
 	}
 
 	@RequestMapping(value="/join", method=RequestMethod.POST)
-	public String joinPost(MemberVo vo) {
-	  	//아이디 중복체크
+	public String joinPost(MemberVo vo, String recommendId) {
+
+		//아이디 체크해서 존재하는 아이디라면, 적립금 지급하기
+		if(memberService.IdCheck(recommendId)!=null) {
+			//적립금 지급 내역 추가
+			mypageService.addEmoney(vo.getmMID(),5000,"추천인 아이디 적립");
+			mypageService.addEmoney(recommendId,5000,"추천인 아이디 적립");
+			
+			//회원 테이블에서 적립급 컬럼 변경
+			memberService.addEmoneyMember(vo.getmMID(),5000);
+			memberService.addEmoneyMember(recommendId,5000);
+		}
+		
+		//아이디 중복체크
 	  	if(memberService.IdCheck(vo.getmMID()) != null) {
 	  		msgFlag = "idCheckNO";
 	  		return "redirect:/msg/" + msgFlag;
@@ -81,6 +94,8 @@ public class MemberController {
 	  		session.setAttribute("smid" , mMID);
 	  		session.setAttribute("sname", vo.getmNAME());
 	  		session.setAttribute("slevel", vo.getmLEVEL());
+	  		int scart = memberService.getMyCartNumber(mMID);
+	  		session.setAttribute("scart", scart);
 	  		
 	  		//아이디 기억하기 체크시 쿠키생성, 체크 안할시 모든 쿠키 삭제
 	  		if(rememberId.equals("YES")) {
@@ -225,6 +240,15 @@ public class MemberController {
 		return "redirect:/msg/"+msgFlag;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/recommendIdCheck", method=RequestMethod.POST)
+	public String recommendIdCheckPost(String recommendId) {
+	  	String res = "0";
+	  	MemberVo vo = memberService.IdCheck(recommendId);
+	  	if(vo != null) res = "1";
+	  	
+	  	return res;
+	}
 
 	
 	

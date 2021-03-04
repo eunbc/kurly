@@ -11,7 +11,7 @@
 	<title>마켓컬리 :: 내일의 장보기, 마켓컬리</title>
 	<link rel= "stylesheet" type="text/css" href="${contextPath}/resources/css/kurly.css?after">
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script src="${contextPath}/resources/js/join.js"></script>
+	<script src="${contextPath}/resources/js/join.js" async></script>
     <script src="${contextPath}/resources/js/address.js"></script>
 	<style>
 		#content{margin: 0 auto; width: 620px;}
@@ -75,11 +75,13 @@
 					<td>주소<span class="necessary">*</span></td>
 					<td>
 						<input type="button" onclick="sample6_execDaumPostcode()" id="address" style="width:304;text-align: center;" class="button-outline" value="주소 검색"/>
-						<input type="text" id="sample6_postcode" name="address1" placeholder="우편번호" class="form-control">
-						<input type="text" id="sample6_address" name="address2" placeholder="주소" class="form-control"><br>
-						<input type="text" id="sample6_detailAddress" name="address3" placeholder="상세주소" class="form-control">
-						<input type="text" id="sample6_extraAddress" name="address4" placeholder="참고항목" class="form-control">
-						<input type="hidden" name="mADDRESS" id="mADDRESS"/>
+						<span class="myAddress">
+							<input type="text" id="sample6_postcode" name="address1" placeholder="우편번호" class="form-control">
+							<input type="text" id="sample6_address" name="address2" placeholder="주소" class="form-control"><br>
+							<input type="text" id="sample6_detailAddress" name="address3" placeholder="상세주소" class="form-control">
+							<input type="text" id="sample6_extraAddress" name="address4" placeholder="참고항목" class="form-control">
+							<input type="hidden" name="mADDRESS" id="mADDRESS"/>
+						</span>
 						<p style="font-size: 12px">배송지에 따라 상품 정보가 달라질 수 있습니다.</p>
 					</td>
 					<td></td>
@@ -101,7 +103,46 @@
 				<tr>
 					<td>추가입력 사항</td>
 					<td>
-						<input type="checkbox" name="" value="추천인 아이디"/>&nbsp;추천인 아이디 
+						<input type="checkbox" class="recommendId" value="추천인 아이디"/>&nbsp;추천인 아이디
+						<span id="recommendId">
+							<input type="text" name="recommendId" id="strrecommendId" class="form-control" placeholder="추천인 아이디"/>
+							<input type="button" class="button-outline-small" id="recommendIdCheck" value="확인"/>
+						</span> 
+						<script>
+						    $(".recommendId").on('click', recommendId)
+						    
+						    function recommendId(){
+							    var check = $('input:checkbox[class="recommendId"]').is(':checked');
+								if(check){
+							        $("#recommendId").show();
+								} else if(!check) {
+							        $("#recommendId").hide();
+								}
+						    }
+						    
+						    $("#recommendIdCheck").click(function() {
+						    	if($("#strrecommendId").val().trim() == "") {
+						    		alert("추천인 아이디를 입력하세요");
+						    		return false;
+						    	}
+						    	
+						    	var query = { recommendId : $("#strrecommendId").val() }
+						    	
+						    	$.ajax({
+						    		url : '${contextPath}/member/recommendIdCheck',
+						    		type : "post",
+						    		data : query,
+						    		success : function(data) {
+						    			if(data == "1") {
+						    				alert("확인되었습니다.");
+						    			}
+						    			else {
+						    			 	alert("확인되지 않은 정보입니다.");
+						    			}
+						    		}
+						    	});
+						    });
+						</script>
 					</td>
 					<td></td>
 				</tr>
@@ -115,22 +156,25 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td><input type="checkbox" class="terms" />&nbsp;이용약관 동의<span class="gray">(필수)</span></td>
+					<td><input type="checkbox" class="terms" id="necessary1" />&nbsp;이용약관 동의<span class="gray">(필수)</span></td>
 					<td><a href="" class="terms">약관보기></a></td>
 				</tr>
 				<tr>
 					<td></td>
-					<td><input type="checkbox" class="terms" />&nbsp;개인정보처리방침 동의<span class="gray">(필수)</span></td>
+					<td><input type="checkbox" class="terms" id="necessary2"/>&nbsp;개인정보처리방침 동의<span class="gray">(필수)</span></td>
 					<td><a href="" class="terms">약관보기></a></td>
 				</tr>
 				<tr>
 					<td></td>
-					<td><input type="checkbox" class="terms" name="mRECEIVEAD" id="mRECEIVEAD"/>&nbsp;할인쿠폰 등 혜택/정보 수신 동의<span class="gray">(선택)</span></td>
+					<td>
+						<input type="checkbox" class="terms" id="mRECEIVEADChkbox"/>&nbsp;할인쿠폰 등 혜택/정보 수신 동의<span class="gray">(선택)</span>
+						<input type="hidden" name="mRECEIVEAD" id="mRECEIVEAD"/>
+					</td>
 					<td></td>
 				</tr>
 				<tr>
 					<td></td>
-					<td><input type="checkbox" class="terms" />&nbsp;본인은 만 14세 이상입니다.<span class="gray">(필수)</span></td>
+					<td><input type="checkbox" class="terms" id="necessary3"/>&nbsp;본인은 만 14세 이상입니다.<span class="gray">(필수)</span></td>
 					<td></td>
 				</tr>
 			</table>

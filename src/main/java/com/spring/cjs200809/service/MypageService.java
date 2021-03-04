@@ -10,4 +10,6 @@ public interface MypageService {
 
 	public void wishDelete(int wIDX);
 
+	public void addEmoney(String mMID, int ePLUS, String eCONTENT);
+
 }
