@@ -72,7 +72,7 @@
 		</tr>
 		<c:forEach var="vo" items="${vos}">
 		<tr>
-			<td><input type="checkbox" class="cartChkbox" data-cIDX="${vo.cIDX}" data-gPRICE="${vo.gPRICE}" data-cQTY="${vo.cQTY}" data-gIDX="${vo.gIDX}" data-goIDX="${vo.goIDX}" data-gDISCOUNT="${vo.gDISCOUNT}"/></td>
+			<td><input type="checkbox" value="값" class="cartChkbox" data-cIDX="${vo.cIDX}" data-gPRICE="${vo.gPRICE}" data-cQTY="${vo.cQTY}" data-gIDX="${vo.gIDX}" data-goIDX="${vo.goIDX}" data-gDISCOUNT="${vo.gDISCOUNT}"/></td>
 			<td>
 		        <img src="${contextPath}/resources/goods/${vo.gIMAGE}" width="100px"/>
 			</td>
@@ -81,7 +81,7 @@
 				<div style="color:red;"></div>
 			</td>
 			<td>
-	            <input class="cart-quantity-input" type="number" value="${vo.cQTY}" data-gPRICE="${vo.gPRICE}" data-gDISCOUNT="${vo.gDISCOUNT}">
+	            <input class="cart-quantity-input" type="number" value="${vo.cQTY}" data-cIDX="${vo.cIDX}" data-gPRICE="${vo.gPRICE}" data-cQTY="${vo.cQTY}" data-gIDX="${vo.gIDX}" data-goIDX="${vo.goIDX}" data-gDISCOUNT="${vo.gDISCOUNT}">
 			</td>
 			<td>
 				<div><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.gPRICE}"/></div>
@@ -100,23 +100,23 @@
 				<input type="text" id="sample6_address" name="address2" placeholder="주소" class="form-control"><br>
 				<input type="text" id="sample6_detailAddress" name="address3" placeholder="상세주소" class="form-control">
 				<input type="text" id="sample6_extraAddress" name="address4" placeholder="참고항목" class="form-control">
-				<input type="hidden" name="mADDRESS" id="mADDRESS"/>
+				<input type="hidden" name="tempADDRESS" id="tempADDRESS"/>
 			</span>
 		</div>
 		<div>
-			<p>상품금액</p>
-			<p>상품할인금액</p>
-			<p>배송비</p>
+			<p>
+				상품금액 : <strong class="cart-total">0</strong>
+			</p>
+			<p>상품할인금액 : <strong class="cart-discount">0</strong></p>
+			<p>배송비 : <strong class="cart-delivery">0</strong></p>
 		</div>
 		<div>
-            <div class="cart-items">
-            </div>
             <div class="cart-total">
-                <strong class="cart-total-title">총 상품금액 : &nbsp;</strong>
-                <strong class="cart-total-price finalPrice">0</strong>원
+                <strong>총 상품금액 : &nbsp;</strong>
+				<strong class="cart-finalTotal">0</strong>원                
             </div>
 		</div>
-		<input type="button" class="button" value="주문하기">
+		<input type="button" class="button" id="getOrder" value="주문하기">
 	</div>
 </div>
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
@@ -125,8 +125,8 @@
 	$(function() {
 		$("#checkAll").prop("checked",true);
         $(".cartChkbox").prop("checked",true);
-        updateCartTotal();
         $(".updatedAddress").hide();
+        updateMyCartPrice();
 
         var address = $("#sample6_postcode").val()+"@"+$("#sample6_address").val()+"@"+$("#sample6_detailAddress").val()+"@"+$("#sample6_extraAddress").val();
     	$('#mADDRESS').val(address);

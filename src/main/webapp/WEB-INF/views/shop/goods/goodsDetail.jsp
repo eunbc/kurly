@@ -193,7 +193,6 @@
 						    addItemToCart(goIDX, goNAME, goPRICE)
 						    updateCartTotal()
 						}
-	
 						optionSelect.addEventListener("change", selectEvent);	
 					</script>
 					<tr>
@@ -310,7 +309,7 @@
 				}
 				
 				$.ajax({
-			    	url : "${contextPath}/goods/addtoCartwithOption",
+			    	url : "${contextPath}/goods/addtoCart",
 			    	type : "post",
 			    	data : query,
 			    	success : function(data){
@@ -323,7 +322,6 @@
 			    		} else if(data=="2"){
 				    		alert("이미 존재하는 상품으로,장바구니에 수량 추가하였습니다.");
 							purchaseClicked();
-							//$("#my-cart-badge").load();
 			    		} 
 			    	}
 			    });

@@ -2,10 +2,7 @@ package com.spring.cjs200809;
 
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -31,6 +28,7 @@ import com.spring.cjs200809.vo.BoardVo;
 import com.spring.cjs200809.vo.CartVo;
 import com.spring.cjs200809.vo.GoodsOptionVo;
 import com.spring.cjs200809.vo.GoodsVo;
+import com.spring.cjs200809.vo.MemberVo;
 
 
 @Controller
@@ -90,8 +88,8 @@ public class GoodsController {
 
 	//장바구니에 추가(상품옵션번호 넣기)
 	@ResponseBody
-	@RequestMapping(value="/addtoCartwithOption", method=RequestMethod.POST)
-	public String addtoCartwithOptionPost(@RequestParam String cart,int gIDX,HttpSession session) {
+	@RequestMapping(value="/addtoCart", method=RequestMethod.POST)
+	public String addtoCartPost(@RequestParam String cart,int gIDX,HttpSession session) {
 		String mMID = (String) session.getAttribute("smid");
 		String result = "";
 		
@@ -184,5 +182,15 @@ public class GoodsController {
 		return result;  
 	}
 	
+	@RequestMapping(value="/orderForm", method=RequestMethod.GET)
+	public String orderFormGet(Model model,HttpSession session) {
+		String mMID = (String) session.getAttribute("smid");
+		String mADDRESS = memberService.getMyAddress(mMID);
+		MemberVo mVo = memberService.IdCheck(mMID);
+		
+		model.addAttribute("mVo",mVo);
+		return "shop/order/orderForm";
+	}
 
+	
 }

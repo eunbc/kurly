@@ -91,6 +91,13 @@
         .qWdate {
         	padding: 0 30px;
         }
+		#table {display: table; width: 900px;}
+		.table-row {display: table-row; width: 100%;}
+		.cell {display: table-cell; padding: 2px;}
+		.col1 {width: 100px;text-align: center;}
+		.col2 {width: 800px;}        
+		.col3 {width: 150px;}        
+		.col4 {width: 150px;}        
 	</style>
 	<script>
 		$(document).ready(function() {
@@ -106,10 +113,10 @@
 <div class="qna-content-default">
 	<table class="qna-list-table">
 		<tr> 
-			<th style="width:50px">번호</th>
-			<th style="width:100px">작성자</th>
-			<th style="width:100px">작성일자</th>
+			<th style="width:100px">번호</th>
 			<th>제목</th>
+			<th style="width:150px">작성자</th>
+			<th style="width:150px">작성일자</th>
 		</tr>
 	</table>
 	
@@ -121,26 +128,26 @@
 		</c:if>    
     	<c:if test="${!empty qVos}">
 		    <c:forEach var="qVo" items="${qVos}">
-		        <div class="item">
-			        <div>
-			        	<span class="qNumber">${curScrNo}</span>
-			        	<span class="qName">${qVo.qNAME}</span>
-			        	<span class="qWdate">${fn:substring(qVo.qWDATE,0,10)}</span>
-			        	<span class="qTitle">
+				<div class="table">
+					<div class="table-row item">
+						<span class="cell col1">${curScrNo}</span>
+						<span class="cell col2">
 			        		<c:if test="${qVo.qSECRET eq 'Y'}"><i class="xi-lock-o"></i></c:if>
 			        		<c:if test="${qVo.qLEVEL eq 1}"><i class="xi-subdirectory-arrow"></i></c:if>
 			        		${qVo.qTITLE}
-		        		</span>
-		        	</div>
-			    </div>
-			    <p>
-			    	<c:if test="${qVo.qSECRET=='N' || qVo.mMID==smid}">
-				   	    ${fn:replace(qVo.qCONTENT,newLine, "<br/>")}
-			    	</c:if>
-			    	<c:if test="${qVo.qSECRET=='Y' && qVo.mMID!=smid}">
-						비공개
-					</c:if>
-			    </p>
+						</span>
+						<span class="cell col3">${qVo.qNAME}</span>
+						<span class="cell col4">${fn:substring(qVo.qWDATE,0,10)}</span>
+					</div>
+				    <p>
+				    	<c:if test="${qVo.qSECRET=='N' || qVo.mMID==smid || sname=='관리자'}">
+					   	    ${fn:replace(qVo.qCONTENT,newLine, "<br/>")}
+				    	</c:if>
+				    	<c:if test="${qVo.qSECRET=='Y' && qVo.mMID!=smid && sname!='관리자'}">
+							비공개
+						</c:if>
+				    </p>
+				</div>
 			    <hr/>			
 			    <c:set var="curScrNo" value="${curScrNo-1}"/>
 	        </c:forEach>			
