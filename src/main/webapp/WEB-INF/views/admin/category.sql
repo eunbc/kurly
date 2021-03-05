@@ -42,5 +42,10 @@ create table goods_option (
 	foreign key(gIDX) references goods(gIDX)
 );
 
+select * from cart c
+	left outer join goods g on c.gIDX = g.gIDX
+	left outer join goods_option go on c.gIDX= g.gIDX and c.goIDX=go.goIDX 
+	where c.mMID = 'marketkurly';
+
 
 

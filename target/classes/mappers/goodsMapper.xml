@@ -23,10 +23,13 @@
 	</select>
 	
 	<select id="getMyCart" resultType="com.spring.cjs200809.vo.CartVo">
-		select *
-		from cart c
-		    inner join goods g on c.gIDX = g.gIDX   
-		    where mMID=#{mMID} order by cIDX desc;
+		select c.*, go.goNAME, g.gNAME, g.gPRICE, g.gDISCOUNT, g.gIMAGE
+			from cart c
+			left outer join goods g 
+				on c.gIDX = g.gIDX
+			left outer join goods_option go 
+				on c.gIDX= g.gIDX and c.goIDX=go.goIDX 
+			where c.mMID = #{mMID};
 	</select>
 	
 	<select id="mainGoodsListNew" resultType="com.spring.cjs200809.vo.GoodsVo">

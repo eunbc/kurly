@@ -12,6 +12,7 @@
 	<link rel= "stylesheet" type="text/css" href="${contextPath}/resources/css/kurly.css?after">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
 	<style>
 		.admin-list-table {
 			width: 1100px;
@@ -45,16 +46,18 @@
 	</style>
 	<script>
 		$(document).ready(function() {
-			var idx = $('.iIDX').val();
-			var iWDATE = $('#iWDATE'+idx).val();
-			var fromnow = moment(iWDATE, "YYYYMMDD").fromNow();
-			console.log(fromnow);
+			var iWDATE = document.getElementsByClassName('iWDATE');
+			for(var i=0; i<iWDATE.length; i++) {
+				var fromNow = moment(iWDATE[i].value).fromNow();
+			    document.getElementsByClassName('inputDate')[i].innerText = fromNow;
+			}
 		});
 	
 		function categoryCheck() {
 			var iREPLY = categoryForm.iREPLY.value;
 			location.href="${contextPath}/admin/inquiry?iREPLY="+iREPLY;
 		}
+		
 	</script>
 </head>
 <body>
@@ -87,7 +90,8 @@
 					<td><a href="${contextPath}/admin/inquiryReply?iIDX=${vo.iIDX}&pag=${p.pag}" class="title-decoration-none">[${vo.iCATEGORY}] ${vo.iTITLE}</a></td>
 					<td>${vo.mMID}</td>
 					<td>
-						${fn:substring(vo.iWDATE,0,10)}
+						<span class="inputDate"></span>
+						<input type="hidden" class="iWDATE" value="${vo.iWDATE}"/>
 					</td>
 					<td>
 						<c:if test="${vo.iREPLY=='답변대기중'}">

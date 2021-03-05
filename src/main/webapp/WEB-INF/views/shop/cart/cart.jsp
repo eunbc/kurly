@@ -77,11 +77,17 @@
 		        <img src="${contextPath}/resources/goods/${vo.gIMAGE}" width="100px"/>
 			</td>
 			<td style="text-align: left;">
-				<div style="font-size: medium;">${vo.gNAME}</div>
-				<div style="color:red;"></div>
+				<div style="font-size: medium;">
+					<c:if test="${vo.goIDX!=0}">
+						${vo.goNAME}						
+					</c:if>
+					<c:if test="${vo.goIDX==0}">
+						${vo.gNAME}
+					</c:if>					
+				</div>
 			</td>
 			<td>
-	            <input class="cart-quantity-input" type="number" value="${vo.cQTY}" data-cIDX="${vo.cIDX}" data-gPRICE="${vo.gPRICE}" data-cQTY="${vo.cQTY}" data-gIDX="${vo.gIDX}" data-goIDX="${vo.goIDX}" data-gDISCOUNT="${vo.gDISCOUNT}">
+	            <input class="cart-quantity-input" type="number" readonly="readonly" value="${vo.cQTY}" data-cIDX="${vo.cIDX}" data-gPRICE="${vo.gPRICE}" data-cQTY="${vo.cQTY}" data-gIDX="${vo.gIDX}" data-goIDX="${vo.goIDX}" data-gDISCOUNT="${vo.gDISCOUNT}">
 			</td>
 			<td>
 				<div><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.gPRICE}"/></div>

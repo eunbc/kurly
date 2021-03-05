@@ -185,7 +185,6 @@ public class GoodsController {
 	@RequestMapping(value="/orderForm", method=RequestMethod.GET)
 	public String orderFormGet(Model model,HttpSession session) {
 		String mMID = (String) session.getAttribute("smid");
-		String mADDRESS = memberService.getMyAddress(mMID);
 		MemberVo mVo = memberService.IdCheck(mMID);
 		
 		model.addAttribute("mVo",mVo);

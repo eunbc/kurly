@@ -44,14 +44,15 @@
 		}	
 	</style>
 	<script>
-		var fromnow = moment("20120620", "YYYYMMDD").fromNow();
-		console.log(fromnow);
 		
 		$(document).ready(function() {
 			
-			var qWDATE = $('#qWDATE').val();
-			var fromnow = moment(qWDATE, "YYYYMMDD").fromNow();
-			console.log(fromnow);
+			var qWDATE = document.getElementsByClassName('qWDATE');
+			for(var i=0; i<qWDATE.length; i++) {
+				var fromNow = moment(qWDATE[i].value).fromNow();
+			    document.getElementsByClassName('inputDate')[i].innerText = fromNow;
+			}
+
 		});
 		
 		function categoryCheck() {
@@ -90,7 +91,8 @@
 					<td><a href="${contextPath}/admin/qnaReply?qIDX=${vo.qIDX}&pag=${p.pag}" class="title-decoration-none">${vo.qTITLE}</a></td>
 					<td>${vo.qNAME}</td>
 					<td>
-						${fn:substring(vo.qWDATE,0,10)}
+						<span class="inputDate"></span>
+						<input type="hidden" class="qWDATE" value="${vo.qWDATE}"/>
 					</td>
 					<td>
 						<c:if test="${vo.qREPLY=='답변대기중'}">
