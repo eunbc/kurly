@@ -24,8 +24,10 @@ import com.spring.cjs200809.pagination.PageVo;
 import com.spring.cjs200809.service.AdminService;
 import com.spring.cjs200809.service.GoodsService;
 import com.spring.cjs200809.service.MemberService;
+import com.spring.cjs200809.service.MypageService;
 import com.spring.cjs200809.vo.BoardVo;
 import com.spring.cjs200809.vo.CartVo;
+import com.spring.cjs200809.vo.CouponVo;
 import com.spring.cjs200809.vo.GoodsOptionVo;
 import com.spring.cjs200809.vo.GoodsVo;
 import com.spring.cjs200809.vo.MemberVo;
@@ -48,6 +50,9 @@ public class GoodsController {
 	
 	@Autowired
 	MemberService memberService;
+	
+	@Autowired
+	MypageService mypageService;
 
 	@RequestMapping(value="/write", method=RequestMethod.GET)
 	public String writeBoardGet() {
@@ -187,16 +192,72 @@ public class GoodsController {
 	public String orderFormGet(Model model,HttpSession session) {
 		String mMID = (String) session.getAttribute("smid");
 		MemberVo mVo = memberService.IdCheck(mMID);
+		List<CouponVo> cpVos = memberService.getMyCouponList(mMID);
 		
+		model.addAttribute("cpVos",cpVos);
 		model.addAttribute("mVo",mVo);
 		return "shop/order/orderForm";
 	}
 	
+	//주문 테이블에 추가
 	@RequestMapping(value="/orderForm", method=RequestMethod.POST)
-	public String orderFormPost(OrderVo vo) {
+	public String orderFormPost(HttpSession session, OrderVo vo) {
+		String mMID = (String) session.getAttribute("smid");
 		System.out.println(vo);
+		//적립금 삭감
+		if(vo.getoEMONEY()!=0) {
+			memberService.subtractEmoney(mMID,vo.getoEMONEY());
+			mypageService.subtractEmoney(mMID, vo.getoEMONEY(), "상품구매시 적립금 사용");
+		}
+		//쿠폰 사용처리
+		if(vo.getCpIDX()!=0) {
+			memberService.useCoupon(mMID,vo.getCpIDX());
+		}
+		//메일 보내기
+		
+		//주문 테이블에 추가
+		
 		return "shop/order/orderForm";
 	}
+	
+	//주문 상세 목록에 추가
+	@ResponseBody
+	@RequestMapping(value="/addtoOrder", method=RequestMethod.POST)
+	public String addtoOrderPost(@RequestParam String order,String ordernumber,HttpSession session) {
+		String mMID = (String) session.getAttribute("smid");
+		String result = "";
+		
+		System.out.println(order);
+		System.out.println(ordernumber);
+		
+		if (mMID!=null) {
+			try {
+				JSONParser jsonParse = new JSONParser();
+				JSONArray itemArray = (JSONArray) jsonParse.parse(order);
+				
+				for(int i=0; i<itemArray.size(); i++) {
+					JSONObject itemObject = (JSONObject) itemArray.get(i);
+					int gIDX = Integer.parseInt(String.valueOf(itemObject.get("gIDX")));
+					int goIDX = Integer.parseInt(String.valueOf(itemObject.get("goIDX")));
+					int odQTY = Integer.parseInt(String.valueOf(itemObject.get("odQTY")));
+					
+					//주문 상세 리스트 생성
+					goodsService.addOrderDetail(ordernumber,gIDX,goIDX,odQTY);
+					//주문 상세 목록은 장바구니에서 삭제
+					goodsService.subtractFromCart(gIDX,goIDX,mMID);
+					//재고 감소,판매량 증가시키기
+					goodsService.decreaseStock(gIDX,odQTY);
+					goodsService.increaseSales(gIDX,odQTY);
+					
+				}	
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		} else {
+			result = "0";
+		} 
+		return result; 
+	}	
 
 	
 }

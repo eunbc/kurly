@@ -22,18 +22,6 @@ function addItemToOrder(gIDX,goIDX,odQTY,gPRICE,gDISCOUNT){
 
 function ready() {
 
-    var removeCartItemButtons = document.getElementsByClassName('btn-danger')
-    for (var i = 0; i < removeCartItemButtons.length; i++) {
-        var button = removeCartItemButtons[i]
-        button.addEventListener('click', removeCartItem)
-    }
-
-    var quantityInputs = document.getElementsByClassName('cart-quantity-input')
-    for (var i = 0; i < quantityInputs.length; i++) {
-        var input = quantityInputs[i]
-        input.addEventListener('change', quantityChanged)
-    }
-
     var cartChkbox = document.getElementsByClassName('cartChkbox')
     for (var i = 0; i < cartChkbox.length; i++) {
         var input = cartChkbox[i]
@@ -42,8 +30,6 @@ function ready() {
     
     var getOrder = document.getElementById('getOrder');
     getOrder.addEventListener('click',letsOrder);
-    
-    
     
 }
 
@@ -75,64 +61,6 @@ function letsOrder() {
 	
 }
 
-function chkboxChanged(event){
-	var input = event.target
-	var gIDX = input.getAttribute('data-gIDX')
-	console.log(gIDX)
-	
-	updateMyCartPrice();
-}
-
-function quantityChanged(event) {
-	
-	//일단 보류....
-    var input = event.target
-    if (isNaN(input.value) || input.value <= 0) {
-        input.value = 1  
-    }
-	var gIDX = input.getAttribute('data-gIDX')
-	var odQTY = input.value
-
-	//수량을 바꾸면, 가격 정보를 바꿔야 함
-	//체크된 항목만 가격정보를 가져옴
-	
-	for(var i in cart) {
-		if(cart[i].goIDX == goIDX){
-			cart[i].cQTY = Number(input.value); 
-			break;
-		}
-	}
-	
-	var cartChkbox = $('.cartChkbox:checked'); 
-	   
-	var total = 0;    
-	var discount = 0;    
-	var delivery = 0;    
-	var finalTotal = 0;    
-	
-    for (var i = 0; i < cartChkbox.length; i++) {
-    
-    	//var cIDX = Number(cartChkbox[i].getAttribute('data-cIDX')); 
-    	var gIDX = Number(cartChkbox[i].getAttribute('data-gIDX')); 
-    	var goIDX = Number(cartChkbox[i].getAttribute('data-goIDX')); 
-    	var cQTY = Number(cartChkbox[i].getAttribute('data-cQTY'));
-    	var gPRICE = Number(cartChkbox[i].getAttribute('data-gPRICE')); 
-    	var gDISCOUNT = Number(cartChkbox[i].getAttribute('data-gDISCOUNT')); 
-    	
-		total = total + (gPRICE * cQTY );  //할인 전 상품 전체 금액
-		discount = discount + gPRICE * cQTY * gDISCOUNT * 0.01; //할인된 금액
-	}
-    total = Math.round(total * 10) / 10;
-    if((total-discount)<30000) {
-    	delivery = 3000;
-    }
-    finalTotal = total - discount + delivery;
-    document.getElementsByClassName('cart-total')[0].innerText = numberWithCommas(total);
-    document.getElementsByClassName('cart-discount')[0].innerText = numberWithCommas(discount);
-    document.getElementsByClassName('cart-delivery')[0].innerText = numberWithCommas(delivery);
-    document.getElementsByClassName('cart-finalTotal')[0].innerText = numberWithCommas(finalTotal);
-	
-}
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

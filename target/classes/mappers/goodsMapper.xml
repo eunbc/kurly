@@ -47,5 +47,21 @@
 	<delete id="cartDelete">
 		delete from cart where cIDX=#{cIDX};
 	</delete>
+	
+	<insert id="addOrderDetail">
+		insert into order_detail values (default,#{ordernumber},#{gIDX},#{goIDX},#{odQTY},default);
+	</insert>
+	
+	<delete id="subtractFromCart">
+		delete from cart where gIDX=#{gIDX} and goIDX=#{goIDX} and mMID=#{mMID};
+	</delete>
+	
+	<update id="decreaseStock">
+		update goods set gSTOCK=gSTOCK-#{odQTY} where gIDX=#{gIDX};
+	</update>
+	
+	<update id="increaseSales">
+		update goods set gSALES=gSALES+#{odQTY} where gIDX=#{gIDX}; 
+	</update>
 
 </mapper>

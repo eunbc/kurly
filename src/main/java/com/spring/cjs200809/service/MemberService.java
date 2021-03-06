@@ -1,5 +1,8 @@
 package com.spring.cjs200809.service;
 
+import java.util.List;
+
+import com.spring.cjs200809.vo.CouponVo;
 import com.spring.cjs200809.vo.MemberVo;
 
 public interface MemberService {
@@ -25,6 +28,12 @@ public interface MemberService {
 	public String getMyAddress(String mMID);
 
 	public void addEmoneyMember(String mMID, int addedEmoney);
+
+	public List<CouponVo> getMyCouponList(String mMID);
+
+	public void subtractEmoney(String mMID, int oEMONEY);
+
+	public void useCoupon(String mMID, int cpIDX);
 
 
 

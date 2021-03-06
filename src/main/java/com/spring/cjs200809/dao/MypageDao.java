@@ -14,4 +14,6 @@ public interface MypageDao {
 
 	public void addEmoney(@Param("mMID")String mMID,@Param("ePLUS") int ePLUS,@Param("eCONTENT") String eCONTENT);
 
+	public void subtractEmoney(@Param("mMID")String mMID,@Param("oEMONEY") int oEMONEY,@Param("eCONTENT") String eCONTENT);
+
 }

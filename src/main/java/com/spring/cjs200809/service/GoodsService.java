@@ -26,4 +26,12 @@ public interface GoodsService {
 
 	public void cartDelete(int cIDX);
 
+	public void addOrderDetail(String ordernumber, int gIDX, int goIDX, int odQTY);
+
+	public void subtractFromCart(int gIDX, int goIDX, String mMID);
+
+	public void decreaseStock(int gIDX, int odQTY);
+
+	public void increaseSales(int gIDX, int odQTY);
+
 }

@@ -30,4 +30,12 @@ public interface GoodsDao {
 
 	public void cartDelete(@Param("cIDX")int cIDX);
 
+	public void addOrderDetail(@Param("ordernumber")String ordernumber,@Param("gIDX") int gIDX,@Param("goIDX") int goIDX,@Param("odQTY") int odQTY);
+
+	public void subtractFromCart(@Param("gIDX")int gIDX,@Param("goIDX") int goIDX,@Param("mMID") String mMID);
+
+	public void decreaseStock(@Param("gIDX")int gIDX,@Param("odQTY") int odQTY);
+
+	public void increaseSales(@Param("gIDX")int gIDX,@Param("odQTY") int odQTY);
+
 }

@@ -60,6 +60,26 @@ public class GoodsServiceImp implements GoodsService{
 		goodsDao.cartDelete(cIDX);
 	}
 
+	@Override
+	public void addOrderDetail(String ordernumber, int gIDX, int goIDX, int odQTY) {
+		goodsDao.addOrderDetail(ordernumber,gIDX,goIDX,odQTY);
+	}
+
+	@Override
+	public void subtractFromCart(int gIDX, int goIDX, String mMID) {
+		goodsDao.subtractFromCart(gIDX,goIDX,mMID);
+	}
+
+	@Override
+	public void decreaseStock(int gIDX, int odQTY) {
+		goodsDao.decreaseStock(gIDX,odQTY);
+	}
+
+	@Override
+	public void increaseSales(int gIDX, int odQTY) {
+		goodsDao.increaseSales(gIDX,odQTY);
+	}
+
 	
 
 

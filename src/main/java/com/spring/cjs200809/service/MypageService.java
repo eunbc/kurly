@@ -12,4 +12,6 @@ public interface MypageService {
 
 	public void addEmoney(String mMID, int ePLUS, String eCONTENT);
 
+	public void subtractEmoney(String mMID, int oEMONEY, String eCONTENT);
+
 }

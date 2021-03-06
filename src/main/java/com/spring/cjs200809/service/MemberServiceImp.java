@@ -1,9 +1,12 @@
 package com.spring.cjs200809.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.cjs200809.dao.MemberDao;
+import com.spring.cjs200809.vo.CouponVo;
 import com.spring.cjs200809.vo.MemberVo;
 
 @Service
@@ -64,6 +67,21 @@ public class MemberServiceImp implements MemberService{
 	@Override
 	public void addEmoneyMember(String mMID, int addedEmoney) {
 		memberDao.addEmoneyMember(mMID,addedEmoney);
+	}
+
+	@Override
+	public List<CouponVo> getMyCouponList(String mMID) {
+		return memberDao.getMyCouponList(mMID);
+	}
+
+	@Override
+	public void subtractEmoney(String mMID, int oEMONEY) {
+		memberDao.subtractEmoney(mMID,oEMONEY);
+	}
+
+	@Override
+	public void useCoupon(String mMID, int cpIDX) {
+		memberDao.useCoupon(mMID,cpIDX);
 	}
 
 

@@ -9,9 +9,9 @@ public class OrderVo {
 	private String oADDRESS;
 	private int oAMOUNT;
 	private int oEMONEY;
-	private int cIDX;
+	private int cpIDX;
 	private String oPAYMENT;
-	private String nNVOICE;
+	private String oNVOICE;
 	private String oSTATUS;
 	public int getoIDX() {
 		return oIDX;
@@ -61,11 +61,11 @@ public class OrderVo {
 	public void setoEMONEY(int oEMONEY) {
 		this.oEMONEY = oEMONEY;
 	}
-	public int getcIDX() {
-		return cIDX;
+	public int getCpIDX() {
+		return cpIDX;
 	}
-	public void setcIDX(int cIDX) {
-		this.cIDX = cIDX;
+	public void setCpIDX(int cpIDX) {
+		this.cpIDX = cpIDX;
 	}
 	public String getoPAYMENT() {
 		return oPAYMENT;
@@ -73,11 +73,11 @@ public class OrderVo {
 	public void setoPAYMENT(String oPAYMENT) {
 		this.oPAYMENT = oPAYMENT;
 	}
-	public String getnNVOICE() {
-		return nNVOICE;
+	public String getoNVOICE() {
+		return oNVOICE;
 	}
-	public void setnNVOICE(String nNVOICE) {
-		this.nNVOICE = nNVOICE;
+	public void setoNVOICE(String oNVOICE) {
+		this.oNVOICE = oNVOICE;
 	}
 	public String getoSTATUS() {
 		return oSTATUS;
@@ -85,13 +85,10 @@ public class OrderVo {
 	public void setoSTATUS(String oSTATUS) {
 		this.oSTATUS = oSTATUS;
 	}
-	
 	@Override
 	public String toString() {
 		return "OrderVo [oIDX=" + oIDX + ", mMID=" + mMID + ", oDATE=" + oDATE + ", oNAME=" + oNAME + ", oPHONE="
-				+ oPHONE + ", oADDRESS=" + oADDRESS + ", oAMOUNT=" + oAMOUNT + ", oEMONEY=" + oEMONEY + ", cIDX=" + cIDX
-				+ ", oPAYMENT=" + oPAYMENT + ", nNVOICE=" + nNVOICE + ", oSTATUS=" + oSTATUS + "]";
+				+ oPHONE + ", oADDRESS=" + oADDRESS + ", oAMOUNT=" + oAMOUNT + ", oEMONEY=" + oEMONEY + ", cpIDX="
+				+ cpIDX + ", oPAYMENT=" + oPAYMENT + ", oNVOICE=" + oNVOICE + ", oSTATUS=" + oSTATUS + "]";
 	}
-	
-	
 }

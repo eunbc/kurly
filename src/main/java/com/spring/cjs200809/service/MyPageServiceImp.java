@@ -28,6 +28,11 @@ public class MyPageServiceImp implements MypageService{
 	public void addEmoney(String mMID, int ePLUS, String eCONTENT) {
 		mypageDao.addEmoney(mMID,ePLUS,eCONTENT);
 	}
+
+	@Override
+	public void subtractEmoney(String mMID, int oEMONEY, String eCONTENT) {
+		mypageDao.subtractEmoney(mMID,oEMONEY,eCONTENT);
+	}
 	
 
 

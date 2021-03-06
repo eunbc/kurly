@@ -28,3 +28,23 @@ create table coupon(
 );
 
 drop table coupon;
+
+select * from coupon where DATE(cpSTARTDATE) =< DATE(NOW()) AND DATE(cpENDDATE) >= DATE(NOW());
+select * from coupon;
+
+SELECT * FROM coupon
+	WHERE DATE(NOW()) BETWEEN DATE(cpSTARTDATE) AND 
+		DATE(cpENDDATE) 
+		AND mMID= 'rena1234';
+		
+create table order_detail(
+	odIDX  	int not null auto_increment primary key,
+	oNVOICE varchar(30) not null,
+	gIDX 	INT not null,
+	goIDX 	INT,
+	odQTY	int not null,
+	odREVIEW char(1) default 'N',
+	foreign key(gIDX) references goods(gIDX)
+);	
+
+drop table order_detail;

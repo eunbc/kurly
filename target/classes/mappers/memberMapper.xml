@@ -46,4 +46,18 @@
 		update member set mEMONEY=mEMONEY+#{addedEmoney} where mMID=#{mMID};
 	</update>
 	
+	<select id="getMyCouponList" resultType="com.spring.cjs200809.vo.CouponVo">
+		SELECT * FROM coupon
+			WHERE DATE(NOW()) BETWEEN DATE(cpSTARTDATE) AND DATE(cpENDDATE) 
+				AND mMID= #{mMID} AND cpUSE='N';		
+	</select>
+	
+	<update id="subtractEmoney">
+		update member set mEMONEY = mEMONEY-#{oEMONEY} where mMID=#{mMID};
+	</update>
+	
+	<update id="useCoupon">
+		update coupon set cpUSE='Y' where cpIDX=#{cpIDX} and mMID=#{mMID};
+	</update>
+	
 </mapper>

@@ -18,5 +18,9 @@
 	<insert id="addEmoney">
 		insert into emoney values (default,#{mMID},#{ePLUS},NULL,default,#{eCONTENT});
 	</insert>	
+	
+	<insert id="subtractEmoney">
+		insert into emoney values (default,#{mMID},NULL,#{oEMONEY},default,#{eCONTENT});
+	</insert>
 
 </mapper>
