@@ -84,6 +84,10 @@ public class MsgController {
 			model.addAttribute("msg","본 서비스는 로그인 후 이용가능합니다.");
 			model.addAttribute("url","member/login");
 		}	
+		else if(msgFlag.equals("couponInputOK")) {
+			model.addAttribute("msg","해당 등급에 쿠폰이 지급되었습니다.");
+			model.addAttribute("url","admin/coupon");
+		}	
 		
 		//예) msgFlag = "imgDeleteOk$fileCnt="+fileCnt;
 		//앞의 예에서 특정 매개변수에 추가로 매개값이 넘어왔을 때는 아래와 같이 처리한다.

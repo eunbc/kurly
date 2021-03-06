@@ -46,7 +46,30 @@
 	</style>
 	<script>
 		function goPay() {
+			var card = orderForm.card.value;
+			var month = orderForm.month.value;
+		    var amount = Number(localStorage.getItem('finalTotal'));
 			
+			if(card==''){
+				alert('결제카드를 선택해주세요.');
+				return false;
+			}else if(month==''){
+				alert('할부 개월 수를 선택해주세요.');
+				return false;
+			} else {
+				var oPAYMENT = card+"/"+month;
+				$('#oPAYMENT').val(oPAYMENT);
+				$('#oAMOUNT').val(amount);
+				
+				var tempADDRESS = localStorage.getItem('tempAddress');
+				if(tempADDRESS) {
+					$('#oADDRESS').val(tempADDRESS);
+				    
+				} else {
+					$('#oADDRESS').val('${mVo.mADDRESS}');
+				}
+				orderForm.submit();
+			}
 		}
 	</script>
 </head>
@@ -57,7 +80,7 @@
 		<h3>주문서</h3>
 	</div>
 	
-	<form method="post">
+	<form name="orderForm" method="post">
 		<div class="order-content">
 			<div class="title">주문상품</div>
 			<div style="text-align: center; padding:10px;">총 <span id='orderQuantity'>n</span>개 상품을 주문합니다. 결제금액 : <span id='finalTotal'>0</span>원</div>
@@ -103,6 +126,7 @@
 							var tempADDRESS = localStorage.getItem('tempAddress');
 							if(tempADDRESS) {
 							    document.getElementById('address').innerText = tempADDRESS;
+							    
 							} else {
 							    document.getElementById('address').innerText = '${fn:replace(mVo.mADDRESS,'@',' ')}';
 							}
@@ -156,7 +180,8 @@
 				<div class="row">
 					<span class="cell col1">일반 결제</span>
 					<span class="cell col2">
-						<select class="input-box">
+						<select name="card" class="input-box">
+							<option value="">카드선택</option>
 							<option>신한</option>
 							<option>현대</option>
 							<option>하나</option>
@@ -164,7 +189,7 @@
 							<option>우리</option>
 							<option>농협</option>
 						</select>
-						<select class="input-box">
+						<select name="month" class="input-box">
 							<option value="">할부선택</option>
 							<option>일시불</option>
 							<option>2개월</option>
@@ -176,6 +201,13 @@
 				</div>
 			</div>
 		</div>
+		
+		<input type="hidden" name="mMID" value="${mVo.mMID}"/>
+		<input type="hidden" name="oNAME" value="${mVo.mNAME}"/>
+		<input type="hidden" name="oPHONE" value="${mVo.mPHONE}"/>
+		<input type="hidden" name="oADDRESS" id="oADDRESS"/>
+		<input type="hidden" name="oAMOUNT" id="oAMOUNT"/>
+		<input type="hidden" name="oPAYMENT" id="oPAYMENT"/>
 		
 		<div style="text-align: center;"><input type="button" class="button" onclick="goPay()" value="결제하기"/></div>
 	</form>

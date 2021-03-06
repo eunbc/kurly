@@ -128,6 +128,13 @@
 	<delete id="deleteGoodsOption">
 		delete from goods_option where goIDX=#{goIDX};
 	</delete>
+
+	<select id="findMemberbyLevel" resultType="String">
+		select mMID from member where mLEVEL = #{mLEVEL};
+	</select>	
 	
+	<insert id="createCoupon">
+		insert into coupon values (default,#{mMID},#{vo.cpNAME},#{vo.cpPRICE},#{vo.cpMINIMUM},default,#{vo.cpSTARTDATE},#{vo.cpENDDATE},default);
+	</insert>
 	
 </mapper>

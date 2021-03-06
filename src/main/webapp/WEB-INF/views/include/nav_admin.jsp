@@ -95,8 +95,7 @@
 			<li class="menu1"><a href="${contextPath}/" class="menuLink">회원관리</a>
 				<ul class="menu2_s submenu">
 					<li><a href="${contextPath}/admin/memberList">회원목록</a></li>
-					<li><a href="${contextPath}/shop/productList?category=">배송지목록</a></li>
-					<li><a href="${contextPath}/shop/productList?category=">중분류관리</a></li>
+					<li><a href="${contextPath}/admin/coupon">쿠폰지급</a></li>
 				</ul>
 			</li>
 			<li class="menu2"><a href="${contextPath}/" class="menuLink">상품관리</a>

@@ -23,6 +23,7 @@ import com.spring.cjs200809.service.AdminService;
 import com.spring.cjs200809.service.InquiryService;
 import com.spring.cjs200809.service.QnaService;
 import com.spring.cjs200809.vo.CategoryVo;
+import com.spring.cjs200809.vo.CouponVo;
 import com.spring.cjs200809.vo.GoodsOptionVo;
 import com.spring.cjs200809.vo.GoodsVo;
 import com.spring.cjs200809.vo.InquiryReplyVo;
@@ -381,7 +382,21 @@ public class AdminController {
   		return "";
 	}
 	
-	
-	
+	@RequestMapping(value="/coupon", method=RequestMethod.GET)
+	public String couponAdminGet() {
+		return "admin/coupon";
+	}
+
+	@RequestMapping(value="/coupon", method=RequestMethod.POST)
+	public String couponAdminPost(String mLEVEL,CouponVo vo) {
+		//레벨정보에 맞는 회원 목록 불러옴
+		String[] members = adminService.findMemberbyLevel(mLEVEL);
+		//회원 목록에 쿠폰 지급
+		for(int i=0; i<members.length; i++) {
+			adminService.createCoupon(vo,members[i]);
+		}
+		msgFlag = "couponInputOK";
+		return "redirect:/msg/"+msgFlag;
+	}
 
 }

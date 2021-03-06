@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.cjs200809.vo.CategoryVo;
+import com.spring.cjs200809.vo.CouponVo;
 import com.spring.cjs200809.vo.GoodsOptionVo;
 import com.spring.cjs200809.vo.GoodsVo;
 import com.spring.cjs200809.vo.InquiryVo;
@@ -58,5 +59,9 @@ public interface AdminService {
 	public void deleteGoodsOption(int goIDX);
 
 	public List<QnaVo> listQna(String qREPLY, int startNo, int pageSize);
+
+	public String[] findMemberbyLevel(String mLEVEL);
+
+	public void createCoupon(CouponVo vo, String mMID);
 
 }

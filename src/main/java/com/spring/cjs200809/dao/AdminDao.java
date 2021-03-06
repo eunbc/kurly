@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.spring.cjs200809.vo.CategoryVo;
+import com.spring.cjs200809.vo.CouponVo;
 import com.spring.cjs200809.vo.GoodsOptionVo;
 import com.spring.cjs200809.vo.GoodsVo;
 import com.spring.cjs200809.vo.InquiryVo;
@@ -58,5 +59,9 @@ public interface AdminDao {
 	public List<QnaVo> listQna(@Param("qREPLY")String qREPLY,@Param("startNo") int startNo,@Param("pageSize") int pageSize);
 
 	public int qnaTotRecCnt(@Param("partValue")String partValue);
+
+	public String[] findMemberbyLevel(@Param("mLEVEL")String mLEVEL);
+
+	public void createCoupon(@Param("vo")CouponVo vo,@Param("mMID") String mMID);
 
 }

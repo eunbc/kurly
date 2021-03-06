@@ -9,3 +9,4 @@ create table cart(
 	foreign key(gIDX) references goods(gIDX)
 );
 
+

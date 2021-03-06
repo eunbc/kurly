@@ -29,6 +29,7 @@ import com.spring.cjs200809.vo.CartVo;
 import com.spring.cjs200809.vo.GoodsOptionVo;
 import com.spring.cjs200809.vo.GoodsVo;
 import com.spring.cjs200809.vo.MemberVo;
+import com.spring.cjs200809.vo.OrderVo;
 
 
 @Controller
@@ -188,6 +189,12 @@ public class GoodsController {
 		MemberVo mVo = memberService.IdCheck(mMID);
 		
 		model.addAttribute("mVo",mVo);
+		return "shop/order/orderForm";
+	}
+	
+	@RequestMapping(value="/orderForm", method=RequestMethod.POST)
+	public String orderFormPost(OrderVo vo) {
+		System.out.println(vo);
 		return "shop/order/orderForm";
 	}
 

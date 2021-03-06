@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.cjs200809.dao.AdminDao;
 import com.spring.cjs200809.vo.CategoryVo;
+import com.spring.cjs200809.vo.CouponVo;
 import com.spring.cjs200809.vo.GoodsOptionVo;
 import com.spring.cjs200809.vo.GoodsVo;
 import com.spring.cjs200809.vo.InquiryVo;
@@ -298,6 +299,16 @@ public class AdminServiceImp implements AdminService{
 	@Override
 	public List<QnaVo> listQna(String qREPLY, int startNo, int pageSize) {
 		return adminDao.listQna(qREPLY,startNo,pageSize);
+	}
+
+	@Override
+	public String[] findMemberbyLevel(String mLEVEL) {
+		return adminDao.findMemberbyLevel(mLEVEL);
+	}
+
+	@Override
+	public void createCoupon(CouponVo vo, String mMID) {
+		adminDao.createCoupon(vo,mMID); 
 	}
 	
 
