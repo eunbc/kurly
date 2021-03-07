@@ -154,8 +154,6 @@
     	</c:if>
     </section>
 
-	
-
     <div class="row">
         <div class="col-12">
 			<ul class="pagination justify-content-center" style="margin:20px 0">

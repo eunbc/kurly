@@ -27,7 +27,7 @@
 	</update>
 
 	<update id="memberUpdate">
-		update member set mPWD=${vo.mPWD}, mNAME=${vo.mNAME}, mEMAIL=${vo.mEMAIL}, mPHONE=${vo.mPHONE}, mADDRESS=${vo.mADDRESS}, mGENDER=${vo.mGENDER}, mBDAY=${vo.mBDAY}, mRECEIVEAD=${vo.mRECEIVEAD} where mMID=${vo.mMID};
+		update member set mPWD=#{vo.mPWD}, mNAME=#{vo.mNAME}, mPHONE=#{vo.mPHONE}, mADDRESS=#{vo.mADDRESS}, mGENDER=#{vo.mGENDER}, mBDAY=#{vo.mBDAY}, mRECEIVEAD=#{vo.mRECEIVEAD} where mMID=#{vo.mMID};
 	</update>
 	
 	<update id="memberDelete">

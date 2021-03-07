@@ -11,7 +11,7 @@
 	<title>마켓컬리 :: 내일의 장보기, 마켓컬리</title>
 	<link rel= "stylesheet" type="text/css" href="${contextPath}/resources/css/kurly.css?after">
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script src="${contextPath}/resources/js/join.js"></script>
+	<script src="${contextPath}/resources/js/mUpdate.js"></script>
     <script src="${contextPath}/resources/js/address.js"></script>
 	<style>
 		.necessary {color: red;}
@@ -108,7 +108,8 @@
 				<tr>
 					<td>추가입력 사항</td>
 					<td>
-						<input type="checkbox" name="mRECEIVEAD" id="term3" ${vo.mRECEIVEAD=='Y'? 'checked':''}/>&nbsp;할인쿠폰 등 혜택/정보 수신 동의<span class="gray">(선택)</span>
+						<input type="checkbox" id="mRECEIVEADChkbox" ${vo.mRECEIVEAD=='Y'? 'checked':''}/>&nbsp;할인쿠폰 등 혜택/정보 수신 동의<span class="gray">(선택)</span>
+						<input type="hidden" name="mRECEIVEAD" id="mRECEIVEAD"/>
 					</td>
 					<td></td>
 				</tr>

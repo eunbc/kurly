@@ -221,11 +221,6 @@ public class MemberController {
 
 	@RequestMapping(value="/updateForm", method=RequestMethod.POST)
 	public String updateFormPost(MemberVo vo) {
-	  	//이메일 중복체크
-	  	if(memberService.EmailCheck(vo.getmEMAIL()) != null) {
-	  		msgFlag = "emailCheckNO";
-	  		return "redirect:/msg/" + msgFlag;
-	  	}
 	  	vo.setmPWD(bCryptPasswordEncoder.encode(vo.getmPWD()));
 		memberService.memberUpdate(vo);
 		msgFlag = "memberUpdateOK";
@@ -246,7 +241,6 @@ public class MemberController {
 	  	String res = "0";
 	  	MemberVo vo = memberService.IdCheck(recommendId);
 	  	if(vo != null) res = "1";
-	  	
 	  	return res;
 	}
 

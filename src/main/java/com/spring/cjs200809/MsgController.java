@@ -28,7 +28,7 @@ public class MsgController {
 		}
 		else if(msgFlag.equals("memberUpdateOK")) {
 			model.addAttribute("msg","회원정보가 수정되었습니다.");
-			model.addAttribute("url","member/updateForm");
+			model.addAttribute("url","member/update");
 		}
 		else if(msgFlag.equals("memberDeleteOK")) {
 			session.invalidate();
