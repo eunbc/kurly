@@ -81,7 +81,7 @@
 				alert('할부 개월 수를 선택해주세요.');
 				return false;
 			} else {
-				//결제수단
+				//결제수단,주문금액
 				var oPAYMENT = card+"/"+month;
 				$('#oPAYMENT').val(oPAYMENT);
 				$('#oAMOUNT').val(amount);

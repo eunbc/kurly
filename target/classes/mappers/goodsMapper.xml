@@ -63,5 +63,9 @@
 	<update id="increaseSales">
 		update goods set gSALES=gSALES+#{odQTY} where gIDX=#{gIDX}; 
 	</update>
+	
+	<insert id="addOrder">
+		insert into orderinfo values (default,#{vo.mMID},default,#{vo.oNAME},#{vo.oPHONE},#{vo.oADDRESS},#{vo.oAMOUNT},#{vo.oEMONEY},#{vo.cpIDX},#{vo.cpIDX},#{vo.oNVOICE},default);
+	</insert>
 
 </mapper>

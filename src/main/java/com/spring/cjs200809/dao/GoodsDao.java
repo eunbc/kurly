@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.spring.cjs200809.vo.BoardVo;
 import com.spring.cjs200809.vo.CartVo;
 import com.spring.cjs200809.vo.GoodsVo;
+import com.spring.cjs200809.vo.OrderVo;
 
 public interface GoodsDao {
 
@@ -37,5 +38,7 @@ public interface GoodsDao {
 	public void decreaseStock(@Param("gIDX")int gIDX,@Param("odQTY") int odQTY);
 
 	public void increaseSales(@Param("gIDX")int gIDX,@Param("odQTY") int odQTY);
+
+	public void addOrder(@Param("vo")OrderVo vo);
 
 }

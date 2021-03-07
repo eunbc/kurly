@@ -9,6 +9,7 @@ import com.spring.cjs200809.dao.GoodsDao;
 import com.spring.cjs200809.vo.BoardVo;
 import com.spring.cjs200809.vo.CartVo;
 import com.spring.cjs200809.vo.GoodsVo;
+import com.spring.cjs200809.vo.OrderVo;
 
 @Service
 public class GoodsServiceImp implements GoodsService{
@@ -78,6 +79,11 @@ public class GoodsServiceImp implements GoodsService{
 	@Override
 	public void increaseSales(int gIDX, int odQTY) {
 		goodsDao.increaseSales(gIDX,odQTY);
+	}
+
+	@Override
+	public void addOrder(OrderVo vo) {
+		goodsDao.addOrder(vo);
 	}
 
 	

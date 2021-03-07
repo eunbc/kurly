@@ -5,6 +5,7 @@ import java.util.List;
 import com.spring.cjs200809.vo.BoardVo;
 import com.spring.cjs200809.vo.CartVo;
 import com.spring.cjs200809.vo.GoodsVo;
+import com.spring.cjs200809.vo.OrderVo;
 
 public interface GoodsService {
 
@@ -33,5 +34,7 @@ public interface GoodsService {
 	public void decreaseStock(int gIDX, int odQTY);
 
 	public void increaseSales(int gIDX, int odQTY);
+
+	public void addOrder(OrderVo vo);
 
 }

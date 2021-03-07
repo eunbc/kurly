@@ -203,22 +203,25 @@ public class GoodsController {
 	@RequestMapping(value="/orderForm", method=RequestMethod.POST)
 	public String orderFormPost(HttpSession session, OrderVo vo) {
 		String mMID = (String) session.getAttribute("smid");
-		System.out.println(vo);
-		//적립금 삭감
-		if(vo.getoEMONEY()!=0) {
-			memberService.subtractEmoney(mMID,vo.getoEMONEY());
-			mypageService.subtractEmoney(mMID, vo.getoEMONEY(), "상품구매시 적립금 사용");
+
+		if (mMID!=null) {
+			//적립금 삭감
+			if(vo.getoEMONEY()!=0) {
+				memberService.subtractEmoney(mMID,vo.getoEMONEY());
+				mypageService.subtractEmoney(mMID, vo.getoEMONEY(), "상품구매시 적립금 사용");
+			}
+			//쿠폰 사용처리
+			if(vo.getCpIDX()!=0) {
+				memberService.useCoupon(mMID,vo.getCpIDX());
+			}
+			
+			//주문 테이블에 추가
+			goodsService.addOrder(vo);
+	
+			//메일 보내기
 		}
-		//쿠폰 사용처리
-		if(vo.getCpIDX()!=0) {
-			memberService.useCoupon(mMID,vo.getCpIDX());
-		}
-		//메일 보내기
-		
-		//주문 테이블에 추가
-		
 		return "shop/order/orderForm";
-	}
+	}	
 	
 	//주문 상세 목록에 추가
 	@ResponseBody
@@ -227,8 +230,8 @@ public class GoodsController {
 		String mMID = (String) session.getAttribute("smid");
 		String result = "";
 		
-		System.out.println(order);
-		System.out.println(ordernumber);
+		//System.out.println(order);
+		//System.out.println(ordernumber);
 		
 		if (mMID!=null) {
 			try {
