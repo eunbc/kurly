@@ -208,9 +208,9 @@
 				</ul>
 			</li>
 			<li class="menu2"><a href="${contextPath}/goods/goodsNew" class="menuLink">신상품</a></li>
-			<li class="menu3"><a href="${contextPath}/" class="menuLink">베스트</a></li>
-			<li class="menu4"><a href="${contextPath}/" class="menuLink">알뜰쇼핑</a></li>
-			<li class="menu5"><a href="${contextPath}/" class="menuLink">금주혜택</a></li>
+			<li class="menu3"><a href="${contextPath}/goods/goodsBest" class="menuLink">베스트</a></li>
+			<li class="menu4"><a href="${contextPath}/goods/goodsOnsale" class="menuLink">알뜰쇼핑</a></li>
+			<li class="menu5"><a href="${contextPath}/board/list" class="menuLink">고객센터</a></li>
 			<li style="width:220px;margin:8px;"><input type="text" class="form-control" placeholder="검색" /></li>
 		</ul> 
 		<div id="topMenu_icon">

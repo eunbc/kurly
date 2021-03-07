@@ -36,4 +36,12 @@
 	<select id="getMyEmoneyList" resultType="com.spring.cjs200809.vo.EmoneyVo">
 		select ePLUS, eMINUS, eDATE,eCONTENT from emoney where mMID=#{mMID} order by eIDX desc;
 	</select>
+	
+	<select id="getOrderDetails" resultType="com.spring.cjs200809.vo.OrderDetailVo">
+		select od.gIDX,od.goIDX, g.gIMAGE, g.gNAME, go.goNAME, g.gPRICE, od.odQTY, od.odREVIEW
+			from order_detail od 
+				left join goods g on od.gIDX=g.gIDX
+				left join goods_option go on od.gIDX=go.gIDX and od.goIDX=go.goIDX
+					where oNVOICE=#{oNVOICE};		
+	</select>
 </mapper>

@@ -50,3 +50,8 @@ create table order_detail(
 drop table order_detail;
 
 select * from order_detail od left outer join orderinfo o on od.oNVOICE = o.oNVOICE;
+
+select * from order_detail od 
+	left join goods g on od.gIDX=g.gIDX
+	left join goods_option go on od.gIDX=go.gIDX and od.goIDX=go.goIDX;
+	

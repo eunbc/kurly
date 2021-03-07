@@ -17,8 +17,18 @@ public class GoodsServiceImp implements GoodsService{
 	GoodsDao goodsDao;
 
 	@Override
-	public List<BoardVo> goodsListNew(int startNo, int pageSize) {
+	public List<GoodsVo> goodsListNew(int startNo, int pageSize) {
 		return goodsDao.goodsListNew(startNo,pageSize);
+	}
+
+	@Override
+	public List<GoodsVo> goodsListBest(int startNo, int pageSize) {
+		return goodsDao.goodsListBest(startNo,pageSize);
+	}
+	
+	@Override
+	public List<GoodsVo> goodsListOnsale(int startNo, int pageSize) {
+		return goodsDao.goodsListOnsale(startNo, pageSize);
 	}
 
 	@Override
@@ -85,6 +95,7 @@ public class GoodsServiceImp implements GoodsService{
 	public void addOrder(OrderVo vo) {
 		goodsDao.addOrder(vo);
 	}
+
 
 	
 

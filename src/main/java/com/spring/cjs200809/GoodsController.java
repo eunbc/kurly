@@ -65,20 +65,43 @@ public class GoodsController {
 		int pageSize = request.getParameter("pageSize")==null? 9 : Integer.parseInt(request.getParameter("pageSize"));
 		
 		com.spring.cjs200809.pagination.PageVo pageVo = pageProcess.pagination(pag,pageSize,"goodsList","new");
-		List<BoardVo> vos = goodsService.goodsListNew(pageVo.getStartNo(),pageVo.getPageSize());
+		List<GoodsVo> vos = goodsService.goodsListNew(pageVo.getStartNo(),pageVo.getPageSize());
 		model.addAttribute("pag",pag);
 		model.addAttribute("p",pageVo);
 		model.addAttribute("vos",vos);
 		return "shop/goods/goodsNew";
+	}
+
+	@RequestMapping(value="/goodsBest", method=RequestMethod.GET)
+	public String goodsBestGet(Model model, HttpServletRequest request) {
+		int pag = request.getParameter("pag")==null? 1 : Integer.parseInt(request.getParameter("pag"));
+		int pageSize = request.getParameter("pageSize")==null? 9 : Integer.parseInt(request.getParameter("pageSize"));
+		
+		com.spring.cjs200809.pagination.PageVo pageVo = pageProcess.pagination(pag,pageSize,"goodsList","new");
+		List<GoodsVo> vos = goodsService.goodsListBest(pageVo.getStartNo(),pageVo.getPageSize());
+		model.addAttribute("pag",pag);
+		model.addAttribute("p",pageVo);
+		model.addAttribute("vos",vos);
+		return "shop/goods/goodsBest";
+	}
+
+	@RequestMapping(value="/goodsOnsale", method=RequestMethod.GET)
+	public String goodsOnsaleGet(Model model, HttpServletRequest request) {
+		int pag = request.getParameter("pag")==null? 1 : Integer.parseInt(request.getParameter("pag"));
+		int pageSize = request.getParameter("pageSize")==null? 9 : Integer.parseInt(request.getParameter("pageSize"));
+		
+		com.spring.cjs200809.pagination.PageVo pageVo = pageProcess.pagination(pag,pageSize,"goodsList","new");
+		List<GoodsVo> vos = goodsService.goodsListOnsale(pageVo.getStartNo(),pageVo.getPageSize());
+		model.addAttribute("pag",pag);
+		model.addAttribute("p",pageVo);
+		model.addAttribute("vos",vos);
+		return "shop/goods/goodsOnsale";
 	}
 	
 	@RequestMapping(value="/goodsDetail", method=RequestMethod.GET)
 	public String goodsDetailGet(int gIDX,Model model, HttpServletRequest request, PageVo pageVo) {
 		int pag = request.getParameter("pag")==null? 1 : Integer.parseInt(request.getParameter("pag"));
 		int pageSize = request.getParameter("pageSize")==null? 5 : Integer.parseInt(request.getParameter("pageSize"));
-		
-		//com.spring.cjs200809.pagination.PageVo pageVo = pageProcess.pagination(pag,pageSize,"board");
-		//List<QnaVo> qVos = adminService.getQnaList(pageVo.getStartNo(),pageVo.getPageSize());
 		int curScrNo = pageVo.getCurScrNo();
 		
 		model.addAttribute("p",pageVo);

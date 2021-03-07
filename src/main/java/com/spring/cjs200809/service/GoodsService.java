@@ -9,7 +9,11 @@ import com.spring.cjs200809.vo.OrderVo;
 
 public interface GoodsService {
 
-	public List<BoardVo> goodsListNew(int startNo, int pageSize);
+	public List<GoodsVo> goodsListNew(int startNo, int pageSize);
+
+	public List<GoodsVo> goodsListBest(int startNo, int pageSize);
+	
+	public List<GoodsVo> goodsListOnsale(int startNo, int pageSize);
 
 	public void addCart(String mMID, int gIDX, int cQTY, int goIDX);
 
@@ -36,5 +40,6 @@ public interface GoodsService {
 	public void increaseSales(int gIDX, int odQTY);
 
 	public void addOrder(OrderVo vo);
+
 
 }

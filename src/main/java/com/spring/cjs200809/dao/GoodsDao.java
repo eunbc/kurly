@@ -4,14 +4,17 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.spring.cjs200809.vo.BoardVo;
 import com.spring.cjs200809.vo.CartVo;
 import com.spring.cjs200809.vo.GoodsVo;
 import com.spring.cjs200809.vo.OrderVo;
 
 public interface GoodsDao {
 
-	public List<BoardVo> goodsListNew(@Param("startNo")int startNo,@Param("pageSize") int pageSize);
+	public List<GoodsVo> goodsListNew(@Param("startNo")int startNo,@Param("pageSize") int pageSize);
+
+	public List<GoodsVo> goodsListBest(@Param("startNo")int startNo,@Param("pageSize") int pageSize);
+	
+	public List<GoodsVo> goodsListOnsale(@Param("startNo")int startNo,@Param("pageSize") int pageSize);
 
 	public int goodsTotRecCnt();
 
@@ -40,5 +43,6 @@ public interface GoodsDao {
 	public void increaseSales(@Param("gIDX")int gIDX,@Param("odQTY") int odQTY);
 
 	public void addOrder(@Param("vo")OrderVo vo);
+
 
 }

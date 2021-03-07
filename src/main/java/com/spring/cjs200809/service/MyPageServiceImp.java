@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.spring.cjs200809.dao.AdminDao;
 import com.spring.cjs200809.dao.MypageDao;
 import com.spring.cjs200809.vo.EmoneyVo;
+import com.spring.cjs200809.vo.OrderDetailVo;
 import com.spring.cjs200809.vo.OrderVo;
 import com.spring.cjs200809.vo.WishlistVo;
 
@@ -49,6 +50,11 @@ public class MyPageServiceImp implements MypageService{
 	@Override
 	public List<EmoneyVo> getMyEmoneyList(String mMID) {
 		return mypageDao.getMyEmoneyList(mMID);
+	}
+
+	@Override
+	public List<OrderDetailVo> getOrderDetails(String oNVOICE) {
+		return mypageDao.getOrderDetails(oNVOICE);
 	}
 	
 

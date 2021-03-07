@@ -19,6 +19,7 @@ import com.spring.cjs200809.service.MemberService;
 import com.spring.cjs200809.service.MypageService;
 import com.spring.cjs200809.vo.CouponVo;
 import com.spring.cjs200809.vo.EmoneyVo;
+import com.spring.cjs200809.vo.OrderDetailVo;
 import com.spring.cjs200809.vo.OrderVo;
 import com.spring.cjs200809.vo.WishlistVo;
 
@@ -95,7 +96,8 @@ public class MypageController {
 	@RequestMapping(value="/orderDetail", method=RequestMethod.GET)
 	public String MypageOrderGet(String oNVOICE,Model model) {
 		OrderVo oVo = mypageService.getMyOrderInfo(oNVOICE);
-		//List<>
+		List<OrderDetailVo> vos = mypageService.getOrderDetails(oNVOICE);
+		model.addAttribute("vos",vos);
 		model.addAttribute("oVo",oVo);
 		return "mypage/orderDetail";
 	}

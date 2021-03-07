@@ -6,6 +6,14 @@
 		select * from goods order by gIDX desc limit #{startNo},#{pageSize};
 	</select>
 
+	<select id="goodsListBest" resultType="com.spring.cjs200809.vo.GoodsVo">
+		select * from goods order by gSALES desc limit #{startNo},#{pageSize};
+	</select>
+
+	<select id="goodsListOnsale" resultType="com.spring.cjs200809.vo.GoodsVo">
+		select * from goods order by gDISCOUNT desc limit #{startNo},#{pageSize};
+	</select>
+
 	<select id="goodsTotRecCnt" resultType="int">
 		select count(*) from goods;
 	</select>

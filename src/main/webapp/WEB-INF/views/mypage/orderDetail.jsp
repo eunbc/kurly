@@ -33,7 +33,7 @@
 			background-color: #5F0080;
 		}
 		.order-content{
-			margin-bottom: 50px;
+			margin: 50px 0px;
 			width: 100%;
 		}
 		.order-content > .title{
@@ -72,19 +72,26 @@
 		<table class="list-table">
 			<tr> 
 				<th style="width:130px">사진</th>
-				<th style="width:500px">이름</th>
-				<th style="width:100px"></th>
-				<th style="width:100px">주문상태</th>
+				<th style="width:500px">상품</th>
+				<th style="width:70px">가격</th>
+				<th style="width:70px">수량</th>
 				<th></th>
 			</tr>
  	 		<c:forEach var="vo" items="${vos}">
 				<tr>
-					<td><img src="${contextPath}/resources/goods/${vo.gIMAGE}" width="100px"/></td>
-					<td style="text-align: center;"><a href="${contextPath}/mypage/orderDetail?oNVOICE=${vo.oNVOICE}" class="title-decoration-none">${vo.oNVOICE}</a></td>
-					<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.oAMOUNT}"/>원</td>
-					<td>${vo.oSTATUS}</td>
+					<td><img src="${contextPath}/resources/goods/${vo.gIMAGE}" width="80px"/></td>
+					<td style="text-align: center;">
+						<c:if test="${vo.goIDX!=0}">
+							<a href="${contextPath}/goods/goodsDetail?gIDX=${vo.gIDX}" class="title-decoration-none">${vo.goNAME}</a>						
+						</c:if>
+						<c:if test="${vo.goIDX==0}">
+							<a href="${contextPath}/goods/goodsDetail?gIDX=${vo.gIDX}" class="title-decoration-none">${vo.gNAME}</a>
+						</c:if>					
+					</td>
+					<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.gPRICE}"/>원</td>
+					<td>${vo.odQTY}</td>
 					<td>
-						<c:if test="${vo.oSTATUS!='구매확정'}">
+						<c:if test="${vo.odREVIEW!='Y'}">
 							<input type="button" class="btn btn-outline-secondary" value="리뷰작성" id="btn-Confirm"/>
 						</c:if>
 					</td>
