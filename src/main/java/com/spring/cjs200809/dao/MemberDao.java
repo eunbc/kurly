@@ -37,5 +37,7 @@ public interface MemberDao {
 
 	public void useCoupon(@Param("mMID")String mMID,@Param("cpIDX") int cpIDX);
 
+	public int getMyEmoney(@Param("mMID")String mMID);
+
 
 }

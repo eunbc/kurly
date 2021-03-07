@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <% pageContext.setAttribute("newLine", "\n"); %>
 <%@ include file="/WEB-INF/views/include/bs.jsp" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
@@ -9,6 +10,29 @@
 <head>
 	<meta charset="UTF-8">
 	<title>마켓컬리 :: 내일의 장보기, 마켓컬리</title>
+	<style>
+		#btn-Inquiry{
+			color: #5F0080;
+			border-radius: 0;
+			font-size: 13px;
+			width: 108px;
+			margin-top: 4px;
+		}
+		#btn-Confirm{
+			background-color: #5F0080;
+			color: white;
+			border-radius: 0;
+			font-size: 13px;
+			width: 108px;
+			margin-top: 4px;
+		}
+		#btn-Inquiry:hover{
+			background-color: white;
+		}
+		#btn-Confirm{
+			background-color: #5F0080;
+		}
+	</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/nav.jsp" %>
@@ -27,26 +51,30 @@
 	</div>
 	<div class="section">
 		<div>
-			<span class="section-title">주문내역 </span><span class="explanation-gray">컬리의 새로운 소식들과 유용한 정보들을 한곳에서 확인하세요. </span>
+			<span class="section-title">주문내역 </span><span class="explanation-gray">주문번호를 클릭하면 주문 내역 상세 조회가 가능합니다. </span>
 		</div>
 		<table class="list-table">
 			<tr> 
-				<th style="width:50px">번호</th>
-				<th style="width:550px">제목</th>
-				<th style="width:70px">작성자</th>
-				<th style="width:70px">작성일</th>
-				<th style="width:50px">조회</th>
+				<th style="width:130px">주문일자</th>
+				<th style="width:500px">주문번호</th>
+				<th style="width:100px">구매금액</th>
+				<th style="width:100px">주문상태</th>
+				<th>문의</th>
 			</tr>
-<%-- 			<c:forEach var="vo" items="${vos}">
+ 			<c:forEach var="vo" items="${vos}">
 				<tr>
-					<td>${curScrNo}</td>
-					<td><a href="${contextPath}/board/view?board_idx=${vo.board_idx}&pag=${p.pag}" class="title-decoration-none">${vo.title}</a></td>
-					<td>${vo.name}</td>
-					<td>${fn:substring(vo.wdate,0,10)}</td>
-					<td>${vo.viewCnt}</td>
+					<td>${fn:substring(vo.oDATE,0,16)}</td>
+					<td style="text-align: center;"><a href="${contextPath}/mypage/orderDetail?oNVOICE=${vo.oNVOICE}" class="title-decoration-none">${vo.oNVOICE}</a></td>
+					<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.oAMOUNT}"/>원</td>
+					<td>${vo.oSTATUS}</td>
+					<td>
+						<input type="button" class="btn btn-outline-secondary" value="1:1문의" id="btn-Inquiry"/>
+						<c:if test="${vo.oSTATUS!='구매확정'}">
+							<input type="button" class="btn btn-outline-secondary" value="구매확정" id="btn-Confirm"/>
+						</c:if>
+					</td>
 				</tr>
-				<c:set var="curScrNo" value="${curScrNo-1}"/>
-			</c:forEach> --%>
+			</c:forEach> 
 		</table>
 	</div>
 </div>

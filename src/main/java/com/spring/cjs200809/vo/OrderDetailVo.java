@@ -7,6 +7,7 @@ public class OrderDetailVo {
 	private int goIDX;
 	private int odQTY;
 	private String odREVIEW;
+	
 	public int getOdIDX() {
 		return odIDX;
 	}

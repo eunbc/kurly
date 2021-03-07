@@ -48,3 +48,5 @@ create table order_detail(
 );	
 
 drop table order_detail;
+
+select * from order_detail od left outer join orderinfo o on od.oNVOICE = o.oNVOICE;

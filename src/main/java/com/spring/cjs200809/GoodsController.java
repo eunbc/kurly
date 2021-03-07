@@ -225,7 +225,7 @@ public class GoodsController {
 	
 	//주문 상세 목록에 추가
 	@ResponseBody
-	@RequestMapping(value="/addtoOrder", method=RequestMethod.POST)
+	@RequestMapping(value="/addtoOrderDetail", method=RequestMethod.POST)
 	public String addtoOrderPost(@RequestParam String order,String ordernumber,HttpSession session) {
 		String mMID = (String) session.getAttribute("smid");
 		String result = "";

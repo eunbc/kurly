@@ -60,4 +60,8 @@
 		update coupon set cpUSE='Y' where cpIDX=#{cpIDX} and mMID=#{mMID};
 	</update>
 	
+	<select id="getMyEmoney" resultType="int">
+		select mEMONEY from member where mMID=#{mMID};		
+	</select>
+	
 </mapper>

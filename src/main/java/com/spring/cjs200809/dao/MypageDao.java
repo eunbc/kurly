@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.spring.cjs200809.vo.EmoneyVo;
+import com.spring.cjs200809.vo.OrderVo;
 import com.spring.cjs200809.vo.WishlistVo;
 
 public interface MypageDao {
@@ -15,5 +17,11 @@ public interface MypageDao {
 	public void addEmoney(@Param("mMID")String mMID,@Param("ePLUS") int ePLUS,@Param("eCONTENT") String eCONTENT);
 
 	public void subtractEmoney(@Param("mMID")String mMID,@Param("oEMONEY") int oEMONEY,@Param("eCONTENT") String eCONTENT);
+
+	public List<OrderVo> getMyOrder(@Param("mMID")String mMID);
+
+	public OrderVo getMyOrderInfo(@Param("oNVOICE")String oNVOICE);
+
+	public List<EmoneyVo> getMyEmoneyList(@Param("mMID")String mMID);
 
 }

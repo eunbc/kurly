@@ -22,5 +22,18 @@
 	<insert id="subtractEmoney">
 		insert into emoney values (default,#{mMID},NULL,#{oEMONEY},default,#{eCONTENT});
 	</insert>
+	
+	<select id="getMyOrder" resultType="com.spring.cjs200809.vo.OrderVo">
+		select oDATE,oNVOICE,oAMOUNT,oSTATUS from orderinfo where mMID=#{mMID} order by oIDX desc;
+	</select>
 
+	<select id="getMyOrderInfo" resultType="com.spring.cjs200809.vo.OrderVo">
+		select o.*,cp.cpPRICE from orderinfo o 
+			left join coupon cp on o.cpIDX=cp.cpIDX 
+				where oNVOICE=#{oNVOICE};
+	</select>
+	
+	<select id="getMyEmoneyList" resultType="com.spring.cjs200809.vo.EmoneyVo">
+		select ePLUS, eMINUS, eDATE,eCONTENT from emoney where mMID=#{mMID} order by eIDX desc;
+	</select>
 </mapper>

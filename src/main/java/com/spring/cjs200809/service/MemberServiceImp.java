@@ -84,5 +84,10 @@ public class MemberServiceImp implements MemberService{
 		memberDao.useCoupon(mMID,cpIDX);
 	}
 
+	@Override
+	public int getMyEmoney(String mMID) {
+		return memberDao.getMyEmoney(mMID);
+	}
+
 
 }

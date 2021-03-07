@@ -113,7 +113,7 @@
 					}
 					
 					$.ajax({
-				    	url : "${contextPath}/goods/addtoOrder",
+				    	url : "${contextPath}/goods/addtoOrderDetail",
 				    	type : "post",
 				    	data : query,
 				    	success : function(data){
@@ -150,7 +150,7 @@
 	
 			    var finalTotal = localStorage.getItem('finalTotal');
 			    document.getElementById('finalTotal').innerText = numberWithCommas(finalTotal);
-			    </script>
+		    </script>
 		</div>
 	
 		<div class="order-content">

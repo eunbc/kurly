@@ -48,4 +48,11 @@ select * from cart c
 	where c.mMID = 'marketkurly';
 
 
+select * from order_detail od 
+			left join goods g
+				on od.gIDX = g.gIDX;
 
+select * from order_detail od 
+			left join goods g on od.gIDX = g.gIDX
+			left join goods_option go on od.gIDX=go.gIDX and od.goIDX=go.goIDX;
+				

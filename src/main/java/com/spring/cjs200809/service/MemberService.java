@@ -35,6 +35,8 @@ public interface MemberService {
 
 	public void useCoupon(String mMID, int cpIDX);
 
+	public int getMyEmoney(String mMID);
+
 
 
 
