@@ -28,4 +28,12 @@
 		select count(*) from review where gIDX=#{partValue};
 	</select>
 	
+	<update id="addReviewViewCnt">
+		update review set rVIEW=rVIEW+1 where rIDX=#{rIDX};
+	</update>
+	
+	<update id="addHelpCnt">
+		update review set rHELP=rHELP+1 where rIDX=#{rIDX};
+	</update>
+	
 </mapper>

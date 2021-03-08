@@ -172,10 +172,16 @@ public class BoardServiceImp implements BoardService{
 		return boardDao.bListTop();
 	}
 
-	/*
-	 * @Override public BoardVo prevAndnext(int bIDX) { return
-	 * boardDao.prevAndnext(bIDX); }
-	 */
+	@Override
+	public BoardVo boardPrev(int bIDX) {
+		return boardDao.boardPrev(bIDX);
+	}
+
+	@Override
+	public BoardVo boardNext(int bIDX) {
+		return boardDao.boardNext(bIDX);
+	}
+
 
 
 

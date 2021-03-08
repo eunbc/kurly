@@ -26,7 +26,10 @@ public interface BoardService {
 
 	public List<BoardVo> bListTop();
 
-	//public BoardVo prevAndnext(int bIDX);
+	public BoardVo boardPrev(int bIDX);
+
+	public BoardVo boardNext(int bIDX);
+
 	
 
 }

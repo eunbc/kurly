@@ -61,11 +61,11 @@
 	<table class="view-table-move">
 		<tr>
 			<td>∧이전글</td>
-			<td><a href="${contextPath}/board/view?bIDX=&pag=${pag}"></a></td>
+			<td><a href="${contextPath}/board/view?bIDX=${prev.bIDX}&pag=${pag}">${prev.bTITLE}</a></td>
 		</tr>
 		<tr>
 			<td>∨다음글</td>
-			<td><a href="${contextPath}/board/view?bIDX=&pag=${pag}"></a></td>
+			<td><a href="${contextPath}/board/view?bIDX=${next.bIDX}&pag=${pag}">${next.bTITLE}</a></td>
 		</tr>
 	</table>
 </div>

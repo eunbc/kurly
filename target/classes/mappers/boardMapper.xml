@@ -33,15 +33,14 @@
 	<select id="bListTop" resultType="com.spring.cjs200809.vo.BoardVo">
 		select * from board where bTOP='Y';
 	</select>
-<!-- 	<select id="prevAndnext" resultType="com.spring.cjs200809.vo.BoardVo">
-		select bTITLE 
-			from board 
-			where bIDX in (
-				(select bIDX from board where bIDX &lt; #{bIDX} order by bIDX desc limit 1),
-				(select bIDX from board where bIDX &gt; #{bIDX} order by bIDX limit 1)
-			);		
-	</select> -->
-	
+
+	<select id="boardPrev" resultType="com.spring.cjs200809.vo.BoardVo">
+	   	SELECT bIDX,bTITLE FROM BOARD WHERE bIDX &lt; #{bIDX}  ORDER BY bIDX DESC LIMIT 1;
+	</select>
+
+	<select id="boardNext" resultType="com.spring.cjs200809.vo.BoardVo">
+	   	SELECT bIDX,bTITLE FROM BOARD WHERE bIDX &gt; #{bIDX}  ORDER BY bIDX LIMIT 1;
+	</select>		
 
 	
 

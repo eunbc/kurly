@@ -41,7 +41,18 @@
 	</select>
 	
 	<select id="mainGoodsListNew" resultType="com.spring.cjs200809.vo.GoodsVo">
-		select * from goods order by gIDX desc limit 4;
+		select gIDX,gIMAGE,gPRICE,gDISCOUNT,gNAME
+			from goods order by gIDX desc limit 4;
+	</select>
+	
+	<select id="mainGoodsListHot" resultType="com.spring.cjs200809.vo.GoodsVo">
+		select gIDX,gIMAGE,gPRICE,gDISCOUNT,gNAME
+			from goods order by gSALES desc limit 4;
+	</select>
+	
+	<select id="mainGoodsListOnsale" resultType="com.spring.cjs200809.vo.GoodsVo">
+		select gIDX,gIMAGE,gPRICE,gDISCOUNT,gNAME
+			from goods order by gDISCOUNT desc limit 4;
 	</select>
 	
 	<select id="checkMyCart" resultType="int">

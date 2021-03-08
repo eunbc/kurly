@@ -9,8 +9,44 @@
 <head>
 	<meta charset="UTF-8">
 	<title>마켓컬리 :: 내일의 장보기, 마켓컬리</title>
-	<script src="${contextPath}/resources/ckeditor/ckeditor.js"></script>
-	<script>
+    <style type="text/css">
+        .imgs_wrap {
+            width: 600px;
+            margin-top: 50px;
+        }
+        .imgs_wrap img {
+            max-width: 200px;
+        }
+    </style>	
+    <script type="text/javascript" src="./js/jquery-3.1.0.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        var sel_files = [];
+ 
+        $(document).ready(function() {
+            $("#file").on("change", handleImgsFilesSelect);
+        }); 
+ 
+        function handleImgsFilesSelect(e) {
+            var files = e.target.files;
+            var filesArr = Array.prototype.slice.call(files);
+ 
+            filesArr.forEach(function(f) {
+                if(!f.type.match("image.*")) {
+                    alert("확장자는 이미지 확장자만 가능합니다.");
+                    return;
+                }
+ 
+                sel_files.push(f);
+ 
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var img_html = "<img src=\"" + e.target.result + "\" />";
+                    $(".imgs_wrap").append(img_html);
+                }
+                reader.readAsDataURL(f);
+            });
+        }
+ 
 		function writeCheck() {
 			var iTITLE = writeForm.iTITLE.value;
 			var iCATEGORY = writeForm.iCATEGORY.value;
@@ -70,7 +106,7 @@
 				</tr>
 				<tr> 
 					<td>주문번호</td>
-					<td><input type="text" name="oIDX" value="${oNVOICE}" class="form-control" maxlength="100"/></td>
+					<td><input type="text" name="oNVOICE" value="${oNVOICE}" class="form-control" maxlength="100"/></td>
 				</tr>
 				<tr> 
 					<td>내용</td>
@@ -90,7 +126,11 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td><div class="imgs_wrap"></div></td>
+					<td>
+						<div class="imgs_wrap">
+
+						</div>
+					</td>
 				</tr>
 			</table>
 			<p><br/></p>

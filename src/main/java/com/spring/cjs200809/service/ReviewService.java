@@ -17,4 +17,8 @@ public interface ReviewService {
 
 	public List<ReviewVo> getReviewList(int startNo, int pageSize, int gIDX);
 
+	public void addReviewViewCnt(int rIDX);
+
+	public void addHelpCnt(int rIDX);
+
 }

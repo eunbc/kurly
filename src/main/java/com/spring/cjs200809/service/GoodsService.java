@@ -41,5 +41,9 @@ public interface GoodsService {
 
 	public void addOrder(OrderVo vo);
 
+	public List<GoodsVo> mainGoodsListHot();
+
+	public List<GoodsVo> mainGoodsListOnsale();
+
 
 }

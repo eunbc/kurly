@@ -96,6 +96,16 @@ public class GoodsServiceImp implements GoodsService{
 		goodsDao.addOrder(vo);
 	}
 
+	@Override
+	public List<GoodsVo> mainGoodsListHot() {
+		return goodsDao.mainGoodsListHot();
+	}
+
+	@Override
+	public List<GoodsVo> mainGoodsListOnsale() {
+		return goodsDao.mainGoodsListOnsale();
+	}
+
 
 	
 

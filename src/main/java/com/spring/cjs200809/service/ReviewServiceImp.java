@@ -95,6 +95,16 @@ public class ReviewServiceImp implements ReviewService{
 	public List<ReviewVo> getReviewList(int startNo, int pageSize, int gIDX) {
 		return reviewDao.getReviewList(startNo,pageSize,gIDX);
 	}
+
+	@Override
+	public void addReviewViewCnt(int rIDX) {
+		reviewDao.addReviewViewCnt(rIDX);
+	}
+
+	@Override
+	public void addHelpCnt(int rIDX) {
+		reviewDao.addHelpCnt(rIDX);
+	}
 		
 
 

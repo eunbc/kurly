@@ -44,5 +44,9 @@ public interface GoodsDao {
 
 	public void addOrder(@Param("vo")OrderVo vo);
 
+	public List<GoodsVo> mainGoodsListHot();
+
+	public List<GoodsVo> mainGoodsListOnsale();
+
 
 }

@@ -19,4 +19,8 @@ public interface ReviewDao {
 
 	public List<ReviewVo> getReviewList(@Param("startNo")int startNo,@Param("pageSize") int pageSize,@Param("gIDX") int gIDX);
 
+	public void addReviewViewCnt(@Param("rIDX")int rIDX);
+
+	public void addHelpCnt(@Param("rIDX")int rIDX);
+
 }

@@ -24,6 +24,9 @@ public interface BoardDao {
 
 	public List<BoardVo> bListTop();
 
-	//public BoardVo prevAndnext(@Param("bIDX") int bIDX);
+	public BoardVo boardPrev(@Param("bIDX")int bIDX);
+
+	public BoardVo boardNext(@Param("bIDX")int bIDX);
+
 
 }

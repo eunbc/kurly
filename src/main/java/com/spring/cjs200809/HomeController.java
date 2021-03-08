@@ -32,7 +32,12 @@ public class HomeController {
 	@RequestMapping(value = {"/","/h"}, method = RequestMethod.GET)
 	public String home(Model model) {
 		List<GoodsVo> newVos = goodsService.mainGoodsListNew();
+		List<GoodsVo> hotVos = goodsService.mainGoodsListHot();
+		List<GoodsVo> saleVos = goodsService.mainGoodsListOnsale();
+		//추천 상품 List<GoodsVo> hotVos = goodsService.mainGoodsListHot();
 		model.addAttribute("newVos",newVos);
+		model.addAttribute("hotVos",hotVos);
+		model.addAttribute("saleVos",saleVos);
 		return "home";
 	}
 

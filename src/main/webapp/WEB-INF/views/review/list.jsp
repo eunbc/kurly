@@ -109,6 +109,39 @@
 		        $('p').not($(this).next()).slideUp('fast');
 		    });
 		});    
+		
+		function increseView(rIDX) {
+			var query = {
+					rIDX : rIDX
+				}
+				
+			$.ajax({
+		    	url : "${contextPath}/review/addReviewViewCnt",
+		    	type : "post",
+		    	data : query,
+		    	success : function(data){
+		    	}
+		    });
+		}
+		
+		function addHelpCnt(rIDX) {
+			var query = {
+					rIDX : rIDX
+				}
+				
+			$.ajax({
+		    	url : "${contextPath}/review/addHelpCnt",
+		    	type : "post",
+		    	data : query,
+		    	success : function(data){
+		    		if(data=='1'){
+		    			alert("좋아요 반영되었습니다.");
+		    		} else if(data=='0'){
+		    			alert("로그인 후 이용가능한 서비스입니다.");
+		    		}
+		    	}
+		    });
+		}
 	</script>
 </head>
 <body>
@@ -133,7 +166,7 @@
     	<c:if test="${!empty rVos}">
 		    <c:forEach var="rVo" items="${rVos}">
 				<div id="table">
-					<div class="table-row item">
+					<div class="table-row item" onclick="increseView(${rVo.rIDX})">
 						<span class="cell col1">${curScrNo}</span>
 						<span class="cell col2">${rVo.rTITLE}
 						</span>
@@ -158,7 +191,7 @@
 				            </c:forEach>
 			            </c:if>
 				   	    <br>
-				   	    <input type="button" class="button-outline-small" value="도움이 돼요 ${rVo.rHELP}"/>
+				   	    <input type="button" class="button-outline-small addHelp" value="도움이 돼요 ${rVo.rHELP}" onclick="addHelpCnt(${rVo.rIDX});this.onclick=null;" />
 				    </p>
 				</div>
 			    <hr/>			

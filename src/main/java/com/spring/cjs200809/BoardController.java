@@ -80,10 +80,14 @@ public class BoardController {
 		
 		boardService.addViewCnt(bIDX);
 		BoardVo vo = boardService.viewBoard(bIDX);
-		//BoardVo vo2 = boardService.prevAndnext(bIDX);
+		
+		//이전글 다음글 정보
+		BoardVo prev = boardService.boardPrev(bIDX);
+		BoardVo next = boardService.boardNext(bIDX);
 		
 		model.addAttribute("vo",vo);
-		//model.addAttribute("vo2",vo2);
+		model.addAttribute("prev",prev);
+		model.addAttribute("next",next);
 		model.addAttribute("pag",pag);
 
 		return "board/view";

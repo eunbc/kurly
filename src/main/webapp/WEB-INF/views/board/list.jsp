@@ -36,10 +36,10 @@
 			<c:forEach var="tVo" items="${vosTOP}">
 				<tr>
 					<td><b>공지</b></td>
-					<td><a href="${contextPath}/board/view?bIDX=${tVo.bIDX}&pag=${p.pag}" class="title-decoration-none">${tVo.bTITLE}</a></td>
-					<td>${tVo.bNAME}</td>
-					<td>${fn:substring(tVo.bWDATE,0,10)}</td>
-					<td>${tVo.bVIEWCNT}</td>
+					<td><b><a href="${contextPath}/board/view?bIDX=${tVo.bIDX}&pag=${p.pag}" class="title-decoration-none">${tVo.bTITLE}</a></b></td>
+					<td><b>${tVo.bNAME}</b></td>
+					<td><b>${fn:substring(tVo.bWDATE,0,10)}</b></td>
+					<td><b>${tVo.bVIEWCNT}</b></td>
 				</tr>
 			</c:forEach>
 			

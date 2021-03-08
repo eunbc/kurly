@@ -12,12 +12,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.cjs200809.pagination.PageProcess;
 import com.spring.cjs200809.service.MemberService;
 import com.spring.cjs200809.service.MypageService;
 import com.spring.cjs200809.service.ReviewService;
+import com.spring.cjs200809.vo.InquiryReplyVo;
 import com.spring.cjs200809.vo.OrderDetailVo;
 import com.spring.cjs200809.vo.QnaVo;
 import com.spring.cjs200809.vo.ReviewVo;
@@ -39,6 +41,7 @@ public class ReviewController {
 	
 	@Autowired
 	MypageService mypageService;
+	
 	@RequestMapping(value="/write", method=RequestMethod.GET)
 	public String writeReviewGet(Model model,int gIDX,HttpSession session) {
 		String mMID = (String) session.getAttribute("smid");
@@ -90,6 +93,28 @@ public class ReviewController {
 		
 		return "review/list";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/addReviewViewCnt", method=RequestMethod.POST)
+	public String addReviewViewCntPost(int rIDX) {
+		reviewService.addReviewViewCnt(rIDX);
+		return "";
+	}
+
+	@ResponseBody
+	@RequestMapping(value="/addHelpCnt", method=RequestMethod.POST)
+	public String addHelpCntPost(HttpSession session, int rIDX) {
+		String mMID = (String) session.getAttribute("smid");
+		String res ="";
+		if(mMID!=null) {
+			reviewService.addHelpCnt(rIDX);
+			res = "1";
+		} else {
+			res = "0";
+		}
+		return res;
+	}
+	
 
 	
 }

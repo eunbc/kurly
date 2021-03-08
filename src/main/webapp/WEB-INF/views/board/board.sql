@@ -23,7 +23,18 @@ select *
 		(select bIDX from board where bIDX > 3 order by bIDX limit 1)
 	);		
 
-	
+SELECT bIDX,bNAME from board where bIDX < 3 order by bIDX LIMIT 1;
+
+SELECT
+    bIDX,bTITLE
+ FROM
+    BOARD
+ WHERE
+  bIDX IN (
+    (SELECT bIDX FROM BOARD WHERE bIDX < 5  ORDER BY bIDX DESC LIMIT 1),
+    (SELECT bIDX FROM BOARD WHERE bIDX > 5  ORDER BY bIDX LIMIT 1)
+   );
+
 	
 alter table board add FOREIGN KEY(mMID) REFERENCES member(mMID);
 ALTER TABLE `board` ADD CONSTRAINT `mMID` FOREIGN KEY (`mMID`) REFERENCES `member` (`mMID`) ON UPDATE CASCADE ON DELETE NO ACTION;
