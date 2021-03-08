@@ -10,6 +10,7 @@ import com.spring.cjs200809.dao.MypageDao;
 import com.spring.cjs200809.vo.EmoneyVo;
 import com.spring.cjs200809.vo.OrderDetailVo;
 import com.spring.cjs200809.vo.OrderVo;
+import com.spring.cjs200809.vo.ReviewVo;
 import com.spring.cjs200809.vo.WishlistVo;
 
 @Service
@@ -55,6 +56,11 @@ public class MyPageServiceImp implements MypageService{
 	@Override
 	public List<OrderDetailVo> getOrderDetails(String oNVOICE) {
 		return mypageDao.getOrderDetails(oNVOICE);
+	}
+
+	@Override
+	public List<ReviewVo> getMyReviewList(String mMID) {
+		return mypageDao.getMyReviewList(mMID);
 	}
 	
 

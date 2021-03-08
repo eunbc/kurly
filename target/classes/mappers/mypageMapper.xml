@@ -44,4 +44,11 @@
 				left join goods_option go on od.gIDX=go.gIDX and od.goIDX=go.goIDX
 					where oNVOICE=#{oNVOICE};		
 	</select>
+	
+	<select id="getMyReviewList" resultType="com.spring.cjs200809.vo.ReviewVo">
+		select r.rIDX,r.rTITLE,g.gNAME, r.rWDATE, r.rVIEW,r.rHELP 
+			from review r 
+				left join goods g on r.gIDX=g.gIDX
+					where r.mMID=#{mMID};
+	</select>
 </mapper>

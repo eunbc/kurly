@@ -28,24 +28,26 @@
 		</ul>
 	</div>
 	<div class="section">
-		<h4>주문 내역 <span class="explanation-gray">지난 3년간의 주문 내역 조회가 가능합니다 </span>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="button-outline-join" onclick="location.href='${contextPath}/board/write'" value="공지작성"/></h4>
+		<div>
+			<span class="section-title">상품 후기 </span>
+		</div>
+		내가 작성한 후기 목록
 		<table class="list-table">
 			<tr> 
-				<th style="width:50px">번호</th>
-				<th style="width:550px">제목</th>
-				<th style="width:70px">작성자</th>
+				<th style="width:250px">제목</th>
+				<th style="width:250px">상품명</th>
 				<th style="width:70px">작성일</th>
-				<th style="width:50px">조회</th>
+				<th style="width:70px">조회</th>
+				<th style="width:70px">도움</th>
 			</tr>
-			<c:forEach var="vo" items="${vos}">
+  			<c:forEach var="vo" items="${vos}">
 				<tr>
-					<td>${curScrNo}</td>
-					<td><a href="${contextPath}/board/view?board_idx=${vo.board_idx}&pag=${p.pag}" class="title-decoration-none">${vo.title}</a></td>
-					<td>${vo.name}</td>
-					<td>${fn:substring(vo.wdate,0,10)}</td>
-					<td>${vo.viewCnt}</td>
+					<td><a href="${contextPath}/review/view?rIDX=${vo.rIDX}" class="title-decoration-none">${vo.rTITLE}</a></td>
+					<td style="text-align: center;">${vo.gNAME}</td>
+					<td>${fn:substring(vo.rWDATE,0,10)}</td>
+					<td>${vo.rVIEW}</td>
+					<td>${vo.rHELP}</td>
 				</tr>
-				<c:set var="curScrNo" value="${curScrNo-1}"/>
 			</c:forEach>
 		</table>
 	</div>

@@ -14,3 +14,19 @@ create table review(
 	foreign key(gIDX) references goods(gIDX),
 	foreign key(mMID) references member(mMID)
 );
+
+select * from review;
+
+select * from order_detail od
+	left join orderinfo o on o.mMID='testuser' and od.oNVOICE=o.oNVOICE
+	where gIDX='15';
+
+select od.odIDX, od.oNVOICE, od.gIDX, od.odREVIEW
+	from order_detail od
+		left join orderinfo o on od.oNVOICE=o.oNVOICE
+				where od.gIDX='15' 
+					and o.mMID='testuser' 
+					and od.odREVIEW='N'
+					and date(now()) < date_add(o.oDATE, interval +1 month);
+
+

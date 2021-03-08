@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.spring.cjs200809.vo.EmoneyVo;
 import com.spring.cjs200809.vo.OrderDetailVo;
 import com.spring.cjs200809.vo.OrderVo;
+import com.spring.cjs200809.vo.ReviewVo;
 import com.spring.cjs200809.vo.WishlistVo;
 
 public interface MypageDao {
@@ -26,5 +27,7 @@ public interface MypageDao {
 	public List<EmoneyVo> getMyEmoneyList(@Param("mMID")String mMID);
 
 	public List<OrderDetailVo> getOrderDetails(@Param("oNVOICE")String oNVOICE);
+
+	public List<ReviewVo> getMyReviewList(@Param("mMID")String mMID);
 
 }

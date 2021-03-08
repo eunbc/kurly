@@ -21,6 +21,7 @@ import com.spring.cjs200809.vo.CouponVo;
 import com.spring.cjs200809.vo.EmoneyVo;
 import com.spring.cjs200809.vo.OrderDetailVo;
 import com.spring.cjs200809.vo.OrderVo;
+import com.spring.cjs200809.vo.ReviewVo;
 import com.spring.cjs200809.vo.WishlistVo;
 
 
@@ -70,6 +71,14 @@ public class MypageController {
 		model.addAttribute("vos",vos);
 		model.addAttribute("currentEmoney",currentEmoney);
 		return "mypage/emoney";
+	}
+	
+	@RequestMapping(value="/review", method=RequestMethod.GET)
+	public String MypageReviewGet(Model model, HttpSession session) {
+		String mMID = (String) session.getAttribute("smid");
+		List<ReviewVo> vos = mypageService.getMyReviewList(mMID);
+		model.addAttribute("vos",vos);
+		return "mypage/review";
 	}
 	
 	//선택 항목 일괄 삭제

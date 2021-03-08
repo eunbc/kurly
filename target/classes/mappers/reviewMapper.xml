@@ -2,5 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.cjs200809.dao.ReviewDao">
 
+	<insert id="writeReview">
+		insert into review values (default,#{vo.oNVOICE},#{vo.gIDX},#{vo.rNAME},#{vo.mMID},#{vo.rTITLE},#{vo.rCONTENT},default,default,default,#{vo.rFNAME},#{vo.rRFNAME});
+	</insert>
 	
+	<select id="checkMyOrderforReview" resultType="com.spring.cjs200809.vo.OrderDetailVo">
+		select od.odIDX, od.oNVOICE, od.gIDX, od.odREVIEW
+			from order_detail od
+				left join orderinfo o on od.oNVOICE=o.oNVOICE
+						where od.gIDX=#{gIDX} 
+							and o.mMID=#{mMID} 
+							and od.odREVIEW='N'
+							and date(now()) &lt; date_add(o.oDATE, interval +1 month);
+	</select>
+	
+	<update id="changeReviewStatus">
+		update order_detail set odREVIEW='Y' where oNVOICE=#{oNVOICE} and gIDX=#{gIDX};
+	</update>
 </mapper>

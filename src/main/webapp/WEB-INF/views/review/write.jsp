@@ -13,19 +13,29 @@
 	<script>
 		function writeCheck() {
 			
-			var qTITLE = writeForm.qTITLE.value;
-			var qCONTENT = writeForm.qCONTENT.value;
+			var rTITLE = writeForm.rTITLE.value;
+			var rCONTENT = writeForm.rCONTENT.value;
 			
-			if(qTITLE=="") {
+			if(rTITLE=="") {
 				alert("제목을 입력하세요.");
-				writeForm.qTITLE.focus();
+				writeForm.rTITLE.focus();
 				return false;
 			}
-			else if(qCONTENT=="") {
+			else if(rCONTENT=="") {
 				alert("내용을 입력하세요.");
-				writeForm.qCONTENT.focus();
+				writeForm.rCONTENT.focus();
 				return false;
 			}
+
+			//파일 체크
+	        var file = writeForm.file.value;
+	        var ext = file.substring(file.lastIndexOf(".")+1);  // 화일의 확장자만 구하기
+	        var uExt = ext.toUpperCase();  // 확장자를 대문자로 치환
+	        
+	        if(file.indexOf(" ") != -1) {
+	            alert("파일명 안에는 공백을 포함할 수 없습니다.");
+	            return false;
+	        }
 			else {
 		        var check = $('input:checkbox[id="qSECRETchkbox"]').is(':checked');
 		    	if(!check) {
@@ -34,9 +44,27 @@
 		    	else if(check){
 		            $('#qSECRET').val("Y");
 		    	}
+		    	
 				writeForm.submit();
-			}
-		}
+		    }
+		}  
+		
+	    // 동적폼 파일박스 추가
+	    var cnt = 1;
+	    function fileAdd() {
+		    cnt++;
+		    var fileIn = "";
+		    fileIn += "<div id='dBox"+cnt+"'>";
+		    fileIn += "<input type='file' name='file' id='fname"+cnt+"' class='form-control-file border' style='width:80%;float:left;' accept='.zip,.jpg,.gif,.png,.hwp,.ppt,.pptx'/>";
+		    fileIn += "<button type='button' onclick='javascript:deleteBox("+cnt+")' id='delBox'"+cnt+"' class='btn' style='width:20%'>삭제</botton>";
+		    fileIn += "</div>";
+		    $("#fileInsert").append(fileIn);
+	    }
+  
+	    // 동적 파일박스의 삭제버튼을 클릭하면~
+	     function deleteBox(cnt) {
+		     $("#dBox"+cnt).remove();
+	     }		
 	</script>
 	<style>
 		.qna-section{
@@ -74,7 +102,7 @@
 		<div>
 			상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다.
 		</div>
-		<form name="writeForm" method="post" action="${contextPath}/qna/write">
+		<form name="writeForm" method="post" action="${contextPath}/review/write" enctype="Multipart/form-data">
 			<table class="qna-write-table">
 				<tr> 
 					<td>작성자</td>
@@ -82,11 +110,11 @@
 				</tr>
 				<tr> 
 					<td>주문번호</td>
-					<td><input type="text" name="oNVOICE" value="${sname}" readonly="readonly" class="input-box" maxlength="100"/></td>
+					<td><input type="text" name="oNVOICE" value="${oNVOICE}" readonly="readonly" class="input-box" maxlength="100"/></td>
 				</tr>
 				<tr> 
 					<td>후기 제목</td>
-					<td><input type="text" name="qTITLE" class="form-control" maxlength="50"/></td>
+					<td><input type="text" name="rTITLE" class="form-control" maxlength="50"/></td>
 				</tr>
 				<tr> 
 					<td>내용</td>
@@ -94,7 +122,15 @@
 				</tr>
 				<tr> 
 					<td>파일첨부</td>
-					<td><input type="file" name="qTITLE" class="form-control" maxlength="50"/></td>
+					<td>
+						<div class="form-group">
+							<label for="fname">파일첨부 :(확장자 gif,jpg,png만 가능, 각각 10MB이내의 파일) </label>
+					        <input type="button" value="파일추가" onclick="fileAdd()"/>
+							<input type="file" class="form-control-file border" name="file" id="fname1" accept='.gif,.jpg,.png'/>
+						</div>
+						<div class="form-group"id="fileInsert"></div>
+						<div id="buttons" style="text-align:center;"></div>
+					</td>
 				</tr>
 			</table>
 			<p><br/></p>

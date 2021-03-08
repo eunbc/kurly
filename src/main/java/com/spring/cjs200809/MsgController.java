@@ -88,6 +88,10 @@ public class MsgController {
 			model.addAttribute("msg","해당 등급에 쿠폰이 지급되었습니다.");
 			model.addAttribute("url","admin/coupon");
 		}	
+		else if(msgFlag.equals("writeReviewOK")) {
+			model.addAttribute("msg","후기가 등록되었습니다. 적립금 100원이 지급됩니다.");
+			model.addAttribute("url","mypage/review");
+		}	
 		
 		//예) msgFlag = "imgDeleteOk$fileCnt="+fileCnt;
 		//앞의 예에서 특정 매개변수에 추가로 매개값이 넘어왔을 때는 아래와 같이 처리한다.
@@ -106,6 +110,10 @@ public class MsgController {
 		else if(msgFlag.substring(0,10).equals("writeQnaOK")) {
 			model.addAttribute("msg","상품 문의가 등록되었습니다.");
 			model.addAttribute("url","goods/goodsDetail?"+msgFlag.substring(11));
+		}
+		else if(msgFlag.substring(0,18).equals("deniedByEmptyOrder")) {
+			model.addAttribute("msg","후기는 상품 구입 회원에 한하여 한달 이내에만 작성가능합니다.");
+			model.addAttribute("url","goods/goodsDetail?"+msgFlag.substring(19));
 		}
 		
 		return "include/msg";
