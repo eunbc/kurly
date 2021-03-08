@@ -47,7 +47,8 @@ public class InquiryController {
 	}
 
 	@RequestMapping(value="/write", method=RequestMethod.GET)
-	public String writeInquiryGet() {
+	public String writeInquiryGet(Model model, String oNVOICE) {
+		model.addAttribute("oNVOICE",oNVOICE);
 		return "inquiry/write";
 	}
 

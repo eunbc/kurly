@@ -137,4 +137,16 @@
 		insert into coupon values (default,#{mMID},#{vo.cpNAME},#{vo.cpPRICE},#{vo.cpMINIMUM},default,#{vo.cpSTARTDATE},#{vo.cpENDDATE},default);
 	</insert>
 	
+	<select id="reviewTotRecCnt" resultType="int">
+		select count(*) from review;
+	</select>
+	
+	<select id="listReview" resultType="com.spring.cjs200809.vo.ReviewVo">
+		select * from review order by rIDX desc;
+	</select>
+	
+	<delete id="reviewDeleteByAdminPost">
+		delete from review where rIDX=#{rIDX};
+	</delete>
+	
 </mapper>

@@ -21,7 +21,7 @@
 		.qna-list-table {
 			width: 1000px;
 			border-top: 2px solid #5F0080;
-			margin-top: 10px;
+			margin-top: 150px;
 			font-size: 13px;
 		}
 		.qna-list-table tr{
@@ -108,11 +108,35 @@
 		        $(this).next().slideToggle(100);
 		        $('p').not($(this).next()).slideUp('fast');
 		    });
-		});    
+		});   
+		function deleteReview(rIDX) {
+			var ans = confirm("해당 후기를 삭제하시겠습니까?");
+			if(!ans) return false;
+
+			var query = {
+			        rIDX : rIDX
+			    };
+			   
+		    $.ajax({
+		    	url : "${contextPath}/admin/reviewDelete",
+		    	type : "post",
+		    	data : query,
+		    	success : function(data){
+		    		alert("후기를 삭제하였습니다.")
+		    	}
+		    });
+		   
+			
+		}
 	</script>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/include/nav_admin.jsp"%>
 <div class="qna-content-default">
+	<div class="view-title">
+		<br>
+		<h3>후기 관리</h3>
+	</div>
 	<table class="qna-list-table">
 		<tr> 
 			<th style="width:70px">번호</th>
@@ -125,13 +149,13 @@
 	</table>
 	
     <section class="accordion">
-    	<c:if test="${empty rVos}">
+    	<c:if test="${empty vos}">
 	        <div class="non-item">
 	        	등록된 상품 후기가 없습니다.
 			</div>    	
 		</c:if>    
-    	<c:if test="${!empty rVos}">
-		    <c:forEach var="rVo" items="${rVos}">
+    	<c:if test="${!empty vos}">
+		    <c:forEach var="rVo" items="${vos}">
 				<div id="table">
 					<div class="table-row item">
 						<span class="cell col1">${curScrNo}</span>
@@ -159,6 +183,7 @@
 			            </c:if>
 				   	    <br>
 				   	    <input type="button" class="button-outline-small" value="도움이 돼요 ${rVo.rHELP}"/>
+				   	    <input type="button" class="btn btn-danger" onclick='deleteReview(${rVo.rIDX})' value="삭제"/>
 				    </p>
 				</div>
 			    <hr/>			
@@ -171,30 +196,30 @@
         <div class="col-12">
 			<ul class="pagination justify-content-center" style="margin:20px 0">
 			<c:set var="startPageNum" value="${p.pag- (p.pag-1)%(p.blockSize)}"/>
-	  			<li class="page-item"><a class="page-link" href="${contextPath}/review/list?gIDX=${gIDX}&pag=1&pageSize=${p.pageSize}">◀</a></li>
+	  			<li class="page-item"><a class="page-link" href="${contextPath}/admin/review?pag=1&pageSize=${p.pageSize}">◀</a></li>
 				<c:if test="${p.pag != 1}">
-		  			<li class="page-item"><a class="page-link" href="${contextPath}/review/list?gIDX=${gIDX}&pag=${p.pag-1}&pageSize=${p.pageSize}">◁</a></li>
+		  			<li class="page-item"><a class="page-link" href="${contextPath}/admin/review?pag=${p.pag-1}&pageSize=${p.pageSize}">◁</a></li>
 				</c:if>
 				<c:if test="${p.pag == 1}">
-		  			<li class="page-item"><a class="page-link" href="${contextPath}/review/list?gIDX=${gIDX}&pag=1&pageSize=${p.pageSize}">◁</a></li>
+		  			<li class="page-item"><a class="page-link" href="${contextPath}/admin/review?pag=1&pageSize=${p.pageSize}">◁</a></li>
 				</c:if>
 				<c:forEach var="i" begin="0" end="2">
 					<c:if test="${(startPageNum + i)<=p.totPage}">
 						<c:if test="${(startPageNum + i)==p.pag}">
-				  			<li class="page-item active"><b><a class="page-link" href="${contextPath}/review/list?gIDX=${gIDX}pag=${startPageNum + i}&pageSize=${p.pageSize}">${startPageNum + i }</a></b></li>
+				  			<li class="page-item active"><b><a class="page-link" href="${contextPath}/admin/review?gIDX=${gIDX}pag=${startPageNum + i}&pageSize=${p.pageSize}">${startPageNum + i }</a></b></li>
 						</c:if>
 						<c:if test="${(startPageNum + i)!=p.pag}">
-							<li class="page-item"><a class="page-link" href="${contextPath}/review/list?gIDX=${gIDX}&pag=${startPageNum + i}&pageSize=${p.pageSize}">${startPageNum + i }</a></li>
+							<li class="page-item"><a class="page-link" href="${contextPath}/admin/review?pag=${startPageNum + i}&pageSize=${p.pageSize}">${startPageNum + i }</a></li>
 						</c:if>
 					</c:if>
 				</c:forEach>
 				<c:if test="${p.pag != p.totPage}">
-					<li class="page-item"><a class="page-link" href="${contextPath}/review/list?gIDX=${gIDX}&pag=${p.pag+1}&pageSize=${p.pageSize}">▷</a></li>
+					<li class="page-item"><a class="page-link" href="${contextPath}/admin/review?pag=${p.pag+1}&pageSize=${p.pageSize}">▷</a></li>
 				</c:if>
 				<c:if test="${p.pag == p.totPage}">
-					<li class="page-item"><a class="page-link" href="${contextPath}/review/list?gIDX=${gIDX}&pag=${p.totPage}&pageSize=${p.pageSize}">▷</a></li>
+					<li class="page-item"><a class="page-link" href="${contextPath}/admin/review?pag=${p.totPage}&pageSize=${p.pageSize}">▷</a></li>
 				</c:if>
-				<li class="page-item"><a class="page-link" href="${contextPath}/review/list?gIDX=${gIDX}&pag=${p.totPage}&pageSize=${p.pageSize}">▶</a></li>
+				<li class="page-item"><a class="page-link" href="${contextPath}/admin/review?pag=${p.totPage}&pageSize=${p.pageSize}">▶</a></li>
 			</ul>            
            </div>
        </div>

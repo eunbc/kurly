@@ -92,12 +92,20 @@
 					<td>${vo.odQTY}</td>
 					<td>
 						<c:if test="${vo.odREVIEW!='Y'}">
-							<input type="button" class="btn btn-outline-secondary" value="리뷰작성" id="btn-Confirm"/>
+							<input type="button" class="btn btn-outline-secondary" onclick="location.href='${contextPath}/review/write?gIDX=${vo.gIDX}';" value="리뷰작성" id="btn-Confirm"/>
 						</c:if>
 					</td>
 				</tr>
 			</c:forEach>
 		</table>
+		
+		<br>
+		<div style="text-align:center;">
+			<c:if test="${oVo.oSTATUS==1}">
+				<input type="button" class="button-outline" value="주문취소"/>
+			</c:if>
+				<input type="button" class="button" value="1:1문의하기"/>
+		</div>
 		
 		<div class="order-content">
 			<div class="title">결제 정보</div>

@@ -23,6 +23,7 @@ import com.spring.cjs200809.vo.GoodsOptionVo;
 import com.spring.cjs200809.vo.GoodsVo;
 import com.spring.cjs200809.vo.InquiryVo;
 import com.spring.cjs200809.vo.QnaVo;
+import com.spring.cjs200809.vo.ReviewVo;
 import com.spring.cjs200809.vo.SubcategoryVo;
 
 @Service
@@ -309,6 +310,16 @@ public class AdminServiceImp implements AdminService{
 	@Override
 	public void createCoupon(CouponVo vo, String mMID) {
 		adminDao.createCoupon(vo,mMID); 
+	}
+
+	@Override
+	public List<ReviewVo> listReview(int startNo, int pageSize) {
+		return adminDao.listReview(startNo,pageSize);
+	}
+
+	@Override
+	public void reviewDeleteByAdminPost(int rIDX) {
+		adminDao.reviewDeleteByAdminPost(rIDX);
 	}
 	
 

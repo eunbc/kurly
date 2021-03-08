@@ -29,6 +29,9 @@ public class LocationController {
 		else if(msgFlag.substring(0,13).equals("goodsDeleteOK")) {
 			model.addAttribute("url","admin/goodsList?"+msgFlag.substring(14));
 		}		
+		else if(msgFlag.substring(0,14).equals("orderCompleted")) {
+			model.addAttribute("url","goods/orderCompleted?"+msgFlag.substring(15));
+		}		
 		
 		return "include/location";
 	}

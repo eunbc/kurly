@@ -29,6 +29,7 @@ import com.spring.cjs200809.vo.GoodsVo;
 import com.spring.cjs200809.vo.InquiryReplyVo;
 import com.spring.cjs200809.vo.InquiryVo;
 import com.spring.cjs200809.vo.QnaVo;
+import com.spring.cjs200809.vo.ReviewVo;
 import com.spring.cjs200809.vo.SubcategoryVo;
 
 
@@ -398,5 +399,29 @@ public class AdminController {
 		msgFlag = "couponInputOK";
 		return "redirect:/msg/"+msgFlag;
 	}
+	
+	@RequestMapping(value="/review", method=RequestMethod.GET)
+	public String ReviewAdminGet(Model model,HttpServletRequest request) {
+		int pag = request.getParameter("pag")==null? 1 : Integer.parseInt(request.getParameter("pag"));
+		int pageSize = request.getParameter("pageSize")==null? 10 : Integer.parseInt(request.getParameter("pageSize"));
+		
+		com.spring.cjs200809.pagination.PageVo pageVo = pageProcess.pagination(pag,pageSize,"review");
+		List<ReviewVo> vos = adminService.listReview(pageVo.getStartNo(),pageVo.getPageSize());
+		int curScrNo = pageVo.getCurScrNo();
+		
+		model.addAttribute("curScrNo",curScrNo);
+		model.addAttribute("p",pageVo);
+		model.addAttribute("vos",vos);
+		return "admin/reviewList";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/reviewDelete", method=RequestMethod.POST)
+	public String reviewDeleteByAdminPost(int rIDX) {
+		adminService.reviewDeleteByAdminPost(rIDX);
+  		return "";
+	}
+	
+	
 
 }

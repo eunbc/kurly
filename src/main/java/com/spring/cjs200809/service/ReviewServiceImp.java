@@ -90,6 +90,11 @@ public class ReviewServiceImp implements ReviewService{
 	public void changeReviewStatus(int gIDX, String oNVOICE) {
 		reviewDao.changeReviewStatus(gIDX,oNVOICE);
 	}
+
+	@Override
+	public List<ReviewVo> getReviewList(int startNo, int pageSize, int gIDX) {
+		return reviewDao.getReviewList(startNo,pageSize,gIDX);
+	}
 		
 
 

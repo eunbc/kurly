@@ -26,4 +26,5 @@ public interface QnaDao {
 
 	public int qnaTotRecCnt(@Param("partValue")String partValue);
 
+
 }

@@ -49,6 +49,7 @@
 		select r.rIDX,r.rTITLE,g.gNAME, r.rWDATE, r.rVIEW,r.rHELP 
 			from review r 
 				left join goods g on r.gIDX=g.gIDX
-					where r.mMID=#{mMID};
+					where r.mMID=#{mMID} 
+						order by rIDX desc;
 	</select>
 </mapper>

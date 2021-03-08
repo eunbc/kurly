@@ -12,7 +12,7 @@ public class OrderVo {
 	private int cpIDX;
 	private String oPAYMENT;
 	private String oNVOICE;
-	private String oSTATUS;
+	private int oSTATUS;
 	
 	private int cpPRICE;
 
@@ -104,11 +104,11 @@ public class OrderVo {
 		this.oNVOICE = oNVOICE;
 	}
 
-	public String getoSTATUS() {
+	public int getoSTATUS() {
 		return oSTATUS;
 	}
 
-	public void setoSTATUS(String oSTATUS) {
+	public void setoSTATUS(int oSTATUS) {
 		this.oSTATUS = oSTATUS;
 	}
 
@@ -126,5 +126,6 @@ public class OrderVo {
 				+ oPHONE + ", oADDRESS=" + oADDRESS + ", oAMOUNT=" + oAMOUNT + ", oEMONEY=" + oEMONEY + ", cpIDX="
 				+ cpIDX + ", oPAYMENT=" + oPAYMENT + ", oNVOICE=" + oNVOICE + ", oSTATUS=" + oSTATUS + ", cpPRICE="
 				+ cpPRICE + "]";
-	}	
+	}
+
 }

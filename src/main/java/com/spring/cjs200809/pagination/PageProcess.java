@@ -8,6 +8,7 @@ import com.spring.cjs200809.dao.BoardDao;
 import com.spring.cjs200809.dao.FaqDao;
 import com.spring.cjs200809.dao.GoodsDao;
 import com.spring.cjs200809.dao.QnaDao;
+import com.spring.cjs200809.dao.ReviewDao;
 
 @Service
 public class PageProcess {
@@ -26,6 +27,8 @@ public class PageProcess {
 	@Autowired
 	QnaDao qnaDao;
 	
+	@Autowired
+	ReviewDao reviewDao;
 	
 	public PageVo pagination(int pag, int pageSize, String partFlag) {
 		int totRecCnt = 0;
@@ -37,6 +40,9 @@ public class PageProcess {
 		} 
 		else if(partFlag.equals("faq")) {
 			totRecCnt = faqDao.fListTotRecCnt(); 
+		} 
+		else if(partFlag.equals("review")) {
+			totRecCnt = adminDao.reviewTotRecCnt(); 
 		} 
 		else if(partFlag.equals("회원문의")) {
 			totRecCnt = faqDao.fListTotRecCntCategory("회원문의"); 
@@ -113,6 +119,9 @@ public class PageProcess {
 		} 
 		else if(partFlag.equals("qnaList")) {
 			totRecCnt = qnaDao.qnaTotRecCnt(partValue);  
+		} 
+		else if(partFlag.equals("reviewList")) {
+			totRecCnt = reviewDao.reviewTotRecCnt(partValue);  
 		} 
 		
 		

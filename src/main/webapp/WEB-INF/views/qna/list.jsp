@@ -91,13 +91,13 @@
         .qWdate {
         	padding: 0 30px;
         }
-		#table {display: table; width: 900px;}
+		#table {display: table; width: 1000px;}
 		.table-row {display: table-row; width: 100%;}
 		.cell {display: table-cell; padding: 2px;}
-		.col1 {width: 100px;text-align: center;}
-		.col2 {width: 800px;}        
-		.col3 {width: 150px;}        
-		.col4 {width: 150px;}        
+		.col1 {width: 400px;text-align: left; padding-left:40px;}
+		.col2 {width: 600px;}        
+		.col3 {width: 150px;text-align: center;}        
+		.col4 {width: 150px;text-align: center;}        
 	</style>
 	<script>
 		$(document).ready(function() {
@@ -128,7 +128,7 @@
 		</c:if>    
     	<c:if test="${!empty qVos}">
 		    <c:forEach var="qVo" items="${qVos}">
-				<div class="table">
+				<div id="table">
 					<div class="table-row item">
 						<span class="cell col1">${curScrNo}</span>
 						<span class="cell col2">
@@ -142,7 +142,7 @@
 				    <p>
 				    	<c:if test="${qVo.qSECRET=='N' || qVo.mMID==smid || sname=='관리자'}">
 					   	    ${fn:replace(qVo.qCONTENT,newLine, "<br/>")}
-				    	</c:if>
+   				    	</c:if>
 				    	<c:if test="${qVo.qSECRET=='Y' && qVo.mMID!=smid && sname!='관리자'}">
 							비공개
 						</c:if>
@@ -158,30 +158,30 @@
         <div class="col-12">
 			<ul class="pagination justify-content-center" style="margin:20px 0">
 			<c:set var="startPageNum" value="${p.pag- (p.pag-1)%(p.blockSize)}"/>
-	  			<li class="page-item"><a class="page-link" href="${contextPath}/qna/list?gIDX=${vo.gIDX}&pag=1&pageSize=${p.pageSize}">◀</a></li>
+	  			<li class="page-item"><a class="page-link" href="${contextPath}/qna/list?gIDX=${gIDX}&pag=1&pageSize=${p.pageSize}">◀</a></li>
 				<c:if test="${p.pag != 1}">
-		  			<li class="page-item"><a class="page-link" href="${contextPath}/qna/list?gIDX=${vo.gIDX}&pag=${p.pag-1}&pageSize=${p.pageSize}">◁</a></li>
+		  			<li class="page-item"><a class="page-link" href="${contextPath}/qna/list?gIDX=${gIDX}&pag=${p.pag-1}&pageSize=${p.pageSize}">◁</a></li>
 				</c:if>
 				<c:if test="${p.pag == 1}">
-		  			<li class="page-item"><a class="page-link" href="${contextPath}/qna/list?gIDX=${vo.gIDX}&pag=1&pageSize=${p.pageSize}">◁</a></li>
+		  			<li class="page-item"><a class="page-link" href="${contextPath}/qna/list?gIDX=${gIDX}&pag=1&pageSize=${p.pageSize}">◁</a></li>
 				</c:if>
 				<c:forEach var="i" begin="0" end="2">
 					<c:if test="${(startPageNum + i)<=p.totPage}">
 						<c:if test="${(startPageNum + i)==p.pag}">
-				  			<li class="page-item active"><b><a class="page-link" href="${contextPath}/qna/list?gIDX=${vo.gIDX}pag=${startPageNum + i}&pageSize=${p.pageSize}">${startPageNum + i }</a></b></li>
+				  			<li class="page-item active"><b><a class="page-link" href="${contextPath}/qna/list?gIDX=${gIDX}pag=${startPageNum + i}&pageSize=${p.pageSize}">${startPageNum + i }</a></b></li>
 						</c:if>
 						<c:if test="${(startPageNum + i)!=p.pag}">
-							<li class="page-item"><a class="page-link" href="${contextPath}/qna/list?gIDX=${vo.gIDX}&pag=${startPageNum + i}&pageSize=${p.pageSize}">${startPageNum + i }</a></li>
+							<li class="page-item"><a class="page-link" href="${contextPath}/qna/list?gIDX=${gIDX}&pag=${startPageNum + i}&pageSize=${p.pageSize}">${startPageNum + i }</a></li>
 						</c:if>
 					</c:if>
 				</c:forEach>
 				<c:if test="${p.pag != p.totPage}">
-					<li class="page-item"><a class="page-link" href="${contextPath}/qna/list?gIDX=${vo.gIDX}&pag=${p.pag+1}&pageSize=${p.pageSize}">▷</a></li>
+					<li class="page-item"><a class="page-link" href="${contextPath}/qna/list?gIDX=${gIDX}&pag=${p.pag+1}&pageSize=${p.pageSize}">▷</a></li>
 				</c:if>
 				<c:if test="${p.pag == p.totPage}">
-					<li class="page-item"><a class="page-link" href="${contextPath}/qna/list?gIDX=${vo.gIDX}&pag=${p.totPage}&pageSize=${p.pageSize}">▷</a></li>
+					<li class="page-item"><a class="page-link" href="${contextPath}/qna/list?gIDX=${gIDX}&pag=${p.totPage}&pageSize=${p.pageSize}">▷</a></li>
 				</c:if>
-				<li class="page-item"><a class="page-link" href="${contextPath}/qna/list?gIDX=${vo.gIDX}&pag=${p.totPage}&pageSize=${p.pageSize}">▶</a></li>
+				<li class="page-item"><a class="page-link" href="${contextPath}/qna/list?gIDX=${gIDX}&pag=${p.totPage}&pageSize=${p.pageSize}">▶</a></li>
 			</ul>            
            </div>
        </div>

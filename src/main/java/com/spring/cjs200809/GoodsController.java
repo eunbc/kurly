@@ -237,13 +237,14 @@ public class GoodsController {
 			if(vo.getCpIDX()!=0) {
 				memberService.useCoupon(mMID,vo.getCpIDX());
 			}
-			
 			//주문 테이블에 추가
 			goodsService.addOrder(vo);
 	
 			//메일 보내기
+			
 		}
-		return "shop/order/orderForm";
+		msgFlag = "orderCompleted$oNVOICE="+vo.getoNVOICE();
+		return "redirect:/location/"+msgFlag;
 	}	
 	
 	//주문 상세 목록에 추가
@@ -252,9 +253,6 @@ public class GoodsController {
 	public String addtoOrderPost(@RequestParam String order,String ordernumber,HttpSession session) {
 		String mMID = (String) session.getAttribute("smid");
 		String result = "";
-		
-		//System.out.println(order);
-		//System.out.println(ordernumber);
 		
 		if (mMID!=null) {
 			try {
@@ -274,8 +272,11 @@ public class GoodsController {
 					//재고 감소,판매량 증가시키기
 					goodsService.decreaseStock(gIDX,odQTY);
 					goodsService.increaseSales(gIDX,odQTY);
-					
 				}	
+			//장바구니 세션값 변경
+			int scart = memberService.getMyCartNumber(mMID);
+			session.setAttribute("scart", scart);
+
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
@@ -284,6 +285,16 @@ public class GoodsController {
 		} 
 		return result; 
 	}	
+
+	@RequestMapping(value="/orderCompleted", method=RequestMethod.GET)
+	public String orderCompletedGet(String oNVOICE,Model model,HttpSession session) {
+		String mMID = (String) session.getAttribute("smid");
+		if(mMID!=null) {
+			model.addAttribute("oNVOICE",oNVOICE);
+		}
+		return "shop/order/orderCompleted";
+	}
+
 
 	
 }

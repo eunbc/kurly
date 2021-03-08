@@ -10,6 +10,7 @@ import com.spring.cjs200809.vo.GoodsOptionVo;
 import com.spring.cjs200809.vo.GoodsVo;
 import com.spring.cjs200809.vo.InquiryVo;
 import com.spring.cjs200809.vo.QnaVo;
+import com.spring.cjs200809.vo.ReviewVo;
 import com.spring.cjs200809.vo.SubcategoryVo;
 
 public interface AdminService {
@@ -63,5 +64,9 @@ public interface AdminService {
 	public String[] findMemberbyLevel(String mLEVEL);
 
 	public void createCoupon(CouponVo vo, String mMID);
+
+	public List<ReviewVo> listReview(int startNo, int pageSize);
+
+	public void reviewDeleteByAdminPost(int rIDX);
 
 }

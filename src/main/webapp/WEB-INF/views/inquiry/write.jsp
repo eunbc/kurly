@@ -70,7 +70,7 @@
 				</tr>
 				<tr> 
 					<td>주문번호</td>
-					<td><input type="text" name="oIDX" class="form-control" maxlength="100"/></td>
+					<td><input type="text" name="oIDX" value="${oNVOICE}" class="form-control" maxlength="100"/></td>
 				</tr>
 				<tr> 
 					<td>내용</td>
@@ -87,6 +87,10 @@
 						<input type="file" multiple="multiple" name="file" id="file" accept=".zip,.jpg,.gif,.png"/><p><br/></p>
 						<p>-파일 형식은 .zip,.jpg,.gif,.png만 허용합니다.</p>
 					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><div class="imgs_wrap"></div></td>
 				</tr>
 			</table>
 			<p><br/></p>

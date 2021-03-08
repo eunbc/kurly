@@ -237,8 +237,8 @@
 		</ul>
 	</div>
     <div style="text-align: right; padding-right:50px;"><input type="button" class="button-small" value="후기쓰기" onclick="location.href='${contextPath}/review/write?gIDX=${vo.gIDX}';"/></div>
-	<div id="goods-qna" data-load="0">
- 		<iframe id="inqna" src="${contextPath}/qna/list?gIDX=${vo.gIDX}" frameborder="0" height="600" width="1100"></iframe> 
+	<div id="goods-review">
+ 		<iframe id="inreview" src="${contextPath}/review/list?gIDX=${vo.gIDX}" frameborder="0" height="600" width="1100"></iframe> 
 	</div>
 
 	<div id="menu-container" class="div3">
@@ -250,7 +250,7 @@
 	</div>
 
     <div style="text-align: right; padding-right:50px;"><input type="button" class="button-small" value="상품문의" onclick="location.href='${contextPath}/qna/write?gIDX=${vo.gIDX}';"/></div>
-	<div id="goods-qna" data-load="0">
+	<div id="goods-qna">
  		<iframe id="inqna" src="${contextPath}/qna/list?gIDX=${vo.gIDX}" frameborder="0" height="600" width="1100"></iframe> 
 	</div>
 	

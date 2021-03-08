@@ -1,5 +1,7 @@
 package com.spring.cjs200809.service;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.cjs200809.vo.OrderDetailVo;
@@ -12,5 +14,7 @@ public interface ReviewService {
 	public OrderDetailVo checkMyOrderforReview(int gIDX, String mMID);
 
 	public void changeReviewStatus(int gIDX, String oNVOICE);
+
+	public List<ReviewVo> getReviewList(int startNo, int pageSize, int gIDX);
 
 }

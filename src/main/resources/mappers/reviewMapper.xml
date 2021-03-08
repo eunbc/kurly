@@ -19,4 +19,13 @@
 	<update id="changeReviewStatus">
 		update order_detail set odREVIEW='Y' where oNVOICE=#{oNVOICE} and gIDX=#{gIDX};
 	</update>
+
+	<select id="getReviewList" resultType="com.spring.cjs200809.vo.ReviewVo">
+		select * from review where gIDX=#{gIDX} order by rIDX desc limit #{startNo},#{pageSize};
+	</select>
+	
+	<select id="reviewTotRecCnt" resultType="int">
+		select count(*) from review where gIDX=#{partValue};
+	</select>
+	
 </mapper>

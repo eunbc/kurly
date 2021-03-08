@@ -2,6 +2,8 @@ package com.spring.cjs200809;
 
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +19,7 @@ import com.spring.cjs200809.service.MemberService;
 import com.spring.cjs200809.service.MypageService;
 import com.spring.cjs200809.service.ReviewService;
 import com.spring.cjs200809.vo.OrderDetailVo;
+import com.spring.cjs200809.vo.QnaVo;
 import com.spring.cjs200809.vo.ReviewVo;
 
 
@@ -75,16 +78,18 @@ public class ReviewController {
 		int gIDX = Integer.parseInt(request.getParameter("gIDX"));
 		String strgIDX = gIDX+"";
 	
-		//com.spring.cjs200809.pagination.PageVo pageVo = pageProcess.pagination(pag,pageSize,"qnaList",strgIDX);
-		//List<QnaVo> qVos = qnaService.getQnaList(pageVo.getStartNo(),pageVo.getPageSize(),gIDX);
-		//int curScrNo = pageVo.getCurScrNo();
+		com.spring.cjs200809.pagination.PageVo pageVo = pageProcess.pagination(pag,pageSize,"reviewList",strgIDX);
+		List<ReviewVo> rVos = reviewService.getReviewList(pageVo.getStartNo(),pageVo.getPageSize(),gIDX);
+		int curScrNo = pageVo.getCurScrNo();
 		
+		model.addAttribute("gIDX",gIDX);
 		model.addAttribute("pag",pag);
-		//model.addAttribute("p",pageVo);
-		//model.addAttribute("qVos",qVos);
-		//model.addAttribute("curScrNo",curScrNo);
+		model.addAttribute("p",pageVo);
+		model.addAttribute("rVos",rVos);
+		model.addAttribute("curScrNo",curScrNo);
 		
-		return "qna/list";
+		return "review/list";
 	}
+
 	
 }

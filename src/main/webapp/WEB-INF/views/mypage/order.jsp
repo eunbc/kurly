@@ -68,8 +68,8 @@
 					<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.oAMOUNT}"/>원</td>
 					<td>${vo.oSTATUS}</td>
 					<td>
-						<input type="button" class="btn btn-outline-secondary" value="1:1문의" id="btn-Inquiry"/>
-						<c:if test="${vo.oSTATUS!='구매확정'}">
+						<input type="button" class="btn btn-outline-secondary" onclick="location.href='${contextPath}/inquiry/write?oNVOICE=${vo.oNVOICE}'" value="1:1문의" id="btn-Inquiry"/>
+						<c:if test="${vo.oSTATUS==1}">
 							<input type="button" class="btn btn-outline-secondary" value="구매확정" id="btn-Confirm"/>
 						</c:if>
 					</td>

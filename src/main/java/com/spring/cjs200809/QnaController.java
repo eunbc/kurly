@@ -63,6 +63,7 @@ public class QnaController {
 		List<QnaVo> qVos = qnaService.getQnaList(pageVo.getStartNo(),pageVo.getPageSize(),gIDX);
 		int curScrNo = pageVo.getCurScrNo();
 		
+		model.addAttribute("gIDX",gIDX);
 		model.addAttribute("pag",pag);
 		model.addAttribute("p",pageVo);
 		model.addAttribute("qVos",qVos);
