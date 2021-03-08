@@ -43,6 +43,12 @@ public class MypageController {
 	public String MypageOrderGet(Model model, HttpSession session) {
 		String mMID = (String) session.getAttribute("smid");
 		List<OrderVo> vos = mypageService.getMyOrder(mMID);
+
+		int currentEmoney = memberService.getMyEmoney(mMID);
+		model.addAttribute("currentEmoney",currentEmoney);
+		int couponCnt = mypageService.AvailableCouponCnt(mMID);
+		model.addAttribute("couponCnt",couponCnt);
+		
 		model.addAttribute("vos",vos);
 		return "mypage/order";
 	}
@@ -52,14 +58,25 @@ public class MypageController {
 		String mMID = (String) session.getAttribute("smid");
 		List<WishlistVo> vos = mypageService.getMyWishlist(mMID);
 		model.addAttribute("vos",vos);
+		
+		int currentEmoney = memberService.getMyEmoney(mMID);
+		model.addAttribute("currentEmoney",currentEmoney);
+		int couponCnt = mypageService.AvailableCouponCnt(mMID);
+		model.addAttribute("couponCnt",couponCnt);
+		
 		return "mypage/wishlist";
 	}
 	
 	@RequestMapping(value="/coupon", method=RequestMethod.GET)
 	public String MypageCouponGet(Model model, HttpSession session) {
 		String mMID = (String) session.getAttribute("smid");
-		List<CouponVo> vos = memberService.getMyCouponList(mMID);
+		List<CouponVo> vos = mypageService.getMyCouponList(mMID);
 		model.addAttribute("vos",vos);
+		int currentEmoney = memberService.getMyEmoney(mMID);
+		model.addAttribute("currentEmoney",currentEmoney);
+		int couponCnt = mypageService.AvailableCouponCnt(mMID);
+		model.addAttribute("couponCnt",couponCnt);
+
 		return "mypage/coupon";
 	}
 
@@ -70,6 +87,9 @@ public class MypageController {
 		int currentEmoney = memberService.getMyEmoney(mMID);
 		model.addAttribute("vos",vos);
 		model.addAttribute("currentEmoney",currentEmoney);
+		int couponCnt = mypageService.AvailableCouponCnt(mMID);
+		model.addAttribute("couponCnt",couponCnt);
+		
 		return "mypage/emoney";
 	}
 	
@@ -78,6 +98,11 @@ public class MypageController {
 		String mMID = (String) session.getAttribute("smid");
 		List<ReviewVo> vos = mypageService.getMyReviewList(mMID);
 		model.addAttribute("vos",vos);
+		int currentEmoney = memberService.getMyEmoney(mMID);
+		model.addAttribute("currentEmoney",currentEmoney);
+		int couponCnt = mypageService.AvailableCouponCnt(mMID);
+		model.addAttribute("couponCnt",couponCnt);
+
 		return "mypage/review";
 	}
 	
@@ -103,9 +128,15 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value="/orderDetail", method=RequestMethod.GET)
-	public String MypageOrderGet(String oNVOICE,Model model) {
+	public String MypageOrderGet(String oNVOICE,Model model,HttpSession session) {
 		OrderVo oVo = mypageService.getMyOrderInfo(oNVOICE);
+		String mMID = (String)session.getAttribute("smid");
+		
 		List<OrderDetailVo> vos = mypageService.getOrderDetails(oNVOICE);
+		int currentEmoney = memberService.getMyEmoney(mMID);
+		model.addAttribute("currentEmoney",currentEmoney);
+		int couponCnt = mypageService.AvailableCouponCnt(mMID);
+		model.addAttribute("couponCnt",couponCnt);
 		model.addAttribute("vos",vos);
 		model.addAttribute("oVo",oVo);
 		return "mypage/orderDetail";

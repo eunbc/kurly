@@ -53,6 +53,7 @@
 		    document.getElementById('cart-total').innerText = numberWithCommas(finalTotal);
 		    document.getElementById('cart-finalTotal').innerText = numberWithCommas(finalTotal);
 		    //var Total = finalTotal - cpPRICE - mEMONEY;
+		    
 			$('.select-option').change(function() {
 				var cpPRICE = Number($(this).find(':selected').attr('data-cpPRICE'));
 				var cpMINIMUM = Number($(this).find(':selected').attr('data-cpMINIMUM'));
@@ -64,7 +65,11 @@
 				    document.getElementById('cart-coupon').innerText = 0;
 			    } else {
 				    document.getElementById('cart-coupon').innerText = numberWithCommas(cpPRICE);
-				    document.getElementById('cart-finalTotal').innerText = numberWithCommas(finalTotal-cpPRICE);
+				    document.getElementById('coupon').value = cpPRICE;
+					var coupon = Number(document.getElementById('coupon').value);
+				    var emoney = Number(document.getElementById('emoney').value);
+				    
+				    document.getElementById('cart-finalTotal').innerText = numberWithCommas(finalTotal-coupon-emoney);
 			    }
 			});
 		});
@@ -215,7 +220,12 @@
 							    document.getElementById('cart-emoney').innerText = 0;
 							} else {
 							    document.getElementById('cart-emoney').innerText = numberWithCommas(emoney.value);
-							    document.getElementById('cart-finalTotal').innerText = numberWithCommas(finalTotal-emoney.value);
+							    
+							    var coupon = Number(document.getElementById('coupon').value);
+							    document.getElementById('emoney').value = emoney.value;
+							    var emoney = Number(document.getElementById('emoney').value);
+							    
+							    document.getElementById('cart-finalTotal').innerText = numberWithCommas(finalTotal-coupon-emoney);
 							}
 						}
 					</script>
@@ -229,7 +239,9 @@
 					주문금액 : <strong id="cart-total">0</strong>
 				</p>
 				<p>쿠폰할인금액 : <strong id="cart-coupon">0</strong></p>
+				<input type="hidden" id="coupon" value="0"/>
 				<p>적립금사용 : <strong id="cart-emoney">0</strong></p>
+				<input type="hidden" id="emoney" value="0"/>
 			</div>
 			<div>
 	            <div class="cart-total">

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.cjs200809.dao.AdminDao;
 import com.spring.cjs200809.dao.MypageDao;
+import com.spring.cjs200809.vo.CouponVo;
 import com.spring.cjs200809.vo.EmoneyVo;
 import com.spring.cjs200809.vo.OrderDetailVo;
 import com.spring.cjs200809.vo.OrderVo;
@@ -61,6 +62,16 @@ public class MyPageServiceImp implements MypageService{
 	@Override
 	public List<ReviewVo> getMyReviewList(String mMID) {
 		return mypageDao.getMyReviewList(mMID);
+	}
+
+	@Override
+	public List<CouponVo> getMyCouponList(String mMID) {
+		return mypageDao.getMyCouponList(mMID);
+	}
+
+	@Override
+	public int AvailableCouponCnt(String mMID) {
+		return mypageDao.AvailableCouponCnt(mMID);
 	}
 	
 

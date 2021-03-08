@@ -40,7 +40,6 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/nav.jsp" %>
-<%@ include file="/WEB-INF/views/include/mypage-box.jsp" %>
 <div class="content-default">
 	<div class="subNav">
 		<h2 style="font-weight: 600">&nbsp;마이컬리</h2>

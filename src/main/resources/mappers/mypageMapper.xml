@@ -52,4 +52,14 @@
 					where r.mMID=#{mMID} 
 						order by rIDX desc;
 	</select>
+	
+	<select id="getMyCouponList" resultType="com.spring.cjs200809.vo.CouponVo">
+		select * from coupon where mMID=#{mMID} order by cpIDX desc;
+	</select>
+	
+	<select id="AvailableCouponCnt" resultType="int">
+		select count(cpIDX) from coupon 
+			where mMID=#{mMID} and cpUSE='N' and
+				DATE(NOW()) BETWEEN DATE(cpSTARTDATE) AND DATE(cpENDDATE); 
+	</select>
 </mapper>

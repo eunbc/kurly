@@ -13,7 +13,7 @@
 						where od.gIDX=#{gIDX} 
 							and o.mMID=#{mMID} 
 							and od.odREVIEW='N'
-							and date(now()) &lt; date_add(o.oDATE, interval +1 month);
+							and date(now()) &lt; date_add(o.oDATE, interval +1 month) limit 1;
 	</select>
 	
 	<update id="changeReviewStatus">

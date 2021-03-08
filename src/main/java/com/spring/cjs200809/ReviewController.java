@@ -45,7 +45,7 @@ public class ReviewController {
 	@RequestMapping(value="/write", method=RequestMethod.GET)
 	public String writeReviewGet(Model model,int gIDX,HttpSession session) {
 		String mMID = (String) session.getAttribute("smid");
-		//기존에 해당 상품을 구입한 이력이 있는지를 확인
+		//기존에 해당 상품을 구입한 이력이 있는지를 확인 --같은 상품을 구매했을 경우 다수의 vo가 넘어옴
 		OrderDetailVo vo = reviewService.checkMyOrderforReview(gIDX,mMID);
 		
 		if(vo!=null) {

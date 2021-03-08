@@ -49,7 +49,7 @@
 	<select id="getMyCouponList" resultType="com.spring.cjs200809.vo.CouponVo">
 		SELECT * FROM coupon
 			WHERE DATE(NOW()) BETWEEN DATE(cpSTARTDATE) AND DATE(cpENDDATE) 
-				AND mMID= #{mMID} AND cpUSE='N';		
+				AND mMID= #{mMID} AND cpUSE='N' order by cpIDX desc;		
 	</select>
 	
 	<update id="subtractEmoney">

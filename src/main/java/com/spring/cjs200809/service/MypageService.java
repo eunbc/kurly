@@ -2,6 +2,7 @@ package com.spring.cjs200809.service;
 
 import java.util.List;
 
+import com.spring.cjs200809.vo.CouponVo;
 import com.spring.cjs200809.vo.EmoneyVo;
 import com.spring.cjs200809.vo.OrderDetailVo;
 import com.spring.cjs200809.vo.OrderVo;
@@ -27,5 +28,9 @@ public interface MypageService {
 	public List<OrderDetailVo> getOrderDetails(String oNVOICE);
 
 	public List<ReviewVo> getMyReviewList(String mMID);
+
+	public List<CouponVo> getMyCouponList(String mMID);
+
+	public int AvailableCouponCnt(String mMID);
 
 }

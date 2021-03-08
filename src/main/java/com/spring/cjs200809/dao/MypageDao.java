@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.spring.cjs200809.vo.CouponVo;
 import com.spring.cjs200809.vo.EmoneyVo;
 import com.spring.cjs200809.vo.OrderDetailVo;
 import com.spring.cjs200809.vo.OrderVo;
@@ -29,5 +30,9 @@ public interface MypageDao {
 	public List<OrderDetailVo> getOrderDetails(@Param("oNVOICE")String oNVOICE);
 
 	public List<ReviewVo> getMyReviewList(@Param("mMID")String mMID);
+
+	public List<CouponVo> getMyCouponList(@Param("mMID")String mMID);
+
+	public int AvailableCouponCnt(@Param("mMID")String mMID);
 
 }

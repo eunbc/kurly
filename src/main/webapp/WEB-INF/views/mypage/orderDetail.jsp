@@ -160,7 +160,7 @@
 			<div class="table">
 				<div class="row">
 					<span class="cell col1">배송지</span>
-					<span class="cell col2" id="address">${oVo.oADDRESS}</span>
+					<span class="cell col2" id="address">${fn:replace(oVo.oADDRESS,'@',' ')}</span>
 				</div>
 			</div>
 		</div>
