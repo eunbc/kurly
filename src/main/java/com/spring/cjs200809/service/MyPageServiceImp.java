@@ -73,6 +73,16 @@ public class MyPageServiceImp implements MypageService{
 	public int AvailableCouponCnt(String mMID) {
 		return mypageDao.AvailableCouponCnt(mMID);
 	}
+
+	@Override
+	public void purchaseConfirm(int oIDX) {
+		mypageDao.purchaseConfirm(oIDX);
+	}
+
+	@Override
+	public void cancelOrder(int oIDX) {
+		mypageDao.cancelOrder(oIDX);
+	}
 	
 
 

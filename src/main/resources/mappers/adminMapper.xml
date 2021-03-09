@@ -187,4 +187,14 @@
 		select count(oIDX) from orderinfo where DATE(oDATE)=DATE(NOW()); 
 	</select>
 	
+	<select id="orderTotRecCnt" resultType="int">
+		select count(oIDX) from orderinfo;
+	</select>
+	
+	<select id="listOrder" resultType="com.spring.cjs200809.vo.OrderVo">
+		select * from orderinfo order by oIDX desc;
+	</select>
+	
+	
+	
 </mapper>

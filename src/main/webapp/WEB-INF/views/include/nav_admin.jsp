@@ -108,10 +108,8 @@
 			</li>
 			<li class="menu3"><a href="${contextPath}/" class="menuLink">주문관리</a>
 				<ul class="menu2_s submenu">
-					<li><a href="${contextPath}/shop/productList?category=">상품등록</a></li>
-					<li><a href="${contextPath}/shop/productList?category=">상품목록</a></li>
-					<li><a href="${contextPath}/shop/productList?category=">대분류관리</a></li>
-					<li><a href="${contextPath}/shop/productList?category=">중분류관리</a></li>
+					<li><a href="${contextPath}/admin/orderList">주문관리</a></li>
+					<li><a href="${contextPath}/admin/refund">환불요청</a></li>
 				</ul>
 			</li>
 			<li class="menu4"><a href="${contextPath}/" class="menuLink">문의관리</a>

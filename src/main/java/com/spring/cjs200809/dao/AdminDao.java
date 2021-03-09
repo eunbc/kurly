@@ -10,6 +10,7 @@ import com.spring.cjs200809.vo.GoodsOptionVo;
 import com.spring.cjs200809.vo.GoodsVo;
 import com.spring.cjs200809.vo.InquiryVo;
 import com.spring.cjs200809.vo.MemberVo;
+import com.spring.cjs200809.vo.OrderVo;
 import com.spring.cjs200809.vo.QnaVo;
 import com.spring.cjs200809.vo.ReviewVo;
 import com.spring.cjs200809.vo.SubcategoryVo;
@@ -85,6 +86,10 @@ public interface AdminDao {
 	public int getInquiryCnt();
 
 	public int getOrderCntToday();
+
+	public int orderTotRecCnt();
+
+	public List<OrderVo> listOrder(@Param("startNo")int startNo,@Param("pageSize") int pageSize);
 
 
 }

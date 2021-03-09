@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.spring.cjs200809.pagination.PageProcess;
 import com.spring.cjs200809.service.AdminService;
 import com.spring.cjs200809.service.InquiryService;
+import com.spring.cjs200809.service.MypageService;
 import com.spring.cjs200809.service.QnaService;
 import com.spring.cjs200809.vo.CategoryVo;
 import com.spring.cjs200809.vo.CouponVo;
@@ -29,6 +30,8 @@ import com.spring.cjs200809.vo.GoodsVo;
 import com.spring.cjs200809.vo.InquiryReplyVo;
 import com.spring.cjs200809.vo.InquiryVo;
 import com.spring.cjs200809.vo.MemberVo;
+import com.spring.cjs200809.vo.OrderDetailVo;
+import com.spring.cjs200809.vo.OrderVo;
 import com.spring.cjs200809.vo.QnaVo;
 import com.spring.cjs200809.vo.ReviewVo;
 import com.spring.cjs200809.vo.SubcategoryVo;
@@ -50,6 +53,9 @@ public class AdminController {
 	
 	@Autowired
 	QnaService qnaService;
+	
+	@Autowired
+	MypageService mypageService;
 
 	@RequestMapping(value="/main", method=RequestMethod.GET)
 	public String mainAdminGet(Model model) {
@@ -456,6 +462,32 @@ public class AdminController {
 		model.addAttribute("vos",vos);
 		return "admin/memberList";
 	}
+	
+	@RequestMapping(value="/orderList", method=RequestMethod.GET)
+	public String orderListAdminGet(Model model,HttpServletRequest request) {
+		int pag = request.getParameter("pag")==null? 1 : Integer.parseInt(request.getParameter("pag"));
+		int pageSize = request.getParameter("pageSize")==null? 10 : Integer.parseInt(request.getParameter("pageSize"));
+		
+		com.spring.cjs200809.pagination.PageVo pageVo = pageProcess.pagination(pag,pageSize,"order");
+		List<OrderVo> vos = adminService.listOrder(pageVo.getStartNo(),pageVo.getPageSize());
+		int curScrNo = pageVo.getCurScrNo();
+		
+		model.addAttribute("curScrNo",curScrNo);
+		model.addAttribute("p",pageVo);
+		model.addAttribute("vos",vos);
+		return "admin/orderList";
+	}
+	
+	@RequestMapping(value="/orderDetail", method=RequestMethod.GET)
+	public String MypageOrderGet(String oNVOICE,Model model,HttpSession session) {
+		OrderVo oVo = mypageService.getMyOrderInfo(oNVOICE);
+		String mMID = (String)session.getAttribute("smid");
+		List<OrderDetailVo> vos = mypageService.getOrderDetails(oNVOICE);
+		model.addAttribute("vos",vos);
+		model.addAttribute("oVo",oVo);
+		return "admin/orderDetail";
+	}
+	
 	
 	
 	

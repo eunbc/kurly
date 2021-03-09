@@ -33,6 +33,26 @@
 			background-color: #5F0080;
 		}
 	</style>
+	<script>
+		function purchaseConfirm(oIDX,oAMOUNT) {
+			var ans = confirm("구매 확정하시겠습니까?");
+			if(!ans) return false;
+
+			var query = {
+					oIDX : oIDX,
+					oAMOUNT : oAMOUNT
+			}
+			$.ajax({
+				url : "${contextPath}/mypage/purchaseConfirm",
+				type : "post",
+				data : query,
+				success : function(data) {
+					alert("적립금이 지급되었습니다. 감사합니다.");
+					location.reload();
+				}
+			});
+		}
+	</script>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/nav.jsp" %>
@@ -66,11 +86,31 @@
 					<td>${fn:substring(vo.oDATE,0,16)}</td>
 					<td style="text-align: center;"><a href="${contextPath}/mypage/orderDetail?oNVOICE=${vo.oNVOICE}" class="title-decoration-none">${vo.oNVOICE}</a></td>
 					<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.oAMOUNT}"/>원</td>
-					<td>${vo.oSTATUS}</td>
+					<td><b>
+						<c:if test="${vo.oSTATUS==1}">
+							결제완료
+						</c:if>
+						<c:if test="${vo.oSTATUS==2}">
+							배송중
+						</c:if>
+						<c:if test="${vo.oSTATUS==3}">
+							배송완료
+						</c:if>
+						<c:if test="${vo.oSTATUS==4}">
+							구매확정
+						</c:if>
+						<c:if test="${vo.oSTATUS==5}">
+							환불요청
+						</c:if>
+						<c:if test="${vo.oSTATUS==6}">
+							환불완료
+						</c:if>
+						</b>
+					</td>
 					<td>
 						<input type="button" class="btn btn-outline-secondary" onclick="location.href='${contextPath}/inquiry/write?oNVOICE=${vo.oNVOICE}'" value="1:1문의" id="btn-Inquiry"/>
-						<c:if test="${vo.oSTATUS==1}">
-							<input type="button" class="btn btn-outline-secondary" value="구매확정" id="btn-Confirm"/>
+						<c:if test="${vo.oSTATUS==3}">
+							<input type="button" class="btn btn-outline-secondary" value="구매확정" onclick="purchaseConfirm(${vo.oIDX},${vo.oAMOUNT});" id="btn-Confirm"/>
 						</c:if>
 					</td>
 				</tr>

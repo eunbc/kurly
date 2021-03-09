@@ -35,4 +35,8 @@ public interface MypageDao {
 
 	public int AvailableCouponCnt(@Param("mMID")String mMID);
 
+	public void purchaseConfirm(@Param("oIDX")int oIDX);
+
+	public void cancelOrder(@Param("oIDX")int oIDX);
+
 }

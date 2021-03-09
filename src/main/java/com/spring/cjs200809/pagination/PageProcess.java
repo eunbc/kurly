@@ -44,6 +44,9 @@ public class PageProcess {
 		else if(partFlag.equals("review")) {
 			totRecCnt = adminDao.reviewTotRecCnt(); 
 		} 
+		else if(partFlag.equals("order")) {
+			totRecCnt = adminDao.orderTotRecCnt(); 
+		} 
 		else if(partFlag.equals("회원문의")) {
 			totRecCnt = faqDao.fListTotRecCntCategory("회원문의"); 
 		} 

@@ -31,16 +31,16 @@
 			<p class="mypage-number">
 				<a href="">적립 
 				<c:if test="${slevel=='일반'}">
-					0.5%
-				</c:if>
-				<c:if test="${slevel=='화이트'}">
 					1%
 				</c:if>
-				<c:if test="${slevel=='라벤더'}">
+				<c:if test="${slevel=='화이트'}">
 					3%
 				</c:if>
-				<c:if test="${slevel=='퍼플'}">
+				<c:if test="${slevel=='라벤더'}">
 					5%
+				</c:if>
+				<c:if test="${slevel=='퍼플'}">
+					10%
 				</c:if>
 				<c:if test="${slevel=='관리자'}">
 					10%

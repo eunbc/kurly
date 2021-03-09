@@ -142,5 +142,53 @@ public class MypageController {
 		return "mypage/orderDetail";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/purchaseConfirm", method=RequestMethod.POST)
+	public String purchaseConfirmPost(HttpSession session,int oIDX,int oAMOUNT) {
+		String mMID = (String)session.getAttribute("smid");
+		String slevel = (String)session.getAttribute("slevel"); 
+		int emoney = 0;
+		int percent = 0;
+		
+		if(mMID != null) {
+			//주문 상태 변경
+			mypageService.purchaseConfirm(oIDX);
+			
+			//적립금 적립
+			switch (slevel) {
+				case "일반":
+					percent = 1;
+					break;
+				case "화이트":
+					percent = 3;
+					break;
+				case "라벤더":
+					percent = 5;
+					break;
+				case "퍼플":
+					percent = 10;
+					break;
+				default:
+					break;
+			}
+			System.out.println(percent);
+			
+			emoney = (int) Math.round(oAMOUNT * percent * 0.01); 
+			mypageService.addEmoney(mMID, emoney, "구매확정 적립");
+			memberService.addEmoneyMember(mMID, emoney);
+		}  
+		return "";  
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/cancelOrder", method=RequestMethod.POST)
+	public String cancelOrderPost(HttpSession session,int oIDX) {
+		String mid = (String)session.getAttribute("smid");
+		 
+		if(mid != null) {
+			mypageService.cancelOrder(oIDX);
+		}  
+		return "";  
+	}
 	
 }

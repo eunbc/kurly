@@ -33,4 +33,8 @@ public interface MypageService {
 
 	public int AvailableCouponCnt(String mMID);
 
+	public void purchaseConfirm(int oIDX);
+
+	public void cancelOrder(int oIDX);
+
 }

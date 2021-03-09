@@ -24,7 +24,7 @@
 	</insert>
 	
 	<select id="getMyOrder" resultType="com.spring.cjs200809.vo.OrderVo">
-		select oDATE,oNVOICE,oAMOUNT,oSTATUS from orderinfo where mMID=#{mMID} order by oIDX desc;
+		select oIDX,oDATE,oNVOICE,oAMOUNT,oSTATUS from orderinfo where mMID=#{mMID} order by oIDX desc;
 	</select>
 
 	<select id="getMyOrderInfo" resultType="com.spring.cjs200809.vo.OrderVo">
@@ -62,4 +62,13 @@
 			where mMID=#{mMID} and cpUSE='N' and
 				DATE(NOW()) BETWEEN DATE(cpSTARTDATE) AND DATE(cpENDDATE); 
 	</select>
+	
+	<update id="purchaseConfirm">
+		update orderinfo set oSTATUS=4 where oIDX=#{oIDX};
+	</update>
+
+	<update id="cancelOrder">
+		update orderinfo set oSTATUS=5 where oIDX=#{oIDX};
+	</update>
+	
 </mapper>
