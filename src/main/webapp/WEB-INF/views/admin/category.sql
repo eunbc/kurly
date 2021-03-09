@@ -55,5 +55,7 @@ select * from order_detail od
 select * from order_detail od 
 			left join goods g on od.gIDX = g.gIDX
 			left join goods_option go on od.gIDX=go.gIDX and od.goIDX=go.goIDX;
-				
+
+select count(mIDX) from member where DATE(mJOINDAY)=DATE(NOW()); 
+			
 		

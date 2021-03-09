@@ -28,6 +28,7 @@ import com.spring.cjs200809.vo.GoodsOptionVo;
 import com.spring.cjs200809.vo.GoodsVo;
 import com.spring.cjs200809.vo.InquiryReplyVo;
 import com.spring.cjs200809.vo.InquiryVo;
+import com.spring.cjs200809.vo.MemberVo;
 import com.spring.cjs200809.vo.QnaVo;
 import com.spring.cjs200809.vo.ReviewVo;
 import com.spring.cjs200809.vo.SubcategoryVo;
@@ -51,7 +52,17 @@ public class AdminController {
 	QnaService qnaService;
 
 	@RequestMapping(value="/main", method=RequestMethod.GET)
-	public String mainAdminGet() {
+	public String mainAdminGet(Model model) {
+		int NewMemberCnt = adminService.getNewMemberCnt();
+		int OutofStock = adminService.getOutofStock();
+		int InquiryCnt = adminService.getInquiryCnt();
+		int OrderCntToday= adminService.getOrderCntToday();
+		
+		model.addAttribute("NewMemberCnt",NewMemberCnt);
+		model.addAttribute("OutofStock",OutofStock);
+		model.addAttribute("InquiryCnt",InquiryCnt);
+		model.addAttribute("OrderCntToday",OrderCntToday);
+		
 		return "admin/main";
 	}
 
@@ -421,6 +432,31 @@ public class AdminController {
 		adminService.reviewDeleteByAdminPost(rIDX);
   		return "";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/memberDelete", method=RequestMethod.POST)
+	public String memberDeleteByAdminPost(int mIDX) {
+		adminService.memberDeleteByAdmin(mIDX);
+  		return "";
+	}
+	
+	@RequestMapping(value="/memberList", method=RequestMethod.GET)
+	public String memberListAdminGet(Model model,HttpServletRequest request) {
+		String mDROPOUT = request.getParameter("mDROPOUT")==null? "전체":request.getParameter("mDROPOUT");
+		int pag = request.getParameter("pag")==null? 1 : Integer.parseInt(request.getParameter("pag"));
+		int pageSize = request.getParameter("pageSize")==null? 10 : Integer.parseInt(request.getParameter("pageSize"));
+		
+		com.spring.cjs200809.pagination.PageVo pageVo = pageProcess.pagination(pag,pageSize,"member",mDROPOUT);
+		List<MemberVo> vos = adminService.listMember(pageVo.getStartNo(),pageVo.getPageSize(),mDROPOUT);
+		int curScrNo = pageVo.getCurScrNo();
+		
+		model.addAttribute("mDROPOUT",mDROPOUT);
+		model.addAttribute("curScrNo",curScrNo);
+		model.addAttribute("p",pageVo);
+		model.addAttribute("vos",vos);
+		return "admin/memberList";
+	}
+	
 	
 	
 

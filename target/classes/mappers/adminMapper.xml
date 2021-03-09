@@ -149,4 +149,42 @@
 		delete from review where rIDX=#{rIDX};
 	</delete>
 	
+	<select id="memberTotRecCnt" resultType="int">
+	    <if test="partValue == '전체'">
+		    select count(mIDX) from member;
+	    </if>
+	    <if test="partValue != '전체'">
+			select count(mIDX) from member where mDROPOUT = 'Y';
+	    </if>
+	</select>
+	
+	<select id="listMember" resultType="com.spring.cjs200809.vo.MemberVo">
+	    <if test="mDROPOUT == '전체'">
+	  	    select * from member order by mIDX desc limit #{startNo},#{pageSize};
+	    </if>
+	    <if test="mDROPOUT != '전체'">
+	  	    select * from member where mDROPOUT = 'Y' order by mIDX desc limit #{startNo},#{pageSize};
+	    </if>
+	</select>
+	
+	<delete id="memberDeleteByAdmin">
+		delete from member where mIDX=#{mIDX};
+	</delete>
+	
+	<select id="getNewMemberCnt" resultType="int">
+		select count(mIDX) from member where DATE(mJOINDAY)=DATE(NOW()); 
+	</select>
+	
+	<select id="getOutofStock" resultType="int">
+		select count(gIDX) from goods where gSTOCK=0;
+	</select>
+	
+	<select id="getInquiryCnt" resultType="int">
+		select count(iIDX) from inquiry where iREPLY='답변대기중';
+	</select>
+	
+	<select id="getOrderCntToday" resultType="int">
+		select count(oIDX) from orderinfo where DATE(oDATE)=DATE(NOW()); 
+	</select>
+	
 </mapper>

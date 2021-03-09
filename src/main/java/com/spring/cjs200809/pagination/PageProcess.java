@@ -123,6 +123,9 @@ public class PageProcess {
 		else if(partFlag.equals("reviewList")) {
 			totRecCnt = reviewDao.reviewTotRecCnt(partValue);  
 		} 
+		else if(partFlag.equals("member")) {
+			totRecCnt = adminDao.memberTotRecCnt(partValue);  
+		} 
 		
 		
 		int totPage = (totRecCnt % pageSize)==0? totRecCnt/pageSize : (int) (totRecCnt/pageSize) +1;

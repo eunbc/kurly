@@ -22,6 +22,7 @@ import com.spring.cjs200809.vo.CouponVo;
 import com.spring.cjs200809.vo.GoodsOptionVo;
 import com.spring.cjs200809.vo.GoodsVo;
 import com.spring.cjs200809.vo.InquiryVo;
+import com.spring.cjs200809.vo.MemberVo;
 import com.spring.cjs200809.vo.QnaVo;
 import com.spring.cjs200809.vo.ReviewVo;
 import com.spring.cjs200809.vo.SubcategoryVo;
@@ -320,6 +321,36 @@ public class AdminServiceImp implements AdminService{
 	@Override
 	public void reviewDeleteByAdminPost(int rIDX) {
 		adminDao.reviewDeleteByAdminPost(rIDX);
+	}
+
+	@Override
+	public List<MemberVo> listMember(int startNo, int pageSize, String mDROPOUT) {
+		return adminDao.listMember(startNo,pageSize,mDROPOUT);
+	}
+
+	@Override
+	public void memberDeleteByAdmin(int mIDX) {
+		adminDao.memberDeleteByAdmin(mIDX);
+	}
+
+	@Override
+	public int getNewMemberCnt() {
+		return adminDao.getNewMemberCnt();
+	}
+
+	@Override
+	public int getOutofStock() {
+		return adminDao.getOutofStock();
+	}
+
+	@Override
+	public int getInquiryCnt() {
+		return adminDao.getInquiryCnt();
+	}
+
+	@Override
+	public int getOrderCntToday() {
+		return adminDao.getOrderCntToday();
 	}
 	
 

@@ -9,6 +9,7 @@ import com.spring.cjs200809.vo.CouponVo;
 import com.spring.cjs200809.vo.GoodsOptionVo;
 import com.spring.cjs200809.vo.GoodsVo;
 import com.spring.cjs200809.vo.InquiryVo;
+import com.spring.cjs200809.vo.MemberVo;
 import com.spring.cjs200809.vo.QnaVo;
 import com.spring.cjs200809.vo.ReviewVo;
 import com.spring.cjs200809.vo.SubcategoryVo;
@@ -70,5 +71,20 @@ public interface AdminDao {
 	public List<ReviewVo> listReview(@Param("startNo")int startNo,@Param("pageSize") int pageSize);
 
 	public void reviewDeleteByAdminPost(@Param("rIDX")int rIDX);
+
+	public int memberTotRecCnt(@Param("partValue")String partValue);
+
+	public List<MemberVo> listMember(@Param("startNo")int startNo,@Param("pageSize") int pageSize,@Param("mDROPOUT") String mDROPOUT);
+
+	public void memberDeleteByAdmin(@Param("mIDX")int mIDX);
+
+	public int getNewMemberCnt();
+
+	public int getOutofStock();
+
+	public int getInquiryCnt();
+
+	public int getOrderCntToday();
+
 
 }
