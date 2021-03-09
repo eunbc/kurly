@@ -86,5 +86,18 @@
 	<insert id="addOrder">
 		insert into orderinfo values (default,#{vo.mMID},default,#{vo.oNAME},#{vo.oPHONE},#{vo.oADDRESS},#{vo.oAMOUNT},#{vo.oEMONEY},#{vo.cpIDX},#{vo.oPAYMENT},#{vo.oNVOICE},default);
 	</insert>
+	
+	<select id="goodsSearch" resultType="com.spring.cjs200809.vo.GoodsVo">
+		select gIDX,gIMAGE,gPRICE,gDISCOUNT,gNAME 
+			from goods 
+				where gNAME like concat('%',#{strSearch},'%')
+					order by gIDX desc;
+	</select>
+	
+	<select id="goodsSearchCnt" resultType="int">
+		select count(gIDX)
+			from goods 
+				where gNAME like concat('%',#{strSearch},'%');
+	</select>
 
 </mapper>

@@ -60,6 +60,19 @@ public class GoodsController {
 		return "admin/goods";
 	}
 
+	@RequestMapping(value="/goodsSearch", method=RequestMethod.GET)
+	public String goodsSearchGet(Model model, HttpServletRequest request) {
+		String strSearch = request.getParameter("strSearch")==null? "" : request.getParameter("strSearch");
+		
+		List<GoodsVo> vos = goodsService.goodsSearch(strSearch);
+		int cntSearch = goodsService.goodsSearchCnt(strSearch);
+		
+		model.addAttribute("strSearch",strSearch);
+		model.addAttribute("cntSearch",cntSearch);
+		model.addAttribute("vos",vos);
+		return "shop/goods/goodsSearch";
+	}
+	
 	@RequestMapping(value="/goodsNew", method=RequestMethod.GET)
 	public String goodsNewGet(Model model, HttpServletRequest request) {
 		int pag = request.getParameter("pag")==null? 1 : Integer.parseInt(request.getParameter("pag"));
@@ -260,7 +273,8 @@ public class GoodsController {
 	@RequestMapping(value="/orderForm", method=RequestMethod.POST)
 	public String orderFormPost(HttpSession session, OrderVo vo) {
 		String mMID = (String) session.getAttribute("smid");
-
+		String toMail="";
+		String content="";
 		if (mMID!=null) {
 			//적립금 삭감
 			if(vo.getoEMONEY()!=0) {
@@ -275,10 +289,13 @@ public class GoodsController {
 			goodsService.addOrder(vo);
 	
 			//메일 보내기
-			
+			toMail = memberService.getMyEmailAddress(mMID);
+			content = vo.getoNVOICE();
+			return "redirect:/mail/orderCompleted/"+toMail+"/"+content+"/"; 
+		} else {
+			msgFlag="NeedtoLogin";
+			return "redirect:/msg/"+msgFlag;
 		}
-		msgFlag = "orderCompleted$oNVOICE="+vo.getoNVOICE();
-		return "redirect:/location/"+msgFlag;
 	}	
 	
 	//주문 상세 목록에 추가

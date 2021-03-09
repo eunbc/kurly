@@ -35,7 +35,7 @@
 				<tr>
 					<td>아이디<span class="necessary">*</span></td>
 					<td>
-						<input type="text" name="mMID" id="mMID" class="form-control" placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합"/>
+						<input type="text" name="mMID" id="mMID" class="form-control" placeholder="4~12자의 영문 소문자/숫자로만 입력"/>
 	                    <div class="validation" id="id_check"></div>
 					</td>
 					<td><input type="button" class="button-outline-join" style="width:140px" value="중복확인" id="idCheck"/></td>

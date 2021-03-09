@@ -14,7 +14,6 @@ public class AdminInterceptor extends HandlerInterceptorAdapter{
 		HttpSession session = request.getSession();
 		String slevel = session.getAttribute("slevel")==null? "" : (String)session.getAttribute("slevel");
 		
-		System.out.println(slevel);
 		if(!slevel.equals("관리자")) {
 			response.sendRedirect(request.getContextPath()+"/msg/adminNo");
 		}

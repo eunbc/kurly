@@ -48,5 +48,9 @@ public interface GoodsDao {
 
 	public List<GoodsVo> mainGoodsListOnsale();
 
+	public List<GoodsVo> goodsSearch(@Param("strSearch")String strSearch);
+
+	public int goodsSearchCnt(@Param("strSearch")String strSearch);
+
 
 }

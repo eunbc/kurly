@@ -11,6 +11,7 @@
 	<title>마켓컬리 :: 내일의 장보기, 마켓컬리</title>
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 	<link rel= "stylesheet" type="text/css" href="${contextPath}/resources/css/kurly.css?after">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
     	header {
     		width: 1100px;
@@ -142,6 +143,9 @@
 			color: white;
 			font-size: 9px;
 		}
+		#btnSearch {
+			cursor: pointer;
+		}
     </style>
 </head>
 <header>
@@ -211,13 +215,23 @@
 			<li class="menu3"><a href="${contextPath}/goods/goodsBest" class="menuLink">베스트</a></li>
 			<li class="menu4"><a href="${contextPath}/goods/goodsOnsale" class="menuLink">알뜰쇼핑</a></li>
 			<li class="menu5"><a href="${contextPath}/board/list" class="menuLink">고객센터</a></li>
-			<li style="width:220px;margin:8px;"><input type="text" class="form-control" placeholder="검색" /></li>
+			<li style="width:220px;margin:8px;"><input type="text" id="strSearch" class="form-control" placeholder="검색" /></li>
 		</ul> 
 		<div id="topMenu_icon">
-			&nbsp;<a href="${contextPath}/" style="top:-10px;" ><i class="xi-search xi-2x"></i></a>
+			&nbsp;<a id="btnSearch" style="top:-10px;" ><i class="xi-search xi-2x"></i></a>
 			<a href="${contextPath}/" style="top:-10px;" ><i class="xi-maker xi-2x"></i></a>
 			<a href="${contextPath}/goods/cart" ><i class="xi-cart-o xi-2x"></i><span class="badge badge-notify my-cart-badge" id="my-cart-badge">${scart}</span></a>
 		</div>
+		<script>
+			$(function() {
+				$("#btnSearch").click(function(){
+					var strSearch = document.getElementById("strSearch").value;
+					
+					if(strSearch=='') return false;
+					location.href='${contextPath}/goods/goodsSearch?strSearch='+strSearch;
+				});			
+			});
+		</script>
 	</div>
 	<!-- Nav Bar End -->
 </nav>

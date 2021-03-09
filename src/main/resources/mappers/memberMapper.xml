@@ -64,4 +64,8 @@
 		select mEMONEY from member where mMID=#{mMID};		
 	</select>
 	
+	<select id="getMyEmailAddress" resultType="String">
+		select mEMAIL from member where mMID=#{mMID};
+	</select>
+	
 </mapper>

@@ -89,5 +89,10 @@ public class MemberServiceImp implements MemberService{
 		return memberDao.getMyEmoney(mMID);
 	}
 
+	@Override
+	public String getMyEmailAddress(String mMID) {
+		return memberDao.getMyEmailAddress(mMID);
+	}
+
 
 }

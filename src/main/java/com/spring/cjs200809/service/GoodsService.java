@@ -45,5 +45,9 @@ public interface GoodsService {
 
 	public List<GoodsVo> mainGoodsListOnsale();
 
+	public List<GoodsVo> goodsSearch(String strSearch);
+
+	public int goodsSearchCnt(String strSearch);
+
 
 }

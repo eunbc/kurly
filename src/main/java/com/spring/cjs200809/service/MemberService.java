@@ -37,6 +37,8 @@ public interface MemberService {
 
 	public int getMyEmoney(String mMID);
 
+	public String getMyEmailAddress(String mMID);
+
 
 
 

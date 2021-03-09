@@ -106,6 +106,16 @@ public class GoodsServiceImp implements GoodsService{
 		return goodsDao.mainGoodsListOnsale();
 	}
 
+	@Override
+	public List<GoodsVo> goodsSearch(String strSearch) {
+		return goodsDao.goodsSearch(strSearch);
+	}
+
+	@Override
+	public int goodsSearchCnt(String strSearch) {
+		return goodsDao.goodsSearchCnt(strSearch);
+	}
+
 
 	
 

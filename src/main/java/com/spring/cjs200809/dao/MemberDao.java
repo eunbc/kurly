@@ -39,5 +39,7 @@ public interface MemberDao {
 
 	public int getMyEmoney(@Param("mMID")String mMID);
 
+	public String getMyEmailAddress(@Param("mMID")String mMID);
+
 
 }

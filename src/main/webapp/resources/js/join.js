@@ -1,22 +1,8 @@
 
-	//모든 공백 체크 정규식
-	var empJ = /\s/g;
 	//아이디 정규식
-	var idJ = /^[a-z0-9][a-z0-9_\-]{4,19}$/;
+	var idJ = /^[a-z0-9]{4,12}$/; 
 	// 비밀번호 정규식
-	var pwJ = /^[A-Za-z0-9]{4,12}$/;
-	// 이름 정규식
-	var nameJ = /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/;
-	// 이메일 검사 정규식
-	var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-	// 휴대폰 번호 정규식
-	var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
-	
-	/^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/
-	
-	
-	var birthJ = false;
-	
+	var pwJ = /^[a-z0-9]{4,12}$/;
 	
 	var idKey = 0;
 	var emailKey = 0;
@@ -31,7 +17,7 @@ $(document).ready(function() {
             console.log('true');
             $('#id_check').text('');
         } else {
-            $('#id_check').text('6자 이상의 영문 혹은 영문과 숫자를 조합');
+            $('#id_check').text('4~12자의 영문 소문자/숫자로만 입력');
             $('#id_check').css('font-size', '12px');
     		$('#id_check').css('color', 'black');
         }
@@ -42,7 +28,7 @@ $(document).ready(function() {
             console.log('true');
             $('#pwd_check').text('');
         } else {
-            $('#pwd_check').text('10자 이상 영문/숫자/특수문자(공백 제외)만 허용하며, 2개 이상 조합');
+            $('#pwd_check').text('4~12자의 영문 소문자/숫자로만 입력');
             $('#pwd_check').css('font-size', '12px');
         }
     });
@@ -65,8 +51,8 @@ $(document).ready(function() {
     		$("#mMID").focus();
     		return false;
     	}
-    	else if($("#mMID").val().length<6) {
-    		alert("아이디는 6자 이상만 허용합니다");
+    	else if($("#mMID").val().length<4) {
+    		alert("아이디는 4자 이상만 허용합니다");
     		$("#mMID").focus();
     		return false;
     	}

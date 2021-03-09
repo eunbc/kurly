@@ -5,3 +5,7 @@ create table faq(
 	fCONTENT 	text not null,
 	primary key(fIDX)
 );
+
+select gIDX,gIMAGE,gPRICE,gDISCOUNT,gNAME 
+			from goods 
+				where gNAME like concat('%','감자','%');
