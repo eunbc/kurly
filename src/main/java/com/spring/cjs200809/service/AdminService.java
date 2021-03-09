@@ -85,4 +85,12 @@ public interface AdminService {
 
 	public List<OrderVo> listOrder(int startNo, int pageSize);
 
+	public List<OrderVo> listOrderRefund();
+
+	public void refundByAdmin(int oIDX);
+
+	public void orderUpdate(int oIDX, int oSTATUS);
+
+	public void memberLevelUpdate(int mIDX, String mLEVEL);
+
 }

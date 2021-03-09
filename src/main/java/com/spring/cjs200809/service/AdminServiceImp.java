@@ -358,6 +358,26 @@ public class AdminServiceImp implements AdminService{
 	public List<OrderVo> listOrder(int startNo, int pageSize) {
 		return adminDao.listOrder(startNo,pageSize);
 	}
+
+	@Override
+	public List<OrderVo> listOrderRefund() {
+		return adminDao.listOrderRefund();
+	}
+
+	@Override
+	public void refundByAdmin(int oIDX) {
+		adminDao.refundByAdmin(oIDX);
+	}
+
+	@Override
+	public void orderUpdate(int oIDX, int oSTATUS) {
+		adminDao.orderUpdate(oIDX,oSTATUS);
+	}
+
+	@Override
+	public void memberLevelUpdate(int mIDX, String mLEVEL) {
+		adminDao.memberLevelUpdate(mIDX,mLEVEL); 
+	}
 	
 
 

@@ -195,16 +195,16 @@
 			<li class="menu1" style="width:170px">
 				<a href="${contextPath}/" class="menuLink" style="width: 170px"><i class="xi-bars xi-x">&nbsp;</i>전체 카테고리</a>
 				<ul class="menu2_s submenu">
-					<li><a href="${contextPath}/goods/goodsList?cCODE=9">채소</a></li>
-					<li><a href="${contextPath}/goods/goodsList?cCODE=9">과일·견과·쌀</a></li>
-					<li><a href="${contextPath}/goods/goodsList?cCODE=9">수산·해산·건어물</a></li>
-					<li><a href="${contextPath}/goods/goodsList?cCODE=9">정육·계란</a></li>
-					<li><a href="${contextPath}/goods/goodsList?cCODE=9">국·반찬·메인요리</a></li>
-					<li><a href="${contextPath}/goods/goodsList?cCODE=9">샐러드·간편식</a></li>
-					<li><a href="${contextPath}/goods/goodsList?cCODE=9">면·양념·오일</a></li>
-					<li><a href="${contextPath}/goods/goodsList?cCODE=9">생수·음료·우유·커피</a></li>
-					<li><a href="${contextPath}/goods/goodsList?cCODE=9">간식·과자·떡</a></li>
-					<li><a href="${contextPath}/goods/goodsList?cCODE=9">베이커리·치즈·델리</a></li>
+					<li><a href="${contextPath}/goods/goodsList?cCODE=907">채소</a></li>
+					<li><a href="${contextPath}/goods/goodsList?cCODE=908">과일·견과·쌀</a></li>
+					<li><a href="${contextPath}/goods/goodsList?cCODE=909">수산·해산·건어물</a></li>
+					<li><a href="${contextPath}/goods/goodsList?cCODE=910">정육·계란</a></li>
+					<li><a href="${contextPath}/goods/goodsList?cCODE=911">국·반찬·메인요리</a></li>
+					<li><a href="${contextPath}/goods/goodsList?cCODE=912">샐러드·간편식</a></li>
+					<li><a href="${contextPath}/goods/goodsList?cCODE=913">면·양념·오일</a></li>
+					<li><a href="${contextPath}/goods/goodsList?cCODE=914">생수·음료·우유·커피</a></li>
+					<li><a href="${contextPath}/goods/goodsList?cCODE=915">간식·과자·떡</a></li>
+					<li><a href="${contextPath}/goods/goodsList?cCODE=916">베이커리·치즈·델리</a></li>
 				</ul>
 			</li>
 			<li class="menu2"><a href="${contextPath}/goods/goodsNew" class="menuLink">신상품</a></li>

@@ -195,6 +195,22 @@
 		select * from orderinfo order by oIDX desc;
 	</select>
 	
+	<select id="listOrderRefund" resultType="com.spring.cjs200809.vo.OrderVo">
+		select * from orderinfo where oSTATUS=5 order by oIDX desc;
+	</select>
+	
+	<update id="refundByAdmin">
+		update orderinfo set oSTATUS=6 where oIDX=#{oIDX};
+	</update>
+	
+	<update id="orderUpdate">
+		update orderinfo set oSTATUS=#{oSTATUS} WHERE oIDX=#{oIDX};
+	</update>
+	
+	<update id="memberLevelUpdate">
+		update member set mLEVEL=#{mLEVEL} WHERE mIDX=#{mIDX};
+	</update>
+	
 	
 	
 </mapper>

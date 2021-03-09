@@ -11,9 +11,9 @@
 	<title>마켓컬리 :: 내일의 장보기, 마켓컬리</title>
 	<link rel= "stylesheet" type="text/css" href="${contextPath}/resources/css/kurly.css?after">
 	<style>
-		.goodsList-select{
-			text-align: center;
-			padding-bottom: 5px;
+		.memberList-select{
+			text-align: right;
+			margin-right: 20px;
 		}		
 	</style>
 	<script>
@@ -36,6 +36,51 @@
 			});
 			
 		}
+		$(function() {
+		    //체크박스 전체 선택
+		    $("#checkAll").click(function(){
+		        if($("#checkAll").prop("checked")){
+		            $(".memberChkbox").prop("checked",true);
+		        }else{
+		            $(".memberChkbox").prop("checked",false);
+		        }
+		    });
+		    
+		    //전체 선택된 상태에서 하나 해제할 때, 전체 선택 해제
+		    $(".memberChkbox").click(function(){
+	            var check = $('input:checkbox[id="checkAll"]').is(':checked');
+		    	if(check){
+		            $("#checkAll").prop("checked",false);
+		    	}
+		    });
+			
+		    //선택 삭제 버튼 누르면 선택된 항목만 삭제된다
+		    $(".selectUpdate_btn").click(function(){
+		      	var checkArr = new Array();
+		      	var mLEVEL = levelForm.mLEVEL.value;
+		      	
+		      	if(mLEVEL=='') {
+		      		alert("변경할 상태를 선택하세요.");
+		      		return false;
+		      	}
+		      
+		      	$("input[class='memberChkbox']:checked").each(function(){
+		       		checkArr.push($(this).attr("data-mIDX"));
+		      	});
+		      	
+		    	var ans = confirm(""+checkArr.length+"명의 등급을 수정하시겠습니까?");
+		     	if(!ans) return false;
+
+		     	$.ajax({
+		       		url : "${contextPath}/admin/memberLevelUpdate",
+		       		type : "post",
+		       		data : { chbox : checkArr, mLEVEL : mLEVEL},
+		       		success : function(){
+						location.reload();
+		       		}
+		      	});
+		    });
+		}); 		
 	</script>
 </head>
 <body>
@@ -52,9 +97,25 @@
 			    <option value="탈퇴" <c:if test="${mDROPOUT=='탈퇴'}">selected</c:if>>탈퇴 신청</option>
 			</select>
 		</form>
+		
+		<div class="memberList-select">
+			<form name="levelForm">
+				<label for="oSTATUS">회원레벨 선택  </label>
+				<select class="input-box" id="mLEVEL" name="mLEVEL">
+					<option value="">선택하세요</option>
+					<option value="일반">일반</option>
+					<option value="화이트">화이트</option>
+					<option value="라벤더">라벤더</option>
+					<option value="퍼플">퍼플</option>
+				</select>
+				
+				<input type="button" class="button-small selectUpdate_btn" value="회원등급변경"/>
+			</form>
+		</div>		
 	
 		<table class="admin-list-table">
 			<tr> 
+				<th style="width:70px"><input type="checkbox" id="checkAll"/>전체</th>
 				<th style="width:100px">번호</th>
 				<th style="width:200px">회원아이디</th>
 				<th style="width:200px">이메일</th>
@@ -64,11 +125,28 @@
 			</tr>
  			<c:forEach var="vo" items="${vos}">
 				<tr>
-					<td>${curScrNo}</td>
-					<td style="text-align: center;">${vo.mMID}</td>
+					<td><input type="checkbox" class="memberChkbox" data-mIDX="${vo.mIDX}" /></td>
+					<td  style="text-align: center;">${curScrNo}</td>
+					<td>${vo.mMID}</td>
 					<td>${vo.mEMAIL}</td>
 					<td>${fn:substring(vo.mJOINDAY,0,10)}</td>
-					<td>${vo.mLEVEL}</td>
+					<td>
+						<c:if test="${vo.mLEVEL=='일반'}">
+							<span class="level general">일반</span>
+						</c:if>
+						<c:if test="${vo.mLEVEL=='화이트'}">
+							<span class="level white">화이트</span>
+						</c:if>
+						<c:if test="${vo.mLEVEL=='라벤더'}">
+							<span class="level lavendar">라벤더</span>
+						</c:if>
+						<c:if test="${vo.mLEVEL=='퍼플'}">
+							<span class="level purple">퍼플</span>
+						</c:if>
+						<c:if test="${vo.mLEVEL=='관리자'}">
+							<span class="level admin">관리자</span>
+						</c:if>
+					</td>
 					<td>
 						<c:if test="${vo.mDROPOUT=='Y'}">
 							<input type="button" class="btn btn-danger" onclick="memberDelete(${vo.mIDX})" value="탈퇴처리"/>

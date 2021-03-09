@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.spring.cjs200809.pagination.PageProcess;
 import com.spring.cjs200809.service.AdminService;
 import com.spring.cjs200809.service.InquiryService;
+import com.spring.cjs200809.service.MemberService;
 import com.spring.cjs200809.service.MypageService;
 import com.spring.cjs200809.service.QnaService;
 import com.spring.cjs200809.vo.CategoryVo;
@@ -56,6 +57,9 @@ public class AdminController {
 	
 	@Autowired
 	MypageService mypageService;
+	
+	@Autowired
+	MemberService memberService;
 
 	@RequestMapping(value="/main", method=RequestMethod.GET)
 	public String mainAdminGet(Model model) {
@@ -486,6 +490,62 @@ public class AdminController {
 		model.addAttribute("vos",vos);
 		model.addAttribute("oVo",oVo);
 		return "admin/orderDetail";
+	}
+	
+	@RequestMapping(value="/refund", method=RequestMethod.GET)
+	public String orderRefundAdminGet(Model model,HttpServletRequest request) {
+		List<OrderVo> vos = adminService.listOrderRefund();
+		model.addAttribute("vos",vos);
+		return "admin/refund";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/orderRefund", method=RequestMethod.POST)
+	public String orderRefundPost(String mMID,int oIDX, int oEMONEY) {
+		adminService.refundByAdmin(oIDX);
+		//주문취소로 인한 적립금 환불
+		mypageService.addEmoney(mMID, oEMONEY, "주문취소로 인한 적립금 환불");
+		memberService.addEmoneyMember(mMID, oEMONEY);
+		return "";  
+	}
+
+	//주문 선택 항목 일괄변경 
+	@ResponseBody
+	@RequestMapping(value="/orderUpdate", method=RequestMethod.POST)
+	public int orderUpdatePost(HttpSession session,
+		     @RequestParam(value = "chbox[]") List<String> chArr, int oSTATUS) {
+		String mMID = (String)session.getAttribute("smid");
+		 
+		int result = 0;
+		int oIDX = 0;
+		
+		if(mMID != null) {
+			for(String i : chArr) {   
+				oIDX = Integer.parseInt(i);
+				adminService.orderUpdate(oIDX,oSTATUS);
+			}   
+			result = 1;
+		}  
+		return result;  
+	}
+	
+	//회원등급 일괄변경 
+	@ResponseBody
+	@RequestMapping(value="/memberLevelUpdate", method=RequestMethod.POST)
+	public int memberLevelUpdatePost(HttpSession session,
+		     @RequestParam(value = "chbox[]") List<String> chArr, String mLEVEL) {
+		String mMID = (String)session.getAttribute("smid");
+		 
+		int result = 0;
+		int mIDX = 0;
+		if(mMID != null) {
+			for(String i : chArr) {   
+				mIDX = Integer.parseInt(i);
+				adminService.memberLevelUpdate(mIDX,mLEVEL);
+			}   
+			result = 1;
+		}  
+		return result;  
 	}
 	
 	

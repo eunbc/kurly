@@ -32,6 +32,7 @@ import com.spring.cjs200809.vo.GoodsOptionVo;
 import com.spring.cjs200809.vo.GoodsVo;
 import com.spring.cjs200809.vo.MemberVo;
 import com.spring.cjs200809.vo.OrderVo;
+import com.spring.cjs200809.vo.SubcategoryVo;
 
 
 @Controller
@@ -96,6 +97,39 @@ public class GoodsController {
 		model.addAttribute("p",pageVo);
 		model.addAttribute("vos",vos);
 		return "shop/goods/goodsOnsale";
+	}
+	
+	@RequestMapping(value="/goodsList", method=RequestMethod.GET)
+	public String goodsListGet(Model model, HttpServletRequest request) {
+		com.spring.cjs200809.pagination.PageVo pageVo;
+		int pag = request.getParameter("pag")==null? 1 : Integer.parseInt(request.getParameter("pag"));
+		int pageSize = request.getParameter("pageSize")==null? 9 : Integer.parseInt(request.getParameter("pageSize"));
+		String cCODE = request.getParameter("cCODE")==null? "" : request.getParameter("cCODE");
+		String scCODE = request.getParameter("scCODE")==null? "" : request.getParameter("scCODE");
+		
+		//대분류 하위 중분류 불러오기
+		List<SubcategoryVo> scVos = adminService.getSubcategoryList(cCODE);
+		model.addAttribute("scVos",scVos);
+		String cNAME = adminService.getcNAME(cCODE);
+		
+		//대분류 선택시 
+		if(cCODE!=""&&scCODE=="") {
+			pageVo = pageProcess.pagination(pag,pageSize,"goods",cCODE);
+		}
+		//대분류&중분류 선택시
+		else {
+			pageVo = pageProcess.pagination(pag,pageSize,"goods",cCODE.toString()+scCODE.toString());
+		}		
+
+		List<GoodsVo> vos = adminService.getGoodsByCategory(cCODE,scCODE,pageVo.getStartNo(),pageVo.getPageSize());
+		
+		model.addAttribute("p",pageVo);
+		model.addAttribute("cNAME",cNAME);
+		model.addAttribute("cCODE",cCODE);
+		model.addAttribute("scCODE",scCODE);
+		model.addAttribute("vos",vos);
+		model.addAttribute("pag",pag);
+		return "shop/goods/goodsList";
 	}
 	
 	@RequestMapping(value="/goodsDetail", method=RequestMethod.GET)

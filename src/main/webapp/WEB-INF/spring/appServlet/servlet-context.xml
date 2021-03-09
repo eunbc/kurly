@@ -33,4 +33,25 @@
 	<!-- 비밀번호 암호화 -->
 	<beans:bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></beans:bean>	
 	
+	<!-- 인터셉터 설정 -->
+	<beans:bean id="AdminInterceptor" class="com.spring.cjs200809.interceptor.AdminInterceptor"/>	
+	<beans:bean id="MemberInterceptor" class="com.spring.cjs200809.interceptor.MemberInterceptor"/>	
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/mypage/**"/>
+			<mapping path="/inquiry/**"/>
+			<mapping path="/qna/write"/>
+			<mapping path="/goods/cart"/>
+			<mapping path="/goods/orderForm"/>
+			<beans:ref bean="MemberInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/admin/**"/>
+			<mapping path="/board/write"/>
+			<mapping path="/faq/write"/>
+			<beans:ref bean="AdminInterceptor"/>
+		</interceptor>
+	</interceptors>
+		
 </beans:beans>

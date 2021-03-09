@@ -92,6 +92,10 @@ public class MsgController {
 			model.addAttribute("msg","후기가 등록되었습니다. 적립금 100원이 지급됩니다.");
 			model.addAttribute("url","mypage/review");
 		}	
+		else if(msgFlag.equals("adminNo")) {
+			model.addAttribute("msg","관리자 전용 구역입니다. 다시 로그인하세요.");
+			model.addAttribute("url","member/login");
+		}	
 		
 		//예) msgFlag = "imgDeleteOk$fileCnt="+fileCnt;
 		//앞의 예에서 특정 매개변수에 추가로 매개값이 넘어왔을 때는 아래와 같이 처리한다.

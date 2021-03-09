@@ -91,5 +91,13 @@ public interface AdminDao {
 
 	public List<OrderVo> listOrder(@Param("startNo")int startNo,@Param("pageSize") int pageSize);
 
+	public List<OrderVo> listOrderRefund();
+
+	public void refundByAdmin(@Param("oIDX")int oIDX);
+
+	public void orderUpdate(@Param("oIDX")int oIDX,@Param("oSTATUS") int oSTATUS);
+
+	public void memberLevelUpdate(@Param("mIDX")int mIDX,@Param("mLEVEL") String mLEVEL);
+
 
 }
