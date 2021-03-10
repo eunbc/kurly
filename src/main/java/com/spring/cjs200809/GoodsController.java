@@ -169,6 +169,7 @@ public class GoodsController {
 		String mMID = (String) session.getAttribute("smid");
 		String result = "";
 		
+		
 		if (mMID!=null) {
 			try {
 				JSONParser jsonParse = new JSONParser();
@@ -304,6 +305,8 @@ public class GoodsController {
 	public String addtoOrderPost(@RequestParam String order,String ordernumber,HttpSession session) {
 		String mMID = (String) session.getAttribute("smid");
 		String result = "";
+		
+		System.out.println(order);
 		
 		if (mMID!=null) {
 			try {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.spring.cjs200809.vo.InquiryVo;
 import com.spring.cjs200809.vo.OrderDetailVo;
 import com.spring.cjs200809.vo.ReviewVo;
 
@@ -20,5 +21,9 @@ public interface ReviewService {
 	public void addReviewViewCnt(int rIDX);
 
 	public void addHelpCnt(int rIDX);
+
+	public ReviewVo viewReview(int rIDX);
+
+	public void deleteReview(int rIDX);
 
 }

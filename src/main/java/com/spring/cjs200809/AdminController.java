@@ -548,8 +548,11 @@ public class AdminController {
 		return result;  
 	}
 	
-	
-	
+	@RequestMapping(value="/chart", method=RequestMethod.GET)
+	public String chartAdminGet(Model model) {
+		
+		return "admin/chart";
+	}
 	
 
 }

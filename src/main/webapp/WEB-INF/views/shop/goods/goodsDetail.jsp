@@ -180,18 +180,18 @@
 					<script>
 						let optionSelect = document.querySelector('.select-option');
 						let selectEvent = function(){
-						    //화면단에서 진행되는 작업
+							
+							//select 안의 value, data 받아오기
 							let goIDX = optionSelect.options[optionSelect.selectedIndex].value;  
 						    let gIDX = optionSelect.options[optionSelect.selectedIndex].getAttribute('data-gIDX') 
 						    let goNAME = optionSelect.options[optionSelect.selectedIndex].getAttribute('data-goNAME')
 						    let goPRICE = optionSelect.options[optionSelect.selectedIndex].getAttribute('data-goPRICE') 
 						  
 						    if(goIDX=="") {
-						    	//console.log("옵션 미선택");
 						    	return false;
 						    }
-						    addItemToCart(goIDX, goNAME, goPRICE)
-						    updateCartTotal()
+						    addItemToCart(goIDX, goNAME, goPRICE) //새로운 객체 생성
+						    updateCartTotal() //합계 변경
 						}
 						optionSelect.addEventListener("change", selectEvent);	
 					</script>
@@ -321,7 +321,6 @@
 			    		} else if(data=="1"){
 				    		alert("장바구니에 추가하였습니다.");
 							purchaseClicked();
-							//$("#my-cart-badge").load();
 			    		} else if(data=="2"){
 				    		alert("이미 존재하는 상품으로,장바구니에 수량 추가하였습니다.");
 							purchaseClicked();

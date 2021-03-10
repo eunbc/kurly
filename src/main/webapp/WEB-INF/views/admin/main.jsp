@@ -80,7 +80,7 @@
 
 	<div class="admin-main box4">
 		<div class="title">오늘의 주문건수</div>
-		<div class="content"><a href="${contextPath}/admin/order">${OrderCntToday}건 ></a></div>
+		<div class="content"><a href="${contextPath}/admin/orderList">${OrderCntToday}건 ></a></div>
 	</div>
 
  	<div id="myChart" class="chart--container"><a class="zc-ref" href="https://www.zingchart.com/">Powered by ZingChart</a></div>

@@ -211,8 +211,27 @@
 				</div>
 				<div class="row">
 					<span class="cell col1">적립금</span>
-					<span class="cell col2"><input type="number" name="oEMONEY" id="order-emoney" class="input-box" min='0' value='0' onkeyup="checkEmoney(this,${mVo.mEMONEY})"/><br> (사용 가능 : ${mVo.mEMONEY} )</span>
+					<span class="cell col2"><input type="number" name="oEMONEY" id="order-emoney" class="input-box" min='0' value='0' onchange="checkEmoney(this,${mVo.mEMONEY})"/><input type="button" onclick="useAllEmoney(${mVo.mEMONEY})" class="btn btn-secondary" value="전액사용"/><br> (사용 가능 : ${mVo.mEMONEY} )</span>
 					<script>
+						function useAllEmoney(emoney) {
+							if(emoney>finalTotal) {
+								
+								alert("적립금 사용 금액은 결제 금액을 초과할 수 없습니다. \n최대 금액이 적용됩니다. ");
+							    document.getElementById('cart-emoney').innerText = numberWithCommas(finalTotal);
+							    var coupon = Number(document.getElementById('coupon').value);
+							    document.getElementById('emoney').value = finalTotal;
+							    var emoney = Number(document.getElementById('emoney').value);
+							    document.getElementById('order-emoney').value = finalTotal;
+							    document.getElementById('cart-finalTotal').innerText = numberWithCommas(finalTotal-coupon-emoney);
+								return false;
+							}							
+						    document.getElementById('cart-emoney').innerText = numberWithCommas(emoney);
+						    var coupon = Number(document.getElementById('coupon').value);
+						    document.getElementById('emoney').value = emoney;
+						    var emoney = Number(document.getElementById('emoney').value);
+						    document.getElementById('order-emoney').value = emoney;
+						    document.getElementById('cart-finalTotal').innerText = numberWithCommas(finalTotal-coupon-emoney);
+						}
 						function checkEmoney(emoney,max) {
 							if(emoney.value > max){
 								alert("적립금 사용 금액은 보유 금액을 초과할 수 없습니다.");

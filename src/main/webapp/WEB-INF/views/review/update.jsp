@@ -56,7 +56,38 @@
 	    // 동적 파일박스의 삭제버튼을 클릭하면~
 	     function deleteBox(cnt) {
 		     $("#dBox"+cnt).remove();
-	     }		
+	     }	
+	    
+		// 선택된 첨부파일의 삭제(기존에 업로드된 파일)
+		function pdsFileDelCheck(fname,rfname) {
+			var ans = confirm("현재 자료 첨부파일("+fname+")을 삭제하시겠습니까?")
+			if(!ans) {
+				return false;
+			}
+			  
+			var query = {
+				rIDX    : ${vo.rIDX},
+				fnames : "${vo.rFNAME}",
+				rfnames: "${vo.rRFNAME}",
+				fname  : fname,
+				rfname : rfname
+			};
+			  
+			$.ajax({
+				url : "${contextPath}/review/deleteFile",
+				type: "get",
+				data: query,
+				success:function(data) {
+					if(data != null) {
+				  		alert("삭제 완료되었습니다.");
+				  		location.reload();
+			  		}
+			  		else {
+				  		alert("한개 이상의 파일을 업로드 하셔야 합니다.");
+			  		}
+		  		}
+			});
+		}	    
 	</script>
 	<style>
 		.qna-section{
@@ -102,32 +133,41 @@
 				</tr>
 				<tr> 
 					<td>주문번호</td>
-					<td><input type="text" name="oNVOICE" value="${oNVOICE}" readonly="readonly" class="input-box" maxlength="100"/></td>
+					<td><input type="text" name="oNVOICE" value="${vo.oNVOICE}" readonly="readonly" class="input-box" maxlength="100"/></td>
 				</tr>
 				<tr> 
 					<td>후기 제목</td>
-					<td><input type="text" name="rTITLE" class="form-control" maxlength="50"/></td>
+					<td><input type="text" name="rTITLE" value="${vo.rTITLE}" class="form-control" maxlength="50"/></td>
 				</tr>
 				<tr> 
 					<td>내용</td>
-					<td><textarea name="rCONTENT" rows="10" class="form-control"></textarea></td>
+					<td><textarea name="rCONTENT" rows="10" class="form-control">${vo.rCONTENT}</textarea></td>
 				</tr>
 				<tr> 
 					<td>파일첨부</td>
 					<td>
 						<div class="form-group">
-							<label for="fname">파일첨부 :(확장자 gif,jpg,png만 가능, 각각 10MB이내의 파일) </label>
-					        <input type="button" value="파일추가" onclick="fileAdd()"/>
+							<label for="fname">파일첨부 :(확장자 gif,jpg,png만 가능, 각각 10MB이내의 파일)</label>
+					      	<input type="button" value="파일추가" onclick="fileAdd()"/>
+						    
+						    <c:set var="fnames" value="${fn:split(vo.rFNAME,'/')}"/>
+						    <c:set var="rrFNAMEs" value="${fn:split(vo.rFNAME,'/')}"/>
+						    <c:if test="${!empty vo.rFNAME}">
+							    <c:forEach var="fname" items="${fnames}" varStatus="st">
+							      - ${st.count}. 업로드된 파일명 : ${fname}
+							      <input type="button" value="삭제" onclick="pdsFileDelCheck('${fname}','${rfnames[st.index]}')"/>
+							      <br/>
+							    </c:forEach>
+						    </c:if>
 							<input type="file" class="form-control-file border" name="file" id="fname1" accept='.gif,.jpg,.png'/>
 						</div>
 						<div class="form-group"id="fileInsert"></div>
-						<div id="buttons" style="text-align:center;"></div>
 					</td>
 				</tr>
 			</table>
 			<p><br/></p>
 			<input type="hidden" name="mMID" value="${smid}"/>
-			<input type="hidden" name="gIDX" value="${gIDX}"/>
+			<input type="hidden" name="gIDX" value="${vo.gIDX}"/>
 			<input type="button" onclick="writeCheck()" class="button" style="margin-left: 390px" value="등록"/>
 		</form>
 	</div>

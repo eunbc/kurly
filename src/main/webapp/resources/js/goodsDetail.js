@@ -40,6 +40,8 @@ function ready() {
 function purchaseClicked() {
     var cartItems = document.getElementsByClassName('cart-items')[0]
     if(cartItems=='') return false;
+    
+    
     while (cartItems.hasChildNodes()) {
         cartItems.removeChild(cartItems.firstChild)
     }

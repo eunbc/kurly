@@ -147,6 +147,12 @@
 			cursor: pointer;
 		}
     </style>
+    <script>
+    	function logout() {
+			localStorage.clear();
+			location.href='${contextPath}/member/logout';
+		}
+    </script>
 </head>
 <header>
 	<!-- Top Bar Start -->
@@ -172,7 +178,7 @@
 						<li><a href="${contextPath}/mypage/emoney">적립금</a></li>
 						<li><a href="${contextPath}/mypage/coupon">쿠폰</a></li>
 						<li><a href="${contextPath}/member/update">개인 정보 수정</a></li>
-						<li><a href="${contextPath}/member/logout">로그아웃</a></li>
+						<li><a href="javascript:logout();">로그아웃</a></li>
 						<c:if test="${smid=='marketkurly'}">
 							<li><a href="${contextPath}/admin/main">관리자</a></li>
 						</c:if>

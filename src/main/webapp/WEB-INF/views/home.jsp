@@ -124,22 +124,22 @@
 
 <div class="main-goods-bgcolor-gray">
 	<div class="main-goods-new">
-		<div class="main-title">이 상품 어때요?</div>
+		<div class="main-title">지금 가장 핫한 상품</div>
 		<div class="row">
-			<c:forEach var="nVo" items="${newVos}">
-				<div class="col-lg-3" onclick="location.href='${contextPath}/goods/goodsDetail?gIDX=${nVo.gIDX}';">
+			<c:forEach var="hVo" items="${hotVos}">
+				<div class="col-lg-3" onclick="location.href='${contextPath}/goods/goodsDetail?gIDX=${hVo.gIDX}';">
 					<div class="goods-image">
-						<img src="${contextPath}/resources/goods/${nVo.gIMAGE}"/>					
+						<img src="${contextPath}/resources/goods/${hVo.gIMAGE}"/>					
 					</div>
 					<div class="goods-content">
-						<div class="goods-name">${nVo.gNAME}</div>
+						<div class="goods-name">${hVo.gNAME}</div>
 						<div class="goods-price">
-							<c:if test="${nVo.gDISCOUNT==0}">
-								<h5><fmt:formatNumber type="number" maxFractionDigits="3" value="${nVo.gPRICE}" /><span class="small-font">원</span></h5>
+							<c:if test="${hVo.gDISCOUNT==0}">
+								<h5><fmt:formatNumber type="number" maxFractionDigits="3" value="${hVo.gPRICE}" /><span class="small-font">원</span></h5>
 							</c:if>
-							<c:if test="${nVo.gDISCOUNT!=0}">
-								<c:set var="price" value="${nVo.gPRICE}"/>
-								<c:set var="discount" value="${nVo.gDISCOUNT}"/>
+							<c:if test="${hVo.gDISCOUNT!=0}">
+								<c:set var="price" value="${hVo.gPRICE}"/>
+								<c:set var="discount" value="${hVo.gDISCOUNT}"/>
 								<c:set var="discountedPrice" value="${price*(100-discount)*0.01}"/>
 								<h5><span class="font-color-red">${discount}%</span>&nbsp;<fmt:formatNumber type="number" maxFractionDigits="3" value="${discountedPrice}" /><span class="small-font">원</span></h5>
 								<span class="price-gray"><fmt:formatNumber type="number" maxFractionDigits="3" value="${price}" /></span>
@@ -180,35 +180,7 @@
 	</div>
 </div>
 
-<div class="main-goods-bgcolor-gray">
-	<div class="main-goods-new">
-		<div class="main-title">지금 가장 핫한 상품</div>
-		<div class="row">
-			<c:forEach var="hVo" items="${hotVos}">
-				<div class="col-lg-3" onclick="location.href='${contextPath}/goods/goodsDetail?gIDX=${hVo.gIDX}';">
-					<div class="goods-image">
-						<img src="${contextPath}/resources/goods/${hVo.gIMAGE}"/>					
-					</div>
-					<div class="goods-content">
-						<div class="goods-name">${hVo.gNAME}</div>
-						<div class="goods-price">
-							<c:if test="${hVo.gDISCOUNT==0}">
-								<h5><fmt:formatNumber type="number" maxFractionDigits="3" value="${hVo.gPRICE}" /><span class="small-font">원</span></h5>
-							</c:if>
-							<c:if test="${hVo.gDISCOUNT!=0}">
-								<c:set var="price" value="${hVo.gPRICE}"/>
-								<c:set var="discount" value="${hVo.gDISCOUNT}"/>
-								<c:set var="discountedPrice" value="${price*(100-discount)*0.01}"/>
-								<h5><span class="font-color-red">${discount}%</span>&nbsp;<fmt:formatNumber type="number" maxFractionDigits="3" value="${discountedPrice}" /><span class="small-font">원</span></h5>
-								<span class="price-gray"><fmt:formatNumber type="number" maxFractionDigits="3" value="${price}" /></span>
-							</c:if>
-						</div>
-					</div>
-				</div>
-			</c:forEach>
-		</div>
-	</div>
-</div>
+
 
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>

@@ -92,13 +92,13 @@
 	<div id="container"> 
 		<ul class="myMenu">
 			<li class="icon"><a href="${contextPath}/admin/main"><i class="xi-home xi-2x"></i></a></li>
-			<li class="menu1"><a href="${contextPath}/" class="menuLink">회원관리</a>
+			<li class="menu1"><a href="${contextPath}/admin/memberList" class="menuLink">회원관리</a>
 				<ul class="menu2_s submenu">
 					<li><a href="${contextPath}/admin/memberList">회원목록</a></li>
 					<li><a href="${contextPath}/admin/coupon">쿠폰지급</a></li>
 				</ul>
 			</li>
-			<li class="menu2"><a href="${contextPath}/" class="menuLink">상품관리</a>
+			<li class="menu2"><a href="${contextPath}/admin/goodsList" class="menuLink">상품관리</a>
 				<ul class="menu2_s submenu">
 					<li><a href="${contextPath}/admin/goods">상품등록</a></li>
 					<li><a href="${contextPath}/admin/goodsList">상품목록</a></li>
@@ -106,20 +106,20 @@
 					<li><a href="${contextPath}/admin/subcategory">중분류관리</a></li>
 				</ul>
 			</li>
-			<li class="menu3"><a href="${contextPath}/" class="menuLink">주문관리</a>
+			<li class="menu3"><a href="${contextPath}/admin/orderList" class="menuLink">주문관리</a>
 				<ul class="menu2_s submenu">
 					<li><a href="${contextPath}/admin/orderList">주문관리</a></li>
 					<li><a href="${contextPath}/admin/refund">환불요청</a></li>
 				</ul>
 			</li>
-			<li class="menu4"><a href="${contextPath}/" class="menuLink">문의관리</a>
+			<li class="menu4"><a href="${contextPath}/admin/inquiry" class="menuLink">문의관리</a>
 				<ul class="menu2_s submenu">
 					<li><a href="${contextPath}/admin/inquiry">1:1문의</a></li>
 					<li><a href="${contextPath}/admin/qna">상품문의</a></li>
 					<li><a href="${contextPath}/admin/review">후기관리</a></li>
 				</ul>
 			</li>
-			<li class="menu5"><a href="${contextPath}/" class="menuLink">통계자료</a></li>
+			<li class="menu5"><a href="${contextPath}/admin/chart" class="menuLink">통계자료</a></li>
 			<li class="icon"><a href="${contextPath}/h" class="menuLink"><i class="xi-share xi-2x"></i></a></li>
 		</ul> 
 	</div>

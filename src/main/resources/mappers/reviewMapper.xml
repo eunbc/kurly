@@ -36,4 +36,12 @@
 		update review set rHELP=rHELP+1 where rIDX=#{rIDX};
 	</update>
 	
+	<select id="viewReview" resultType="com.spring.cjs200809.vo.ReviewVo">
+		select * from review where rIDX=#{rIDX};
+	</select>
+	
+	<delete id="deleteReview">
+		delete from review where rIDX=#{rIDX};
+	</delete>
+	
 </mapper>

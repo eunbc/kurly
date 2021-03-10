@@ -4,6 +4,7 @@ package com.spring.cjs200809;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -15,13 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.spring.cjs200809.dao.ReviewDao;
 import com.spring.cjs200809.pagination.PageProcess;
 import com.spring.cjs200809.service.MemberService;
 import com.spring.cjs200809.service.MypageService;
 import com.spring.cjs200809.service.ReviewService;
-import com.spring.cjs200809.vo.InquiryReplyVo;
 import com.spring.cjs200809.vo.OrderDetailVo;
-import com.spring.cjs200809.vo.QnaVo;
 import com.spring.cjs200809.vo.ReviewVo;
 
 
@@ -94,6 +94,14 @@ public class ReviewController {
 		return "review/list";
 	}
 	
+	@RequestMapping(value="/view", method=RequestMethod.GET)
+	public String viewReviewGet(int rIDX,Model model) {
+		ReviewVo vo = reviewService.viewReview(rIDX);
+		model.addAttribute("vo",vo);
+		return "review/view";
+	}
+	
+	
 	@ResponseBody
 	@RequestMapping(value="/addReviewViewCnt", method=RequestMethod.POST)
 	public String addReviewViewCntPost(int rIDX) {
@@ -115,6 +123,54 @@ public class ReviewController {
 		return res;
 	}
 	
-
+	@RequestMapping(value="/delete", method=RequestMethod.GET)
+	public String deleteReviewGet(int rIDX) {
+		reviewService.deleteReview(rIDX);
+		
+		msgFlag="deleteReviewOK";
+		return "redirect:/msg/"+msgFlag; 
+	}
 	
+	@RequestMapping(value="/update", method=RequestMethod.GET)
+	public String updateReviewGet(Model model,int rIDX) {
+		ReviewVo vo = reviewService.viewReview(rIDX);
+		
+		model.addAttribute("vo",vo);
+		return "redirect:/msg/"+msgFlag; 
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/deleteFile", method=RequestMethod.GET)
+	public void deleteFileGet(HttpServletRequest request) {
+		
+/*		int rIDX = Integer.parseInt(request.getParameter("rIDX"));
+		String fnames = request.getParameter("fnames");    // vo.fname에서 받아옴(업로드 파일명들)
+		String rfnames = request.getParameter("rfnames");  // vo.rfname에서 받아옴(실제 서버에 저장된 파일명들)
+		String fname = request.getParameter("fname");
+		String rfname = request.getParameter("rfname");
+		
+		
+		// 파일 삭제처리 루틴
+		ServletContext application = request.getServletContext();
+		String directory = application.getRealPath("/data/pds/");
+		new File(directory + rfname).delete();  // 선택한 파일을 서버에서 삭제처리한다.
+		
+		// DB에서 삭제한 파일 정보를 다시 지워준다.(fnames, rfnames)
+		ReviewVo vo = new ReviewVo();
+		vo.setrIDX(rIDX);
+		vo.setrFNAME(fnames.substring(0, fnames.lastIndexOf(fname+"/"))+fnames.substring(fnames.lastIndexOf(fname+"/")+(fname.length()+1)));
+		vo.setrRFNAME(rfnames.replace(rfname+"/", ""));
+		
+		response.getWriter().write(updFileDel(vo));
+		
+		// 삭제된 파일의 정보를 DB에서 제거(Update)시키는 작업처리
+		private String updFileDel(ReviewVo vo) {
+			ReviewDao dao = new ReviewDao();
+			dao.updFileDel(vo);
+			return vo.getFname();
+		}	
+		model.addAttribute("vo",vo);
+		return "redirect:/msg/"+msgFlag; 
+	*/
+	}
 }

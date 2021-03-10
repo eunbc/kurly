@@ -34,11 +34,17 @@ function ready() {
 }
 
 function letsOrder() {
+
+	var cartChkbox = $('.cartChkbox:checked');    
+	
+	if(cartChkbox.length==0) {
+		alert("장바구니에 담긴 품목이 없습니다.");
+		return false;
+	}
 	var ans = confirm('주문하시겠습니까? 주문 페이지로 이동합니다.');
 	if(!ans) return;
 	
 	//체크된 항목만 로컬 저장소에 저장
-	var cartChkbox = $('.cartChkbox:checked');    
     for (var i = 0; i < cartChkbox.length; i++) {
     	var gIDX = Number(cartChkbox[i].getAttribute('data-gIDX')); 
     	var goIDX = Number(cartChkbox[i].getAttribute('data-goIDX')); 
@@ -56,7 +62,6 @@ function letsOrder() {
 		
 		localStorage.setItem('tempAddress',$('#tempADDRESS').val());
 	}
-	
 	location.href='orderForm';
 	
 }
@@ -75,15 +80,12 @@ function updateMyCartPrice() {
 	var delivery = 0;    
 	var finalTotal = 0;    
     for (var i = 0; i < cartChkbox.length; i++) {
-    	//var cIDX = Number(cartChkbox[i].getAttribute('data-cIDX')); 
     	var gIDX = Number(cartChkbox[i].getAttribute('data-gIDX')); 
     	var goIDX = Number(cartChkbox[i].getAttribute('data-goIDX')); 
     	var cQTY = Number(cartChkbox[i].getAttribute('data-cQTY'));
     	var gPRICE = Number(cartChkbox[i].getAttribute('data-gPRICE')); 
     	var gDISCOUNT = Number(cartChkbox[i].getAttribute('data-gDISCOUNT')); 
     	
-		//addItemToOrder(gIDX,goIDX,cQTY,gPRICE,gDISCOUNT);
-    	//localStorage.setItem('order',JSON.stringify(order));
 		total = total + (gPRICE * cQTY );  //할인 전 상품 전체 금액
 		discount = discount + gPRICE * cQTY * gDISCOUNT * 0.01; //할인된 금액
 	}
@@ -98,6 +100,5 @@ function updateMyCartPrice() {
     document.getElementsByClassName('cart-finalTotal')[0].innerText = numberWithCommas(finalTotal);
     
     localStorage.setItem('finalTotal',finalTotal);
-
 }
 

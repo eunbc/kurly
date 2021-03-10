@@ -23,4 +23,8 @@ public interface ReviewDao {
 
 	public void addHelpCnt(@Param("rIDX")int rIDX);
 
+	public ReviewVo viewReview(@Param("rIDX")int rIDX);
+
+	public void deleteReview(@Param("rIDX")int rIDX);
+
 }
