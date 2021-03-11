@@ -169,7 +169,6 @@ public class GoodsController {
 		String mMID = (String) session.getAttribute("smid");
 		String result = "";
 		
-		
 		if (mMID!=null) {
 			try {
 				JSONParser jsonParse = new JSONParser();
@@ -299,14 +298,13 @@ public class GoodsController {
 		}
 	}	
 	
+	//System.out.println(order);
 	//주문 상세 목록에 추가
 	@ResponseBody
 	@RequestMapping(value="/addtoOrderDetail", method=RequestMethod.POST)
 	public String addtoOrderPost(@RequestParam String order,String ordernumber,HttpSession session) {
 		String mMID = (String) session.getAttribute("smid");
 		String result = "";
-		
-		System.out.println(order);
 		
 		if (mMID!=null) {
 			try {
@@ -321,9 +319,9 @@ public class GoodsController {
 					
 					//주문 상세 리스트 생성
 					goodsService.addOrderDetail(ordernumber,gIDX,goIDX,odQTY);
-					//주문 상세 목록은 장바구니에서 삭제
+					//장바구니 목록에서 삭제
 					goodsService.subtractFromCart(gIDX,goIDX,mMID);
-					//재고 감소,판매량 증가시키기
+					//상품 재고 감소,판매량 증가시키기
 					goodsService.decreaseStock(gIDX,odQTY);
 					goodsService.increaseSales(gIDX,odQTY);
 				}	

@@ -33,8 +33,7 @@
 	<select id="getMyCart" resultType="com.spring.cjs200809.vo.CartVo">
 		select c.*, go.goNAME, g.gNAME, g.gPRICE, g.gDISCOUNT, g.gIMAGE
 			from cart c
-			left outer join goods g 
-				on c.gIDX = g.gIDX
+			left outer join goods g on c.gIDX = g.gIDX
 			left outer join goods_option go 
 				on c.gIDX= g.gIDX and c.goIDX=go.goIDX 
 			where c.mMID = #{mMID};

@@ -5,10 +5,9 @@
 	<!-- 카트 리스트 -->
 	<select id="getMyWishlist" resultType="com.spring.cjs200809.vo.WishlistVo">
 	 select *
-	 from wishlist w
-	     inner join goods g
-	         on w.gIDX = g.gIDX   
-	     where mMID=#{mMID} order by wIDX desc;
+	 	from wishlist w
+	     	inner join goods g on w.gIDX = g.gIDX   
+	     		where mMID=#{mMID} order by wIDX desc;
 	</select>	
 	
 	<delete id="wishDelete">
