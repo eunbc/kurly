@@ -110,23 +110,16 @@ public class BoardController {
 	
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String updateBoardPost(BoardVo vo,HttpServletRequest request) {
-		//기존의 내용을 변경시켰고, content안에 'src'태그속성이 있다면 그림파일이 변경처리되어 있다고 가정하여, images방의 그림파일을 src폴더로 복사처리함
 		if(!vo.getOriginalCONTENT().equals(vo.getbCONTENT()) && vo.getbCONTENT().indexOf("src=\"/") != -1) { //내용 수정, 그림이 있을 때 (그림 안바꾸어도 글자 하나만 바뀌면 새로 업로드함)
-			//앞에서(수정처리를 위해 bUpdateGet메소드 수행후) 이미지의 위치가 src폴더에서 images로 복사된다.
-			//따라서 db에 저장된 실제 그림의 경로도 변경시켜줘야 한다.
 			vo.setbCONTENT(vo.getbCONTENT().replace("/resources/ckeditor/images/src/", "/resources/ckeditor/images/"));
 			
-			//현재 서버에 저장(위치: '/src/')되어 있는 이미지를 삭제처리한다.
 			String uploadPath = request.getRealPath("/resources/ckeditor/images/src/");
 			boardService.imgDelete(vo.getOriginalCONTENT(),uploadPath); //이미지 삭제처리
 			
-			//새롭게 업로드를 위한 이미지를 'src'폴더에 재등록한다.
 			uploadPath = request.getRealPath("/resources/ckeditor/images/");
 			boardService.imgCheck(vo.getbCONTENT(), uploadPath, 42); //content필드안의 그림파일들을 모두 src폴더로 복사
 			vo.setbCONTENT(vo.getbCONTENT().replace("/resources/ckeditor/images/","/resources/ckeditor/images/src/"));
 		}
-		
-		//잘 정비된 vo자료를 db에 update 시켜준다.
 		boardService.updateBoard(vo);
 		
 		int pag = Integer.parseInt(request.getParameter("pag"));
@@ -138,17 +131,11 @@ public class BoardController {
 	public String bDeleteGet(HttpServletRequest request,int bIDX,int pag) {
 		BoardVo vo = boardService.viewBoard(bIDX);
 		
-		//실제 서버에 저장된 그림파일을 삭제처리
 		String uploadPath = request.getRealPath("/resources/ckeditor/images/src/");
 		boardService.imgDelete(vo.getbCONTENT(),uploadPath);
 		
-		//DB에서 실제 게시글을 삭제처리한다
 		boardService.deleteBoard(bIDX);
 		msgFlag = "deleteBoardOK$pag="+pag;
 		return "redirect:/msg/"+msgFlag;
 	}
-	
-	
-	
-
 }

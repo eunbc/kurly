@@ -378,8 +378,5 @@ public class AdminServiceImp implements AdminService{
 	public void memberLevelUpdate(int mIDX, String mLEVEL) {
 		adminDao.memberLevelUpdate(mIDX,mLEVEL); 
 	}
-	
-
-
 
 }

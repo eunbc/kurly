@@ -274,9 +274,9 @@ public class AdminController {
 		return "admin/goodsUpdate";
 	}
 
+	//상품 수정
 	@RequestMapping(value="/goodsUpdate", method=RequestMethod.POST)
 	public String goodsUpdatePost(MultipartFile file,GoodsVo vo,HttpServletRequest request) {
-		//System.out.println("여기다@@@@@@@@@@ 여기 안와요 ㅠㅠㅠㅠㅠ 흑흑");
 		//기존의 내용을 변경시켰고, content안에 'src'태그속성이 있다면 그림파일이 변경처리되어 있다고 가정하여, images방의 그림파일을 src폴더로 복사처리함
 		if(!vo.getOriginalCONTENT().equals(vo.getgDETAIL()) && vo.getgDETAIL().indexOf("src=\"/") != -1) { //내용 수정, 그림이 있을 때 (그림 안바꾸어도 글자 하나만 바뀌면 새로 업로드함)
 			//앞에서(수정처리를 위해 bUpdateGet메소드 수행후) 이미지의 위치가 src폴더에서 images로 복사된다.
