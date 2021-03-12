@@ -276,7 +276,7 @@ public class AdminController {
 
 	@RequestMapping(value="/goodsUpdate", method=RequestMethod.POST)
 	public String goodsUpdatePost(MultipartFile file,GoodsVo vo,HttpServletRequest request) {
-		System.out.println("여기다@@@@@@@@@@ 여기 안와요 ㅠㅠㅠㅠㅠ 흑흑");
+		//System.out.println("여기다@@@@@@@@@@ 여기 안와요 ㅠㅠㅠㅠㅠ 흑흑");
 		//기존의 내용을 변경시켰고, content안에 'src'태그속성이 있다면 그림파일이 변경처리되어 있다고 가정하여, images방의 그림파일을 src폴더로 복사처리함
 		if(!vo.getOriginalCONTENT().equals(vo.getgDETAIL()) && vo.getgDETAIL().indexOf("src=\"/") != -1) { //내용 수정, 그림이 있을 때 (그림 안바꾸어도 글자 하나만 바뀌면 새로 업로드함)
 			//앞에서(수정처리를 위해 bUpdateGet메소드 수행후) 이미지의 위치가 src폴더에서 images로 복사된다.
@@ -308,6 +308,12 @@ public class AdminController {
 		int gIDX = Integer.parseInt(request.getParameter("gIDX"));
 		int pag = request.getParameter("pag")==null? 1 : Integer.parseInt(request.getParameter("pag"));
 		
+		GoodsVo vo = adminService.getGoodsDetail(gIDX);
+		
+		//실제 서버에 저장된 그림파일을 삭제처리
+		String uploadPath = request.getRealPath("/resources/ckeditor/images/src/");
+		adminService.imgDelete(vo.getgDETAIL(),uploadPath);
+
 		adminService.goodsDelete(gIDX);
 		
   		msgFlag = "goodsDeleteOK$pag="+pag;
@@ -317,7 +323,7 @@ public class AdminController {
 	//선택 항목 일괄 삭제
 	@ResponseBody
 	@RequestMapping(value="/goodsDelete", method=RequestMethod.POST)
-	public int goodsDeletePost(HttpSession session,
+	public int goodsDeletePost(HttpServletRequest request,HttpSession session,
 		     @RequestParam(value = "chbox[]") List<String> chArr) {
 		//세션이 끊길 때를 방지
 		String mid = (String)session.getAttribute("smid");
@@ -328,6 +334,11 @@ public class AdminController {
 		if(mid != null) {
 			for(String i : chArr) {   
 				gIDX = Integer.parseInt(i);
+				//ckeditor 파일 삭제
+				GoodsVo vo = adminService.getGoodsDetail(gIDX);
+				String uploadPath = request.getRealPath("/resources/ckeditor/images/src/");
+				adminService.imgDelete(vo.getgDETAIL(),uploadPath);
+				//상품 삭제
 				adminService.goodsDelete(gIDX);
 			}   
 			result = 1;

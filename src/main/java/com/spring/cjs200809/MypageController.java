@@ -153,7 +153,6 @@ public class MypageController {
 		if(mMID != null) {
 			//주문 상태 변경
 			mypageService.purchaseConfirm(oIDX);
-			
 			//적립금 적립
 			switch (slevel) {
 				case "일반":

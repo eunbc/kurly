@@ -18,7 +18,7 @@
             max-width: 200px;
         }
     </style>	
-    <script type="text/javascript" src="./js/jquery-3.1.0.min.js" charset="utf-8"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript">
         var sel_files = [];
  

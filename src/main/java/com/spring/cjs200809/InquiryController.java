@@ -2,9 +2,10 @@ package com.spring.cjs200809;
 
 
 
+import java.io.File;
 import java.util.List;
 
-
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -13,18 +14,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.cjs200809.pagination.PageProcess;
-import com.spring.cjs200809.pagination.PageVo;
-import com.spring.cjs200809.service.BoardService;
-import com.spring.cjs200809.service.FaqService;
 import com.spring.cjs200809.service.InquiryService;
-import com.spring.cjs200809.vo.BoardVo;
-import com.spring.cjs200809.vo.FaqVo;
 import com.spring.cjs200809.vo.InquiryVo;
+import com.spring.cjs200809.vo.ReviewVo;
 
 
 @Controller
@@ -67,6 +63,5 @@ public class InquiryController {
 		model.addAttribute("vo",vo);
 		return "inquiry/view";
 	}
-
 	
 }

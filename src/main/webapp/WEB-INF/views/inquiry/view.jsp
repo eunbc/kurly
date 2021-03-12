@@ -13,13 +13,13 @@
 		function updateCheck(idx) {
 			var ans = confirm("수정하시겠습니까?");
 			if(!ans) return false;
-			else location.href="${contextPath}/inquiry/update?bIDX="+idx;			
+			else location.href="${contextPath}/inquiry/update?iIDX="+idx;			
 		}
 		
 		function deleteCheck(idx) {
 			var ans = confirm("삭제하시겠습니까?");
 			if(!ans) return false;
-			else location.href="${contextPath}/inquiry/delete?bIDX="+idx;			
+			else location.href="${contextPath}/inquiry/delete?iIDX="+idx;			
 		}
 	</script>
 </head>
@@ -79,13 +79,9 @@
 		</tr>
 	</table>
 	
-<!-- 	<div style="text-align: right">
-		<c:if test="${vo.iREPLY=='답변대기중'}">
-			<input type="button" value="수정" onclick="updateCheck(${vo.iIDX})" class="button-outline-small"/>
-			<input type="button" value="삭제" onclick="deleteCheck(${vo.iIDX})" class="button-outline-small"/>
-		</c:if>
+ 	<div style="text-align: right">
 		<input type="button" value="목록" onclick="location.href='${contextPath}/inquiry/list'" class="button-small"/>
-	</div>  -->
+	</div> 
 	
 	<hr/>
 	<c:if test="${!empty irCONTENT}">

@@ -162,7 +162,7 @@ public class GoodsController {
 		return "shop/goods/goodsDetail";
 	}
 
-	//장바구니에 추가(상품옵션번호 넣기)
+	//장바구니에 상품 추가
 	@ResponseBody
 	@RequestMapping(value="/addtoCart", method=RequestMethod.POST)
 	public String addtoCartPost(@RequestParam String cart,int gIDX,HttpSession session) {
