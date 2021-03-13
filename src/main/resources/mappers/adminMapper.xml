@@ -192,7 +192,7 @@
 	</select>
 	
 	<select id="listOrder" resultType="com.spring.cjs200809.vo.OrderVo">
-		select * from orderinfo order by oIDX desc;
+		select * from orderinfo order by oIDX desc limit #{startNo},#{pageSize};
 	</select>
 	
 	<select id="listOrderRefund" resultType="com.spring.cjs200809.vo.OrderVo">

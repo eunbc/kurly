@@ -44,7 +44,7 @@ public class PageProcess {
 		else if(partFlag.equals("review")) {
 			totRecCnt = adminDao.reviewTotRecCnt(); 
 		} 
-		else if(partFlag.equals("order")) {
+		else if(partFlag.equals("orderList")) {
 			totRecCnt = adminDao.orderTotRecCnt(); 
 		} 
 		else if(partFlag.equals("회원문의")) {

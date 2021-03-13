@@ -483,7 +483,7 @@ public class AdminController {
 		int pag = request.getParameter("pag")==null? 1 : Integer.parseInt(request.getParameter("pag"));
 		int pageSize = request.getParameter("pageSize")==null? 10 : Integer.parseInt(request.getParameter("pageSize"));
 		
-		com.spring.cjs200809.pagination.PageVo pageVo = pageProcess.pagination(pag,pageSize,"order");
+		com.spring.cjs200809.pagination.PageVo pageVo = pageProcess.pagination(pag,pageSize,"orderList");
 		List<OrderVo> vos = adminService.listOrder(pageVo.getStartNo(),pageVo.getPageSize());
 		int curScrNo = pageVo.getCurScrNo();
 		

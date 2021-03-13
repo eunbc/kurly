@@ -119,7 +119,7 @@
 					<li><a href="${contextPath}/admin/review">후기관리</a></li>
 				</ul>
 			</li>
-			<li class="menu5"><a href="${contextPath}/admin/chart" class="menuLink">통계자료</a></li>
+			<li class="menu5"><a href="${contextPath}/admin/chart" class="menuLink"></a></li>
 			<li class="icon"><a href="${contextPath}/h" class="menuLink"><i class="xi-share xi-2x"></i></a></li>
 		</ul> 
 	</div>
