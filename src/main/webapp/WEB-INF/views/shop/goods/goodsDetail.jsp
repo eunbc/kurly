@@ -300,7 +300,7 @@
 			//------------------------------------------------------단일 옵션일 때 - 끝
 			
 		    $(".btn-addToCart").click(function(){
-				console.log(cart);		   //이제 이걸 ajax 로 넘겨주고, 화면 클리어 시켜주면 된다.
+				console.log(cart);		   
 			    jQuery.ajaxSettings.traditional = true;
 				if(cart=='') {
 					alert("옵션이나 수량을 선택해주세요!");

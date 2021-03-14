@@ -179,7 +179,7 @@
 						<li><a href="${contextPath}/mypage/coupon">쿠폰</a></li>
 						<li><a href="${contextPath}/member/update">개인 정보 수정</a></li>
 						<li><a href="javascript:logout();">로그아웃</a></li>
-						<c:if test="${smid=='marketkurly'}">
+						<c:if test="${slevel=='관리자'}">
 							<li><a href="${contextPath}/admin/main">관리자</a></li>
 						</c:if>
 					</ul>

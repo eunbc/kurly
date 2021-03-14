@@ -109,7 +109,7 @@
 				ordernumber += "_"+randnum;
 				$('#oNVOICE').val(ordernumber);
 				
-				//주문상세
+				//주문상세목록 저장
 			    var order = localStorage.getItem('order');
 				
 				var query = {

@@ -58,6 +58,9 @@
 			color: #9D9C9A;
 			text-decoration: line-through;
 		}
+		div .col-4 {
+			margin: 30px 0;
+		}
 	</style>
 </head>
 <body>

@@ -136,6 +136,11 @@ $(document).ready(function() {
     		$('#mPHONE').focus();
     		return false;
     	}
+    	else if($('#mBDAY').val()=='') {
+    		alert("생년월일을 입력하세요.");
+    		$('#mBDAY').focus();
+    		return false;
+    	}
     	else if($('#sample6_address').val()=='') {
     		alert("주소를 입력하세요.");
     		return false;

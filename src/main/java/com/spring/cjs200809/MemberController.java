@@ -43,17 +43,6 @@ public class MemberController {
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String joinPost(MemberVo vo, String recommendId) {
 
-		//아이디 체크해서 존재하는 아이디라면, 적립금 지급하기
-		if(memberService.IdCheck(recommendId)!=null) {
-			//적립금 지급 내역 추가
-			mypageService.addEmoney(vo.getmMID(),5000,"추천인 아이디 적립");
-			mypageService.addEmoney(recommendId,5000,"추천인 아이디 적립");
-			
-			//회원 테이블에서 적립급 컬럼 변경
-			memberService.addEmoneyMember(vo.getmMID(),5000);
-			memberService.addEmoneyMember(recommendId,5000);
-		}
-		
 		//아이디 중복체크
 	  	if(memberService.IdCheck(vo.getmMID()) != null) {
 	  		msgFlag = "idCheckNO";
@@ -66,6 +55,18 @@ public class MemberController {
 	  	}
 	  	vo.setmPWD(bCryptPasswordEncoder.encode(vo.getmPWD()));
 		memberService.memberJoin(vo);
+
+		//아이디 체크해서 존재하는 아이디라면, 적립금 지급하기
+		if(memberService.IdCheck(recommendId)!=null) {
+			//적립금 지급 내역 추가
+			mypageService.addEmoney(vo.getmMID(),5000,"추천인 아이디 적립");
+			mypageService.addEmoney(recommendId,5000,"추천인 아이디 적립");
+			
+			//회원 테이블에서 적립급 컬럼 변경
+			memberService.addEmoneyMember(vo.getmMID(),5000);
+			memberService.addEmoneyMember(recommendId,5000);
+		}
+		
 		msgFlag = "memberJoinOK";
 		return "redirect:/msg/"+msgFlag;
 	}

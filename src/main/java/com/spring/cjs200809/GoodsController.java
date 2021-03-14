@@ -162,6 +162,7 @@ public class GoodsController {
 		return "shop/goods/goodsDetail";
 	}
 
+	//System.out.println(cart);
 	//장바구니에 상품 추가
 	@ResponseBody
 	@RequestMapping(value="/addtoCart", method=RequestMethod.POST)
