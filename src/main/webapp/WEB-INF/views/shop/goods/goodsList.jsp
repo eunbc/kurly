@@ -67,7 +67,7 @@
             border-bottom : 1px solid #C2C0C3;                           
 		}
 		ul.goodsMenu > li a {
-            width: 180px;                            
+            width: 160px;                            
             display: inline-block;
             text-decoration:none; 
             color: #383838;                        
@@ -99,7 +99,7 @@
 	<p><br></p>
 	<div class="row">
 		<c:forEach var="vo" items="${vos}">
-			<div class="col-lg-4" onclick="location.href='${contextPath}/goods/goodsDetail?gIDX=${vo.gIDX}&pag=${p.pag}';">
+			<div class="col-4" onclick="location.href='${contextPath}/goods/goodsDetail?gIDX=${vo.gIDX}&pag=${p.pag}';">
 				<div class="goods-image">
 					<img src="${contextPath}/resources/goods/${vo.gIMAGE}"/>					
 				</div>

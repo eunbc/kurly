@@ -65,7 +65,7 @@
 <div class="content-default-goods">
 	<div class="row">
 		<c:forEach var="vo" items="${vos}">
-			<div class="col-lg-4" onclick="location.href='${contextPath}/goods/goodsDetail?gIDX=${vo.gIDX}&pag=${p.pag}';">
+			<div class="col-4" onclick="location.href='${contextPath}/goods/goodsDetail?gIDX=${vo.gIDX}&pag=${p.pag}';">
 				<div class="goods-image">
 					<img src="${contextPath}/resources/goods/${vo.gIMAGE}"/>					
 				</div>

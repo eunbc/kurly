@@ -98,7 +98,7 @@
 	<div class="main-title">오늘의 신상품</div>
 	<div class="row">
 		<c:forEach var="nVo" items="${newVos}">
-			<div class="col-lg-3" onclick="location.href='${contextPath}/goods/goodsDetail?gIDX=${nVo.gIDX}';">
+			<div class="col-3" onclick="location.href='${contextPath}/goods/goodsDetail?gIDX=${nVo.gIDX}';">
 				<div class="goods-image">
 					<img src="${contextPath}/resources/goods/${nVo.gIMAGE}"/>					
 				</div>
@@ -127,7 +127,7 @@
 		<div class="main-title">지금 가장 핫한 상품</div>
 		<div class="row">
 			<c:forEach var="hVo" items="${hotVos}">
-				<div class="col-lg-3" onclick="location.href='${contextPath}/goods/goodsDetail?gIDX=${hVo.gIDX}';">
+				<div class="col-3" onclick="location.href='${contextPath}/goods/goodsDetail?gIDX=${hVo.gIDX}';">
 					<div class="goods-image">
 						<img src="${contextPath}/resources/goods/${hVo.gIMAGE}"/>					
 					</div>
@@ -156,7 +156,7 @@
 	<div class="main-title">알뜰 상품</div>
 	<div class="row">
 		<c:forEach var="sVo" items="${saleVos}">
-			<div class="col-lg-3" onclick="location.href='${contextPath}/goods/goodsDetail?gIDX=${sVo.gIDX}';">
+			<div class="col-3" onclick="location.href='${contextPath}/goods/goodsDetail?gIDX=${sVo.gIDX}';">
 				<div class="goods-image">
 					<img src="${contextPath}/resources/goods/${sVo.gIMAGE}"/>					
 				</div>

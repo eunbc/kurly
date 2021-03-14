@@ -66,7 +66,7 @@
 	<div style="text-align:center;"><h4>'${strSearch}' 검색 결과 : ${cntSearch} 건</h4></div>
 	<div class="row">
 		<c:forEach var="vo" items="${vos}">
-			<div class="col-lg-4" onclick="location.href='${contextPath}/goods/goodsDetail?gIDX=${vo.gIDX}';">
+			<div class="col-4" onclick="location.href='${contextPath}/goods/goodsDetail?gIDX=${vo.gIDX}';">
 				<div class="goods-image">
 					<img src="${contextPath}/resources/goods/${vo.gIMAGE}"/>					
 				</div>
